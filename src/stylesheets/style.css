@@ -1,0 +1,318 @@
+/* Portfolio Styles */
+* {tap-highlight-color: rgba(0, 0, 0, 0); font-family: 'Open Sans', sans-serif;}
+
+html {
+	height: 100%;
+	min-height: 100%;
+	overflow: hidden;
+}
+body {
+	background-image:url('../images/bg.jpg');
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	background-color: #181411;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	color: #fff;
+	height:100%;
+	min-height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow:hidden;
+	/*-ms-behavior: url(/backgroundsize.min.htc);*/
+}
+
+h1 {font-size: 6.5vmin;}
+h2 {font-size: 5vmin;}
+
+h1, h2 {
+	font-family: 'Macula', serif;
+	text-transform: uppercase;
+	margin: 0.5em 0;
+	display: inline-block;
+}
+
+h3 {font-size:1em; margin:0}
+h4, textarea {margin:0; line-height:24px;}
+h5 {}
+	h1, h2, h3, h4, h5, p {font-weight:100;}
+
+	strong {
+		font-weight: 400;
+	}
+
+	ul, li {
+		margin:0;
+		padding:0;
+		list-style: none;
+	}
+	a, textarea{
+		color: #fff;
+		text-decoration:none;
+	}
+
+	section a {
+		font-weight: bold !important;
+	}
+
+	a, a:active, a:focus {
+		outline: none;
+	}
+
+	audio {
+		display: none;
+	}
+
+	@font-face{
+		font-family: 'Macula';
+		font-style: normal;
+		font-weight: bold;
+		/*src: url('../fonts/macula-solid-v10.eot');
+		src: url('../fonts/macula-solid-v10.eot?#iefix') format('embedded-opentype'),*/
+		src: url('../fonts/macula-solid-v10.woff') format('woff');
+	}
+
+	/* Easing */
+	a, nav ul li, ul.social > li, ul.crypto > li, ul.crypto > li > textarea, .iso, .button span, .button:hover span, section ul li{
+		-webkit-transition: all 400ms ease;
+		transition: all 400ms ease;
+	}
+
+	#isobg {
+		width: 100%;
+		height: 100%;
+	}
+
+	.iso > .iso-left {
+		fill: #c3bebe25;
+	}
+
+	.iso > .iso-right {
+		fill: #84848425;
+	}
+
+	.iso > .iso-top {
+		fill: #ffffff25;
+	}
+
+	.superscript {
+		vertical-align: super;
+	}
+
+	h4 .superscript {
+		line-height: 16px;
+		font-size: 0.6em;
+	}
+
+	.copyright, .banner > h4 {margin: 4px 10px; text-align: center}
+
+	/* No Select */
+	.button, .social li {
+		touch-callout: none;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+
+	::-moz-selection {background-image:none; background: #0f8f83;}
+
+	::selection {background-image:none; background: #0f8f83;}
+
+	.left {float:left}
+	.right {float:right}
+	.hidden {display:none}
+	.clear {clear:both}
+	.inline-block {display:inline-block}
+	.inline {display:inline}
+
+	/* Skin */
+	footer, header, .cube > .bottom, .cube > .top, #mainCube .face.focus {
+		background-color:rgba(29,54,75,0.75);
+	}
+
+	/* General */
+	header {
+		width: 100%;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 9999;
+	}
+
+	#background {
+		z-index: 1;
+	}
+
+	#content {
+		z-index: 2;
+	}
+
+	#content, #background {
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		position: absolute;
+	}
+
+	.viewport {
+		-webkit-perspective: 1000px;
+		perspective: 1000px;
+	}
+
+	footer {
+		width:100%;
+		max-height: 32px;
+		position: fixed;
+		bottom:0;
+		left:0;
+		z-index: 2;
+	}
+
+	nav {
+		width: 100%;
+	}
+
+	#toggleMenu span {width:50px; text-align:center; padding:0}
+
+	.button  {cursor:pointer}
+	.button span {
+		padding: 0 5px;
+	}
+	.banner {
+		height: 32px;
+		width:100%;
+		text-align:center;
+	}
+
+	.cube {
+		-webkit-transform-style: preserve-3d;
+		transform-style: preserve-3d;
+	}
+
+	nav > ul, ul.social, ul.crypto {
+		display: inline-block;
+	}
+	nav > ul > li, ul.social > li, ul.crypto > li {
+		float:left;
+		line-height:24px;
+		height:32px;
+	}
+
+	nav > ul > li, ul.social > li, ul.crypto > li.coin, ul.crypto > li.coin > textarea {
+		width: 100px;
+	}
+
+	nav ul li > a h4, ul.social li > a h4, ul.crypto > li.coin > textarea  {
+		padding: 4px 10px;
+		text-align: center;
+	}
+
+	nav ul li:hover, ul.social li.email:hover, .button:hover span, nav ul li.selected {
+		background-color:#0f8f83;
+	}
+	ul.social > li.twitter:hover {
+		background-color:#00aced;
+	}
+	ul.social > li.linkedin:hover {
+		background-color:#4875B4;
+	}
+	ul.social > li.github:hover {
+		background-color: #4183c4;
+	}
+	ul.crypto > li.bitcoin:hover {
+		background-color:#f7931a;
+	}
+	ul.crypto > li.ethereum:hover {
+		background-color:#8a92b2;
+	}
+	ul.crypto > li.coin > textarea {
+		box-sizing: border-box;
+		height: 32px;
+		background-color: transparent;
+		border: none;
+		resize: none;
+		overflow: hidden;
+		cursor:pointer;
+	}
+
+	/*li, ul.crypto > li.coin:hover, ul.crypto > li.coin > textarea:hover {
+		width: 400px;
+		max-width: -moz-available;
+		max-width: -webkit-fill-available;
+	}*/
+
+	ul.crypto > li.coin > textarea:focus {
+		outline: 0px none transparent;
+	}
+
+	/* 3D Cube */
+	.viewport {
+		width: 100%;
+		height: 100%;
+		text-align: center;
+	}
+
+	#mainCube {
+		-webkit-transition: all 2s cubic-bezier(0.175, 0.885, 0.32, 1);
+		transition: all 2s cubic-bezier(0.175, 0.885, 0.32, 1);
+		position: relative;
+		top: -100%;
+		/*-webkit-transform: translateY(-50%);
+		transform: translateY(-50%);*/
+		-webkit-transform-style: preserve-3d;
+		transform-style: preserve-3d;
+		display: inline-block;
+	}
+
+	.face {
+		width: 100%;
+		height: 100%;
+		overflow-y: auto;
+		overflow-x: hidden;
+		position: absolute;
+		box-shadow: inset 0 0 64px rgba(0, 0, 0, 1), 0 0 48px rgba(0, 0, 0, 0.75);
+		background-color: rgba(14, 25, 35, 0.75);
+		z-index: 100;
+		-webkit-transition: all 2s ease-in-out;
+		transition: all 2s ease-in-out;
+	}
+
+	#mainCube .face.focus {
+		box-shadow: none;
+		z-index: 9999;
+	}
+
+	.face .content {
+		margin: 5%;
+		opacity: 0.1;
+		-webkit-transition: all 2s ease-in-out;
+		transition: all 2s ease-in-out;
+	}
+
+	.focus .content {
+		opacity: 1;
+	}
+
+	#mainCube .front {
+		-webkit-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
+	}
+
+	.face::-webkit-scrollbar-track
+	{
+		background-color: rgba(25, 50, 68, 0.1);
+	}
+
+	.face::-webkit-scrollbar
+	{
+		width: 5px;
+	}
+
+	.face::-webkit-scrollbar-thumb
+	{
+		background-color: rgba(40, 81, 111, 1);
+	}
