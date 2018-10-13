@@ -17,7 +17,10 @@ const viewsDir = path.join(srcDir, 'views');
 const partialsDir = path.join(viewsDir, '/partials');
 const helpersDir = path.join(viewsDir, '/helpers');
 
+const nodeEnv = process.env.NODE_ENV || 'development';
+
 module.exports = {
+  mode: nodeEnv,
   entry: {
     main: path.join(jsDir, 'main.js'),
   },
