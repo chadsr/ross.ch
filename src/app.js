@@ -32,7 +32,7 @@ app.engine('hbs', hbs( {
   layoutsDir: path.join(viewsDir, 'layouts'),
   partialsDir: [
     path.join(viewsDir, 'partials'),
-    publicDir // For fetching webpack stuff
+    publicDir // For fetching webpack partial
   ]
 }));
 
@@ -41,7 +41,8 @@ app.set('views', viewsDir);
 
 // Load dev middlewares if developing
 if (isDeveloping) {
-  console.log('Development Mode.');
+  console.log('\nDevelopment Mode.\n');
+
   app.use(webpackDevMiddleware(compiler, {
     publicPath: webpackConfig.output.publicPath,
     log: console.log
@@ -55,7 +56,17 @@ if (isDeveloping) {
 
   app.use(logger('dev'));
 } else {
-  console.log('Production Mode.');
+  console.log('\nProduction Mode.\n');
+
+  // Run the webpack compiler to get the static files to serve
+  compiler.run((err, stats) => {
+    if (err) {
+      console.log("Webpack Error:", err);
+      return; // Just exit, since we depend on webpack
+    } else {
+      console.log("Webpack compiled successfully!");
+    }
+  });
 }
 
 // Production middleware
@@ -70,13 +81,6 @@ const middlewares = [
 ];
 
 app.use(middlewares);
-
-// Set a CSRF token
-app.use(function(req, res, next) {
-  res.locals.csrfToken = req.csrfToken();
-  next();
-});
-
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
@@ -87,6 +91,8 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+  console.log('error handler');
+
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

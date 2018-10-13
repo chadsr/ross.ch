@@ -1,11 +1,18 @@
 {
 	"name": "ross.ch",
 	"version": "0.0.0",
+	"author": "Ross Chadwick",
 	"private": true,
 	"scripts": {
-		"start": "webpack --watch & NODE_ENV=production node ./bin/www",
-		"dev": "webpack --watch & DEBUG=ross.ch:* NODE_ENV=development node ./bin/www",
-		"build": "webpack -p"
+		"start": "NODE_ENV=production node ./bin/www",
+		"dev": "nodemon DEBUG=ross.ch:* NODE_ENV=development node ./bin/www",
+		"watchDev": "webpack --watch --progress --color",
+		"buildSilent": "webpack",
+		"buildDev": "webpack --progress --color"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/chadsr/ross.ch.git"
 	},
 	"dependencies": {
 		"axios": "^0.18.0",
@@ -29,6 +36,8 @@
 		"autoprefixer": "^9.1.5",
 		"babel-loader": "^8.0.4",
 		"clean-webpack-plugin": "^0.1.19",
+		"concurrently": "^4.0.1",
+		"copy-webpack-plugin": "^4.5.3",
 		"css-loader": "^1.0.0",
 		"favicons-webpack-plugin": "0.0.9",
 		"file-loader": "^2.0.0",
@@ -43,6 +52,7 @@
 		"webpack-cli": "^3.1.2",
 		"webpack-dev-middleware": "^3.4.0",
 		"webpack-hot-middleware": "^2.24.3",
-		"webpack-md5-hash": "0.0.6"
+		"webpack-md5-hash": "0.0.6",
+		"write-file-webpack-plugin": "^4.4.1"
 	}
 }
