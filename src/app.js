@@ -31,8 +31,7 @@ app.engine('hbs', hbs( {
   defaultLayout: 'main',
   layoutsDir: path.join(viewsDir, 'layouts'),
   partialsDir: [
-    path.join(viewsDir, 'partials'),
-    publicDir // For fetching webpack partial
+    path.join(viewsDir, 'partials')
   ]
 }));
 
