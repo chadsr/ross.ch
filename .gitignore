@@ -1,4 +1,6 @@
-public/
+src/public/*
+src/fonts/macula-solid-v10.woff
+src/views/partials/webpack.hbs
 
 package-lock.json
 
