@@ -1,0 +1,410 @@
+// Colours
+$color_night_rider_approx: #181411
+$white: #fff
+$color_blue_chill_approx: #0f8f83
+$color_nile_blue_75_approx: rgba(29,54,75,0.75)
+$color_cerulean_approx: #00aced
+$color_san_marino_approx: #4875b4
+$color_steel_blue_approx: #4183c4
+$color_tree_poppy_approx: #f7931a
+$color_bali_hai_approx: #8a92b2
+$black_100: rgba(0, 0, 0, 1)
+$black_75: rgba(0, 0, 0, 0.75)
+$color_vulcan_75_approx: rgba(14, 25, 35, 0.75)
+$color_elephant_10_approx: rgba(25, 50, 68, 0.1)
+$color_san_juan_approx: rgba(40, 81, 111, 1)
+
+// URLs
+$url-background: url('../images/bg.jpg')
+$url-macula: url('../fonts/macula-solid-v10.woff')
+
+// Fonts
+$font-macula: 'Macula'
+$font-opensans: 'Open Sans'
+$sans-serif: 'sans-serif'
+$serif: 'serif'
+
+@font-face
+    font-family: $font-macula
+    font-style: normal
+    font-weight: bold
+    src: $url-macula format('woff')
+
+
+// Extends
+%heading
+    font-family: $font-macula, $serif
+    text-transform: uppercase
+    margin: 0.5em 0
+    display: inline-block
+    text-rendering: geometricPrecision
+
+
+%list
+    margin: 0
+    padding: 0
+    list-style: none
+
+
+%formInput
+    width: 100%
+    text-align: center
+    border: none
+    box-shadow: none
+    padding: 0
+    margin: 0
+
+
+%noSelect
+    touch-callout: none
+    user-select: none
+
+
+%fullScreen
+    width: 100%
+    height: 100%
+    overflow: hidden
+    position: absolute
+
+
+%listElement
+    float: left
+    line-height: 24px
+    height: 32px
+
+%transition-ease
+    transition: all 400ms ease
+
+%transition-ease-in-out
+    transition: all 2s ease-in-out
+
+
+// Main styles
+*
+    tap-highlight-color: rgba(0, 0, 0, 0)
+    font-family: $font-opensans, $sans-serif
+
+::-moz-selection
+    background-image: none
+    background: $color_blue_chill_approx
+
+::selection
+    background-image: none
+    background: $color_blue_chill_approx
+
+html
+    height: 100%
+    min-height: 100%
+    overflow: hidden
+
+body
+    background-image: $url-background
+    background-position: center center
+    background-repeat: no-repeat
+    background-attachment: fixed
+    background-size: cover
+    background-color: $color_night_rider_approx
+    color: $white
+    height: 100%
+    min-height: 100%
+    margin: 0
+    padding: 0
+    overflow: hidden
+
+h1
+    font-size: 6.5vmin
+    @extend %heading
+    font-weight: 100
+
+h2
+    font-size: 5vmin
+    @extend %heading
+    font-weight: 100
+
+h3
+    font-size: 1em
+    margin: 0
+    font-weight: 100
+
+h4
+    margin: 0
+    line-height: 24px
+    font-weight: 100
+    .superscript
+        line-height: 16px
+        font-size: 0.6em
+
+h5
+    font-weight: 100
+
+a
+    color: $white
+    text-decoration: none
+    outline: none
+    @extend %transition-ease
+    &:active
+        outline: none
+
+    &:focus
+        outline: none
+
+p
+    font-weight: 100
+
+strong
+    font-weight: 400
+
+textarea
+    margin: 0
+    line-height: 24px
+    color: $white
+    text-decoration: none
+    @extend %formInput
+
+li
+    @extend %list
+
+ul
+    @extend %list
+    &.social
+        display: inline-block
+        > li
+            @extend %transition-ease
+            @extend %listElement
+            width: 100px
+            &.twitter:hover
+                background-color: $color_cerulean_approx
+
+            &.linkedin:hover
+                background-color: $color_san_marino_approx
+
+            &.github:hover
+                background-color: $color_steel_blue_approx
+
+
+        li
+            > a h4
+                padding: 4px 10px
+                text-align: center
+
+            &.email:hover
+                background-color: $color_blue_chill_approx
+
+    &.crypto
+        display: inline-block
+        > li
+            @extend %transition-ease
+            @extend %listElement
+            > textarea
+            @extend %transition-ease
+
+            &.coin
+                width: 100px
+                > textarea
+                    width: 100px
+                    padding: 4px 10px
+                    text-align: center
+                    box-sizing: border-box
+                    height: 32px
+                    background-color: transparent
+                    border: none
+                    resize: none
+                    overflow: hidden
+                    cursor: pointer
+                    &:focus
+                        outline: 0 none transparent
+
+            &.bitcoin:hover
+                background-color: $color_tree_poppy_approx
+
+            &.ethereum:hover
+                background-color: $color_bali_hai_approx
+
+.social li
+    @extend %noSelect
+
+section
+    a
+        font-weight: bold !important
+
+    ul li
+        @extend %transition-ease
+
+
+fieldset
+    @extend %formInput
+
+input
+    @extend %formInput
+
+form > .field > label
+    @extend %transition-ease
+
+audio
+    display: none
+
+nav
+    width: 100%
+    > ul
+        display: inline-block
+        > li
+            @extend %listElement
+            width: 100px
+
+
+    ul li
+        @extend %transition-ease
+        &:hover
+            background-color: $color_blue_chill_approx
+
+        &.selected
+            background-color: $color_blue_chill_approx
+
+        > a h4
+            padding: 4px 10px
+            text-align: center
+
+#background
+    z-index: 1
+    @extend %fullScreen
+
+#content
+    z-index: 2
+    @extend %fullScreen
+
+.viewport
+    perspective: 1000px
+    width: 100%
+    height: 100%
+    text-align: center
+
+.button
+    @extend %noSelect
+    cursor: pointer
+    span
+        @extend %transition-ease
+        padding: 0 5px
+
+    &:hover span
+        @extend %transition-ease
+        background-color: $color_blue_chill_approx
+
+.superscript
+    vertical-align: super
+
+.copyright
+    margin: 4px 10px
+    text-align: center
+
+.banner
+    height: 32px
+    width: 100%
+    text-align: center
+    > h4
+        margin: 4px 10px
+        text-align: center
+
+.left
+    float: left
+
+.right
+    float: right
+
+.hidden
+    display: none
+
+.clear
+    clear: both
+
+.inline-block
+    display: inline-block
+
+.inline
+    display: inline
+
+footer
+    background-color: $color_nile_blue_75_approx
+    width: 100%
+    max-height: 32px
+    position: fixed
+    bottom: 0
+    left: 0
+    z-index: 2
+
+header
+    background-color: $color_nile_blue_75_approx
+    width: 100%
+    position: fixed
+    top: 0
+    left: 0
+    z-index: 9999
+
+// Escher cube background styles
+#isobg
+    width: 100%
+    height: 100%
+
+.iso
+    @extend %transition-ease
+    >
+        .iso-left
+            fill: #c3bebe25
+
+        .iso-right
+            fill: #84848425
+
+        .iso-top
+            fill: #ffffff25
+
+// 3D content cube styles
+#mainCube
+    transition: all 2s cubic-bezier(0.175, 0.885, 0.32, 1)
+    position: relative
+    top: -100%
+    transform-style: preserve-3d
+    display: inline-block
+    .front
+        transform: translate3d(0, 0, 0)
+
+    .face.focus
+        background-color: $color_nile_blue_75_approx
+        box-shadow: none
+        z-index: 9999
+
+        >
+            .content
+                opacity: 1
+
+.cube
+    transform-style: preserve-3d
+    >
+        .bottom
+            background-color: $color_nile_blue_75_approx
+
+        .top
+            background-color: $color_nile_blue_75_approx
+
+.face
+    width: 100%
+    height: 100%
+    overflow-y: auto
+    overflow-x: hidden
+    position: absolute
+    box-shadow: inset 0 0 64px $black_100, 0 0 48px $black_75
+    background-color: $color_vulcan_75_approx
+    z-index: 100
+    @extend %transition-ease-in-out
+
+    .content
+        margin: 5%
+        opacity: 0.1
+        @extend %transition-ease-in-out
+
+.face::-webkit-scrollbar-track
+    background-color: $color_elephant_10_approx
+
+.face::-webkit-scrollbar
+    width: 5px
+
+.face::-webkit-scrollbar-thumb
+    background-color: $color_san_juan_approx

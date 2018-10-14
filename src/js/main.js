@@ -2,8 +2,8 @@
 // TODO: A LOT of refactoring
 
 // Stylesheets/#
-import '../stylesheets/style.css';
-import '../stylesheets/media.css';
+import '../stylesheets/style.sass';
+import '../stylesheets/media.sass';
 
 // node packages
 const hammer = require('hammerjs');
