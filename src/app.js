@@ -72,8 +72,8 @@ if (isDeveloping) {
 const middlewares = [
   express.static(publicDir, {maxAge: 604800000}),
   bodyParser.json(),
+  bodyParser.urlencoded({extended: true}),
   helmet(),
-  bodyParser.urlencoded({extended: false}),
   cookieParser(),
   csrf({cookie: true}),
   validator()
@@ -90,7 +90,7 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  console.log('error handler');
+  console.log('\nError:', err);
 
   // set locals, only providing error in development
   res.locals.message = err.message;
