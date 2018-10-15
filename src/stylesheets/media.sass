@@ -1,5 +1,5 @@
 @media only screen and (min-width : 320px) and (umax-width : 500px)
-    .viewport
+    .perspective
         perspective: 600px
 
     #mainCube
@@ -23,6 +23,8 @@
                 transform: rotateY(180deg) translate3d(0, 0, 300px)
 
 
+
+
 @media only screen and (max-width : 500px)
     nav
         ul
@@ -33,6 +35,10 @@
 
     .fullWidth
         width: 100% !important
+
+    .crypto > .fullWidth:hover::after
+        display: none
+
 
     footer
         max-height: 128px
@@ -55,8 +61,10 @@
         text-align: center
 
 
+
+
 @media only screen and (min-width : 768px) and (max-width : 1024px)
-    .viewport
+    .perspective
         perspective: 1200px
 
     #mainCube
@@ -78,10 +86,12 @@
 
             .back
                 transform: rotateY(180deg) translate3d(0, 0, 600px)
+
+
 
 
 @media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape)
-    .viewport
+    .perspective
         perspective: 1200px
 
     #mainCube
@@ -103,10 +113,12 @@
 
             .back
                 transform: rotateY(180deg) translate3d(0, 0, 600px)
+
+
 
 
 @media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait)
-    .viewport
+    .perspective
         perspective: 1200px
 
     #mainCube
@@ -130,8 +142,10 @@
                 transform: rotateY(180deg) translate3d(0, 0, 600px)
 
 
+
+
 @media screen and (max-width: 320px) and (min-height : 150px)
-    .viewport
+    .perspective
         perspective: 1500px
 
     #mainCube
@@ -158,7 +172,7 @@
 
 
 @media screen and (min-width: 320px) and (min-height : 300px)
-    .viewport
+    .perspective
         perspective: 600px
 
     #mainCube
@@ -183,7 +197,7 @@
 
 
 @media only screen and (min-width: 640px) and (min-height : 400px)
-    .viewport
+    .perspective
         perspective: 800px
 
     #mainCube
@@ -210,7 +224,7 @@
 
 
 @media only screen and (min-width: 800px) and (min-height : 600px)
-    .viewport
+    .perspective
         perspective: 1200px
 
     #mainCube
@@ -234,8 +248,10 @@
                 transform: rotateY(180deg) translate3d(0, 0, 600px)
 
 
+
+
 @media only screen and (min-width : 1024px) and (min-height : 800px)
-    .viewport
+    .perspective
         perspective: 1600px
 
     #mainCube
@@ -259,8 +275,10 @@
                 transform: rotateY(180deg) translate3d(0, 0, 800px)
 
 
+
+
 @media only screen and (min-width : 1824px) and (min-height : 1000px)
-    .viewport
+    .perspective
         perspective: 2000px
 
     #mainCube

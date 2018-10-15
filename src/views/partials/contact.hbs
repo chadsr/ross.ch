@@ -1,12 +1,20 @@
 <form id="contact-form" method="post" role="form">
   <input type="hidden" name="_csrf" value="{{csrfToken}}">
   <fieldset>
-    <label for="name">Name &#42;</label>
-    <input name="name" type="text" placeholder="Your name" required="required">
-    <label for="email">Email &#42;</label>
-    <input name="email" type="text" placeholder="Your email" required="required">
-    <label for="message">Message &#42;</label>
-    <textarea name="message" placeholder="Enter your message here" rows="3" required="required"></textarea>
-    <button type="submit">Submit</button>
+    <div class="field perspective">
+      <label for="name">Name</label>
+      <input name="name" type="text" placeholder="Your name" required="required">
+    </div>
+    <div class="field perspective">
+      <label for="email">Email</label>
+      <input name="email" type="text" placeholder="Your email" required="required">
+    </div>
+    <div class="field perspective">
+      <label for="message">Message</label>
+      <textarea name="message" placeholder="Enter your message here" rows="3" required="required"></textarea>
+    </div>
+    <div class="field perspective">
+      <button type="submit">Submit</button>
+    </div>
   </fieldset>
 </form>

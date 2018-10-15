@@ -2,7 +2,12 @@
 $color_night_rider_approx: #181411
 $white: #fff
 $color_blue_chill_approx: #0f8f83
-$color_nile_blue_75_approx: rgba(29,54,75,0.75)
+$color_main: rgba(29, 54, 75, 0.8)
+$color_main_shadow: rgba(20, 39, 56, 0.8)
+$color_main_light: rgba(31, 60, 86, 0.8)
+$color_form_input: rgba(25, 40, 53, 0.8)
+$color_form_label: rgba(69, 83, 95, 0.8)
+$color_nile_blue_approx: rgba(29,54,75,1)
 $color_cerulean_approx: #00aced
 $color_san_marino_approx: #4875b4
 $color_steel_blue_approx: #4183c4
@@ -35,7 +40,7 @@ $serif: 'serif'
 %heading
     font-family: $font-macula, $serif
     text-transform: uppercase
-    margin: 0.5em 0
+    margin: 0 0 0.5em 0
     display: inline-block
     text-rendering: geometricPrecision
 
@@ -46,14 +51,23 @@ $serif: 'serif'
     list-style: none
 
 
-%formInput
+%form-layout
     width: 100%
     text-align: center
     border: none
     box-shadow: none
     padding: 0
     margin: 0
+    color: $white
 
+%form-input-style
+    @extend %form-layout
+    background-color: $color_form_input
+
+%form-label-style
+    @extend %form-layout
+    display: block
+    background-color: $color_form_label
 
 %noSelect
     touch-callout: none
@@ -78,15 +92,33 @@ $serif: 'serif'
 %transition-ease-in-out
     transition: all 2s ease-in-out
 
+%3d-side
+    z-index: 2
+    content: ''
+    display: block
+    position: absolute
+    width: inherit
+    height: inherit
+    transform-style: preserve-3d
+    background-color: inherit
+    transition: inherit
+
+%3d-side-top
+    @extend %3d-side
+    filter: brightness(120%)
+    transform: rotateX(60deg) translate3d(0, -24px, 14px)
+    top: 0px
+
+%3d-side-bottom
+    @extend %3d-side
+    filter: brightness(60%)
+    transform: rotateX(-60deg) translate3d(0, 9px, -14px)
+    top: 32px
 
 // Main styles
 *
     tap-highlight-color: rgba(0, 0, 0, 0)
     font-family: $font-opensans, $sans-serif
-
-::-moz-selection
-    background-image: none
-    background: $color_blue_chill_approx
 
 ::selection
     background-image: none
@@ -98,12 +130,6 @@ html
     overflow: hidden
 
 body
-    background-image: $url-background
-    background-position: center center
-    background-repeat: no-repeat
-    background-attachment: fixed
-    background-size: cover
-    background-color: $color_night_rider_approx
     color: $white
     height: 100%
     min-height: 100%
@@ -155,11 +181,9 @@ strong
     font-weight: 400
 
 textarea
-    margin: 0
     line-height: 24px
-    color: $white
     text-decoration: none
-    @extend %formInput
+    @extend %form-input-style
 
 li
     @extend %list
@@ -172,6 +196,11 @@ ul
             @extend %transition-ease
             @extend %listElement
             width: 100px
+
+            &:hover
+                &::after
+                    @extend %3d-side-top
+
             &.twitter:hover
                 background-color: $color_cerulean_approx
 
@@ -181,14 +210,9 @@ ul
             &.github:hover
                 background-color: $color_steel_blue_approx
 
-
-        li
             > a h4
                 padding: 4px 10px
                 text-align: center
-
-            &.email:hover
-                background-color: $color_blue_chill_approx
 
     &.crypto
         display: inline-block
@@ -214,8 +238,13 @@ ul
                     &:focus
                         outline: 0 none transparent
 
+            &:hover
+                &::after
+                    @extend %3d-side-top
+
             &.bitcoin:hover
                 background-color: $color_tree_poppy_approx
+
 
             &.ethereum:hover
                 background-color: $color_bali_hai_approx
@@ -232,20 +261,22 @@ section
 
 
 fieldset
-    @extend %formInput
+    @extend %form-layout
+
+    label
+        @extend %form-label-style
 
 input
-    @extend %formInput
-
-form > .field > label
-    @extend %transition-ease
+    @extend %form-input-style
 
 audio
     display: none
 
 nav
-    width: 100%
+    width: inherit
+    display: inline-block
     > ul
+        width: inherit
         display: inline-block
         > li
             @extend %listElement
@@ -254,17 +285,23 @@ nav
 
     ul li
         @extend %transition-ease
-        &:hover
+        &:hover, &.selected
             background-color: $color_blue_chill_approx
+            &::after
+                @extend %3d-side-bottom
 
-        &.selected
-            background-color: $color_blue_chill_approx
 
         > a h4
             padding: 4px 10px
             text-align: center
 
 #background
+    background-image: $url-background
+    background-position: center center
+    background-repeat: no-repeat
+    background-attachment: fixed
+    background-size: cover
+    background-color: $color_night_rider_approx
     z-index: 1
     @extend %fullScreen
 
@@ -272,8 +309,7 @@ nav
     z-index: 2
     @extend %fullScreen
 
-.viewport
-    perspective: 1000px
+body
     width: 100%
     height: 100%
     text-align: center
@@ -323,7 +359,7 @@ nav
     display: inline
 
 footer
-    background-color: $color_nile_blue_75_approx
+    background-color: $color_main
     width: 100%
     max-height: 32px
     position: fixed
@@ -332,8 +368,9 @@ footer
     z-index: 2
 
 header
-    background-color: $color_nile_blue_75_approx
+    background-color: $color_main
     width: 100%
+    height: 32px
     position: fixed
     top: 0
     left: 0
@@ -357,17 +394,20 @@ header
             fill: #ffffff25
 
 // 3D content cube styles
+// @keyframes cube-spin-in
+//     0%
+//         transform: rotateY(-45deg) rotateX(-15deg) rotateZ(15deg) scale3d(0, 0, 0)
+//     100%
+//         transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale3d(1, 1, 1)
+
 #mainCube
     transition: all 2s cubic-bezier(0.175, 0.885, 0.32, 1)
     position: relative
-    top: -100%
-    transform-style: preserve-3d
     display: inline-block
-    .front
-        transform: translate3d(0, 0, 0)
+    //animation: 2s linear 0s 1 cube-spin-in
 
     .face.focus
-        background-color: $color_nile_blue_75_approx
+        background-color: $color_main
         box-shadow: none
         z-index: 9999
 
@@ -379,10 +419,10 @@ header
     transform-style: preserve-3d
     >
         .bottom
-            background-color: $color_nile_blue_75_approx
+            background-color: $color_main
 
         .top
-            background-color: $color_nile_blue_75_approx
+            background-color: $color_main
 
 .face
     width: 100%
@@ -400,11 +440,48 @@ header
         opacity: 0.1
         @extend %transition-ease-in-out
 
-.face::-webkit-scrollbar-track
+.face::scrollbar-track
     background-color: $color_elephant_10_approx
 
-.face::-webkit-scrollbar
+.face::scrollbar
     width: 5px
 
-.face::-webkit-scrollbar-thumb
+.face::scrollbar-thumb
     background-color: $color_san_juan_approx
+
+header::after
+    z-index: 1
+    @extend %3d-side-bottom
+
+footer::after
+    z-index: 1
+    height: 32px
+    @extend %3d-side-top
+
+#contact-form
+    margin-top: 16px
+
+.field.perspective
+    margin-bottom: 32px
+
+    label
+        height: 32px
+        line-height: 32px
+        &::after
+            @extend %3d-side-top
+
+    button
+        height: 32px
+        width: 100%
+        margin: 0
+        padding: 0
+        border: none
+
+        &::after
+            @extend %3d-side-top
+
+    input
+        height: 32px
+
+    textarea
+        height: 128px

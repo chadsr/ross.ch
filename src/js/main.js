@@ -24,7 +24,7 @@ const CONTACT_FORM_ID = 'contact-form';
 const BG_Y_OFFSET = -0.5; // Offset from y origin for the background rendering (so cube starts halfway offscreen)
 const BG_CONTAINER_Id = 'background';
 const SVG_ID = 'isobg'
-const CUBE_SIZE = 42; // Size of a side in px (if in a 'true' 3d space)
+const CUBE_SIZE = 200; // Size of a side in px (if in a 'true' 3d space)
 const INNER_ANGLE = 60;
 
 // The currently facing side of the mainCube
@@ -105,7 +105,7 @@ window.addEventListener('resize', debounce(function(event) {
 	var footer = document.querySelector('footer');
 	var footerPosition = footer.getBoundingClientRect();
 
-	cube.style.top = (mainContentPosition.height + headerPosition.height - footerPosition.height - cubePosition.height) / 2 + 'px';
+	cube.style.top = Math.round((mainContentPosition.height + headerPosition.height - footerPosition.height - cubePosition.height) / 2) + 'px';
 
 	renderBackground();
 }, 200));

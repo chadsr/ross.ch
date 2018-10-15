@@ -6,6 +6,23 @@ export default class ContactForm {
     this.form = document.getElementById(formId);
   }
 
+  handleResponse(response) {
+    switch(response.status)  {
+      case 200: // Success
+      this.reset();
+
+      break;
+
+      case 422: // Rejected form values
+      console.log(response.data);
+      break;
+
+      case 503: // Email server unavailable
+      console.log(response.data);
+      break;
+    }
+  }
+
   reset() {
     this.form.reset();
   }
@@ -24,21 +41,17 @@ export default class ContactForm {
       message: message,
     };
 
-    console.log(data, csrfToken);
-
     axios({
       method: 'POST',
       url: '/',
-      headers: {'X-CSRF-TOKEN': csrfToken},
+      headers: {'X-CSRF-Token': csrfToken},
+      xsrfHeaderName: 'X-CSRF-Token',
+      xsrfCookieName: 'XSRF-TOKEN',
       data: data
+    }).catch(error => {
+      handleResponse(error.response);
     }).then((response) => {
-      console.log('Response:', response);
-      if (response.status === 200){
-        console.log('sent'); // TODO investigate why these dont trigger
-        this.reset();
-      } else {
-        console.log('fail');
-      }
+      handleResponse(response);
     })
   }
 }
