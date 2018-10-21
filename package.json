@@ -46,6 +46,7 @@
 		"image-webpack-loader": "^4.3.1",
 		"imagemin-webpack-plugin": "^2.3.0",
 		"node-sass": "^4.9.3",
+		"nodemon": "^1.18.4",
 		"postcss-loader": "^3.0.0",
 		"sass-loader": "^7.1.0",
 		"style-loader": "^0.23.1",
