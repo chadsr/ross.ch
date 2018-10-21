@@ -1,23 +1,23 @@
 // Colours
-$color_night_rider_approx: #181411
+$color_background: #181411
 $white: #fff
-$color_blue_chill_approx: #0f8f83
+$color_highlight: #0f8f83
 $color_main: rgba(29, 54, 75, 0.8)
 $color_main_shadow: rgba(20, 39, 56, 0.8)
 $color_main_light: rgba(31, 60, 86, 0.8)
 $color_form_input: rgba(25, 40, 53, 0.8)
 $color_form_label: rgba(69, 83, 95, 0.8)
-$color_nile_blue_approx: rgba(29,54,75,1)
-$color_cerulean_approx: #00aced
-$color_san_marino_approx: #4875b4
-$color_steel_blue_approx: #4183c4
-$color_tree_poppy_approx: #f7931a
-$color_bali_hai_approx: #8a92b2
+$color_twitter: #00aced
+$color_linkedin: #4875b4
+$color_github: #4183c4
+$color_bitcoin: #f7931a
+$color_ethereum: linear-gradient(90deg, #fca09a, #fcccd3, #ffcc9d, #98ddad, #81d7ec, #a0aaed)
 $black_100: rgba(0, 0, 0, 1)
 $black_75: rgba(0, 0, 0, 0.75)
-$color_vulcan_75_approx: rgba(14, 25, 35, 0.75)
-$color_elephant_10_approx: rgba(25, 50, 68, 0.1)
-$color_san_juan_approx: rgba(40, 81, 111, 1)
+$color_scrollbar: $color_main
+$color_scrollbar_track: $color_main
+$color_scrollbar_thumb: $color_form_label
+$color_keybase: #4c8eff
 
 // URLs
 $url-background: url('../images/bg.jpg')
@@ -60,19 +60,24 @@ $serif: 'serif'
     margin: 0
     color: $white
 
+
 %form-input-style
     @extend %form-layout
-    background-color: $color_form_input
+    background: $color_form_input
+
 
 %form-label-style
     @extend %form-layout
     display: block
-    background-color: $color_form_label
+    background: $color_form_label
 
-%noSelect
+
+%no-select
     touch-callout: none
     user-select: none
 
+%allow-select-text
+    user-select: text
 
 %fullScreen
     width: 100%
@@ -81,16 +86,23 @@ $serif: 'serif'
     position: absolute
 
 
-%listElement
+%list-element
     float: left
     line-height: 24px
     height: 32px
 
+
 %transition-ease
-    transition: all 400ms ease
+    transition: all 200ms ease
+
 
 %transition-ease-in-out
-    transition: all 2s ease-in-out
+    transition: all 1s ease-in-out
+
+
+%transition-cube
+    transition: all 2s cubic-bezier(0.175, 0.885, 0.32, 1)
+
 
 %3d-side
     z-index: 2
@@ -100,8 +112,7 @@ $serif: 'serif'
     width: inherit
     height: inherit
     transform-style: preserve-3d
-    background-color: inherit
-    transition: inherit
+    background: inherit
 
 %3d-side-top
     @extend %3d-side
@@ -119,10 +130,11 @@ $serif: 'serif'
 *
     tap-highlight-color: rgba(0, 0, 0, 0)
     font-family: $font-opensans, $sans-serif
+    @extend %no-select
 
 ::selection
     background-image: none
-    background: $color_blue_chill_approx
+    background: $color_highlight
 
 html
     height: 100%
@@ -138,7 +150,7 @@ body
     overflow: hidden
 
 h1
-    font-size: 6.5vmin
+    font-size: 6vmin
     @extend %heading
     font-weight: 100
 
@@ -148,8 +160,7 @@ h2
     font-weight: 100
 
 h3
-    font-size: 1em
-    margin: 0
+    font-size: 4vmin
     font-weight: 100
 
 h4
@@ -194,21 +205,25 @@ ul
         display: inline-block
         > li
             @extend %transition-ease
-            @extend %listElement
+            @extend %list-element
             width: 100px
 
             &:hover
+                background: $color_highlight
                 &::after
                     @extend %3d-side-top
 
             &.twitter:hover
-                background-color: $color_cerulean_approx
+                background: $color_twitter
 
             &.linkedin:hover
-                background-color: $color_san_marino_approx
+                background: $color_linkedin
 
             &.github:hover
-                background-color: $color_steel_blue_approx
+                background: $color_github
+
+            &.keybase:hover
+                background: $color_keybase
 
             > a h4
                 padding: 4px 10px
@@ -218,23 +233,25 @@ ul
         display: inline-block
         > li
             @extend %transition-ease
-            @extend %listElement
+            @extend %list-element
             > textarea
             @extend %transition-ease
 
             &.coin
                 width: 100px
                 > textarea
+                    @extend %allow-select-text
                     width: 100px
                     padding: 4px 10px
                     text-align: center
                     box-sizing: border-box
                     height: 32px
-                    background-color: transparent
+                    background: transparent
                     border: none
                     resize: none
                     overflow: hidden
                     cursor: pointer
+                    font-size: 1em
                     &:focus
                         outline: 0 none transparent
 
@@ -243,14 +260,11 @@ ul
                     @extend %3d-side-top
 
             &.bitcoin:hover
-                background-color: $color_tree_poppy_approx
+                background: $color_bitcoin
 
 
             &.ethereum:hover
-                background-color: $color_bali_hai_approx
-
-.social li
-    @extend %noSelect
+                background: $color_ethereum
 
 section
     a
@@ -263,7 +277,7 @@ section
 fieldset
     @extend %form-layout
 
-    label
+    label, button
         @extend %form-label-style
 
 input
@@ -279,14 +293,14 @@ nav
         width: inherit
         display: inline-block
         > li
-            @extend %listElement
+            @extend %list-element
             width: 100px
 
 
     ul li
         @extend %transition-ease
         &:hover, &.selected
-            background-color: $color_blue_chill_approx
+            background: $color_highlight
             &::after
                 @extend %3d-side-bottom
 
@@ -301,7 +315,7 @@ nav
     background-repeat: no-repeat
     background-attachment: fixed
     background-size: cover
-    background-color: $color_night_rider_approx
+    //background: $color_background
     z-index: 1
     @extend %fullScreen
 
@@ -314,8 +328,13 @@ body
     height: 100%
     text-align: center
 
+button
+    cursor: pointer
+    &:hover
+        @extend %transition-ease
+        background: $color_highlight
+
 .button
-    @extend %noSelect
     cursor: pointer
     span
         @extend %transition-ease
@@ -323,7 +342,7 @@ body
 
     &:hover span
         @extend %transition-ease
-        background-color: $color_blue_chill_approx
+        background: $color_highlight
 
 .superscript
     vertical-align: super
@@ -335,7 +354,6 @@ body
 .banner
     height: 32px
     width: 100%
-    text-align: center
     > h4
         margin: 4px 10px
         text-align: center
@@ -359,7 +377,7 @@ body
     display: inline
 
 footer
-    background-color: $color_main
+    background: $color_main
     width: 100%
     max-height: 32px
     position: fixed
@@ -368,7 +386,7 @@ footer
     z-index: 2
 
 header
-    background-color: $color_main
+    background: $color_main
     width: 100%
     height: 32px
     position: fixed
@@ -401,13 +419,13 @@ header
 //         transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale3d(1, 1, 1)
 
 #mainCube
-    transition: all 2s cubic-bezier(0.175, 0.885, 0.32, 1)
+    @extend %transition-cube
     position: relative
     display: inline-block
     //animation: 2s linear 0s 1 cube-spin-in
 
     .face.focus
-        background-color: $color_main
+        filter: brightness(100%)
         box-shadow: none
         z-index: 9999
 
@@ -417,12 +435,6 @@ header
 
 .cube
     transform-style: preserve-3d
-    >
-        .bottom
-            background-color: $color_main
-
-        .top
-            background-color: $color_main
 
 .face
     width: 100%
@@ -431,23 +443,44 @@ header
     overflow-x: hidden
     position: absolute
     box-shadow: inset 0 0 64px $black_100, 0 0 48px $black_75
-    background-color: $color_vulcan_75_approx
+    background: $color_main
+    filter: brightness(10%)
     z-index: 100
     @extend %transition-ease-in-out
 
+    &::-webkit-scrollbar-track
+        background: $color_scrollbar_track
+
+    &::-webkit-scrollbar
+        background: $color_scrollbar
+        width: 8px
+
+    &::-webkit-scrollbar-thumb
+        background: $color_scrollbar_thumb
+
+        &:hover, &:active
+            background: $color_highlight
+
     .content
-        margin: 5%
-        opacity: 0.1
-        @extend %transition-ease-in-out
+        margin: 10% 15%
 
-.face::scrollbar-track
-    background-color: $color_elephant_10_approx
+        ul > li
+            width: 100%
+            float: left
+            text-align: left
+            margin: 5px 0
 
-.face::scrollbar
-    width: 5px
+            &::before
+                content: '>'
+                font-size: 5vmin
+                float: left
+                line-height: 24px
+                margin-right: 10px
+                @extend %heading
 
-.face::scrollbar-thumb
-    background-color: $color_san_juan_approx
+        p
+            @extend %allow-select-text
+            text-align: left
 
 header::after
     z-index: 1
@@ -476,12 +509,17 @@ footer::after
         margin: 0
         padding: 0
         border: none
+        font-weight: bold
 
         &::after
             @extend %3d-side-top
+
+        &:active
+            transform: scale3d(0.98, 0.98, 0.98)
 
     input
         height: 32px
 
     textarea
+        resize: vertical
         height: 128px

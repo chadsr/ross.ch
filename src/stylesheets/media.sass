@@ -1,4 +1,4 @@
-@media only screen and (min-width : 320px) and (umax-width : 500px)
+@media only screen and (min-width : 320px) and (max-width : 500px)
     .perspective
         perspective: 600px
 
@@ -25,13 +25,17 @@
 
 
 
-@media only screen and (max-width : 500px)
+@media only screen and (max-width : 806px)
     nav
         ul
             float: none !important
 
-        > ul.fullWidth > li
-            width: 25%
+
+    nav > ul.fullWidth, .social.fullWidth
+        @for $i from 1 through 10
+            li:first-child:nth-last-child( #{$i} ),
+            li:first-child:nth-last-child( #{$i} ) ~ li
+                width: 100% / $i
 
     .fullWidth
         width: 100% !important
@@ -51,10 +55,6 @@
         &.coin > a > textarea
             width: 100% !important
             text-align: center
-
-
-    .social.fullWidth > li
-        width: 33.3%
 
     #bParent:hover
         width: 100% !important
@@ -144,29 +144,29 @@
 
 
 
-@media screen and (max-width: 320px) and (min-height : 150px)
+@media screen and (max-width: 320px) and (min-height : 200px)
     .perspective
-        perspective: 1500px
+        perspective: 400px
 
     #mainCube
-        width: 150px
-        height: 150px
-        transform-origin: 75px 75px -75px
+        width: 200px
+        height: 200px
+        transform-origin: 100px 100px -100px
         >
             .top
-                transform: rotateX(90deg) translate3d(0, -75px, 75px)
+                transform: rotateX(90deg) translate3d(0, -100px, 100px)
 
             .bottom
-                transform: rotateX(-90deg) translate3d(0, 75px, 75px)
+                transform: rotateX(-90deg) translate3d(0, 100px, 100px)
 
             .left
-                transform: rotateY(-90deg) translate3d(-75px, 0, 75px)
+                transform: rotateY(-90deg) translate3d(-100px, 0, 100px)
 
             .right
-                transform: rotateY(90deg) translate3d(75px, 0, 75px)
+                transform: rotateY(90deg) translate3d(100px, 0, 100px)
 
             .back
-                transform: rotateY(180deg) translate3d(0, 0, 150px)
+                transform: rotateY(180deg) translate3d(0, 0, 200px)
 
 
 
@@ -196,7 +196,7 @@
                 transform: rotateY(180deg) translate3d(0, 0, 300px)
 
 
-@media only screen and (min-width: 640px) and (min-height : 400px)
+@media only screen and (min-width: 500px) and (min-height : 400px)
     .perspective
         perspective: 800px
 
