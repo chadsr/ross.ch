@@ -43,17 +43,17 @@ async function run() {
         // app.use(logger('dev'));
     } else {
         console.log('\nProduction Mode.\n');
+            
+        // Run the webpack compiler to get the static files to serve
+        compiler.run((err, stats) => {
+            if (err) {
+                console.log('Webpack Error:', err);
+                return; // Just exit, since we depend on webpack
+            } else {
+                console.log('Webpack compiled successfully!');
+            }
+        });
     }
-
-    // Run the webpack compiler to get the static files to serve
-    compiler.run((err, stats) => {
-        if (err) {
-            console.log('Webpack Error:', err);
-            return; // Just exit, since we depend on webpack
-        } else {
-            console.log('Webpack compiled successfully!');
-        }
-    });
 
     // app.use(
     //     views(viewsDir, {
