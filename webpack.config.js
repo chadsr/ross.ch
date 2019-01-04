@@ -11,8 +11,8 @@ const WriteFilePlugin = require('write-file-webpack-plugin');
 
 const srcDir = path.resolve(__dirname, 'src');
 const publicDir = path.join(__dirname, 'public');
-const jsDir = path.join(publicDir, 'js');
-const imagesDir = path.join(publicDir, 'images');
+const jsDir = path.join(srcDir, 'js');
+const imagesDir = path.join(srcDir, 'images');
 const viewsDir = path.join(srcDir, 'views');
 const partialsDir = path.join(viewsDir, 'partials');
 const helpersDir = path.join(viewsDir, 'helpers');
@@ -25,7 +25,7 @@ module.exports = {
   output: {
     path: publicDir,
     filename: '[name].[hash].js',
-    publicPath: 'dist/'
+    publicPath: '/'
   },
   devServer: {
     port: 3000,
