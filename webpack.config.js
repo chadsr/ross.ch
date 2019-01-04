@@ -10,24 +10,22 @@ const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const WriteFilePlugin = require('write-file-webpack-plugin');
 
 const srcDir = path.resolve(__dirname, 'src');
-const publicDir = path.join(srcDir, 'public');
-const jsDir = path.join(srcDir, 'js');
-const imagesDir = path.join(srcDir, 'images');
+const publicDir = path.join(__dirname, 'public');
+const jsDir = path.join(publicDir, 'js');
+const imagesDir = path.join(publicDir, 'images');
 const viewsDir = path.join(srcDir, 'views');
-const partialsDir = path.join(viewsDir, '/partials');
-const helpersDir = path.join(viewsDir, '/helpers');
+const partialsDir = path.join(viewsDir, 'partials');
+const helpersDir = path.join(viewsDir, 'helpers');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 
 module.exports = {
   mode: nodeEnv,
-  entry: {
-    main: path.join(jsDir, 'main.js'),
-  },
+  entry: [path.join(jsDir, 'main.js')],
   output: {
     path: publicDir,
     filename: '[name].[hash].js',
-    publicPath: '/'
+    publicPath: 'dist/'
   },
   devServer: {
     port: 3000,

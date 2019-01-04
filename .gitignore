@@ -1,8 +1,11 @@
-src/public/*
-src/fonts/macula-solid-v10.woff
+src/dist/*
+src/fonts/Macula-Solid.woff
 src/views/partials/webpack.hbs
+src/public/*
 
 package-lock.json
+
+*.env
 
 # Logs
 logs

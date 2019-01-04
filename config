@@ -1,6 +1,0 @@
-module.exports = {
-    HOST: 'localhost',
-    EMAIL: 'EMAIL',
-    PASS: 'PASSWORD_FOR_EMAIL',
-    SUBJECT: 'New message @ ross.ch!'
-}
