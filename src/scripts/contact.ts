@@ -2,12 +2,13 @@ const axios = require('axios');
 
 // A basic contact form class
 export default class ContactForm {
+  form;
   constructor(formId) {
     this.form = document.getElementById(formId);
   }
 
   handleResponse(response) {
-    switch(response.status)  {
+    switch (response.status)  {
       case 200: // Success
       this.reset();
 
@@ -35,7 +36,7 @@ export default class ContactForm {
     const message = this.form.elements['message'].value;
     const csrfToken = this.form.elements['_csrf'].value;
 
-    let data = {
+    const data = {
       name: name,
       email: email,
       message: message,
@@ -49,9 +50,9 @@ export default class ContactForm {
       xsrfCookieName: 'XSRF-TOKEN',
       data: data
     }).catch(error => {
-      handleResponse(error.response);
+      this.handleResponse(error.response);
     }).then((response) => {
-      handleResponse(response);
-    })
+      this.handleResponse(response);
+    });
   }
 }
