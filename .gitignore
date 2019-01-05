@@ -1,7 +1,11 @@
-src/dist/*
+# Build directories for typescript and webpack
+dist
+public
+
 src/fonts/Macula-Solid.woff
+
+# Built by webpack
 src/views/partials/webpack.hbs
-src/public/*
 
 package-lock.json
 
