@@ -9,7 +9,7 @@ const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const WriteFilePlugin = require('write-file-webpack-plugin');
 
 const srcDir = path.resolve(__dirname, 'src');
-const publicDir = path.join(__dirname, 'public');
+const publicDir = path.resolve(__dirname, 'public');
 const jsDir = path.join(srcDir, 'scripts');
 const imagesDir = path.join(srcDir, 'images');
 const viewsDir = path.join(srcDir, 'views');

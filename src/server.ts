@@ -17,7 +17,7 @@ import { logger } from './logging';
 import { config } from './config';
 import { router } from './routes';
 
-import webpackConfig = require('../webpack.config.js');
+const webpackConfig = require('../webpack.config.ts');
 const compiler = webpack(webpackConfig);
 
 const isDeveloping = process.env.NODE_ENV !== 'production';

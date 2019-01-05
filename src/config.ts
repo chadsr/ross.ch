@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 
-dotenv.config({ path: '.env' });
+dotenv.config({ path: '.config.env' });
 
 export interface IConfig {
     port: number;
