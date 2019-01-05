@@ -4,11 +4,12 @@ import * as helmet from 'koa-helmet';
 import * as csrf from  'koa-csrf';
 import * as views from 'koa-views';
 import * as cors from '@koa/cors';
-import * as hbs from 'koa-hbs-renderer';
+import * as session from 'koa-session';
 import * as winston from 'winston';
 import * as dotenv from 'dotenv';
 import 'reflect-metadata'; // TODO: Check if useful
-import * as path from 'path';
+import { join, basename } from 'path';
+import * as glob from 'glob-promise'; // TODO: Investigate why tiny-glob is borked
 import * as webpack from 'webpack';
 import * as koaWebpack from 'koa-webpack';
 
@@ -17,33 +18,40 @@ import { config } from './config';
 import { router } from './routes';
 
 import webpackConfig = require('../webpack.config.js');
-import { runInContext } from 'vm';
 const compiler = webpack(webpackConfig);
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 
-// const publicDir = path.join(__dirname, 'public');
-const viewsDir = path.join(__dirname, 'views');
-const partialsDir = path.join(viewsDir, 'partials');
-const layoutsDir = path.join(viewsDir, 'layouts');
+const dirViews = join(__dirname, 'views');
+const dirPartials = join(dirViews, 'partials');
 
 // Load environment variables from .env file
 dotenv.config({ path: '.env' });
 
+async function getPartialsObj() {
+    const partialsPaths = await glob(join(dirPartials + '/*.hbs'));
+    const partialsNames = partialsPaths.map(path => basename(path, '.hbs'));
+
+    // Create an object with name as key and filepath as value
+    const partialsObj = partialsNames.reduce((obj, key, i) => (
+        {...obj, [key]: partialsPaths[i]}), {});
+
+    return partialsObj;
+}
+
 async function run() {
     const app = new Koa();
 
-    // Load dev middlewares if developing
+    // Load dev webpack middlewares if developing
     if (isDeveloping) {
         console.log('\nDevelopment Mode.\n');
 
         const webpackMiddleware = await koaWebpack({ compiler });
 
         app.use(webpackMiddleware);
-        // app.use(logger('dev'));
     } else {
         console.log('\nProduction Mode.\n');
-            
+
         // Run the webpack compiler to get the static files to serve
         compiler.run((err, stats) => {
             if (err) {
@@ -55,25 +63,26 @@ async function run() {
         });
     }
 
-    // app.use(
-    //     views(viewsDir, {
-    //         extension: 'hbs',
-    //         map: {
-    //             hbs: 'handlebars',
-    //         }
-    //     })
-    // );
+    app.use(
+        views(dirViews, {
+            extension: 'hbs',
+            map: {
+                hbs: 'handlebars',
+            },
+            options: {
+                partials: await getPartialsObj()
+            },
+        })
+    );
 
-    app.use(hbs({
-        paths: {
-            views: viewsDir,
-            layouts: layoutsDir,
-            partials: partialsDir,
-            // helpers:
-        },
-        defaultLayout: 'main',
-        extension: '.hbs',
-    }));
+    // load the session key from our configuration
+    app.keys = [config.sessionKey];
+
+    // add session support
+    app.use(session(app));
+
+    // Enable bodyParser with default options
+    app.use(bodyParser());
 
     // Provides security headers
     app.use(helmet());
@@ -94,9 +103,6 @@ async function run() {
 
     // Logger middleware -> use winston as logger (logging.ts with config)
     app.use(logger(winston));
-
-    // Enable bodyParser with default options
-    app.use(bodyParser());
 
     app.use(router.routes()).use(router.allowedMethods());
 
