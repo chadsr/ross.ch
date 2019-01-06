@@ -1,27 +1,27 @@
 // webpack v4
-const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const WebpackMd5Hash = require('webpack-md5-hash');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
-const WriteFilePlugin = require('write-file-webpack-plugin');
+import { join, resolve } from 'path';
+import * as CleanWebpackPlugin from 'clean-webpack-plugin';
+import * as WebpackMd5Hash from 'webpack-md5-hash';
+import * as HtmlWebpackPlugin from 'html-webpack-plugin';
+import * as UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+import FaviconsWebpackPlugin from 'favicons-webpack-plugin';
+import ImageminPlugin from 'imagemin-webpack-plugin';
+import * as WriteFilePlugin from 'write-file-webpack-plugin';
 
-const srcDir = path.resolve(__dirname, 'src');
-const publicDir = path.resolve(__dirname, 'public');
-const jsDir = path.join(srcDir, 'scripts');
-const imagesDir = path.join(srcDir, 'images');
-const viewsDir = path.join(srcDir, 'views');
-const partialsDir = path.join(viewsDir, 'partials');
-const helpersDir = path.join(viewsDir, 'helpers');
+const srcDir = resolve(__dirname, 'src');
+const publicDir = resolve(__dirname, 'public');
+const jsDir = join(srcDir, 'scripts');
+const imagesDir = join(srcDir, 'images');
+const viewsDir = join(srcDir, 'views');
+const partialsDir = join(viewsDir, 'partials');
+const helpersDir = join(viewsDir, 'helpers');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 
 module.exports = {
   mode: nodeEnv,
   devtool: 'inline-source-map',
-  entry: [path.join(jsDir, 'main.ts')],
+  entry: [join(jsDir, 'main.ts')],
   output: {
     path: publicDir,
     filename: '[name].[hash].js',
@@ -110,7 +110,7 @@ module.exports = {
     new WebpackMd5Hash(),
     new HtmlWebpackPlugin({
       templateContent: '',
-      filename: path.join(partialsDir, 'webpack.hbs') // Write the handlebars to the partials dir instead of public
+      filename: join(partialsDir, 'webpack.hbs') // Write the handlebars to the partials dir instead of public
     }),
     new ImageminPlugin({
       test: /\.(jpe?g|png|gif|svg)$/i,
@@ -119,7 +119,7 @@ module.exports = {
       }
     }),
     /*new FaviconsWebpackPlugin({
-    logo: path.join(imagesDir, 'favicon.png'),
+    logo: join(imagesDir, 'favicon.png'),
     inject: true
     }),*/
 ],

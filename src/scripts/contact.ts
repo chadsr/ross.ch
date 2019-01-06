@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 // A basic contact form class
 export default class ContactForm {
   form: HTMLFormElement;

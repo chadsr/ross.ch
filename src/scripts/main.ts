@@ -74,7 +74,8 @@ document.addEventListener('DOMContentLoaded', function() {
         rotateTo(4);
     });
 
-    window.dispatchEvent(new Event('resize')); // Trigger the resize event, so the cube can center on page load
+    // Trigger the resize event, so the cube can center on page load
+    window.dispatchEvent(new Event('resize'));
 });
 
 document.addEventListener('keydown', function(event) {
