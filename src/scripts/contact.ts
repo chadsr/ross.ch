@@ -1,10 +1,11 @@
-const axios = require('axios');
+import axios from 'axios';
+
 
 // A basic contact form class
 export default class ContactForm {
-  form;
+  form: HTMLFormElement;
   constructor(formId) {
-    this.form = document.getElementById(formId);
+    this.form = <HTMLFormElement>document.getElementById(formId);
   }
 
   handleResponse(response) {
@@ -31,10 +32,10 @@ export default class ContactForm {
   submit(e) {
     e.preventDefault();
 
-    const name = this.form.elements['name'].value;
-    const email = this.form.elements['email'].value;
-    const message = this.form.elements['message'].value;
-    const csrfToken = this.form.elements['_csrf'].value;
+    const name: string = this.form.elements['name'].value;
+    const email: string = this.form.elements['email'].value;
+    const message: string = this.form.elements['message'].value;
+    const csrfToken: string = this.form.elements['_csrf'].value;
 
     const data = {
       name: name,
