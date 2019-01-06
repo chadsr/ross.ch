@@ -79,11 +79,17 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('keydown', function(event) {
-    if (event.keyCode == LEFT_ARROW) {
+    const activeElement = document.activeElement;
+    const inputs = ['input', 'select', 'button', 'textarea'];
+
+    // Only allow keypresses to rotate when active element is not an input element
+    if (activeElement && inputs.indexOf(activeElement.tagName.toLowerCase()) == -1) {
+        if (event.keyCode == LEFT_ARROW) {
         rotateTo(currentSide - 1);
-    }
-    else if (event.keyCode == RIGHT_ARROW) {
-        rotateTo(currentSide + 1);
+        }
+        else if (event.keyCode == RIGHT_ARROW) {
+            rotateTo(currentSide + 1);
+        }
     }
 });
 
