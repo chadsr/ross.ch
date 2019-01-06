@@ -6,7 +6,7 @@ import '../stylesheets/style.sass';
 import '../stylesheets/media.sass';
 
 // node packages
-import { Hammer } from 'hammerjs';
+import 'hammerjs';
 
 // local function imports
 import ContactForm from './contact';
