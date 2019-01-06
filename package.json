@@ -6,7 +6,7 @@
   "author": "Ross Chadwick",
   "private": true,
   "scripts": {
-    "dev": " NODE_ENV=development nodemon --watch 'src/**/*' -e ts,tsx --exec ts-node src/server.ts",
+    "dev": " NODE_ENV=development nodemon --watch '*' -e ts,tsx --exec ts-node src/server.ts",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "serve": "node dist/server.js",
     "build": "npm run tslint && tsc",
@@ -23,6 +23,7 @@
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
     "@types/dotenv": "^6.1.0",
+    "@types/hammerjs": "^2.0.36",
     "@types/koa": "^2.0.48",
     "@types/koa-bodyparser": "^4.2.1",
     "@types/koa-helmet": "^3.1.2",
