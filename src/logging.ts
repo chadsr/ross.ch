@@ -1,8 +1,23 @@
 import * as Koa from 'koa';
 import { config } from './config';
-import * as winston from 'winston';
+import { Logger, createLogger, format, transports } from 'winston';
 
-export function logger(winstonInstance) {
+const logger = createLogger({
+    level: config.debugLogging ? 'debug' : 'info',
+    transports: [
+        //
+        // - Write all logs error (and below) to `error.log`.
+        new transports.File({ filename: 'error.log', level: 'error' }),
+        //
+        // - Write to all logs with specified level to console.
+        new transports.Console({ format: format.combine(
+            format.colorize(),
+            format.simple()
+        ) })
+    ]
+});
+
+export function loggerMiddleware() {
     return async(ctx: Koa.Context, next: () => Promise<any>) => {
 
         const start = new Date().getMilliseconds();
@@ -24,21 +39,8 @@ export function logger(winstonInstance) {
 
         const msg: string = `${ctx.method} ${ctx.originalUrl} ${ctx.status} ${ms}ms`;
 
-        winstonInstance.configure({
-            level: config.debugLogging ? 'debug' : 'info',
-            transports: [
-                //
-                // - Write all logs error (and below) to `error.log`.
-                new winston.transports.File({ filename: 'error.log', level: 'error' }),
-                //
-                // - Write to all logs with specified level to console.
-                new winston.transports.Console({ format: winston.format.combine(
-                    winston.format.colorize(),
-                    winston.format.simple()
-                ) })
-            ]
-        });
-
-        winstonInstance.log(logLevel, msg);
+        logger.log(logLevel, msg);
     };
 }
+
+export { logger };

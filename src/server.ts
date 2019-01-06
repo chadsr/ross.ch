@@ -13,7 +13,7 @@ import * as glob from 'glob-promise'; // TODO: Investigate why tiny-glob is bork
 import * as webpack from 'webpack';
 import * as koaWebpack from 'koa-webpack';
 
-import { logger } from './logging';
+import { logger, loggerMiddleware } from './logging';
 import { config } from './config';
 import { router } from './routes';
 
@@ -28,6 +28,7 @@ const dirPartials = join(dirViews, 'partials');
 // Load environment variables from .env file
 dotenv.config({ path: '.env' });
 
+// Returns an object with handlebars partial names as key and path as value
 async function getPartialsObj() {
     const partialsPaths = await glob(join(dirPartials + '/*.hbs'));
     const partialsNames = partialsPaths.map(path => basename(path, '.hbs'));
@@ -44,21 +45,20 @@ async function run() {
 
     // Load dev webpack middlewares if developing
     if (isDeveloping) {
-        console.log('\nDevelopment Mode.\n');
-
+        logger.info('Development Mode.');
         const webpackMiddleware = await koaWebpack({ compiler });
 
         app.use(webpackMiddleware);
     } else {
-        console.log('\nProduction Mode.\n');
+        logger.info('Production Mode.');
 
         // Run the webpack compiler to get the static files to serve
         compiler.run((err, stats) => {
             if (err) {
-                console.log('Webpack Error:', err);
+                logger.error('Webpack Error:', err);
                 return; // Just exit, since we depend on webpack
             } else {
-                console.log('Webpack compiled successfully!');
+                logger.info('Webpack compiled successfully!');
             }
         });
     }
@@ -102,13 +102,13 @@ async function run() {
     app.use(cors());
 
     // Logger middleware -> use winston as logger (logging.ts with config)
-    app.use(logger(winston));
+    app.use(loggerMiddleware());
 
     app.use(router.routes()).use(router.allowedMethods());
 
     app.listen(config.port);
 
-    console.log(`Server running on port ${config.port}`);
+    logger.info(`Server running on port ${config.port}`);
 }
 
 run();
