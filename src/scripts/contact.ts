@@ -103,8 +103,20 @@ export default class ContactForm {
       xsrfCookieName: 'XSRF-TOKEN',
       data: data
     }).catch(error => {
-      this.handleResponse(error.response.data);
-    }).then(<Response>(response) => {
+      let response;
+      if (!error.response) {
+        // We got no response, so construct a response message client-side
+        response = <Response>{
+          messages: [{
+            target: 'submit',
+            text: 'Server failure. Try later?'}]
+        };
+      } else {
+        response = error.response.data;
+      }
+
+      this.handleResponse(response);
+    }).then(<AxiosResponse>(response) => {
       this.handleResponse(response.data);
     });
   }
