@@ -4,21 +4,21 @@ import { Response, Message } from '../interfaces';
 
 // A basic contact form class
 export default class ContactForm {
-  form: HTMLFormElement;
-  formLabels: {[key: string]: HTMLLabelElement};
-  formSubmitBtn: HTMLButtonElement;
+  private readonly _form: HTMLFormElement;
+  private readonly _formLabels: {[key: string]: HTMLLabelElement};
+  private readonly _formSubmitBtn: HTMLButtonElement;
   constructor(formId) {
-    this.form = <HTMLFormElement>document.getElementById(formId);
+    this._form = <HTMLFormElement>document.getElementById(formId);
 
     // Make formLabels object where key is the label's 'for' element name and value is the HTMLLabelElement
-    this.formLabels = {};
-    const labels = this.form.getElementsByTagName('label');
+    this._formLabels = {};
+    const labels = this._form.getElementsByTagName('label');
     for (let i = 0; i < labels.length; i++) {
       const key = labels[i].htmlFor;
-      this.formLabels[key] = labels[i];
+      this._formLabels[key] = labels[i];
     }
 
-    this.formSubmitBtn = <HTMLButtonElement>document.getElementById(formId + '-submit-btn');
+    this._formSubmitBtn = <HTMLButtonElement>document.getElementById(formId + '-submit-btn');
   }
 
   displayResponse(response: Response) {
@@ -26,10 +26,10 @@ export default class ContactForm {
 
     response.messages.forEach((message) => {
       // Check if target has an associated label to use first
-      if (message.target in this.formLabels) {
-        target = this.formLabels[message.target];
+      if (message.target in this._formLabels) {
+        target = this._formLabels[message.target];
       } else { // No label, so our target is the actual element
-        target = this.form.elements[message.target];
+        target = this._form.elements[message.target];
       }
 
       target.innerHTML = message.text;
@@ -60,21 +60,21 @@ export default class ContactForm {
 
   resetSubmitButton() {
     // Reset the submit button
-    this.formSubmitBtn.innerHTML = 'Submit';
-    this.formSubmitBtn.className = '';
+    this._formSubmitBtn.innerHTML = 'Submit';
+    this._formSubmitBtn.className = '';
   }
 
   resetLabels() {
     // Replace all form labels with their original text and remove classes
-    Object.keys(this.formLabels).forEach((key) => {
-      const label = this.formLabels[key];
+    Object.keys(this._formLabels).forEach((key) => {
+      const label = this._formLabels[key];
       label.innerHTML = key.replace(/^\w/, c => c.toUpperCase());
       label.className = '';
     });
   }
 
   resetInput() {
-    this.form.reset();
+    this._form.reset();
   }
 
   submit(e) {
@@ -84,10 +84,10 @@ export default class ContactForm {
     this.resetLabels();
     this.resetSubmitButton();
 
-    const name: string = this.form.elements['name'].value;
-    const email: string = this.form.elements['email'].value;
-    const message: string = this.form.elements['message'].value;
-    const csrfToken: string = this.form.elements['_csrf'].value;
+    const name: string = this._form.elements['name'].value;
+    const email: string = this._form.elements['email'].value;
+    const message: string = this._form.elements['message'].value;
+    const csrfToken: string = this._form.elements['_csrf'].value;
 
     const data = {
       name: name,
