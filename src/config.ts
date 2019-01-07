@@ -1,5 +1,4 @@
 import * as dotenv from 'dotenv';
-import { ProvidePlugin } from 'webpack';
 
 dotenv.config({ path: '.config.env' });
 
