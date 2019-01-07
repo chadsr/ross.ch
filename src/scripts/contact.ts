@@ -5,42 +5,84 @@ import { Response, Message } from '../interfaces';
 // A basic contact form class
 export default class ContactForm {
   form: HTMLFormElement;
-  formMessages: HTMLElement;
+  formLabels: {[key: string]: HTMLLabelElement};
+  formSubmitBtn: HTMLButtonElement;
   constructor(formId) {
     this.form = <HTMLFormElement>document.getElementById(formId);
-    this.formMessages = document.getElementById(`${formId}-messages`);
+
+    // Make formLabels object where key is the label's 'for' element name and value is the HTMLLabelElement
+    this.formLabels = {};
+    const labels = this.form.getElementsByTagName('label');
+    for (let i = 0; i < labels.length; i++) {
+      const key = labels[i].htmlFor;
+      this.formLabels[key] = labels[i];
+    }
+
+    this.formSubmitBtn = <HTMLButtonElement>document.getElementById(formId + '-submit-btn');
   }
 
-  displayMessages(messages: Message[]) {
-    const messageList = document.createElement('ul');
+  displayResponse(response: Response) {
+    let target: HTMLElement;
 
-    messages.forEach((message) => {
-      const li = document.createElement('li');
-      li.innerHTML = message.text;
-      messageList.appendChild(li);
+    response.messages.forEach((message) => {
+      // Check if target has an associated label to use first
+      if (message.target in this.formLabels) {
+        target = this.formLabels[message.target];
+      } else { // No label, so our target is the actual element
+        target = this.form.elements[message.target];
+      }
+
+      target.innerHTML = message.text;
+
+      // Add a class so we can colourise the target
+      if (response.success) {
+        target.classList.add('success');
+      } else {
+        target.classList.add('error');
+      }
     });
-
-    // Remove previous messages
-    this.formMessages.innerHTML = '';
-
-    this.formMessages.appendChild(messageList);
   }
 
   handleResponse(response: Response) {
-    this.displayMessages(response.messages);
+    this.displayResponse(response);
 
     // If it was a success response, reset the form
     if (response.success) {
-      this.reset();
+      this.resetInput();
+      this.resetLabels();
     }
+
+    // Reset the submit button back to normal after 4s
+    setTimeout(() => {
+      this.resetSubmitButton();
+    }, 4000);
   }
 
-  reset() {
+  resetSubmitButton() {
+    // Reset the submit button
+    this.formSubmitBtn.innerHTML = 'Submit';
+    this.formSubmitBtn.className = '';
+  }
+
+  resetLabels() {
+    // Replace all form labels with their original text and remove classes
+    Object.keys(this.formLabels).forEach((key) => {
+      const label = this.formLabels[key];
+      label.innerHTML = key.replace(/^\w/, c => c.toUpperCase());
+      label.className = '';
+    });
+  }
+
+  resetInput() {
     this.form.reset();
   }
 
   submit(e) {
     e.preventDefault();
+
+    // Remove any existing messages from the form
+    this.resetLabels();
+    this.resetSubmitButton();
 
     const name: string = this.form.elements['name'].value;
     const email: string = this.form.elements['email'].value;

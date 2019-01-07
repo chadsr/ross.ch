@@ -8,9 +8,9 @@ import { contactMailer } from '../mailer';
 import { Response, Message } from '../interfaces';
 
 const contactFormSchema = Joi.object().keys({
-  name: Joi.string().alphanum().min(2).max(32).required().error(() => 'A more meaningful name would be great.'),
-  email: Joi.string().email(({ minDomainAtoms: 2 })).required().error(() => 'Your email looks invalid :('),
-  message: Joi.string().min(2).required().error(() => 'A more meaningful message would be great.')
+  name: Joi.string().alphanum().min(2).max(32).required().error(() => 'Name is a little short...'),
+  email: Joi.string().email(({ minDomainAtoms: 2 })).required().error(() => 'Email looks invalid :('),
+  message: Joi.string().min(2).required().error(() => 'Message is a little short...')
 });
 
 function getResponseObj(success: boolean, msg: (Message|Message[])): Response {
@@ -74,11 +74,17 @@ export async function handleContactForm (ctx: IRouterContext) {
     // Return a 503 error if we couldn't deliver the email for some reason
     logger.error('Could not send contact form email:', err);
     ctx.status = 503;
-    ctx.body = getResponseObj(false, {text: 'Email server unavailable. Try again later.'});
+    ctx.body = getResponseObj(false, {
+      text: 'Server failure. Try later?',
+      target: 'submit'
+    });
   } else {
     // Return a 200 status and message
     logger.info('Contact form email sent!');
     ctx.status = 200;
-    ctx.body = getResponseObj(true, {text: 'Email sent successfully!'});
+    ctx.body = getResponseObj(true, {
+      text: 'Success!',
+      target: 'submit'
+    });
   }
 }

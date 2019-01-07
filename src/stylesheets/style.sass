@@ -70,6 +70,7 @@ $serif: 'serif'
     @extend %form-layout
     display: block
     background: $color_form_label
+    font-weight: bold
 
 
 %no-select
@@ -357,6 +358,12 @@ button
     > h4
         margin: 4px 10px
         text-align: center
+
+.error, .error::before, .error::after
+    background-color: #a51818
+
+.success .success::before, .success::after
+    background-color: green
 
 .left
     float: left
