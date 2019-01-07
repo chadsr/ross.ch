@@ -27,7 +27,7 @@ function getResponseObj(success: boolean, msg: (Message|Message[])): Response {
 
 // Validated data objects against a Joi schema, returning errors in a Message[] format
 function validateData(data: Object, schema: Joi.ObjectSchema): Message[] {
-  const res = Joi.validate(data, schema);
+  const res = Joi.validate(data, schema, { abortEarly : false });
   const errors: Message[] = [];
 
   if (res.error) {
