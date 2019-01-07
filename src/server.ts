@@ -5,7 +5,6 @@ import * as csrf from  'koa-csrf';
 import * as views from 'koa-views';
 import * as cors from '@koa/cors';
 import * as session from 'koa-session';
-import * as winston from 'winston';
 import * as dotenv from 'dotenv';
 import 'reflect-metadata'; // TODO: Check if useful
 import { join, basename } from 'path';
@@ -30,85 +29,89 @@ dotenv.config({ path: '.env' });
 
 // Returns an object with handlebars partial names as key and path as value
 async function getPartialsObj() {
-    const partialsPaths = await glob(join(dirPartials + '/*.hbs'));
-    const partialsNames = partialsPaths.map(path => basename(path, '.hbs'));
+  const partialsPaths = await glob(join(dirPartials + '/*.hbs'));
+  const partialsNames = partialsPaths.map(path => basename(path, '.hbs'));
 
-    // Create an object with name as key and filepath as value
-    const partialsObj = partialsNames.reduce((obj, key, i) => (
-        {...obj, [key]: partialsPaths[i]}), {});
+  // Create an object with name as key and filepath as value
+  const partialsObj = partialsNames.reduce((obj, key, i) => (
+    {...obj, [key]: partialsPaths[i]}), {});
 
-    return partialsObj;
+  return partialsObj;
 }
 
 async function run() {
-    const app = new Koa();
+  const app = new Koa();
 
-    // Load dev webpack middlewares if developing
-    if (isDeveloping) {
-        logger.info('Development Mode.');
-        const webpackMiddleware = await koaWebpack({ compiler });
+  // Load dev webpack middlewares if developing
+  if (isDeveloping) {
+    logger.info('Development Mode.');
+    const webpackMiddleware = await koaWebpack({ compiler });
 
-        app.use(webpackMiddleware);
-    } else {
-        logger.info('Production Mode.');
+    app.use(webpackMiddleware);
+  } else {
+    logger.info('Production Mode.');
 
-        // Run the webpack compiler to get the static files to serve
-        compiler.run((err, stats) => {
-            if (err) {
-                logger.error('Webpack Error:', err);
-                return; // Just exit, since we depend on webpack
-            } else {
-                logger.info('Webpack compiled successfully!');
-            }
-        });
+    // Run the webpack compiler to get the static files to serve
+    compiler.run((err, stats) => {
+      if (err) {
+        logger.error('Webpack Error:', err);
+        return; // Just exit, since we depend on webpack
+      } else {
+        logger.info('Webpack compiled successfully!');
+      }
+    });
+  }
+
+  app.use(
+    views(dirViews, {
+      extension: 'hbs',
+      map: {
+        hbs: 'handlebars',
+      },
+      options: {
+        partials: await getPartialsObj()
+      },
+    })
+  );
+
+  // load the session key from our configuration
+  app.keys = [config.sessionKey];
+
+  // add session support
+  app.use(session(app));
+
+  // Enable bodyParser with default options
+  app.use(bodyParser({
+    onerror: function (err, ctx) {
+      ctx.throw('Could not parse body of request', 422);
     }
+  }));
 
-    app.use(
-        views(dirViews, {
-            extension: 'hbs',
-            map: {
-                hbs: 'handlebars',
-            },
-            options: {
-                partials: await getPartialsObj()
-            },
-        })
-    );
+  // Provides security headers
+  app.use(helmet());
 
-    // load the session key from our configuration
-    app.keys = [config.sessionKey];
+  app.use(
+    new csrf({
+      invalidSessionSecretMessage: 'Invalid session secret',
+      invalidSessionSecretStatusCode: 403,
+      invalidTokenMessage: 'Invalid CSRF token',
+      invalidTokenStatusCode: 403,
+      excludedMethods: [ 'GET', 'HEAD', 'OPTIONS' ],
+      disableQuery: false
+    })
+  );
 
-    // add session support
-    app.use(session(app));
+  // Enable cors with default options
+  app.use(cors());
 
-    // Enable bodyParser with default options
-    app.use(bodyParser());
+  // Logger middleware -> use winston as logger (logging.ts with config)
+  app.use(loggerMiddleware());
 
-    // Provides security headers
-    app.use(helmet());
+  app.use(router.routes()).use(router.allowedMethods());
 
-    app.use(
-        new csrf({
-            invalidSessionSecretMessage: 'Invalid session secret',
-            invalidSessionSecretStatusCode: 403,
-            invalidTokenMessage: 'Invalid CSRF token',
-            invalidTokenStatusCode: 403,
-            excludedMethods: [ 'GET', 'HEAD', 'OPTIONS' ],
-            disableQuery: false
-        })
-    );
+  app.listen(config.port);
 
-    // Enable cors with default options
-    app.use(cors());
-
-    // Logger middleware -> use winston as logger (logging.ts with config)
-    app.use(loggerMiddleware());
-
-    app.use(router.routes()).use(router.allowedMethods());
-
-    app.listen(config.port);
-
-    logger.info(`Server running on port ${config.port}`);
+  logger.info(`Server running on port ${config.port}`);
 }
 
 run();
