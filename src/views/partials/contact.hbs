@@ -1,20 +1,21 @@
+<div  id="contact-form-messages"></div>
 <form id="contact-form" method="post" role="form">
   <input type="hidden" name="_csrf" value="{{csrfToken}}">
   <fieldset>
-    <div class="field perspective">
-      <label for="name">Name</label>
-      <input name="name" type="text" placeholder="Your name" required="required">
-    </div>
-    <div class="field perspective">
-      <label for="email">Email</label>
-      <input name="email" type="text" placeholder="Your email" required="required">
-    </div>
-    <div class="field perspective">
-      <label for="message">Message</label>
-      <textarea name="message" placeholder="Enter your message here" rows="3" required="required"></textarea>
-    </div>
-    <div class="field perspective">
-      <button type="submit">Submit</button>
-    </div>
+  <div class="field perspective">
+    <label for="name">Name</label>
+    <input name="name" type="text" placeholder="Your name" required="required">
+  </div>
+  <div class="field perspective">
+    <label for="email">Email</label>
+    <input name="email" type="text" placeholder="Your email" required="required">
+  </div>
+  <div class="field perspective">
+    <label for="message">Message</label>
+    <textarea name="message" placeholder="Enter your message here" rows="3" required="required"></textarea>
+  </div>
+  <div class="field perspective">
+    <button type="submit">Submit</button>
+  </div>
   </fieldset>
 </form>
