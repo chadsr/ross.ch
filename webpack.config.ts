@@ -4,7 +4,7 @@ import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as WebpackMd5Hash from 'webpack-md5-hash';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as UglifyJsPlugin from 'uglifyjs-webpack-plugin';
-import FaviconsWebpackPlugin from 'favicons-webpack-plugin';
+import WebappWebpackPlugin from 'webapp-webpack-plugin';
 import ImageminPlugin from 'imagemin-webpack-plugin';
 import * as WriteFilePlugin from 'write-file-webpack-plugin';
 
@@ -118,7 +118,7 @@ module.exports = {
         quality: '95-100'
       }
     }),
-    /*new FaviconsWebpackPlugin({
+    /*new WebappWebpackPlugin({
     logo: join(imagesDir, 'favicon.png'),
     inject: true
     }),*/
