@@ -18,6 +18,8 @@ $color_scrollbar: $color_main
 $color_scrollbar_track: $color_main
 $color_scrollbar_thumb: $color_form_label
 $color_keybase: #4c8eff
+$color_success: #15a12a
+$color_error: #a51818
 
 // URLs
 $url-background: url('../images/bg.jpg')
@@ -360,10 +362,10 @@ button
         text-align: center
 
 .error, .error::before, .error::after
-    background-color: #a51818
+    background-color: $color_error
 
 .success .success::before, .success::after
-    background-color: green
+    background-color: $color_success
 
 .left
     float: left
