@@ -9,7 +9,7 @@ import { Response, Message } from '../interfaces';
 
 const contactFormSchema = Joi.object().keys({
   name: Joi.string().alphanum().min(2).max(32).required().error(() => 'A more meaningful name would be great.'),
-  email: Joi.string().email().required().error(() => 'Your email looks invalid :('),
+  email: Joi.string().email(({ minDomainAtoms: 2 })).required().error(() => 'Your email looks invalid :('),
   message: Joi.string().min(2).required().error(() => 'A more meaningful message would be great.')
 });
 
