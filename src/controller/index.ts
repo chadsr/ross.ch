@@ -5,7 +5,10 @@ import * as Joi from 'joi';
 import { logger } from '../logging';
 import { config } from '../config';
 import { contactMailer } from '../mailer';
+import { Medium } from '../medium';
 import { Response, Message } from '../interfaces';
+
+const medium = new Medium(config.mediumUser);
 
 const contactFormSchema = Joi.object().keys({
   name: Joi.string().alphanum().min(2).max(32).required().error(() => 'Name is a little short...'),
@@ -43,9 +46,12 @@ function validateData(data: Object, schema: Joi.ObjectSchema): Message[] {
 }
 
 export async function renderIndex (ctx: IRouterContext) {
+  const feed = await medium.getFeed(1);
+
   await ctx.render('index', {
     title: 'Ross Chadwick',
-    csrfToken: ctx.csrf // Add a CSRF token for the contact form request
+    csrfToken: ctx.csrf, // Add a CSRF token for the contact form request
+    mediumPosts: feed.posts
   });
 }
 

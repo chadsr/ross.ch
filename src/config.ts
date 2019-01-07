@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv';
+import { ProvidePlugin } from 'webpack';
 
 dotenv.config({ path: '.config.env' });
 
@@ -9,6 +10,7 @@ export interface IConfig {
     emailHost: string;
     emailPassword: string;
     emailAddress: string;
+    mediumUser: string;
 }
 
 const config: IConfig = {
@@ -17,7 +19,8 @@ const config: IConfig = {
     sessionKey: process.env.SESSION_KEY || 'some_secret_key',
     emailHost: process.env.EMAIL_HOST || 'localhost',
     emailPassword: process.env.EMAIL_PASSWORD || 'secret',
-    emailAddress: process.env.EMAIL_ADDRESS || 'foo@bar.com'
+    emailAddress: process.env.EMAIL_ADDRESS || 'foo@bar.com',
+    mediumUser: process.env.MEDIUM_USER || '@medium'
 };
 
 export { config };

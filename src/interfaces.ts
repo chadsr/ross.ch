@@ -7,3 +7,16 @@ export interface Response {
   success: boolean;
   messages: Message[];
 }
+
+export interface MediumPost {
+  title: string;
+  url: string;
+  publishDate: string;
+  creator?: string;
+  contentSnippet: string;
+  tags: string[];
+}
+
+export interface MediumFeed {
+  posts: MediumPost[];
+}
