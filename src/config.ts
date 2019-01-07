@@ -10,6 +10,7 @@ export interface IConfig {
     emailPassword: string;
     emailAddress: string;
     mediumUser: string;
+    maxBlogPosts: number;
 }
 
 const config: IConfig = {
@@ -19,7 +20,8 @@ const config: IConfig = {
     emailHost: process.env.EMAIL_HOST || 'localhost',
     emailPassword: process.env.EMAIL_PASSWORD || 'secret',
     emailAddress: process.env.EMAIL_ADDRESS || 'foo@bar.com',
-    mediumUser: process.env.MEDIUM_USER || '@medium'
+    mediumUser: process.env.MEDIUM_USER || '@medium',
+    maxBlogPosts: parseInt(process.env.MAX_POSTS) || 20
 };
 
 export { config };

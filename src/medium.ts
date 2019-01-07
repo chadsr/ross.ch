@@ -35,7 +35,7 @@ class Medium {
     // Extract the posts object to postsObj
     const postsObj = <Object>feedObj['payload']['references']['Post'];
 
-    Object.entries(postsObj).forEach(([key, obj]) => {
+    for (const obj of Object.values(postsObj)) {
       // Extract post tags
       const tags: string[] = [];
       obj['virtuals']['tags'].forEach(tagObj => {
@@ -62,7 +62,11 @@ class Medium {
 
       // Add the medium post to our MediumFeed object
       mediumFeed.posts.push(mediumPost);
-    });
+
+      if (mediumFeed.posts.length == numberPosts) {
+        break;
+      }
+    }
 
     return mediumFeed;
   }

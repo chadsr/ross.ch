@@ -46,7 +46,7 @@ function validateData(data: Object, schema: Joi.ObjectSchema): Message[] {
 }
 
 export async function renderIndex (ctx: IRouterContext) {
-  const feed = await medium.getFeed(1);
+  const feed = await medium.getFeed(config.maxBlogPosts);
 
   await ctx.render('index', {
     title: 'Ross Chadwick',
