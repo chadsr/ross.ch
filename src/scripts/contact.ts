@@ -69,7 +69,7 @@ export default class ContactForm {
     Object.keys(this._formLabels).forEach((key) => {
       const label = this._formLabels[key];
       label.innerHTML = key.replace(/^\w/, c => c.toUpperCase());
-      label.className = '';
+      label.classList.remove('error');
     });
   }
 
