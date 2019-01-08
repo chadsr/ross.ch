@@ -5,10 +5,8 @@ import * as Joi from 'joi';
 import { logger } from '../logging';
 import { config } from '../config';
 import { contactMailer } from '../mailer';
-import { Medium } from '../medium';
+import { getFeed } from '../medium';
 import { Response, Message } from '../interfaces';
-
-const medium = new Medium(config.mediumUser);
 
 const contactFormSchema = Joi.object().keys({
   name: Joi.string().alphanum().min(2).max(32).required().error(() => 'Name is a little short...'),
@@ -46,7 +44,7 @@ function validateData(data: Object, schema: Joi.ObjectSchema): Message[] {
 }
 
 export async function renderIndex (ctx: IRouterContext) {
-  const feed = await medium.getFeed(config.maxBlogPosts);
+  const feed = await getFeed(config.mediumUser, config.maxBlogPosts);
 
   await ctx.render('index', {
     title: 'Ross Chadwick',
