@@ -5,8 +5,8 @@ $color_highlight: #0f8f83
 $color_main: rgba(29, 54, 75, 0.8)
 $color_main_shadow: rgba(20, 39, 56, 0.8)
 $color_main_light: rgba(31, 60, 86, 0.8)
-$color_form_input: rgba(25, 40, 53, 0.8)
-$color_form_label: rgba(69, 83, 95, 0.8)
+$color_content_dark: rgba(25, 40, 53, 0.8)
+$color_field_title: rgba(69, 83, 95, 0.8)
 $color_twitter: #00aced
 $color_linkedin: #4875b4
 $color_github: #4183c4
@@ -16,7 +16,7 @@ $black_100: rgba(0, 0, 0, 1)
 $black_75: rgba(0, 0, 0, 0.75)
 $color_scrollbar: $color_main
 $color_scrollbar_track: $color_main
-$color_scrollbar_thumb: $color_form_label
+$color_scrollbar_thumb: $color_field_title
 $color_keybase: #4c8eff
 $color_success: #15a12a
 $color_error: #a51818
@@ -42,7 +42,7 @@ $serif: 'serif'
 %heading
     font-family: $font-macula, $serif
     text-transform: uppercase
-    margin: 0 0 0.5em 0
+    margin: 0 0 32px 0
     display: inline-block
     text-rendering: geometricPrecision
 
@@ -65,13 +65,13 @@ $serif: 'serif'
 
 %form-input-style
     @extend %form-layout
-    background: $color_form_input
+    background: $color_content_dark
 
 
-%form-label-style
+%field-title-style
     @extend %form-layout
     display: block
-    background: $color_form_label
+    background: $color_field_title
     font-weight: bold
 
 
@@ -113,21 +113,21 @@ $serif: 'serif'
     display: block
     position: absolute
     width: inherit
-    height: inherit
+    height: 32px
     transform-style: preserve-3d
     background: inherit
 
 %3d-side-top
     @extend %3d-side
     filter: brightness(120%)
-    transform: rotateX(60deg) translate3d(0, -24px, 14px)
-    top: 0px
+    transform: rotateX(60deg) translate3d(0, -50%, 0)
+    top: -16px
 
 %3d-side-bottom
     @extend %3d-side
     filter: brightness(60%)
-    transform: rotateX(-60deg) translate3d(0, 9px, -14px)
-    top: 32px
+    transform: rotateX(-60deg) translate3d(0, 50%, 0)
+    top: 16px
 
 // Main styles
 *
@@ -153,18 +153,19 @@ body
     overflow: hidden
 
 h1
-    font-size: 6vmin
+    font-size: 8vmin
     @extend %heading
     font-weight: 100
 
 h2
-    font-size: 5vmin
+    font-size: 6vmin
     @extend %heading
     font-weight: 100
 
 h3
-    font-size: 4vmin
-    font-weight: 100
+    font-size: 1em
+    font-weight: bold
+    padding: 8px
 
 h4
     margin: 0
@@ -281,7 +282,7 @@ fieldset
     @extend %form-layout
 
     label, button
-        @extend %form-label-style
+        @extend %field-title-style
 
 input
     @extend %form-input-style
@@ -471,7 +472,7 @@ header
             background: $color_highlight
 
     .content
-        margin: 10% 15%
+        margin: 32px 10%
 
         ul > li
             width: 100%
@@ -500,15 +501,12 @@ footer::after
     height: 32px
     @extend %3d-side-top
 
-#contact-form
-    margin-top: 16px
-
 .field.perspective
     margin-bottom: 32px
 
-    label
-        height: 32px
-        line-height: 32px
+    .title
+        min-height: 32px
+        line-height: 2em;
         &::after
             @extend %3d-side-top
 
@@ -532,3 +530,50 @@ footer::after
     textarea
         resize: vertical
         height: 128px
+
+/* Contact form stuff */
+#contact-form
+    margin-top: 16px
+/*                    */
+
+/* Blog stuff */
+// .blog-feed
+
+.blog-post
+    margin-bottom: 32px !important
+    a
+        font-weight: normal !important
+    &::before
+        display: none !important
+
+.blog-post-content
+    background-color: $color-content-dark
+    padding: 15px
+
+.blog-post-title
+    @extend %field-title-style
+    h3
+        margin: 0
+
+.blog-post-tags
+    line-height: 32px
+    text-align: center
+    background-color: $color-content-dark
+
+.blog-post-tag
+    border-radius: 4px
+    padding: 4px
+    background-color: $color-field-title
+
+.blog-post-snippet
+    margin: 0
+
+.blog-post-date
+    background-color: $color-content-dark
+    padding: 8px
+    display: block
+    font-style: italic
+    font-size: 14px
+    text-align: center
+
+/*            */
