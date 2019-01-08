@@ -3,6 +3,7 @@ import * as bodyParser from 'koa-bodyparser';
 import * as helmet from 'koa-helmet';
 import * as csrf from  'koa-csrf';
 import * as views from 'koa-views';
+import * as serve from 'koa-static';
 import * as cors from '@koa/cors';
 import * as session from 'koa-session';
 import * as dotenv from 'dotenv';
@@ -16,12 +17,13 @@ import { logger, loggerMiddleware } from './logging';
 import { config } from './config';
 import { router } from './routes';
 
-const webpackConfig = require('../webpack.config.ts');
+const webpackConfig = require('../webpack.config');
 const compiler = webpack(webpackConfig);
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 
 const dirViews = join(__dirname, 'views');
+const dirPublic = join(__dirname, '../public');
 const dirPartials = join(dirViews, 'partials');
 
 // Load environment variables from .env file
@@ -60,6 +62,9 @@ async function run() {
         logger.info('Webpack compiled successfully!');
       }
     });
+
+    // Serve the static files made by webpack
+    app.use(serve(dirPublic));
   }
 
   app.use(

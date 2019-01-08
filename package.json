@@ -8,8 +8,8 @@
   "scripts": {
     "dev": " NODE_ENV=development nodemon --watch '*' -e ts,tsx --exec ts-node src/server.ts",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
-    "serve": "node dist/server.js",
-    "build": "npm run tslint && tsc",
+    "serve": "node dist/src/server.js",
+    "build": "npm run tslint && tsc && ts-node copyStaticAssets.ts",
     "start": "NODE_ENV=production npm run serve"
   },
   "engines": {
@@ -35,6 +35,7 @@
     "@types/koa__cors": "^2.2.3",
     "@types/node": "^10.12.18",
     "@types/nodemailer": "^4.6.5",
+    "@types/shelljs": "^0.8.1",
     "@types/webpack": "^4.4.22",
     "autoprefixer": "^9.1.5",
     "babel-loader": "^8.0.4",
@@ -48,6 +49,7 @@
     "nodemon": "^1.18.9",
     "postcss-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
+    "shelljs": "^0.8.3",
     "style-loader": "^0.23.1",
     "ts-loader": "^5.3.3",
     "ts-node": "^7.0.1",
@@ -75,6 +77,7 @@
     "koa-helmet": "^4.0.0",
     "koa-router": "^7.4.0",
     "koa-session": "^5.10.1",
+    "koa-static": "^5.0.0",
     "koa-views": "^6.1.5",
     "koa-webpack": "^5.1.1",
     "node-sass": "^4.11.0",

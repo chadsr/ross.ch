@@ -21,7 +21,7 @@ const nodeEnv = process.env.NODE_ENV || 'development';
 module.exports = {
   mode: nodeEnv,
   devtool: 'inline-source-map',
-  entry: [join(jsDir, 'main.ts')],
+  entry: [join(jsDir, 'main')],
   output: {
     path: publicDir,
     filename: '[name].[hash].js',
@@ -31,7 +31,7 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js']
   },
   devServer: {
-    port: 3000,
+    port: process.env.PORT,
     open: true
   },
   module: {
