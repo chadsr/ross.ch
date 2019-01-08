@@ -1,16 +1,18 @@
-<ul>
-    {{#each mediumPosts}}
-        <li>
-            <a href="{{url}}" target="_blank">
-                <h3>{{title}}</h3>
-                <span>{{publishDate}}</span>
-                <div>
-                    {{#each tags}}
-                        <span>{{this}}</span>
-                    {{/each}}
-                </div>
-                <p>{{contentSnippet}}</p>
-            </a>
-        </li>
-    {{/each}}
+<ul class="blog-feed">
+  {{#each mediumPosts}}
+    <li class="blog-post field perspective">
+      <a href="{{url}}" target="_blank">
+        <span class="blog-post-title title"><h3>{{title}}</h3></span>
+        <span class="blog-post-date">Published: {{publishDate}}</span>
+        <div class="blog-post-tags">
+          {{#each tags}}
+            <span class="blog-post-tag">{{this}}</span>
+          {{/each}}
+        </div>
+        <div class="blog-post-content">
+          <p class="blog-post-snippet">{{contentSnippet}}</p>
+        </div>
+        </a>
+    </li>
+  {{/each}}
 </ul>
