@@ -4,9 +4,10 @@ import * as Joi from 'joi';
 
 import { logger } from '../logging';
 import { config } from '../config';
+import { Response, Message } from '../interfaces';
 import { contactMailer } from '../mailer';
 import { getFeed } from '../medium';
-import { Response, Message } from '../interfaces';
+import { getUserReposWithStars } from '../github';
 
 const contactFormSchema = Joi.object().keys({
   name: Joi.string().alphanum().min(2).max(32).required().error(() => 'Name is a little short...'),
@@ -45,11 +46,13 @@ function validateData(data: Object, schema: Joi.ObjectSchema): Message[] {
 
 export async function renderIndex (ctx: IRouterContext) {
   const feed = await getFeed(config.mediumUser, config.maxBlogPosts);
+  const github = await getUserReposWithStars(config.githubUser, true, config.maxRepos, 'updated');
 
   await ctx.render('index', {
     title: 'Ross Chadwick',
     csrfToken: ctx.csrf, // Add a CSRF token for the contact form request
-    mediumPosts: feed.posts
+    mediumPosts: feed.posts,
+    githubRepos: github.repositories
   });
 }
 

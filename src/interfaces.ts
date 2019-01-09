@@ -20,3 +20,16 @@ export interface MediumPost {
 export interface MediumFeed {
   posts: MediumPost[];
 }
+
+export interface Repository {
+  title: string;
+  url: string;
+  description: string;
+  numberStars: number;
+  mainLanguage: string;
+  lastUpdated: string;
+}
+
+export interface Github {
+  repositories: Repository[];
+}

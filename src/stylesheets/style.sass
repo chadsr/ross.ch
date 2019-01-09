@@ -153,7 +153,7 @@ body
     overflow: hidden
 
 h1
-    font-size: 8vmin
+    font-size: 6vmin
     @extend %heading
     font-weight: 100
 
@@ -492,6 +492,9 @@ header
             @extend %allow-select-text
             text-align: left
 
+        .description
+            margin-bottom: 32px
+
 header::after
     z-index: 1
     @extend %3d-side-bottom
@@ -536,39 +539,46 @@ footer::after
     margin-top: 16px
 /*                    */
 
-/* Blog stuff */
-// .blog-feed
-
-.blog-post
+/* Blog and Repository stuff */
+.blog-post, .repo
     margin-bottom: 32px !important
     a
         font-weight: normal !important
+        &:hover
+            .blog-post-title, .repo-title
+                @extend %transition-ease
+                background: $color_highlight
     &::before
         display: none !important
 
-.blog-post-content
+.blog-post-content, .repo-content
     background-color: $color-content-dark
-    padding: 15px
+    padding: 8px 16px 16px 16px
 
-.blog-post-title
+.blog-post-title, .repo-title
     @extend %field-title-style
     h3
         margin: 0
 
-.blog-post-tags
+.blog-post-tags, .repo-stats
     line-height: 32px
     text-align: center
     background-color: $color-content-dark
 
-.blog-post-tag
+.repo-stars
+    &::after
+        margin-left: 4px 
+        content: '\2605'
+
+.blog-post-tag, .repo-stars, .repo-language
     border-radius: 4px
     padding: 4px
     background-color: $color-field-title
 
-.blog-post-snippet
+.blog-post-snippet, .repo-description
     margin: 0
 
-.blog-post-date
+.blog-post-date, .repo-updated-date
     background-color: $color-content-dark
     padding: 8px
     display: block

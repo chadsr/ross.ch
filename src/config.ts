@@ -11,6 +11,8 @@ export interface IConfig {
     emailAddress: string;
     mediumUser: string;
     maxBlogPosts: number;
+    githubUser: string;
+    maxRepos: number;
 }
 
 const config: IConfig = {
@@ -21,7 +23,9 @@ const config: IConfig = {
     emailPassword: process.env.EMAIL_PASSWORD || 'secret',
     emailAddress: process.env.EMAIL_ADDRESS || 'foo@bar.com',
     mediumUser: process.env.MEDIUM_USER || '@medium',
-    maxBlogPosts: parseInt(process.env.MAX_POSTS) || 20
+    maxBlogPosts: parseInt(process.env.MAX_POSTS) || 20,
+    githubUser: process.env.GITHUB_USER || 'Chadsr',
+    maxRepos: parseInt(process.env.MAX_REPOS) || 20
 };
 
 export { config };
