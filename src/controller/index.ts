@@ -47,9 +47,11 @@ function validateData(data: Object, schema: Joi.ObjectSchema): Message[] {
 export async function renderIndex (ctx: IRouterContext) {
   const feed = await getFeed(config.mediumUser, config.maxBlogPosts);
   const github = await getUserReposWithStars(config.githubUser, true, config.maxRepos, 'updated');
+  const year = new Date().getFullYear().toString();
 
   await ctx.render('index', {
     title: 'Ross Chadwick',
+    year: year,
     csrfToken: ctx.csrf, // Add a CSRF token for the contact form request
     mediumPosts: feed.posts,
     githubRepos: github.repositories
