@@ -7,7 +7,7 @@ const octokit = new Octokit();
 
 export async function getUserReposWithStars(username: string, includeForks: boolean, numberRepos: number, sort: 'stars' | 'forks' | 'updated'): Promise<Github> {
   let query = `user:${username}`;
-  //query = (includeForks) ? query + '+forks:true' : query;
+  query = (includeForks) ? query + ' fork:true' : query;
   logger.debug(query);
   const res = await octokit.search.repos({
     q: query,
