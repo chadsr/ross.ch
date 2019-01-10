@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv';
+import * as random from 'randomatic';
 
 dotenv.config({ path: '.config.env' });
 
@@ -18,7 +19,7 @@ export interface IConfig {
 const config: IConfig = {
     port: +process.env.PORT || 3000,
     debugLogging: process.env.NODE_ENV == 'development',
-    sessionKey: process.env.SESSION_KEY || 'some_secret_key',
+    sessionKey: process.env.SESSION_KEY || random('*', 32),
     emailHost: process.env.EMAIL_HOST || 'localhost',
     emailPassword: process.env.EMAIL_PASSWORD || 'secret',
     emailAddress: process.env.EMAIL_ADDRESS || 'foo@bar.com',
