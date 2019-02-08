@@ -23,6 +23,13 @@ $color_error: #a51818
 
 // URLs
 $url-background: url('../images/bg.jpg')
+$url-ethereum: url('../images/icons/icon_ethereum.png')
+$url-bitcoin: url('../images/icons/icon_bitcoin.png')
+$url-github: url('../images/icons/icon_github.png')
+$url-twitter: url('../images/icons/icon_twitter.png')
+$url-linkedin: url('../images/icons/icon_linkedin.png')
+$url-keybase: url('../images/icons/icon_keybase.png')
+
 $url-macula: url('../fonts/Macula-Solid.woff')
 
 // Fonts
@@ -30,6 +37,9 @@ $font-macula: 'Macula'
 $font-opensans: 'Open Sans'
 $sans-serif: 'sans-serif'
 $serif: 'serif'
+
+$width-full-button: 125px
+$width-icon-button: 50px
 
 @font-face
     font-family: $font-macula
@@ -82,18 +92,27 @@ $serif: 'serif'
 %allow-select-text
     user-select: text
 
-%fullScreen
+%full-screen
     width: 100%
     height: 100%
     overflow: hidden
     position: absolute
-
 
 %list-element
     float: left
     line-height: 24px
     height: 32px
 
+%button-icon
+    display: block
+    content: ''
+    width: 24px
+    height: 24px
+    margin: 4px auto
+    position: relative
+    background-size: cover
+    background-repeat: no-repeat
+    background-position: center center
 
 %transition-ease
     transition: all 200ms ease
@@ -210,24 +229,41 @@ ul
         > li
             @extend %transition-ease
             @extend %list-element
-            width: 100px
+            width: $width-icon-button
+            cursor: pointer
 
             &:hover
                 background: $color_highlight
                 &::after
                     @extend %3d-side-top
 
-            &.twitter:hover
-                background: $color_twitter
+            &.twitter
+                &:hover
+                    background: $color_twitter
+                a::before
+                    @extend %button-icon
+                    background-image: $url-twitter
 
-            &.linkedin:hover
-                background: $color_linkedin
+            &.linkedin
+                &:hover
+                    background: $color_linkedin
+                &::before
+                    @extend %button-icon
+                    background-image: $url-linkedin
 
-            &.github:hover
-                background: $color_github
+            &.github
+                &:hover
+                    background: $color_github
+                &::before
+                    @extend %button-icon
+                    background-image: $url-github
 
-            &.keybase:hover
-                background: $color_keybase
+            &.keybase
+                &:hover
+                    background: $color_keybase
+                &::before
+                    @extend %button-icon
+                    background-image: $url-keybase
 
             > a h4
                 padding: 4px 10px
@@ -242,10 +278,10 @@ ul
             @extend %transition-ease
 
             &.coin
-                width: 100px
+                width: $width-full-button
                 > textarea
                     @extend %allow-select-text
-                    width: 100px
+                    width: 90px
                     padding: 4px 10px
                     text-align: center
                     box-sizing: border-box
@@ -255,20 +291,30 @@ ul
                     resize: none
                     overflow: hidden
                     cursor: pointer
-                    font-size: 1em
                     &:focus
                         outline: 0 none transparent
+                &::before
+                    margin-left: 10px
+                    float: left
 
             &:hover
                 &::after
                     @extend %3d-side-top
 
-            &.bitcoin:hover
-                background: $color_bitcoin
+            &.bitcoin
+                &:hover
+                    background: $color_bitcoin
+                &::before
+                    @extend %button-icon
+                    background-image: $url-bitcoin
 
 
-            &.ethereum:hover
-                background: $color_ethereum
+            &.ethereum
+                &:hover
+                    background: $color_ethereum
+                &::before
+                    @extend %button-icon
+                    background-image: $url-ethereum
 
 section
     a
@@ -298,7 +344,7 @@ nav
         display: inline-block
         > li
             @extend %list-element
-            width: 100px
+            width: $width-full-button
 
 
     ul li
@@ -321,11 +367,11 @@ nav
     background-size: cover
     //background: $color_background
     z-index: 1
-    @extend %fullScreen
+    @extend %full-screen
 
 #content
     z-index: 2
-    @extend %fullScreen
+    @extend %full-screen
 
 body
     width: 100%
