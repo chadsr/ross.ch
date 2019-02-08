@@ -1,18 +1,22 @@
-<div class="description">For a more definitive list, hit the Github button in the footer.</div>
-<ul class="repo-feed">
-  {{#each githubRepos}}
-    <li class="repo field perspective">
-      <a href="{{url}}" target="_blank">
-        <span class="repo-title title"><h3>{{title}}</h3></span>
-        <span class="repo-updated-date">Updated: {{lastUpdated}}</span>
-        <div class="repo-stats">
-          <span class="repo-language">{{mainLanguage}}</span>
-          <span class="repo-stars">{{numberStars}}</span>
-        </div>
-        <div class="repo-content">
-          <p class="repo-description">{{description}}</p>
-        </div>
-        </a>
-    </li>
-  {{/each}}
-</ul>
+{{#if githubRepos}}
+  <div class="description">For a more definitive list, hit the Github button in the footer.</div>
+  <ul class="repo-feed">
+    {{#each githubRepos}}
+      <li class="repo field perspective">
+        <a href="{{url}}" target="_blank">
+          <span class="repo-title title"><h3>{{title}}</h3></span>
+          <span class="repo-updated-date">Updated: {{lastUpdated}}</span>
+          <div class="repo-stats">
+            <span class="repo-language">{{mainLanguage}}</span>
+            <span class="repo-stars">{{numberStars}}</span>
+          </div>
+          <div class="repo-content">
+            <p class="repo-description">{{description}}</p>
+          </div>
+          </a>
+      </li>
+    {{/each}}
+  </ul>
+{{else}}
+  <h3>Something went wrong and I couldn't fetch and projects. Try later, or checkout my Github (link in footer)</h3>
+{{/if}}

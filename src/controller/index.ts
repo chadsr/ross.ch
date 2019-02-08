@@ -46,15 +46,24 @@ function validateData(data: Object, schema: Joi.ObjectSchema): Message[] {
 
 export async function renderIndex (ctx: IRouterContext) {
   const feed = await getFeed(config.mediumUser, config.maxBlogPosts);
+  let posts = feed.posts;
+  if (posts.length < 1) {
+    posts = undefined;
+  }
   const github = await getUserReposWithStars(config.githubUser, true, config.maxRepos, 'updated');
+  let repositories = github.repositories;
+  if (repositories.length < 1) {
+    repositories = undefined;
+  }
+
   const year = new Date().getFullYear().toString();
 
   await ctx.render('index', {
     title: 'Ross Chadwick',
     year: year,
     csrfToken: ctx.csrf, // Add a CSRF token for the contact form request
-    mediumPosts: feed.posts,
-    githubRepos: github.repositories
+    mediumPosts: posts,
+    githubRepos: repositories
   });
 }
 
