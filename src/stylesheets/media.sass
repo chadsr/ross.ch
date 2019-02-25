@@ -1,29 +1,34 @@
-@media only screen and (min-width : 320px) and (max-width : 500px)
+$bp-larger-than-mobile : "min-width: 400px" !default
+$bp-larger-than-phablet : "min-width: 550px" !default
+$bp-larger-than-tablet : "min-width: 750px" !default
+$bp-larger-than-desktop : "min-width: 1000px" !default
+$bp-larger-than-desktophd : "min-width: 1200px" !default
+
+// Mixin function handling all styles related to the cube over different sizes of width/height in pixels
+@mixin cubeTransform($size)
     .perspective
-        perspective: 600px
+        perspective: $size * 2
 
     #mainCube
-        width: 300px
-        height: 300px
-        transform-origin: 150px 150px -150px
+        width: $size
+        height: $size
+
+        transform-origin: ($size/2) ($size/2) (-$size/2)
+
         >
             .top
-                transform: rotateX(90deg) translate3d(0, -150px, 150px)
-
+                transform: rotateX(90deg) translate3d(0, -$size/2, $size/2)
             .bottom
-                transform: rotateX(-90deg) translate3d(0, 150px, 150px)
-
+                transform: rotateX(-90deg) translate3d(0, $size/2, $size/2)
             .left
-                transform: rotateY(-90deg) translate3d(-150px, 0, 150px)
-
+                transform: rotateY(-90deg) translate3d(-$size/2, 0, $size/2)
             .right
-                transform: rotateY(90deg) translate3d(150px, 0, 150px)
-
+                transform: rotateY(90deg) translate3d($size/2, 0, $size/2)
             .back
-                transform: rotateY(180deg) translate3d(0, 0, 300px)
-
-
-
+                transform: rotateY(180deg) translate3d(0, 0, $size)
+            
+@media only screen and (min-width : 320px) and (max-width : 500px)
+    @include cubeTransform(300px)
 
 @media only screen and (max-width : 806px)
     nav
@@ -66,243 +71,29 @@
         width: 100% !important
         text-align: center
 
-
-
-
 @media only screen and (min-width : 768px) and (max-width : 1024px)
-    .perspective
-        perspective: 1200px
-
-    #mainCube
-        width: 600px
-        height: 600px
-        transform-origin: 300px 300px -300px
-        >
-            .top
-                transform: rotateX(90deg) translate3d(0, -300px, 300px)
-
-            .bottom
-                transform: rotateX(-90deg) translate3d(0, 300px, 300px)
-
-            .left
-                transform: rotateY(-90deg) translate3d(-300px, 0, 300px)
-
-            .right
-                transform: rotateY(90deg) translate3d(300px, 0, 300px)
-
-            .back
-                transform: rotateY(180deg) translate3d(0, 0, 600px)
-
-
-
+    @include cubeTransform(600px)
 
 @media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape)
-    .perspective
-        perspective: 1200px
-
-    #mainCube
-        width: 600px
-        height: 600px
-        transform-origin: 300px 300px -300px
-        >
-            .top
-                transform: rotateX(90deg) translate3d(0, -300px, 300px)
-
-            .bottom
-                transform: rotateX(-90deg) translate3d(0, 300px, 300px)
-
-            .left
-                transform: rotateY(-90deg) translate3d(-300px, 0, 300px)
-
-            .right
-                transform: rotateY(90deg) translate3d(300px, 0, 300px)
-
-            .back
-                transform: rotateY(180deg) translate3d(0, 0, 600px)
-
-
-
+    @include cubeTransform(600px)
 
 @media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait)
-    .perspective
-        perspective: 1200px
-
-    #mainCube
-        width: 600px
-        height: 600px
-        transform-origin: 300px 300px -300px
-        >
-            .top
-                transform: rotateX(90deg) translate3d(0, -300px, 300px)
-
-            .bottom
-                transform: rotateX(-90deg) translate3d(0, 300px, 300px)
-
-            .left
-                transform: rotateY(-90deg) translate3d(-300px, 0, 300px)
-
-            .right
-                transform: rotateY(90deg) translate3d(300px, 0, 300px)
-
-            .back
-                transform: rotateY(180deg) translate3d(0, 0, 600px)
-
-
-
+    @include cubeTransform(600px)
 
 @media screen and (max-width: 320px) and (min-height : 200px)
-    .perspective
-        perspective: 400px
-
-    #mainCube
-        width: 200px
-        height: 200px
-        transform-origin: 100px 100px -100px
-        >
-            .top
-                transform: rotateX(90deg) translate3d(0, -100px, 100px)
-
-            .bottom
-                transform: rotateX(-90deg) translate3d(0, 100px, 100px)
-
-            .left
-                transform: rotateY(-90deg) translate3d(-100px, 0, 100px)
-
-            .right
-                transform: rotateY(90deg) translate3d(100px, 0, 100px)
-
-            .back
-                transform: rotateY(180deg) translate3d(0, 0, 200px)
-
-
-
+    @include cubeTransform(200px)
 
 @media screen and (min-width: 320px) and (min-height : 300px)
-    .perspective
-        perspective: 600px
-
-    #mainCube
-        width: 300px
-        height: 300px
-        transform-origin: 150px 150px -150px
-        >
-            .top
-                transform: rotateX(90deg) translate3d(0, -150px, 150px)
-
-            .bottom
-                transform: rotateX(-90deg) translate3d(0, 150px, 150px)
-
-            .left
-                transform: rotateY(-90deg) translate3d(-150px, 0, 150px)
-
-            .right
-                transform: rotateY(90deg) translate3d(150px, 0, 150px)
-
-            .back
-                transform: rotateY(180deg) translate3d(0, 0, 300px)
-
+    @include cubeTransform(300px)
 
 @media only screen and (min-width: 500px) and (min-height : 400px)
-    .perspective
-        perspective: 800px
-
-    #mainCube
-        width: 400px
-        height: 400px
-        transform-origin: 200px 200px -200px
-        >
-            .top
-                transform: rotateX(90deg) translate3d(0, -200px, 200px)
-
-            .bottom
-                transform: rotateX(-90deg) translate3d(0, 200px, 200px)
-
-            .left
-                transform: rotateY(-90deg) translate3d(-200px, 0, 200px)
-
-            .right
-                transform: rotateY(90deg) translate3d(200px, 0, 200px)
-
-            .back
-                transform: rotateY(180deg) translate3d(0, 0, 400px)
-
-
-
+    @include cubeTransform(400px)
 
 @media only screen and (min-width: 800px) and (min-height : 600px)
-    .perspective
-        perspective: 1200px
-
-    #mainCube
-        width: 600px
-        height: 600px
-        transform-origin: 300px 300px -300px
-        >
-            .top
-                transform: rotateX(90deg) translate3d(0, -300px, 300px)
-
-            .bottom
-                transform: rotateX(-90deg) translate3d(0, 300px, 300px)
-
-            .left
-                transform: rotateY(-90deg) translate3d(-300px, 0, 300px)
-
-            .right
-                transform: rotateY(90deg) translate3d(300px, 0, 300px)
-
-            .back
-                transform: rotateY(180deg) translate3d(0, 0, 600px)
-
-
-
+    @include cubeTransform(600px)
 
 @media only screen and (min-width : 1024px) and (min-height : 800px)
-    .perspective
-        perspective: 1600px
-
-    #mainCube
-        width: 800px
-        height: 800px
-        transform-origin: 400px 400px -400px
-        >
-            .top
-                transform: rotateX(90deg) translate3d(0, -400px, 400px)
-
-            .bottom
-                transform: rotateX(-90deg) translate3d(0, 400px, 400px)
-
-            .left
-                transform: rotateY(-90deg) translate3d(-400px, 0, 400px)
-
-            .right
-                transform: rotateY(90deg) translate3d(400px, 0, 400px)
-
-            .back
-                transform: rotateY(180deg) translate3d(0, 0, 800px)
-
-
-
+    @include cubeTransform(800px)
 
 @media only screen and (min-width : 1824px) and (min-height : 1000px)
-    .perspective
-        perspective: 2000px
-
-    #mainCube
-        width: 1000px
-        height: 1000px
-        transform-origin: 500px 500px -500px
-        >
-            .top
-                transform: rotateX(90deg) translate3d(0, -500px, 500px)
-
-            .bottom
-                transform: rotateX(-90deg) translate3d(0, 500px, 500px)
-
-            .left
-                transform: rotateY(-90deg) translate3d(-500px, 0, 500px)
-
-            .right
-                transform: rotateY(90deg) translate3d(500px, 0, 500px)
-
-            .back
-                transform: rotateY(180deg) translate3d(0, 0, 1000px)
+    @include cubeTransform(1000px)
