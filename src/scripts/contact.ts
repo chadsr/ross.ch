@@ -21,7 +21,6 @@ export default class ContactForm {
     }
 
     this._formSubmitBtn = <HTMLButtonElement>document.getElementById(formId + '-submit-btn');
-    this._formPage = <HTMLDivElement>this._form.parentElement.parentElement; // Store the outer page for use with scrolling
   }
 
   displayResponse(response: Response) {
@@ -42,6 +41,7 @@ export default class ContactForm {
         target.classList.add('success');
       } else {
         target.classList.add('error');
+        target.scrollIntoView();
       }
     });
   }
@@ -53,8 +53,6 @@ export default class ContactForm {
     if (response.success) {
       this.resetInput();
       this.resetLabels();
-    } else { // Otherwise scroll back to top so the user sees any errors
-      this._formPage.scrollTo(0, 0);
     }
 
     // Reset the submit button back to normal after 4s
