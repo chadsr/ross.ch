@@ -31,18 +31,17 @@ const INNER_ANGLE = 60;
 let currentSide = 1;
 
 document.addEventListener('DOMContentLoaded', function() {
-    const content = document.getElementById(MAIN_CONTENT_ID);
-    const contentHammer = new Hammer(content, {
+    const swipe = new Hammer(document.body, {
         recognizers: [
             [Hammer.Swipe, {enable: true}]
         ]
     });
 
-    contentHammer.on('swipeleft', function() {
+    swipe.on('swipeleft', function() {
         rotateTo(currentSide + 1);
     });
 
-    contentHammer.on('swiperight', function() {
+    swipe.on('swiperight', function() {
         rotateTo(currentSide - 1);
     });
 
