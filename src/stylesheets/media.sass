@@ -26,15 +26,11 @@ $bp-larger-than-desktophd : "min-width: 1200px" !default
                 transform: rotateY(90deg) translate3d($size/2, 0, $size/2)
             .back
                 transform: rotateY(180deg) translate3d(0, 0, $size)
-            
-@media only screen and (min-width : 320px) and (max-width : 500px)
-    @include cubeTransform(300px)
 
-@media only screen and (max-width : 806px)
+@mixin elasticNav()
     nav
         ul
             float: none !important
-
 
     nav > ul.fullWidth, .social.fullWidth
         @for $i from 1 through 10
@@ -42,58 +38,83 @@ $bp-larger-than-desktophd : "min-width: 1200px" !default
             li:first-child:nth-last-child( #{$i} ) ~ li
                 width: 100% / $i
 
+@media only screen and (max-width : 806px)
+    @include elasticNav()
+
     .fullWidth
         width: 100% !important
     
-    .coin > textarea
-        &.fullWidth
+    .halfWidth
+        width: 50% !important
+
+    .coin
+        float: left
+        position: relative
+
+        > textarea
             position: absolute
             left: 0
             padding: 4px 10px 4px 28px !important
-
-    .crypto > .fullWidth:hover::after
-        display: none
-
+        &:hover
+            &::after
+                display: none !important
 
     footer
-        max-height: 128px
+        max-height: 64px
 
-    li
-        &.bitcoin:hover
-            width: 100% !important
-            text-align: center
-
-        &.coin > a > textarea
-            width: 100% !important
-            text-align: center
-
-    #bParent:hover
-        width: 100% !important
-        text-align: center
-
-@media only screen and (min-width : 768px) and (max-width : 1024px)
-    @include cubeTransform(600px)
-
-@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape)
-    @include cubeTransform(600px)
-
-@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait)
-    @include cubeTransform(600px)
-
-@media screen and (max-width: 320px) and (min-height : 200px)
+@media only screen and (min-width : 200px) and (min-height : 200px)
     @include cubeTransform(200px)
 
-@media screen and (min-width: 320px) and (min-height : 300px)
+// Larger than mini mobile
+@media only screen and (min-width : 300px) and (min-height : 300px)
+    @include cubeTransform(200px)
+
+@media only screen and (min-width : 350px) and (min-height : 350px)
+    @include cubeTransform(250px)
+
+// Larger than mobile
+@media only screen and (min-width : 400px) and (min-height : 400px)
     @include cubeTransform(300px)
 
-@media only screen and (min-width: 500px) and (min-height : 400px)
+@media only screen and (min-width : 450px) and (min-height : 450px)
+    @include cubeTransform(350px)
+
+@media only screen and (min-width : 500px) and (min-height : 500px)
     @include cubeTransform(400px)
 
-@media only screen and (min-width: 800px) and (min-height : 600px)
+// Larger than phablet (also point when grid becomes active)
+@media only screen and (min-width : 550px) and (min-height : 550px)
+    @include cubeTransform(450px)
+
+@media only screen and (min-width : 600px) and (min-height : 600px)
+    @include cubeTransform(500px)
+
+@media only screen and (min-width : 650px) and (min-height : 650px)
+    @include cubeTransform(550px)
+
+@media only screen and (min-width : 700px) and (min-height : 700px)
     @include cubeTransform(600px)
 
-@media only screen and (min-width : 1024px) and (min-height : 800px)
+// Larger than tablet
+@media only screen and (min-width : 750px) and (min-height : 750px)
+    @include cubeTransform(650px)
+
+@media only screen and (min-width : 800px) and (min-height : 800px)
+    @include cubeTransform(700px)
+
+@media only screen and (min-width : 900px) and (min-height : 900px)
     @include cubeTransform(800px)
 
-@media only screen and (min-width : 1824px) and (min-height : 1000px)
+// Larger than desktop
+@media only screen and (min-width : 1000px) and (min-height : 1000px)
+    @include cubeTransform(900px)
+
+@media only screen and (min-width : 1100px) and (min-height : 1100px)
     @include cubeTransform(1000px)
+
+// Larger than Desktop HD
+@media only screen and (min-width : 1200px) and (min-height : 1200px)
+    @include cubeTransform(1100px)
+
+@media only screen and (min-width : 1300px) and (min-height : 1300px)
+    @include cubeTransform(1200px)
