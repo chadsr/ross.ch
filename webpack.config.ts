@@ -4,8 +4,9 @@ import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as WebpackMd5Hash from 'webpack-md5-hash';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as UglifyJsPlugin from 'uglifyjs-webpack-plugin';
-import WebappWebpackPlugin from 'webapp-webpack-plugin';
+import * as WebappWebpackPlugin from 'webapp-webpack-plugin';
 import ImageminPlugin from 'imagemin-webpack-plugin';
+import * as imageminMozjpeg from 'imagemin-mozjpeg';
 import * as WriteFilePlugin from 'write-file-webpack-plugin';
 
 const srcDir = resolve(__dirname, 'src');
@@ -115,13 +116,18 @@ module.exports = {
     new ImageminPlugin({
       test: /\.(jpe?g|png|gif|svg)$/i,
       pngquant: {
-        quality: '95-100'
-      }
+        quality: '50-100'
+      },
+      plugins: [
+          imageminMozjpeg({
+            quality: 50
+          })
+        ]
     }),
-    /*new WebappWebpackPlugin({
-    logo: join(imagesDir, 'favicon.png'),
-    inject: true
-    }),*/
+    new WebappWebpackPlugin({
+      logo: join(imagesDir, 'favicon.png'),
+      inject: true
+    }),
 ],
 optimization: {
   minimizer: [new UglifyJsPlugin()]
