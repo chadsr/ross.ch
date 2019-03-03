@@ -1,6 +1,48 @@
 <head>
   <title>{{title}}</title>
+  <meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,width=device-width,user-scalable=no" />
+  
+  <!-- Basic styles used when JS is disabled -->
+  <style>
+    body.nojs-styles {
+      color: white;
+      background-color: black;
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+    }
+
+    body.nojs-styles a {
+      color: white;
+      margin: 0;
+    }
+
+    body.nojs-styles header, body.nojs-styles footer {
+      float: left;
+      width: 100%;
+      background-color: rgba(29, 54, 75, 1);
+    }
+
+    body.nojs-styles nav > ul, body.nojs-styles footer > ul {
+      margin: 0;
+    }
+
+    body.nojs-styles nav > ul > li, body.nojs-styles footer > ul > li {
+      float: left;
+      display: inline-block;
+      margin: 16px;
+    }
+
+    body.nojs-styles #nojs {
+      padding: 6px;
+      background-color: rgba(31, 60, 86, 1);
+      width: 100%;
+      float: left;
+    }
+  </style>
 
   {{> webpack}}
-
 </head>

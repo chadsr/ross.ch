@@ -1,6 +1,3 @@
-// Ross Chadwick Portfolio (C) 2018
-// TODO: A LOT of refactoring
-
 // Stylesheets/#
 import '../stylesheets/style.sass';
 import '../stylesheets/media.sass';
@@ -15,6 +12,9 @@ import EscherCubes from './escher';
 // Key event codes
 const LEFT_ARROW = 37;
 const RIGHT_ARROW = 39;
+
+// Needs a long debounce to cover for slow CSS transitions
+const DEBOUNCE_MS = 2000;
 
 const CUBE_ID = 'mainCube';
 const MAIN_CONTENT_ID = 'content';
@@ -31,6 +31,9 @@ const INNER_ANGLE = 60;
 let currentSide = 1;
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Remove the class controlling styles when javascript is disabled
+    document.body.classList.remove('nojs-styles');
+
     const swipe = new Hammer(document.body, {
         recognizers: [
             [Hammer.Swipe, {enable: true}]
@@ -114,7 +117,7 @@ window.addEventListener('resize', debounce(function(event) {
     cube.style.top = Math.round((mainContentPosition.height + headerPosition.height - footerPosition.height - cubePosition.height) / 2) + 'px';
 
     renderBackground();
-}, 200));
+}, DEBOUNCE_MS));
 
 function renderBackground() {
     EscherCubes.render(BG_CONTAINER_Id, SVG_ID, 0, BG_Y_OFFSET, CUBE_SIZE, INNER_ANGLE);

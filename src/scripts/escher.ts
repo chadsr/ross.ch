@@ -76,6 +76,7 @@ export default class EscherCubes {
       side.setAttribute('height', cubeSize);
       side.setAttribute('class', sides[i][0]);
       side.setAttribute('transform', 'matrix(' + sides[i][1] + ')');
+
       iso.appendChild(side);
     }
     parentSVG.append(iso);
