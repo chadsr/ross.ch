@@ -108,7 +108,6 @@ module.exports = {
     new WriteFilePlugin({ // We need the files in dev mode due to handlebars partial...
       test:  /\.hbs$/
     }),
-    new WebpackMd5Hash(),
     new HtmlWebpackPlugin({
       templateContent: '',
       filename: join(partialsDir, 'webpack.hbs') // Write the handlebars to the partials dir instead of public

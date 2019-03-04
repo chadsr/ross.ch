@@ -6,10 +6,10 @@
   "author": "Ross Chadwick",
   "private": true,
   "scripts": {
-    "dev": " NODE_ENV=development nodemon --watch '*' -e ts,tsx --exec ts-node src/server.ts",
-    "tslint": "tslint -c tslint.json -p tsconfig.json",
-    "serve": "node dist/src/server.js",
-    "build": "npm run tslint && tsc && ts-node copyStaticAssets.ts",
+    "dev": " NODE_ENV=development nodemon --watch '*' -e ts,tsx --exec ./node_modules/.bin/ts-node src/server.ts",
+    "lint": "./node_modules/.bin/tslint -c tslint.json -p tsconfig.json",
+    "serve": "node --trace-deprecation dist/src/server.js",
+    "build": "npm run lint && ./node_modules/.bin/tsc && ./node_modules/.bin/ts-node copyStaticAssets.ts",
     "start": "NODE_ENV=production npm run serve"
   },
   "engines": {
@@ -58,7 +58,6 @@
     "uglifyjs-webpack-plugin": "^2.0.1",
     "webapp-webpack-plugin": "^2.4.0",
     "webpack": "^4.20.2",
-    "webpack-md5-hash": "0.0.6",
     "write-file-webpack-plugin": "^4.4.1"
   },
   "dependencies": {
