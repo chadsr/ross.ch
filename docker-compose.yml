@@ -1,0 +1,184 @@
+version: '3'
+
+services:
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        WORK_DIR: "/usr/src/ross.ch"
+        PORT: 8080
+    env_file:
+      - .config.env
+    image: ross.ch-webapp
+    container_name: webapp
+    restart: unless-stopped
+    networks:
+      - default
+
+  webserver:
+    image: nginx:mainline-alpine
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - web-root:/var/www/html
+      - ./nginx-conf:/etc/nginx/conf.d
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - ./dhparam:/etc/ssl/certs
+    depends_on:
+      - webapp
+    networks:
+      - default
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - web-root:/var/www/html
+    depends_on:
+      - webserver
+    command: certonly --webroot --webroot-path=/var/www/html --email hello@rchadwick.co.uk --agree-tos --no-eff-email --staging -d ross.ch  -d www.ross.ch 
+
+  # External dependencies
+  mailu-redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+      - "/mailu/redis:/data"
+
+  # Core services
+  mailu-front:
+    image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}nginx:${MAILU_VERSION:-1.6}
+    restart: always
+    env_file: mailu.env
+    logging:
+      driver: json-file
+    ports:
+      - "127.0.0.1:25:25"
+      - "127.0.0.1:465:465"
+      - "127.0.0.1:587:587"
+      - "127.0.0.1:110:110"
+      - "127.0.0.1:995:995"
+      - "127.0.0.1:143:143"
+      - "127.0.0.1:993:993"
+    volumes:
+      - "/mailu/certs:/certs"
+      - "/mailu/overrides/nginx:/overrides"
+    networks:
+      - default
+
+  mailu-resolver:
+    image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}unbound:${MAILU_VERSION:-1.6}
+    env_file: mailu.env
+    restart: always
+    networks:
+      default:
+        ipv4_address: 172.0.0.254
+
+  mailu-admin:
+    image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}admin:${MAILU_VERSION:-1.6}
+    restart: always
+    env_file: mailu.env
+    volumes:
+      - "/mailu/data:/data"
+      - "/mailu/dkim:/dkim"
+    depends_on:
+      - mailu-redis
+
+  mailu-imap:
+    image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}dovecot:${MAILU_VERSION:-1.6}
+    restart: always
+    env_file: mailu.env
+    volumes:
+      - "/mailu/mail:/mail"
+      - "/mailu/overrides:/overrides"
+    depends_on:
+      - mailu-front
+
+  mailu-smtp:
+    image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}postfix:${MAILU_VERSION:-1.6}
+    restart: always
+    env_file: mailu.env
+    volumes:
+      - "/mailu/overrides:/overrides"
+    depends_on:
+      - mailu-front
+      - mailu-resolver
+    dns:
+      - 172.0.0.254
+
+  mailu-antispam:
+    image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}rspamd:${MAILU_VERSION:-1.6}
+    restart: always
+    env_file: mailu.env
+    volumes:
+      - "/mailu/filter:/var/lib/rspamd"
+      - "/mailu/dkim:/dkim"
+      - "/mailu/overrides/rspamd:/etc/rspamd/override.d"
+    depends_on:
+      - mailu-front
+      - mailu-resolver
+    dns:
+      - 172.0.0.254
+
+  # Optional services
+
+  mailu-webdav:
+    image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}radicale:${MAILU_VERSION:-1.6}
+    restart: always
+    env_file: mailu.env
+    volumes:
+      - "/mailu/dav:/data"
+
+  mailu-fetchmail:
+    image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}fetchmail:${MAILU_VERSION:-1.6}
+    restart: always
+    env_file: mailu.env
+    depends_on:
+      - mailu-resolver
+    dns:
+      - 172.0.0.254
+
+  mailu-database:
+    image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}postgresql:${MAILU_VERSION:-1.6}
+    restart: always
+    env_file: mailu.env
+    volumes:
+      - "/mailu/data/psql_db:/data"
+      - "/mailu/data/psql_backup:/backup"
+
+volumes:
+  certbot-etc:
+  certbot-var:
+  dhparam:
+    driver: local
+    driver_opts:
+      type: none
+      device: "/dhparam/"
+      o: bind
+  web-root:
+#     # driver: local
+#     # driver_opts:
+#     #   type: none
+#     #   device: /home/sammy/node_project/views/
+#     #   o: bind
+#   # mailu:
+#   #   driver: local
+#   #   driver_opts:
+#   #     type: none
+#   #     device: "./mailu/"
+#   #     o: bind
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.0.0.0/24

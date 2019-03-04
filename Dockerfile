@@ -1,37 +1,19 @@
 FROM node:10
 
-ARG working_directory=/usr/src/ross.ch
-ARG port=8080
-ARG debugLogging=false
-ARG emailHost=localhost
-ARG emailPassword
-ARG emailAddress
-ARG mediumUser
-ARG githubUser
-ARG maxBlogPosts=10
-ARG maxRepos=10
+ARG WORK_DIR
+ARG NODE_ENV
+ARG PORT
 
-ENV PORT=${port}
-ENV NODE_ENV=${debugLogging}
-ENV EMAIL_HOST=${emailHost}
-ENV EMAIL_PASSWORD=${emailPassword}
-ENV EMAIL_ADDRESS=${emailAddress}
-ENV MEDIUM_USER=${mediumUser}
-ENV GITHUB_USER=${githubUser}
-ENV MAX_POSTS=${maxBlogPosts}
-ENV MAX_REPOS=${maxRepos}
-
-WORKDIR $working_directory
+WORKDIR ${WORK_DIR}
 
 COPY package*.json ./
-RUN ["mkdir", "-p", "${working_directory}/node_modules"]
-RUN ["chown", "-R", "node:node", "${working_directory}"
+RUN ["mkdir", "-p", "${WORK_DIR}/node_modules"]
+RUN ["chown", "-R", "node:node", "${WORK_DIR}"]
 
 RUN npm install
 COPY . .
 
-EXPOSE $port
+EXPOSE ${PORT}
 
-
-RUN ["npm", "build"]
+RUN ["npm", "run", "build"]
 CMD ["npm", "start"]
