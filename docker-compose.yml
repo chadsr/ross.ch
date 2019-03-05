@@ -30,7 +30,7 @@ services:
       - ./nginx-conf:/etc/nginx/conf.d:Z
       - certbot-etc:/etc/letsencrypt:Z
       - certbot-var:/var/lib/letsencrypt:Z
-      - ./dhparam:/etc/ssl/certs:Z
+      - /ross.ch/dhparam:/etc/ssl/certs:Z
     depends_on:
       - webapp
     networks:
@@ -52,7 +52,7 @@ services:
   #   image: redis:alpine
   #   restart: always
   #   volumes:
-  #     - "/mailu/redis:/data"
+  #     - "/ross.ch/mailu/redis:/data"
 
   # # Core services
   # mailu-front:
@@ -70,8 +70,8 @@ services:
   #     - "127.0.0.1:143:143"
   #     - "127.0.0.1:993:993"
   #   volumes:
-  #     - "/mailu/certs:/certs:Z"
-  #     - "/mailu/overrides/nginx:/overrides:Z"
+  #     - "/ross.ch/mailu/certs:/certs:Z"
+  #     - "/ross.ch/mailu/overrides/nginx:/overrides:Z"
   #   networks:
   #     - default
 
@@ -88,8 +88,8 @@ services:
   #   restart: always
   #   env_file: mailu.env
   #   volumes:
-  #     - "/mailu/data:/data:Z"
-  #     - "/mailu/dkim:/dkim:Z"
+  #     - "/ross.ch/mailu/data:/data:Z"
+  #     - "/ross.ch/mailu/dkim:/dkim:Z"
   #   depends_on:
   #     - mailu-redis
 
@@ -98,8 +98,8 @@ services:
   #   restart: always
   #   env_file: mailu.env
   #   volumes:
-  #     - "/mailu/mail:/mail:Z"
-  #     - "/mailu/overrides:/overrides:Z"
+  #     - "/ross.ch/mailu/mail:/mail:Z"
+  #     - "/ross.ch/mailu/overrides:/overrides:Z"
   #   depends_on:
   #     - mailu-front
 
@@ -108,7 +108,7 @@ services:
   #   restart: always
   #   env_file: mailu.env
   #   volumes:
-  #     - "/mailu/overrides:/overrides:Z"
+  #     - "/ross.ch/mailu/overrides:/overrides:Z"
   #   depends_on:
   #     - mailu-front
   #     - mailu-resolver
@@ -120,9 +120,9 @@ services:
   #   restart: always
   #   env_file: mailu.env
   #   volumes:
-  #     - "/mailu/filter:/var/lib/rspamd:Z"
-  #     - "/mailu/dkim:/dkim:Z"
-  #     - "/mailu/overrides/rspamd:/etc/rspamd/override.d:Z"
+  #     - "/ross.ch/mailu/filter:/var/lib/rspamd:Z"
+  #     - "/ross.ch/mailu/dkim:/dkim:Z"
+  #     - "/ross.ch/mailu/overrides/rspamd:/etc/rspamd/override.d:Z"
   #   depends_on:
   #     - mailu-front
   #     - mailu-resolver
@@ -136,7 +136,7 @@ services:
   #   restart: always
   #   env_file: mailu.env
   #   volumes:
-  #     - "/mailu/dav:/data:Z"
+  #     - "/ross.ch/mailu/dav:/data:Z"
 
   # mailu-fetchmail:
   #   image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}fetchmail:${MAILU_VERSION:-1.6}
@@ -152,31 +152,14 @@ services:
   #   restart: always
   #   env_file: mailu.env
   #   volumes:
-  #     - "/mailu/data/psql_db:/data:Z"
-  #     - "/mailu/data/psql_backup:/backup:Z"
+  #     - "/ross.ch/mailu/data/psql_db:/data:Z"
+  #     - "/ross.ch/mailu/data/psql_backup:/backup:Z"
 
 volumes:
   webapp:
   certbot-etc:
   certbot-var:
-  # dhparam:
-  #   driver: local
-  #   driver_opts:
-  #     type: none
-  #     device: "/dhparam/:Z"
-  #     o: bind
   web-root:
-#     # driver: local
-#     # driver_opts:
-#     #   type: none
-#     #   device: /home/sammy/node_project/views/
-#     #   o: bind
-#   # mailu:
-#   #   driver: local
-#   #   driver_opts:
-#   #     type: none
-#   #     device: "./mailu/"
-#   #     o: bind
 
 networks:
   default:
