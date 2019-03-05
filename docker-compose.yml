@@ -28,7 +28,7 @@ services:
     volumes:
       - web-root:/var/www/html:Z
       - ./nginx-conf:/etc/nginx/conf.d:Z
-      - certbot-etc:/etc/letsencrypt:Z
+      - /ross.ch/certbot:/etc/letsencrypt:Z
       - certbot-var:/var/lib/letsencrypt:Z
       - /ross.ch/dhparam:/etc/ssl/certs:Z
     depends_on:
@@ -40,7 +40,7 @@ services:
     image: certbot/certbot
     container_name: certbot
     volumes:
-      - certbot-etc:/etc/letsencrypt:Z
+      - /ross.ch/certbot:/etc/letsencrypt:Z
       - certbot-var:/var/lib/letsencrypt:Z
       - web-root:/var/www/html:Z
     depends_on:
@@ -157,12 +157,6 @@ services:
 
 volumes:
   webapp:
-  certbot-etc:
-    driver: local
-    driver_opts:
-      type: none
-      device: /ross.ch/certbot
-      o: bind
   certbot-var:
   web-root:
 
