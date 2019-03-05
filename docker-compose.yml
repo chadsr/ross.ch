@@ -158,6 +158,11 @@ services:
 volumes:
   webapp:
   certbot-etc:
+    driver: local
+    driver_opts:
+      type: none
+      device: /ross.ch/certbot
+      o: bind
   certbot-var:
   web-root:
 
