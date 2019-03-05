@@ -6,12 +6,12 @@ ARG PORT
 
 WORKDIR ${WORK_DIR}
 
-COPY package*.json ./
+COPY package*.json ${WORK_DIR}
+COPY . ${WORK_DIR}
 RUN ["mkdir", "-p", "${WORK_DIR}/node_modules"]
 RUN ["chown", "-R", "node:node", "${WORK_DIR}"]
 
 RUN npm install
-COPY . .
 
 EXPOSE ${PORT}
 
