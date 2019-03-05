@@ -1,7 +1,6 @@
 // webpack v4
 import { join, resolve } from 'path';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
-import * as WebpackMd5Hash from 'webpack-md5-hash';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import * as WebappWebpackPlugin from 'webapp-webpack-plugin';
