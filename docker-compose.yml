@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        WORK_DIR: "/usr/src/ross.ch:Z"
+        WORK_DIR: "/usr/src/ross.ch"
         PORT: 8080
     env_file:
       - .config.env
