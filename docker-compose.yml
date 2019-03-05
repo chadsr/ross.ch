@@ -3,10 +3,10 @@ version: '3'
 services:
   webapp:
     build:
-      context: https://github.com/chadsr/ross.ch.git
+      context: .
       dockerfile: Dockerfile
       args:
-        WORK_DIR: "/usr/src/ross.ch"
+        WORK_DIR: "/usr/src/ross.ch:Z"
         PORT: 8080
     env_file:
       - .config.env
@@ -24,11 +24,11 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - web-root:/var/www/html
-      - ./nginx-conf:/etc/nginx/conf.d
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
-      - ./dhparam:/etc/ssl/certs
+      - web-root:/var/www/html:Z
+      - ./nginx-conf:/etc/nginx/conf.d:Z
+      - certbot-etc:/etc/letsencrypt:Z
+      - certbot-var:/var/lib/letsencrypt:Z
+      - ./dhparam:/etc/ssl/certs:Z
     depends_on:
       - webapp
     networks:
@@ -38,9 +38,9 @@ services:
     image: certbot/certbot
     container_name: certbot
     volumes:
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
-      - web-root:/var/www/html
+      - certbot-etc:/etc/letsencrypt:Z
+      - certbot-var:/var/lib/letsencrypt:Z
+      - web-root:/var/www/html:Z
     depends_on:
       - webserver
     command: certonly --webroot --webroot-path=/var/www/html --email hello@rchadwick.co.uk --agree-tos --no-eff-email --staging -d ross.ch  -d www.ross.ch 
@@ -68,8 +68,8 @@ services:
       - "127.0.0.1:143:143"
       - "127.0.0.1:993:993"
     volumes:
-      - "/mailu/certs:/certs"
-      - "/mailu/overrides/nginx:/overrides"
+      - "/mailu/certs:/certs:Z"
+      - "/mailu/overrides/nginx:/overrides:Z"
     networks:
       - default
 
@@ -86,8 +86,8 @@ services:
     restart: always
     env_file: mailu.env
     volumes:
-      - "/mailu/data:/data"
-      - "/mailu/dkim:/dkim"
+      - "/mailu/data:/data:Z"
+      - "/mailu/dkim:/dkim:Z"
     depends_on:
       - mailu-redis
 
@@ -96,8 +96,8 @@ services:
     restart: always
     env_file: mailu.env
     volumes:
-      - "/mailu/mail:/mail"
-      - "/mailu/overrides:/overrides"
+      - "/mailu/mail:/mail:Z"
+      - "/mailu/overrides:/overrides:Z"
     depends_on:
       - mailu-front
 
@@ -106,7 +106,7 @@ services:
     restart: always
     env_file: mailu.env
     volumes:
-      - "/mailu/overrides:/overrides"
+      - "/mailu/overrides:/overrides:Z"
     depends_on:
       - mailu-front
       - mailu-resolver
@@ -118,9 +118,9 @@ services:
     restart: always
     env_file: mailu.env
     volumes:
-      - "/mailu/filter:/var/lib/rspamd"
-      - "/mailu/dkim:/dkim"
-      - "/mailu/overrides/rspamd:/etc/rspamd/override.d"
+      - "/mailu/filter:/var/lib/rspamd:Z"
+      - "/mailu/dkim:/dkim:Z"
+      - "/mailu/overrides/rspamd:/etc/rspamd/override.d:Z"
     depends_on:
       - mailu-front
       - mailu-resolver
@@ -134,7 +134,7 @@ services:
     restart: always
     env_file: mailu.env
     volumes:
-      - "/mailu/dav:/data"
+      - "/mailu/dav:/data:Z"
 
   mailu-fetchmail:
     image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}fetchmail:${MAILU_VERSION:-1.6}
@@ -150,8 +150,8 @@ services:
     restart: always
     env_file: mailu.env
     volumes:
-      - "/mailu/data/psql_db:/data"
-      - "/mailu/data/psql_backup:/backup"
+      - "/mailu/data/psql_db:/data:Z"
+      - "/mailu/data/psql_backup:/backup:Z"
 
 volumes:
   certbot-etc:
@@ -160,7 +160,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: "/dhparam/"
+      device: "/dhparam/:Z"
       o: bind
   web-root:
 #     # driver: local
