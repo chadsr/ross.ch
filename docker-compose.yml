@@ -13,6 +13,8 @@ services:
     image: ross.ch-webapp
     container_name: webapp
     restart: unless-stopped
+    volumes:
+      - webapp:/usr/src/ross.ch/
     networks:
       - default
 
@@ -43,7 +45,7 @@ services:
       - web-root:/var/www/html:Z
     depends_on:
       - webserver
-    command: certonly --webroot --webroot-path=/var/www/html --email hello@rchadwick.co.uk --agree-tos --no-eff-email --staging -d ross.ch  -d www.ross.ch 
+    command: certonly --webroot --webroot-path=/var/www/html --email hello@rchadwick.co.uk --agree-tos --no-eff-email --force-renewal -d ross.ch  -d www.ross.ch 
 
   # External dependencies
   mailu-redis:
@@ -154,6 +156,7 @@ services:
       - "/mailu/data/psql_backup:/backup:Z"
 
 volumes:
+  webapp:
   certbot-etc:
   certbot-var:
   dhparam:
