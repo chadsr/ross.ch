@@ -8,6 +8,7 @@
     html {
       margin: 0;
       padding: 0;
+      overflow-x: hidden;
     }
 
     body.nojs-styles {
@@ -42,8 +43,27 @@
       text-shadow: none;
     }
 
+    .repo-stars::after {
+      margin-left: 4px;
+      content: '\2605';
+    }
+
     body.nojs-styles header, body.nojs-styles #crypto {
       display: none;
+    }
+
+    body.nojs-styles .content {
+      margin: 0 32px;
+    }
+
+    body.nojs-styles .field {
+      margin-bottom: 16px;
+    }
+
+    body.nojs-styles fieldset {
+      border: none;
+      margin: 0;
+      padding: 0;
     }
 
     @font-face {
@@ -55,19 +75,23 @@
     body.nojs-styles h1 {
       font-family: "Macula", "serif";
       font-size: 48px;
+      margin: 16px 0;
     }
 
     body.nojs-styles h2 {
       font-family: "Macula", "serif";
       font-size: 32px;
+      margin: 16px 0;
     }
 
     body.nojs-styles h3 {
       font-size: 18px;
+      margin: 3px 0 16px 0;
     }
 
     body.nojs-styles a {
       color: white;
+      font-weight: bold;
       margin: 0;
       text-decoration: none;
     }
@@ -84,6 +108,13 @@
 
     body.nojs-styles input, body.nojs-styles textarea {
       width: 100%;
+      max-width: 500px;
+      border: none;
+    }
+
+    body.nojs-styles label {
+      width: 100%;
+      display: block;
     }
 
     body.nojs-styles .face {
