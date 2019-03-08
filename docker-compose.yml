@@ -14,7 +14,7 @@ services:
     container_name: webapp
     restart: unless-stopped
     volumes:
-      - webapp:/usr/src/ross.ch/
+      - web-root:/usr/src/ross.ch/dist/public
     networks:
       - default
 
@@ -156,9 +156,8 @@ services:
   #     - "/ross.ch/mailu/data/psql_backup:/backup:Z"
 
 volumes:
-  webapp:
-  certbot-var:
   web-root:
+  certbot-var:
 
 networks:
   default:
