@@ -529,7 +529,7 @@ header
     .content
         margin: 32px 10%
 
-        ul > li
+        ul li
             width: 100%
             float: left
             text-align: left
@@ -537,11 +537,20 @@ header
 
             &::before
                 content: '>'
-                font-size: 5vmin
                 float: left
-                line-height: 24px
-                margin-right: 10px
+                line-height: 20px
+                margin: 0 10px 0 0
                 @extend %heading
+
+        > ul > li
+            &::before
+                font-size: 5vmin
+
+            > ul
+                margin-left: 24px
+                > li
+                    &::before
+                        font-size: 3vmin
 
         p
             @extend %allow-select-text
