@@ -3,9 +3,8 @@ Description=Ross.ch Dockerized Services
 Requires=docker.service
 After=docker.service
 
-WorkingDirectory=<PATH_TO_COMPOSE_YML>
-
 [Service]
+WorkingDirectory=<PATH_TO_COMPOSE_YML>
 Restart=always
 
 ExecStart=/usr/bin/docker-compose up
