@@ -15,6 +15,7 @@ services:
     restart: unless-stopped
     volumes:
       - web-root:/usr/src/ross.ch/dist/public
+      - web-views:/usr/src/ross.ch/dist/src/views
     networks:
       - default
 
@@ -156,6 +157,7 @@ services:
   #     - "/ross.ch/mailu/data/psql_backup:/backup:Z"
 
 volumes:
+  web-views:
   web-root:
   certbot-var:
 
