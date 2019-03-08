@@ -4,3 +4,5 @@ npm-debug.log
 README.md
 .travis.yml
 error.log
+renew_ssl.sh
+rossch.service
