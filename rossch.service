@@ -10,6 +10,7 @@ Restart=always
 ExecStart=/usr/bin/docker-compose up --build
 
 ExecStop=/usr/bin/docker-compose down
+ExecStop=/usr/bin/docker rm web-views
 
 [Install]
 WantedBy=multi-user.target
