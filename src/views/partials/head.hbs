@@ -4,24 +4,103 @@
   
   <!-- Basic styles used when JS is disabled -->
   <style>
-    body.nojs-styles {
-      color: white;
-      background-color: black;
+
+    html {
       margin: 0;
       padding: 0;
+    }
+
+    body.nojs-styles {
+      color: white;
+      font: 1.2rem Inconsolata, monospace;
+      text-shadow: 0 0 5px #C8C8C8;
+      background-color: black;
+      background-image: radial-gradient( rgba(31, 60, 86, 0.75), black 120% );
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+    }
+
+    body.nojs-styles::after {
+      content: "";
       position: absolute;
-      top: 0px;
-      width: 100%;
-      height: 100%;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: repeating-linear-gradient(
+        0deg,
+        rgba(black, 0.15),
+        rgba(black, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+    }
+
+    ::selection {
+      background: #0080FF;
+      text-shadow: none;
+    }
+
+    body.nojs-styles header, body.nojs-styles #crypto {
+      display: none;
+    }
+
+    @font-face {
+      font-family: "Macula";
+      src: url("../../fonts/Macula-Solid.woff") format('woff');
+      font-weight: bold;
+    }
+
+    body.nojs-styles h1 {
+      font-family: "Macula", "serif";
+      font-size: 48px;
+    }
+
+    body.nojs-styles h2 {
+      font-family: "Macula", "serif";
+      font-size: 32px;
+    }
+
+    body.nojs-styles h3 {
+      font-size: 18px;
     }
 
     body.nojs-styles a {
       color: white;
       margin: 0;
+      text-decoration: none;
     }
 
-    body.nojs-styles header, body.nojs-styles footer {
+    body.nojs-styles ul {
+      list-style-type: none;
+    }
+
+    body.nojs-styles .content li {
+      margin: 12px 0;
+      width: 100%;
       float: left;
+    }
+
+    body.nojs-styles input, body.nojs-styles textarea {
+      width: 100%;
+    }
+
+    body.nojs-styles .face {
+      width: 100%;
+      float: left;
+    }
+
+    body.nojs-styles .face .content ul > li::before {
+      font-family: "Macula", "serif";
+      content: '>';
+      font-size: 5vmin;
+      float: left;
+      line-height: 24px;
+      margin-right: 10px;
+    }
+
+    body.nojs-styles footer {
       width: 100%;
       background-color: rgba(29, 54, 75, 1);
     }
@@ -30,17 +109,19 @@
       margin: 0;
     }
 
-    body.nojs-styles nav > ul > li, body.nojs-styles footer > ul > li {
+    body.nojs-styles footer > ul > li, body.nojs-styles .repo {
+      display: block;
       float: left;
-      display: inline-block;
-      margin: 16px;
+    }
+
+    body.nojs-styles footer > ul > li {
+      margin-right: 16px;
     }
 
     body.nojs-styles #nojs {
       padding: 6px;
       background-color: rgba(31, 60, 86, 1);
-      width: 100%;
-      float: left;
+      font-size: 14px;
     }
   </style>
 
