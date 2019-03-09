@@ -64,7 +64,8 @@ services:
       - "/ross.ch/mailu/certs:/certs:Z"
       - "/ross.ch/mailu/overrides/nginx:/overrides:Z"
     networks:
-      - default
+      default:
+        ipv4_address: 172.0.0.253
 
   mailu-resolver:
     image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}unbound:${MAILU_VERSION:-1.6}
