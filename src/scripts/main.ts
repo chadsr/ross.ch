@@ -1,6 +1,7 @@
 // Stylesheets/#
 import '../stylesheets/style.sass';
 import '../stylesheets/media.sass';
+import '../stylesheets/nojs.css';
 
 // node packages
 import 'hammerjs';

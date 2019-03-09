@@ -7,6 +7,7 @@ import * as WebappWebpackPlugin from 'webapp-webpack-plugin';
 import ImageminPlugin from 'imagemin-webpack-plugin';
 import * as imageminMozjpeg from 'imagemin-mozjpeg';
 import * as WriteFilePlugin from 'write-file-webpack-plugin';
+import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const srcDir = resolve(__dirname, 'src');
 const publicDir = resolve(__dirname, 'public');
@@ -61,10 +62,12 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'postcss-loader'
+          use: [
+            {
+              loader: MiniCssExtractPlugin.loader
+            },
+            'css-loader',
+            'postcss-loader'
         ]
       },
       {
@@ -126,6 +129,10 @@ module.exports = {
       logo: join(imagesDir, 'favicon.png'),
       inject: true
     }),
+    new MiniCssExtractPlugin({
+      filename: '[name].[hash].css',
+      chunkFilename: '[id].[hash].css',
+    })
 ],
 optimization: {
   minimizer: [new UglifyJsPlugin()]
