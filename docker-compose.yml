@@ -48,113 +48,101 @@ services:
       - webserver
     command: certonly --webroot --webroot-path=/var/www/html --email hello@rchadwick.co.uk --agree-tos --no-eff-email --force-renewal -d ross.ch  -d www.ross.ch 
 
-  # # External dependencies
-  # mailu-redis:
-  #   image: redis:alpine
-  #   restart: always
-  #   volumes:
-  #     - "/ross.ch/mailu/redis:/data"
+  mailu-redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+      - "/ross.ch/mailu/redis:/data"
 
-  # # Core services
-  # mailu-front:
-  #   image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}nginx:${MAILU_VERSION:-1.6}
-  #   restart: always
-  #   env_file: mailu.env
-  #   logging:
-  #     driver: json-file
-  #   ports:
-  #     - "127.0.0.1:25:25"
-  #     - "127.0.0.1:465:465"
-  #     - "127.0.0.1:587:587"
-  #     - "127.0.0.1:110:110"
-  #     - "127.0.0.1:995:995"
-  #     - "127.0.0.1:143:143"
-  #     - "127.0.0.1:993:993"
-  #   volumes:
-  #     - "/ross.ch/mailu/certs:/certs:Z"
-  #     - "/ross.ch/mailu/overrides/nginx:/overrides:Z"
-  #   networks:
-  #     - default
+  mailu-front:
+    image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}nginx:${MAILU_VERSION:-1.6}
+    restart: always
+    env_file: mailu.env
+    logging:
+      driver: json-file
+    volumes:
+      - "/ross.ch/mailu/certs:/certs:Z"
+      - "/ross.ch/mailu/overrides/nginx:/overrides:Z"
+    networks:
+      - default
 
-  # mailu-resolver:
-  #   image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}unbound:${MAILU_VERSION:-1.6}
-  #   env_file: mailu.env
-  #   restart: always
-  #   networks:
-  #     default:
-  #       ipv4_address: 172.0.0.254
+  mailu-resolver:
+    image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}unbound:${MAILU_VERSION:-1.6}
+    env_file: mailu.env
+    restart: always
+    networks:
+      default:
+        ipv4_address: 172.0.0.254
 
-  # mailu-admin:
-  #   image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}admin:${MAILU_VERSION:-1.6}
-  #   restart: always
-  #   env_file: mailu.env
-  #   volumes:
-  #     - "/ross.ch/mailu/data:/data:Z"
-  #     - "/ross.ch/mailu/dkim:/dkim:Z"
-  #   depends_on:
-  #     - mailu-redis
+  mailu-admin:
+    image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}admin:${MAILU_VERSION:-1.6}
+    restart: always
+    env_file: mailu.env
+    volumes:
+      - "/ross.ch/mailu/data:/data:Z"
+      - "/ross.ch/mailu/dkim:/dkim:Z"
+    depends_on:
+      - mailu-redis
 
-  # mailu-imap:
-  #   image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}dovecot:${MAILU_VERSION:-1.6}
-  #   restart: always
-  #   env_file: mailu.env
-  #   volumes:
-  #     - "/ross.ch/mailu/mail:/mail:Z"
-  #     - "/ross.ch/mailu/overrides:/overrides:Z"
-  #   depends_on:
-  #     - mailu-front
+  mailu-imap:
+    image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}dovecot:${MAILU_VERSION:-1.6}
+    restart: always
+    env_file: mailu.env
+    volumes:
+      - "/ross.ch/mailu/mail:/mail:Z"
+      - "/ross.ch/mailu/overrides:/overrides:Z"
+    depends_on:
+      - mailu-front
 
-  # mailu-smtp:
-  #   image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}postfix:${MAILU_VERSION:-1.6}
-  #   restart: always
-  #   env_file: mailu.env
-  #   volumes:
-  #     - "/ross.ch/mailu/overrides:/overrides:Z"
-  #   depends_on:
-  #     - mailu-front
-  #     - mailu-resolver
-  #   dns:
-  #     - 172.0.0.254
+  mailu-smtp:
+    image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}postfix:${MAILU_VERSION:-1.6}
+    restart: always
+    env_file: mailu.env
+    volumes:
+      - "/ross.ch/mailu/overrides:/overrides:Z"
+    depends_on:
+      - mailu-front
+      - mailu-resolver
+    dns:
+      - 172.0.0.254
 
-  # mailu-antispam:
-  #   image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}rspamd:${MAILU_VERSION:-1.6}
-  #   restart: always
-  #   env_file: mailu.env
-  #   volumes:
-  #     - "/ross.ch/mailu/filter:/var/lib/rspamd:Z"
-  #     - "/ross.ch/mailu/dkim:/dkim:Z"
-  #     - "/ross.ch/mailu/overrides/rspamd:/etc/rspamd/override.d:Z"
-  #   depends_on:
-  #     - mailu-front
-  #     - mailu-resolver
-  #   dns:
-  #     - 172.0.0.254
+  mailu-antispam:
+    image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}rspamd:${MAILU_VERSION:-1.6}
+    restart: always
+    env_file: mailu.env
+    volumes:
+      - "/ross.ch/mailu/filter:/var/lib/rspamd:Z"
+      - "/ross.ch/mailu/dkim:/dkim:Z"
+      - "/ross.ch/mailu/overrides/rspamd:/etc/rspamd/override.d:Z"
+    depends_on:
+      - mailu-front
+      - mailu-resolver
+    dns:
+      - 172.0.0.254
 
-  # # Optional services
+  mailu-webdav:
+    image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}radicale:${MAILU_VERSION:-1.6}
+    restart: always
+    env_file: mailu.env
+    volumes:
+      - "/ross.ch/mailu/dav:/data:Z"
 
-  # mailu-webdav:
-  #   image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}radicale:${MAILU_VERSION:-1.6}
-  #   restart: always
-  #   env_file: mailu.env
-  #   volumes:
-  #     - "/ross.ch/mailu/dav:/data:Z"
+  mailu-fetchmail:
+    image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}fetchmail:${MAILU_VERSION:-1.6}
+    restart: always
+    env_file: mailu.env
+    depends_on:
+      - mailu-resolver
+    dns:
+      - 172.0.0.254
 
-  # mailu-fetchmail:
-  #   image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}fetchmail:${MAILU_VERSION:-1.6}
-  #   restart: always
-  #   env_file: mailu.env
-  #   depends_on:
-  #     - mailu-resolver
-  #   dns:
-  #     - 172.0.0.254
-
-  # mailu-database:
-  #   image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}postgresql:${MAILU_VERSION:-1.6}
-  #   restart: always
-  #   env_file: mailu.env
-  #   volumes:
-  #     - "/ross.ch/mailu/data/psql_db:/data:Z"
-  #     - "/ross.ch/mailu/data/psql_backup:/backup:Z"
+  mailu-database:
+    image: ${DOCKER_ORG:-mailu}/${DOCKER_PREFIX:-}postgresql:${MAILU_VERSION:-1.6}
+    restart: always
+    env_file: mailu.env
+    volumes:
+      - "/ross.ch/mailu/data/psql_db:/data:Z"
+      - "/ross.ch/mailu/data/psql_backup:/backup:Z"
 
 volumes:
   web-views:
