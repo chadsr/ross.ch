@@ -112,6 +112,11 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       templateContent: '',
+      title: '{{title}}',
+      inject: 'head',
+      meta: {
+        viewport: '" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,width=device-width,user-scalable=no" />'
+      },
       filename: join(partialsDir, 'webpack.hbs') // Write the handlebars to the partials dir instead of public
     }),
     new ImageminPlugin({
