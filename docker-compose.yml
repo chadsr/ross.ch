@@ -55,8 +55,6 @@ services:
       - db
     env_file:
       - .config.env
-    environment:
-
     volumes:
       - /ross.ch/ghost_content:/var/lib/ghost/content
 
