@@ -18,7 +18,7 @@ export interface IConfig {
 }
 
 const config: IConfig = {
-    port: +process.env.PORT || 3000,
+    port: +process.env.PORT || 8080,
     debugLogging: process.env.NODE_ENV == 'development',
     title: process.env.TITLE || 'Ross Chadwick',
     sessionKey: process.env.SESSION_KEY || random('*', 32),
