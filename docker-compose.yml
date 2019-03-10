@@ -62,6 +62,8 @@ services:
 
     db:
       image: postgres:alpine
+      env_file:
+        - .config.env
       volumes:
         - /ross.ch/db-data:/var/lib/postgresql/data
 
