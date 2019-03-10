@@ -1,6 +1,6 @@
 // webpack v4
 import { join, resolve } from 'path';
-import * as CleanWebpackPlugin from 'clean-webpack-plugin';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import * as WebappWebpackPlugin from 'webapp-webpack-plugin';
@@ -108,7 +108,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin([publicDir]),
+    new CleanWebpackPlugin(),
     new WriteFilePlugin({ // We need the files in dev mode due to handlebars partial...
       test:  /\.hbs$/
     }),
