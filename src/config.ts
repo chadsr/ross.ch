@@ -5,6 +5,7 @@ dotenv.config({ path: '.config.env' });
 
 export interface IConfig {
     port: number;
+    title: string;
     debugLogging: boolean;
     sessionKey: string;
     emailHost: string;
@@ -19,6 +20,7 @@ export interface IConfig {
 const config: IConfig = {
     port: +process.env.PORT || 3000,
     debugLogging: process.env.NODE_ENV == 'development',
+    title: process.env.TITLE || 'Ross Chadwick',
     sessionKey: process.env.SESSION_KEY || random('*', 32),
     emailHost: process.env.EMAIL_HOST || 'localhost',
     emailPassword: process.env.EMAIL_PASSWORD || 'secret',

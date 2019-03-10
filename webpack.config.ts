@@ -9,6 +9,8 @@ import * as imageminMozjpeg from 'imagemin-mozjpeg';
 import * as WriteFilePlugin from 'write-file-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
+import { config } from './src/config';
+
 const srcDir = resolve(__dirname, 'src');
 const publicDir = resolve(__dirname, 'public');
 const jsDir = join(srcDir, 'scripts');
@@ -111,12 +113,9 @@ module.exports = {
       test:  /\.hbs$/
     }),
     new HtmlWebpackPlugin({
-      templateContent: '',
-      title: '{{title}}',
+      template: join(partialsDir, 'head.hbs'),
+      title: config.title,
       inject: 'head',
-      meta: {
-        viewport: '" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,width=device-width,user-scalable=no" />'
-      },
       filename: join(partialsDir, 'webpack.hbs') // Write the handlebars to the partials dir instead of public
     }),
     new ImageminPlugin({

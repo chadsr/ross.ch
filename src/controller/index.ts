@@ -59,7 +59,6 @@ export async function renderIndex (ctx: IRouterContext) {
   const year = new Date().getFullYear().toString();
 
   await ctx.render('index', {
-    title: 'Ross Chadwick',
     year: year,
     csrfToken: ctx.csrf, // Add a CSRF token for the contact form request
     mediumPosts: posts,
