@@ -50,20 +50,11 @@ services:
 
   ghost:
     image: ghost:alpine
-    restart: always
-    depends_on:
-      - db
+    restart: unless-stopped
     env_file:
       - .config.env
     volumes:
-      - /ross.ch/ghost_content:/var/lib/ghost/content
-
-  db:
-    image: postgres:alpine
-    env_file:
-      - .config.env
-    volumes:
-      - /ross.ch/db-data:/var/lib/postgresql/data
+      - /ross.ch/ghost_content:/var/lib/ghost/content:Z
 
 volumes:
   web-views:
