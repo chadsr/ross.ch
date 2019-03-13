@@ -15,7 +15,6 @@ services:
     restart: unless-stopped
     volumes:
       - web-root:/usr/src/ross.ch/dist/public:rw,z
-      - /ross.ch/webpack:/usr/src/ross.ch/dist/src/views/partials:rw,Z
     networks:
       - default
 
