@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
     volumes:
       - web-root:/usr/src/ross.ch/dist/public:rw,z
-      - web-views:/usr/src/ross.ch/dist/src/views:rw,z
+      - /ross.ch/webpack:/usr/src/ross.ch/dist/src/views/partials:rw,Z
     networks:
       - default
 
@@ -57,7 +57,6 @@ services:
       - /ross.ch/ghost_content:/var/lib/ghost/content:rw,z
 
 volumes:
-  web-views:
   web-root:
   certbot-var:
 
