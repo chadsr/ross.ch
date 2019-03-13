@@ -10,7 +10,7 @@
     "lint": "./node_modules/.bin/tslint -c tslint.json -p tsconfig.json",
     "serve": "node --trace-deprecation dist/src/server.js",
     "webpack": "./node_modules/.bin/webpack --config ./webpack.config.ts",
-    "build": "npm run lint && ./node_modules/.bin/tsc && ./node_modules/.bin/ts-node copyStaticAssets.ts && npm run webpack",
+    "build": "npm run lint && ./node_modules/.bin/tsc && npm run webpack && ./node_modules/.bin/ts-node copyStaticAssets.ts",
     "start": "NODE_ENV=production npm run serve"
   },
   "engines": {
