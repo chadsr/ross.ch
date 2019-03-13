@@ -46,4 +46,4 @@ const contactMailer = new Mailer(config.emailHost, config.emailAddress, config.e
   if (err) logger.error('Could not authenticate with mail server:', err);
 })();
 
-export {contactMailer, Mailer};
+export { contactMailer, Mailer };
