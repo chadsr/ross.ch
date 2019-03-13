@@ -2,8 +2,6 @@
 dist
 public
 
-src/fonts/Macula-Solid.woff
-
 # Built by webpack
 src/views/partials/webpack.hbs
 
