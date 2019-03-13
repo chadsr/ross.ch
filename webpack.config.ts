@@ -2,7 +2,6 @@
 import { join, resolve } from 'path';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
-import * as UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import * as WebappWebpackPlugin from 'webapp-webpack-plugin';
 import ImageminPlugin from 'imagemin-webpack-plugin';
 import * as imageminMozjpeg from 'imagemin-mozjpeg';
@@ -137,8 +136,4 @@ module.exports = {
       filename: '[name].[hash].css',
       chunkFilename: '[id].[hash].css',
     })
-],
-optimization: {
-  minimizer: [new UglifyJsPlugin()]
-}
-};
+]};

@@ -9,7 +9,8 @@
     "dev": " NODE_ENV=development nodemon --watch '*' -e ts,tsx --exec ./node_modules/.bin/ts-node src/server.ts",
     "lint": "./node_modules/.bin/tslint -c tslint.json -p tsconfig.json",
     "serve": "node --trace-deprecation dist/src/server.js",
-    "build": "npm run lint && ./node_modules/.bin/tsc && ./node_modules/.bin/ts-node copyStaticAssets.ts",
+    "webpack": "./node_modules/.bin/webpack --config ./webpack.config.ts",
+    "build": "npm run lint && ./node_modules/.bin/tsc && ./node_modules/.bin/ts-node copyStaticAssets.ts && npm run webpack",
     "start": "NODE_ENV=production npm run serve"
   },
   "engines": {
@@ -36,7 +37,8 @@
     "@types/nodemailer": "^4.6.6",
     "@types/shelljs": "^0.8.3",
     "@types/webpack": "^4.4.25",
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "webpack-cli": "^3.2.3"
   },
   "dependencies": {
     "@koa/cors": "^2.2.3",
@@ -82,7 +84,6 @@
     "ts-node": "^8.0.3",
     "tslint": "^5.13.1",
     "typescript": "^3.3.3333",
-    "uglifyjs-webpack-plugin": "^2.1.2",
     "webapp-webpack-plugin": "^2.6.1",
     "webpack": "^4.29.6",
     "winston": "^3.2.1",
