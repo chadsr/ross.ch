@@ -15,9 +15,6 @@ before_install:
 
 
 script:
-  # Setup your application stack. You may need to tweak these commands if you
-  # doing out-of-the-ordinary docker-compose builds.
-  - docker-compose pull
   - docker-compose build
-  - docker-compose start
+  - docker-compose up
 
