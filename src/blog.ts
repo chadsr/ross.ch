@@ -16,12 +16,8 @@ export async function getAggregatedFeed(maxPosts: number): Promise<BlogFeed> {
   // Get medium posts up until maxPosts
   const mediumFeed = await getMediumFeed(config.mediumUser, maxPosts);
 
-  logger.debug(mediumFeed.posts[0].title);
-
   // Get ghost blog posts up until maxPosts
   const ghostFeed = await getGhostFeed(config.ghostPublicApiKey, maxPosts);
-
-  logger.debug(ghostFeed.posts[0].title);
 
   // Merge posts from each source into aggregatedFeed
   aggregatedFeed.posts = mediumFeed.posts.concat(ghostFeed.posts);
@@ -31,8 +27,6 @@ export async function getAggregatedFeed(maxPosts: number): Promise<BlogFeed> {
 
   // Only keep maxPosts number of elements from the beginning of the posts array
   aggregatedFeed.posts = aggregatedFeed.posts.slice(0, maxPosts);
-
-  logger.debug(aggregatedFeed.posts[0].title);
 
   return aggregatedFeed;
 }
@@ -48,7 +42,7 @@ export async function getGhostFeed(apiKey: string, maxPosts: number): Promise<Bl
     reject(err);
   }
 
-  const postsObj = res.data['posts'];
+  const postsObj = <Object> res.data['posts'];
 
   if (postsObj) {
     for (const post of Object.values(postsObj)) {
@@ -94,8 +88,6 @@ export async function getMediumFeed(username: string, maxPosts: number): Promise
   const mediumFeed: BlogFeed = {
     posts: []
   };
-
-  logger.debug(username);
 
   const [err, res] = await to(axios.get(`${MEDIUM_URL}${username}/latest?format=json`));
   if (err) {
