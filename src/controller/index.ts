@@ -6,7 +6,7 @@ import { logger } from '../logging';
 import { config } from '../config';
 import { Response, Message } from '../interfaces';
 import { contactMailer } from '../mailer';
-import { getFeed } from '../medium';
+import { getAggregatedFeed } from '../blog';
 import { getUserReposWithStars } from '../github';
 
 const contactFormSchema = Joi.object().keys({
@@ -45,7 +45,7 @@ function validateData(data: Object, schema: Joi.ObjectSchema): Message[] {
 }
 
 export async function renderIndex (ctx: IRouterContext) {
-  const feed = await getFeed(config.mediumUser, config.maxBlogPosts);
+  const feed = await getAggregatedFeed(config.maxBlogPosts);
   let posts = feed.posts;
   if (posts.length < 1) {
     posts = undefined;
@@ -61,7 +61,7 @@ export async function renderIndex (ctx: IRouterContext) {
   await ctx.render('index', {
     year: year,
     csrfToken: ctx.csrf, // Add a CSRF token for the contact form request
-    mediumPosts: posts,
+    blogPosts: posts,
     githubRepos: repositories
   });
 }

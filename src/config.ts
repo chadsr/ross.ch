@@ -12,6 +12,8 @@ export interface IConfig {
     emailPassword: string;
     emailAddress: string;
     mediumUser: string;
+    ghostUrl: string;
+    ghostPublicApiKey: string;
     maxBlogPosts: number;
     githubUser: string;
     maxRepos: number;
@@ -25,6 +27,8 @@ const config: IConfig = {
     emailHost: process.env.EMAIL_HOST || 'localhost',
     emailPassword: process.env.EMAIL_PASSWORD || 'secret',
     emailAddress: process.env.EMAIL_ADDRESS || 'foo@bar.com',
+    ghostUrl: process.env.GHOST_URL || 'https://blog.ross.ch',
+    ghostPublicApiKey: process.env.GHOST_PUB_KEY || '8c55bff1844399dad7ce341607',
     mediumUser: process.env.MEDIUM_USER || '@medium',
     maxBlogPosts: parseInt(process.env.MAX_POSTS) || 20,
     githubUser: process.env.GITHUB_USER || 'Chadsr',

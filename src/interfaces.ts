@@ -8,17 +8,18 @@ export interface Response {
   messages: Message[];
 }
 
-export interface MediumPost {
+export interface BlogPost {
   title: string;
   url: string;
   publishDate: string;
+  publishTimestamp: number; // Publish date in milis (UNIX timestamp)
   creator?: string;
   contentSnippet: string;
   tags: string[];
 }
 
-export interface MediumFeed {
-  posts: MediumPost[];
+export interface BlogFeed {
+  posts: BlogPost[];
 }
 
 export interface Repository {
