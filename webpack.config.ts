@@ -131,7 +131,12 @@ module.exports = {
     }),
     new WebappWebpackPlugin({
       logo: join(imagesDir, 'favicon.png'),
-      inject: true
+      inject: true,
+      favicons: {
+        icons: {
+          appleIcon: false
+        }
+      }
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[hash].css',
