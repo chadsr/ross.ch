@@ -7,6 +7,7 @@ import ImageminPlugin from 'imagemin-webpack-plugin';
 import * as imageminMozjpeg from 'imagemin-mozjpeg';
 import * as WriteFilePlugin from 'write-file-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import WebpackDeepScopeAnalysisPlugin from 'webpack-deep-scope-plugin';
 
 import { config } from './src/config';
 
@@ -22,7 +23,6 @@ const nodeEnv = process.env.NODE_ENV || 'development';
 
 module.exports = {
   mode: nodeEnv,
-  devtool: 'inline-source-map',
   entry: [join(jsDir, 'main')],
   output: {
     path: publicDir,
@@ -108,6 +108,7 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new WebpackDeepScopeAnalysisPlugin(),
     new WriteFilePlugin({ // We need the files in dev mode due to handlebars partial...
       test:  /\.hbs$/
     }),

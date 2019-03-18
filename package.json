@@ -4,13 +4,14 @@
   "description": "ross.ch website",
   "main": "dist/server.js",
   "author": "Ross Chadwick",
+  "sideEffects": false,
   "private": true,
   "scripts": {
     "dev": " NODE_ENV=development nodemon --watch '*' -e ts,tsx --exec ./node_modules/.bin/ts-node src/server.ts",
     "lint": "./node_modules/.bin/tslint -c tslint.json -p tsconfig.json",
     "serve": "node --trace-deprecation dist/src/server.js",
-    "webpack": "./node_modules/.bin/webpack --config ./webpack.config.ts",
-    "build": "npm run lint && ./node_modules/.bin/tsc && npm run webpack && ./node_modules/.bin/ts-node copyStaticAssets.ts",
+    "webpack": "NODE_ENV=production ./node_modules/.bin/webpack --config ./webpack.config.ts",
+    "build": "npm run lint && ./node_modules/.bin/tsc && npm run webpack --display-used-exports && ./node_modules/.bin/ts-node copyStaticAssets.ts",
     "start": "NODE_ENV=production npm run serve"
   },
   "engines": {
@@ -86,6 +87,7 @@
     "typescript": "^3.3.3333",
     "webapp-webpack-plugin": "^2.6.1",
     "webpack": "^4.29.6",
+    "webpack-deep-scope-plugin": "^1.6.0",
     "winston": "^3.2.1",
     "write-file-webpack-plugin": "^4.5.0"
   }
