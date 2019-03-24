@@ -9,7 +9,7 @@ ross.ch, www.ross.ch {
 
     header / {
         Strict-Transport-Security "max-age=31536000; includeSubDomains"
-        Content-Security-Policy "default-src 'self'; script-src https: 'self' 'unsafe-inline'; style-src https: 'self' 'unsafe-inline';"
+        Content-Security-Policy "default-src 'self'; script-src https: 'self'; style-src https: 'self' 'unsafe-inline';"
         X-Frame-Options SAMEORIGIN
         X-XSS-Protection "1; mode=block"
         X-Content-Type-Options nosniff
@@ -27,7 +27,7 @@ blog.ross.ch, www.blog.ross.ch {
 
     header / {
         Strict-Transport-Security "max-age=31536000; includeSubDomains"
-        default-src 'self'; script-src https: 'self' https: 'code.jquery.com' 'unsafe-inline'; style-src https: 'self' 'unsafe-inline';
+        Content-Security-Policy "default-src 'self'; script-src https: 'self' https: 'code.jquery.com'; style-src https: 'self' 'unsafe-inline';"
         X-Frame-Options SAMEORIGIN
         X-XSS-Protection "1; mode=block"
         X-Content-Type-Options nosniff
