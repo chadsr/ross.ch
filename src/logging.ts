@@ -8,6 +8,8 @@ const logger = createLogger({
     // Write errors to error.log
     new transports.File({ filename: 'error.log', level: 'error' }),
 
+    new transports.File({ filename: 'debug.log', level: 'debug' }),
+
     // Write colourised logs to console, according to the given level value
     new transports.Console({ format: format.combine(
       format.colorize(),
