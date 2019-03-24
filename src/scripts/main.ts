@@ -77,6 +77,18 @@ document.addEventListener('DOMContentLoaded', function() {
         rotateTo(4);
     });
 
+    const ethAddress = <HTMLTextAreaElement>document.getElementById('eth-addr');
+    ethAddress.addEventListener('click', function() {
+        this.focus();
+        this.select();
+    });
+
+    const btcAddress = <HTMLTextAreaElement>document.getElementById('btc-addr');
+    btcAddress.addEventListener('click', function() {
+        this.focus();
+        this.select();
+    });
+
     // Trigger the resize event, so the cube can center on page load
     window.dispatchEvent(new Event('resize'));
 });
