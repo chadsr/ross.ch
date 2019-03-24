@@ -18,34 +18,29 @@ services:
     networks:
       - default
 
-  webserver:
-    image: nginx:mainline-alpine
-    container_name: webserver
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
+  caddy:
+    build:
+        context: github.com/abiosoft/caddy-docker.git
+        dockerfile: Dockerfile-no-stats
+        args:
+          - plugins=git,cloudflare
+    restart: always
     volumes:
-      - web-root:/var/www/html:rw,z
-      - ./nginx-conf:/etc/nginx/conf.d:rw,z
-      - /ross.ch/certbot:/etc/letsencrypt:rw,z
-      - certbot-var:/var/lib/letsencrypt:rw,z
-      - /ross.ch/dhparam:/etc/ssl/certs:rw,z
-    depends_on:
-      - webapp
+      - ./Caddyfile:/etc/Caddyfile:ro
+      - /ross.ch/caddycerts:/etc/caddycerts:z,rw
+      - web-root:/var/www/html:ro,z
+    environment:
+      - ENABLE_TELEMETRY=false
+    ports:
+      - 80:80 # needed for Let's Encrypt
+      - 443:443
     networks:
       - default
-
-  certbot:
-    image: certbot/certbot
-    container_name: certbot
-    volumes:
-      - /ross.ch/certbot:/etc/letsencrypt:rw,z
-      - certbot-var:/var/lib/letsencrypt:rw,z
-      - web-root:/var/www/html:rw,z
-    depends_on:
-      - webserver
-    command: certonly --webroot --webroot-path=/var/www/html --email hello@rchadwick.co.uk --agree-tos --no-eff-email --force-renewal -d ross.ch  -d www.ross.ch -d blog.ross.ch -d www.blog.ross.ch 
+    env_file:
+      - .config.env
+    environment:
+      CADDYPATH: "/etc/caddycerts"
+      ACME_AGREE: "true"
 
   ghost:
     image: ghost:alpine
