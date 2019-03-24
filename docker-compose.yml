@@ -15,6 +15,8 @@ services:
     restart: unless-stopped
     volumes:
       - web-root:/usr/src/ross.ch/dist/public:rw,z
+      - ./error.log:/usr/src/ross.ch/error.log:rw,Z
+      - ./debug.log:/usr/src/ross.ch/debug.log:rw,Z
     networks:
       - default
 
