@@ -1,34 +1,34 @@
 #Caddyfile
 
-mime {
-    .js application/javascript
-    .css text/css
-    .pdf application/pdf
-    .json application/json
-    .jsonld application/ld+json
-    .vcard text/vcard
-    .vcf text/vcard
-    .txt text/plain
-    .ico image/x-icon
-    .bmp image/bmp
-    .gif image/gif
-    .jpeg image/jpeg
-    .jpg image/jpeg
-    .png image/png
-    .svg image/svg+xml
-    .svgz image/svg+xml
-    .rss application/rss+xml
-    .geojson application/vnd.geo+json
-    .rdf application/xml
-    .xml application/xml
-}
-
 ross.ch, www.ross.ch {
     gzip
     root /var/www/html
 
     tls {
         dns cloudflare
+    }
+
+    mime {
+        .js application/javascript
+        .css text/css
+        .pdf application/pdf
+        .json application/json
+        .jsonld application/ld+json
+        .vcard text/vcard
+        .vcf text/vcard
+        .txt text/plain
+        .ico image/x-icon
+        .bmp image/bmp
+        .gif image/gif
+        .jpeg image/jpeg
+        .jpg image/jpeg
+        .png image/png
+        .svg image/svg+xml
+        .svgz image/svg+xml
+        .rss application/rss+xml
+        .geojson application/vnd.geo+json
+        .rdf application/xml
+        .xml application/xml
     }
 
     header / {
@@ -51,9 +51,32 @@ blog.ross.ch, www.blog.ross.ch {
 
     gzip
 
+    mime {
+        .js application/javascript
+        .css text/css
+        .pdf application/pdf
+        .json application/json
+        .jsonld application/ld+json
+        .vcard text/vcard
+        .vcf text/vcard
+        .txt text/plain
+        .ico image/x-icon
+        .bmp image/bmp
+        .gif image/gif
+        .jpeg image/jpeg
+        .jpg image/jpeg
+        .png image/png
+        .svg image/svg+xml
+        .svgz image/svg+xml
+        .rss application/rss+xml
+        .geojson application/vnd.geo+json
+        .rdf application/xml
+        .xml application/xml
+    }
+
     header / {
         Strict-Transport-Security "max-age=31536000; includeSubDomains"
-        Content-Security-Policy "default-src 'self'; script-src https: 'self' https: 'code.jquery.com'; style-src https: 'self' 'unsafe-inline';"
+        Content-Security-Policy "default-src 'self'; script-src https: 'self' 'unsafe-inline'; style-src https: 'self' 'unsafe-inline';"
         X-Frame-Options SAMEORIGIN
         X-XSS-Protection "1; mode=block"
         X-Content-Type-Options nosniff
