@@ -8,7 +8,6 @@ src/views/partials/webpack.hbs
 package-lock.json
 
 *.env
-!.config.env
 
 # Logs
 logs
