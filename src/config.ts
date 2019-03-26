@@ -9,8 +9,9 @@ export interface IConfig {
     debugLogging: boolean;
     sessionKey: string;
     emailHost: string;
-    emailPassword: string;
-    emailAddress: string;
+    sendEmailPassword: string;
+    sendEmailAddress: string;
+    recvEmailAddress: string;
     mediumUser: string;
     ghostUrl: string;
     ghostPublicApiKey: string;
@@ -25,8 +26,9 @@ const config: IConfig = {
     title: process.env.TITLE || 'Ross Chadwick',
     sessionKey: process.env.SESSION_KEY || random('*', 32),
     emailHost: process.env.EMAIL_HOST || 'localhost',
-    emailPassword: process.env.EMAIL_PASSWORD || 'secret',
-    emailAddress: process.env.EMAIL_ADDRESS || 'foo@bar.com',
+    sendEmailPassword: process.env.SENDER_EMAIL_PASSWORD || 'secret',
+    sendEmailAddress: process.env.SENDER_EMAIL_ADDRESS || 'foo@bar.com',
+    recvEmailAddress: process.env.RECV_EMAIL_ADDRESS || 'foo@bar.com',
     ghostUrl: process.env.GHOST_URL || 'https://blog.ross.ch',
     ghostPublicApiKey: process.env.GHOST_PUB_KEY || '8c55bff1844399dad7ce341607',
     mediumUser: process.env.MEDIUM_USER || '@medium',

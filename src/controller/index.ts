@@ -5,7 +5,7 @@ import * as Joi from 'joi';
 import { logger } from '../logging';
 import { config } from '../config';
 import { Response, Message } from '../interfaces';
-import { contactMailer } from '../mailer';
+import { contactMailer, Email } from '../mailer';
 import { getAggregatedFeed } from '../blog';
 import { getUserReposWithStars } from '../github';
 
@@ -77,16 +77,15 @@ export async function handleContactForm (ctx: IRouterContext) {
     return;
   }
 
-  const fromAddress = <string>ctx.request.body.email;
-  const name = <string>ctx.request.body.name;
-  const message = <string>ctx.request.body.msg;
-  const remoteIp = <string>ctx.request.ip;
+  // Construct email object from the request body
+  const formEmail = <Email>{
+    senderName: ctx.request.body.name,
+    senderAddress: ctx.request.body.email,
+    senderIP: ctx.request.ip,
+    text: ctx.request.body.message
+  };
 
-  // Construct the email from the request body
-  const subject = `Ross.ch - New message from ${name} (${remoteIp})`;
-  const text = `Name: ${name}</br>IP: ${remoteIp}</br></br>Message:${message}`;
-
-  const [ err ] = await to(contactMailer.send(fromAddress, config.emailAddress, subject, text));
+  const [ err ] = await to(contactMailer.send(config.sendEmailAddress, config.recvEmailAddress, formEmail));
   if (err) {
     // Return a 503 error if we couldn't deliver the email for some reason
     logger.error('Could not send contact form email:', err);

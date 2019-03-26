@@ -98,6 +98,8 @@ export default class ContactForm {
       message: message,
     };
 
+    this._formSubmitBtn.innerHTML = 'Sending...';
+
     axios({
       method: 'POST',
       url: '/',
