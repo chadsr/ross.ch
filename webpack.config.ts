@@ -115,6 +115,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: join(partialsDir, 'head.hbs'),
       title: config.title,
+      meta: {
+        description: config.description
+      },
       inject: 'head',
       filename: join(partialsDir, 'webpack.hbs') // Write the handlebars to the partials dir instead of public
     }),
