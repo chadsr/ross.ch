@@ -10,7 +10,7 @@ import { getAggregatedFeed } from '../blog';
 import { getUserReposWithStars } from '../github';
 
 const contactFormSchema = Joi.object().keys({
-  name: Joi.string().alphanum().min(2).max(32).required().error(() => 'Name is a little short...'),
+  name: Joi.string().min(2).max(32).required().error(() => 'Name is a little short...'),
   email: Joi.string().email(({ minDomainAtoms: 2 })).required().error(() => 'Email looks invalid :('),
   message: Joi.string().min(2).required().error(() => 'Message is a little short...')
 });
