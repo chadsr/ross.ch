@@ -29,6 +29,8 @@ ross.ch, www.ross.ch {
         .geojson application/vnd.geo+json
         .rdf application/xml
         .xml application/xml
+        .woff font/woff
+        .woff2 font/woff2
     }
 
     header / {
