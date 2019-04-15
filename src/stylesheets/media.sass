@@ -8,24 +8,44 @@ $bp-larger-than-desktophd : "min-width: 1200px" !default
 @mixin cubeTransform($size)
     .perspective
         perspective: $size * 2
-
-    #mainCube
+        
+    #content.perspective 
+        perspective-origin: 50% $size/2
+    
+    #content-cube
         width: $size
         height: $size
 
-        transform-origin: ($size/2) ($size/2) (-$size/2)
+        transform-origin: ($size/2) ($size/2) 0
+        transform: translateZ(-$size/2)
+
+        &.rotate
+            &-0
+                transform: rotateY(0deg) translateZ(-$size/2)
+            &-1
+                transform: rotateY(-90deg) translateZ(-$size/2)
+            &-2
+                transform: rotateY(-180deg) translateZ(-$size/2)
+            &-3
+                transform: rotateY(-270deg) translateZ(-$size/2)
+            &-4
+                transform: rotateX(-270deg) translateZ(-$size/2)
+            &-5
+                transform: rotateX(-90deg) translateZ(-$size/2)
 
         >
             .top
-                transform: rotateX(90deg) translate3d(0, -$size/2, $size/2)
+                transform: rotateX(90deg) translateZ($size/2)
+            .front
+                transform: translateZ($size/2)
             .bottom
-                transform: rotateX(-90deg) translate3d(0, $size/2, $size/2)
+                transform: rotateX(-90deg) translateZ($size/2)
             .left
-                transform: rotateY(-90deg) translate3d(-$size/2, 0, $size/2)
+                transform: rotateY(-90deg) translateZ($size/2)
             .right
-                transform: rotateY(90deg) translate3d($size/2, 0, $size/2)
+                transform: rotateY(90deg) translateZ($size/2)
             .back
-                transform: rotateY(180deg) translate3d(0, 0, $size)
+                transform: rotateY(180deg) translateZ($size/2)
 
 @mixin elasticNav()
     nav

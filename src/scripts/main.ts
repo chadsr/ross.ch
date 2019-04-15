@@ -17,7 +17,7 @@ const RIGHT_ARROW = 39;
 // Needs a long debounce to cover for slow CSS transitions
 const DEBOUNCE_MS = 2000;
 
-const CUBE_ID = 'mainCube';
+const CUBE_ID = 'content-cube';
 const MAIN_CONTENT_ID = 'content';
 const CONTACT_FORM_ID = 'contact-form';
 
@@ -28,8 +28,10 @@ const SVG_ID = 'isobg';
 const CUBE_SIZE = 200; // Size of a side in px (if in a 'true' 3d space)
 const INNER_ANGLE = 60;
 
-// The currently facing side of the mainCube
-let currentSide = 1;
+const MIN_SIDE = 0;
+const MAX_SIDE = 3;
+// The currently facing side of the content-cube
+let currentSide = MIN_SIDE;
 
 document.addEventListener('DOMContentLoaded', function() {
     // Remove the class controlling styles when javascript is disabled
@@ -50,31 +52,31 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Register contact form submit event
-    const contactForm = document.getElementById(CONTACT_FORM_ID);
+    const contactForm = <HTMLFormElement>document.getElementById(CONTACT_FORM_ID);
     const contactHandler = new ContactForm(CONTACT_FORM_ID);
     contactForm.addEventListener('submit', function(e) {
         contactHandler.submit(e);
     });
 
     // Menu cube rotate events
-    const aboutButton = document.getElementById('about-btn');
+    const aboutButton = <HTMLLIElement>document.getElementById('about-btn');
     aboutButton.addEventListener('mousedown', function() {
+        rotateTo(0);
+    });
+
+    const projectsButton = <HTMLLIElement>document.getElementById('projects-btn');
+    projectsButton.addEventListener('mousedown', function() {
         rotateTo(1);
     });
 
-    const projectsButton = document.getElementById('projects-btn');
-    projectsButton.addEventListener('mousedown', function() {
+    const blogButton = <HTMLLIElement>document.getElementById('blog-btn');
+    blogButton.addEventListener('mousedown', function() {
         rotateTo(2);
     });
 
-    const blogButton = document.getElementById('blog-btn');
-    blogButton.addEventListener('mousedown', function() {
-        rotateTo(3);
-    });
-
-    const contactButton = document.getElementById('contact-btn');
+    const contactButton = <HTMLLIElement>document.getElementById('contact-btn');
     contactButton.addEventListener('mousedown', function() {
-        rotateTo(4);
+        rotateTo(3);
     });
 
     const ethAddress = <HTMLTextAreaElement>document.getElementById('eth-addr');
@@ -94,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('keydown', function(event) {
-    const activeElement = document.activeElement;
+    const activeElement = <HTMLElement>document.activeElement;
     const inputs = ['input', 'select', 'button', 'textarea'];
 
     // Only allow keypresses to rotate when active element is not an input element
@@ -108,7 +110,7 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-function debounce(func, time) {
+function debounce(func: Function, time: number) {
     time = time || 100; // 100 by default if no param
     let timer;
     return function(event) {
@@ -119,7 +121,8 @@ function debounce(func, time) {
 
 window.addEventListener('resize', debounce(function(event) {
     const cube = document.getElementById(CUBE_ID);
-    const cubePosition = cube.getBoundingClientRect();
+    const cubeFront = cube.getElementsByClassName('focus')[0];
+    const cubePosition = cubeFront.getBoundingClientRect();
     const mainContent = document.getElementById(MAIN_CONTENT_ID);
     const mainContentPosition = mainContent.getBoundingClientRect();
     const header = document.querySelector('header');
@@ -136,36 +139,8 @@ function renderBackground() {
     EscherCubes.render(BG_CONTAINER_Id, SVG_ID, 0, BG_Y_OFFSET, CUBE_SIZE, INNER_ANGLE);
 }
 
-function rotateTo(side) {
-    let degrees, focus;
-
-    if (side != currentSide) {
-        switch (side) {
-            case 1:
-            degrees = 0;
-            focus = 'front';
-            break;
-
-            case 2:
-            degrees = -90;
-            focus = 'right';
-            break;
-
-            case 3:
-            degrees = -180;
-            focus = 'back';
-            break;
-
-            case 4:
-            degrees = -270;
-            focus = 'left';
-            break;
-
-            default:
-            return false;
-        }
-
-        // TODO: cleanup a little
+function rotateTo(side: number) {
+    if (side != currentSide && side >= MIN_SIDE && side <= MAX_SIDE) {
         currentSide = side;
         const nav = document.getElementById('nav');
         const navList = nav.getElementsByTagName('ul')[0];
@@ -176,15 +151,19 @@ function rotateTo(side) {
         selected.classList.remove('selected');
 
         const cube = document.getElementById(CUBE_ID);
-
-        // Remove the focus class from the focused cube face
+        // Remove the focus class from the old focused cube face
         const focusSide = cube.querySelector('.focus');
         focusSide.classList.remove('focus');
 
-        // Transform the cube by the given degree using CSS Transform
-        cube.style.transform = 'rotateY(' + degrees + 'deg)';
-        navListElements[side - 1].classList.add('selected');
-        cube.querySelector('.' + focus).classList.add('focus');
+        // Add classes to menu and cube face to indicate focus
+        navListElements[side].classList.add('selected');
+        const faces = cube.children;
+        faces[side].classList.add('focus');
+
+        // Construct a regex to match any existing classname from the rotate classes (A little overkill)
+        const re = new RegExp(`rotate-[${MIN_SIDE}-${MAX_SIDE}]`, 'g');
+        // Replace the existing class with one matching the newly focused side (While preserving any other classes)
+        cube.className = cube.className.replace(re, 'rotate-' + side.toString());
 
         return true;
     }
