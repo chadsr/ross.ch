@@ -34,9 +34,7 @@ $url-macula: url('../fonts/Macula-Solid.woff')
 
 // Fonts
 $font-macula: 'Macula'
-$font-opensans: 'Open Sans'
-$sans-serif: 'sans-serif'
-$serif: 'serif'
+$font-main: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace
 
 $width-full-button: 125px
 $width-icon-button: 50px
@@ -49,7 +47,7 @@ $width-icon-button: 50px
 
 // Extends
 %heading
-    font-family: $font-macula, $serif
+    font-family: $font-macula, serif
     text-transform: uppercase
     margin: 0 0 32px 0
     display: inline-block
@@ -145,7 +143,7 @@ $width-icon-button: 50px
 // Main styles
 *
     tap-highlight-color: rgba(0, 0, 0, 0)
-    font-family: $font-opensans, $sans-serif
+    font-family: $font-main
     @extend %no-select
 
 ::selection
