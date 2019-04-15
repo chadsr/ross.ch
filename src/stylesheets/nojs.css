@@ -101,6 +101,10 @@ body.nojs-styles .content li {
   float: left;
 }
 
+body.nojs-styles #contact-form {
+  display: none;
+}
+
 body.nojs-styles input, body.nojs-styles textarea {
   width: 100%;
   max-width: 500px;
@@ -120,7 +124,7 @@ body.nojs-styles .face {
 body.nojs-styles .face .content ul > li::before {
   font-family: "Macula", "serif";
   content: '>';
-  font-size: 5vmin;
+  font-size: 48px;
   float: left;
   line-height: 24px;
   margin-right: 10px;
