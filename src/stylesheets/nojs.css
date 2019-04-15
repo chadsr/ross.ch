@@ -1,5 +1,12 @@
 /* A stylesheet that is used only when Javascript is disabled */
 
+@font-face {
+  font-family: "Macula";
+  src: url("fonts/Macula-Solid.woff") format('woff');
+  font-style: normal;
+  font-weight: bold;
+}
+
 html {
   margin: 0;
   padding: 0;
@@ -8,7 +15,7 @@ html {
 
 body.nojs-styles {
   color: white;
-  font: 1.2rem Inconsolata, monospace;
+  font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
   text-shadow: 0 0 5px #C8C8C8;
   background-color: black;
   background-image: radial-gradient( rgba(31, 60, 86, 0.75), black 120% );
@@ -59,12 +66,6 @@ body.nojs-styles fieldset {
   border: none;
   margin: 0;
   padding: 0;
-}
-
-@font-face {
-  font-family: "Macula";
-  src: url("../fonts/Macula-Solid.woff") format('woff');
-  font-weight: bold;
 }
 
 body.nojs-styles h1 {
