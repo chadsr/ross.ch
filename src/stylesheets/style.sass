@@ -30,8 +30,6 @@ $url-twitter: url('../images/icons/icon_twitter.png')
 $url-linkedin: url('../images/icons/icon_linkedin.png')
 $url-keybase: url('../images/icons/icon_keybase.png')
 
-$url-macula: url('../fonts/Macula-Solid.woff')
-
 // Fonts
 $font-macula: 'Macula'
 $font-main: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace
@@ -43,7 +41,9 @@ $width-icon-button: 50px
     font-family: $font-macula
     font-style: normal
     font-weight: bold
-    src: $url-macula format('woff')
+    src: url('../fonts/Macula-Solid.woff') format('woff')
+    src: url('../fonts/Macula-Solid.woff2') format('woff2')
+
 
 // Extends
 %heading
