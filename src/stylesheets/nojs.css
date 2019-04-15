@@ -50,7 +50,7 @@ body.nojs-styles .repo-stars::after {
   content: '\2605';
 }
 
-body.nojs-styles header, body.nojs-styles #crypto {
+body.nojs-styles header, body.nojs-styles #crypto, body.nojs-styles #contact {
   display: none;
 }
 
@@ -100,10 +100,6 @@ body.nojs-styles .content li {
   margin: 12px 0;
   width: 100%;
   float: left;
-}
-
-body.nojs-styles #contact-form {
-  display: none;
 }
 
 body.nojs-styles input, body.nojs-styles textarea {
