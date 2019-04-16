@@ -18,6 +18,7 @@ const RIGHT_ARROW = 39;
 const DEBOUNCE_MS = 2000;
 
 const CUBE_ID = 'content-cube';
+const CUBE_WRAPPER_ID = 'content-cube-wrapper';
 const MAIN_CONTENT_ID = 'content';
 const CONTACT_FORM_ID = 'contact-form';
 
@@ -33,9 +34,13 @@ const MAX_SIDE = 3;
 // The currently facing side of the content-cube
 let currentSide = MIN_SIDE;
 
+let isSafari; // We need to apply a hack to safari, to fix 3d transforms, so this is used based on the browser's useragent
+
 document.addEventListener('DOMContentLoaded', function() {
     // Remove the class controlling styles when javascript is disabled
     document.body.classList.remove('nojs-styles');
+
+    isSafari = navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1;
 
     const swipe = new Hammer(document.body, {
         recognizers: [
@@ -110,6 +115,19 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
+// The cube should be rendering at the exact same size and the style sheet states. Some browser LIKE SAFARI, act differently on transform-origin and screw this up.
+// This is therefore a Safari/IOS hack to correct the size of the cube
+function fixTranslateZ() {
+    // Get the computed CSS size (width since it's a cube) of the cube
+    const cube = <HTMLDivElement>document.getElementById(CUBE_ID);
+    const cubeStyles = getComputedStyle(cube);
+
+    // Apply this value to the translateZ function of the cube's wrapper container
+    const cubeWrapper = document.getElementById(CUBE_WRAPPER_ID);
+    cubeWrapper.style.transform = `translateZ(-${cubeStyles.width})`;
+    cubeWrapper.style.webkitTransform = `translateZ(-${cubeStyles.width})`;
+}
+
 function debounce(func: Function, time: number) {
     time = time || 100; // 100 by default if no param
     let timer;
@@ -118,6 +136,12 @@ function debounce(func: Function, time: number) {
         timer = setTimeout(func, time, event);
     };
 }
+
+window.addEventListener('resize', function(event) {
+    if (isSafari) {
+        fixTranslateZ();
+    }
+});
 
 window.addEventListener('resize', debounce(function(event) {
     const cube = document.getElementById(CUBE_ID);
@@ -130,7 +154,7 @@ window.addEventListener('resize', debounce(function(event) {
     const footer = document.querySelector('footer');
     const footerPosition = footer.getBoundingClientRect();
 
-    cube.style.top = Math.round((mainContentPosition.height + headerPosition.height - footerPosition.height - cubePosition.height) / 2) + 'px';
+    cube.style.top = `${Math.round((mainContentPosition.height + headerPosition.height - footerPosition.height - cubePosition.height) / 2)}px`;
 
     renderBackground();
 }, DEBOUNCE_MS));
@@ -163,7 +187,7 @@ function rotateTo(side: number) {
         // Construct a regex to match any existing classname from the rotate classes (A little overkill)
         const re = new RegExp(`rotate-[${MIN_SIDE}-${MAX_SIDE}]`, 'g');
         // Replace the existing class with one matching the newly focused side (While preserving any other classes)
-        cube.className = cube.className.replace(re, 'rotate-' + side.toString());
+        cube.className = cube.className.replace(re, `rotate-${side}`);
 
         return true;
     }

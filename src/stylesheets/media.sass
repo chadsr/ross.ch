@@ -8,30 +8,29 @@ $bp-larger-than-desktophd : "min-width: 1200px" !default
 @mixin cubeTransform($size)
     .perspective
         perspective: $size * 2
-        
-    #content.perspective 
+
+    #content-cube-wrapper
         perspective-origin: 50% $size/2
-    
+        transform-origin: 50% 50% (-$size/2)
+        transform: translateZ(-$size/2)
+
     #content-cube
         width: $size
         height: $size
 
-        transform-origin: ($size/2) ($size/2) (-$size/2)
-        transform: translateZ(-$size/2)
-
         &.rotate
             &-0
-                transform: rotateY(0deg) translateZ(-$size/2)
+                transform: rotateY(0deg)
             &-1
-                transform: rotateY(-90deg) translateZ(-$size/2)
+                transform: rotateY(-90deg)
             &-2
-                transform: rotateY(-180deg) translateZ(-$size/2)
+                transform: rotateY(-180deg)
             &-3
-                transform: rotateY(-270deg) translateZ(-$size/2)
+                transform: rotateY(-270deg)
             &-4
-                transform: rotateX(-270deg) translateZ(-$size/2)
+                transform: rotateX(-270deg)
             &-5
-                transform: rotateX(-90deg) translateZ(-$size/2)
+                transform: rotateX(-90deg)
 
         >
             .top
