@@ -137,13 +137,11 @@ function debounce(func: Function, time: number) {
     };
 }
 
-window.addEventListener('resize', function(event) {
+window.addEventListener('resize', debounce(function(event) {
     if (isSafari) {
         fixTranslateZ();
     }
-});
 
-window.addEventListener('resize', debounce(function(event) {
     const cube = document.getElementById(CUBE_ID);
     const cubeHeight = parseInt(getComputedStyle(cube).height, 10); // Get an int value from the style height string
 
