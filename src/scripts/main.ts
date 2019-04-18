@@ -145,8 +145,8 @@ window.addEventListener('resize', function(event) {
 
 window.addEventListener('resize', debounce(function(event) {
     const cube = document.getElementById(CUBE_ID);
-    const cubeFront = cube.getElementsByClassName('focus')[0];
-    const cubePosition = cubeFront.getBoundingClientRect();
+    const cubeHeight = parseInt(getComputedStyle(cube).height, 10); // Get an int value from the style height string
+
     const mainContent = document.getElementById(MAIN_CONTENT_ID);
     const mainContentPosition = mainContent.getBoundingClientRect();
     const header = document.querySelector('header');
@@ -154,7 +154,8 @@ window.addEventListener('resize', debounce(function(event) {
     const footer = document.querySelector('footer');
     const footerPosition = footer.getBoundingClientRect();
 
-    cube.style.top = `${Math.round((mainContentPosition.height + headerPosition.height - footerPosition.height - cubePosition.height) / 2)}px`;
+    // calculate the distance from the top needed in order to center the cube and apply it as the 'top' attribute of the cube
+    cube.style.top = `${Math.round((mainContentPosition.height + headerPosition.height - footerPosition.height - cubeHeight) / 2)}px`;
 
     renderBackground();
 }, DEBOUNCE_MS));
