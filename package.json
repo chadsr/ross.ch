@@ -12,7 +12,9 @@
     "serve": "node --trace-deprecation dist/src/server.js",
     "webpack": "NODE_ENV=production ./node_modules/.bin/webpack --config ./webpack.config.ts",
     "build": "npm run lint && ./node_modules/.bin/tsc && npm run webpack --display-used-exports && ./node_modules/.bin/ts-node copyStaticAssets.ts",
-    "start": "NODE_ENV=production npm run serve"
+    "start": "NODE_ENV=production npm run serve",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "engines": {
     "node": "8.x.x",
@@ -89,6 +91,8 @@
     "webpack": "^4.29.6",
     "webpack-deep-scope-plugin": "^1.6.0",
     "winston": "^3.2.1",
-    "write-file-webpack-plugin": "^4.5.0"
-  }
+    "write-file-webpack-plugin": "^4.5.0",
+    "snyk": "^1.161.1"
+  },
+  "snyk": true
 }
