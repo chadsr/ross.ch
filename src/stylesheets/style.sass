@@ -8,6 +8,7 @@ $color_main_light: rgba(31, 60, 86, 0.8)
 $color_content_dark: rgba(25, 40, 53, 0.8)
 $color_field_title: rgba(69, 83, 95, 0.8)
 $color_twitter: #00aced
+$color_mastodon: #3088d4
 $color_linkedin: #4875b4
 $color_github: #4183c4
 $color_bitcoin: #f7931a
@@ -27,6 +28,7 @@ $url-ethereum: url('../images/icons/icon_ethereum.png')
 $url-bitcoin: url('../images/icons/icon_bitcoin.png')
 $url-github: url('../images/icons/icon_github.png')
 $url-twitter: url('../images/icons/icon_twitter.png')
+$url-mastodon: url('../images/icons/icon_mastodon.png')
 $url-linkedin: url('../images/icons/icon_linkedin.png')
 $url-keybase: url('../images/icons/icon_keybase.png')
 
@@ -242,6 +244,13 @@ ul
                 a::before
                     @extend %button-icon
                     background-image: $url-twitter
+
+            &.mastodon
+                &:hover
+                    background: $color_mastodon
+                a::before
+                    @extend %button-icon
+                    background-image: $url-mastodon
 
             &.linkedin
                 &:hover
