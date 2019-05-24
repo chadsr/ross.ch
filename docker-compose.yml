@@ -21,16 +21,15 @@ services:
   caddy:
     build:
         context: github.com/abiosoft/caddy-docker.git
-        dockerfile: Dockerfile-no-stats
+        dockerfile: Dockerfile
         args:
-          - plugins=git,cloudflare
+          - plugins=git,cors,realip,expires,cache,cloudflare
+          - enable_telemetry=false
     restart: always
     volumes:
       - ./Caddyfile:/etc/Caddyfile:ro
       - /ross.ch/caddycerts:/etc/caddycerts:z,rw
       - web-root:/var/www/html:ro,z
-    environment:
-      - ENABLE_TELEMETRY=false
     ports:
       - 80:80 # needed for Let's Encrypt
       - 443:443
