@@ -63,12 +63,12 @@ module.exports = {
       },
       {
         test: /\.css$/,
-          use: [
-            {
-              loader: MiniCssExtractPlugin.loader
-            },
-            'css-loader',
-            'postcss-loader'
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          'css-loader',
+          'postcss-loader'
         ]
       },
       {
@@ -110,7 +110,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new WebpackDeepScopeAnalysisPlugin(),
     new WriteFilePlugin({ // We need the files in dev mode due to handlebars partial...
-      test:  /\.hbs$/
+      test: /\.hbs$/
     }),
     new HtmlWebpackPlugin({
       template: join(partialsDir, 'head.hbs'),
@@ -127,10 +127,10 @@ module.exports = {
         quality: '50-100'
       },
       plugins: [
-          imageminMozjpeg({
-            quality: 50
-          })
-        ]
+        imageminMozjpeg({
+          quality: 50
+        })
+      ]
     }),
     new WebappWebpackPlugin({
       logo: join(imagesDir, 'favicon.png'),
@@ -145,4 +145,5 @@ module.exports = {
       filename: '[name].[hash].css',
       chunkFilename: '[id].[hash].css',
     })
-]};
+  ]
+};
