@@ -1,11 +1,18 @@
 import axios, { AxiosResponse } from 'axios';
 
 import { Response, Message } from '../interfaces';
+import { errors } from '../errors';
+
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
 
 // A basic contact form class
 export default class ContactForm {
   private readonly _form: HTMLFormElement;
-  private readonly _formLabels: {[key: string]: HTMLLabelElement};
+  private readonly _formLabels: { [key: string]: HTMLLabelElement };
   private readonly _formSubmitBtn: HTMLButtonElement;
   private readonly _formPage: HTMLDivElement;
 
@@ -80,6 +87,44 @@ export default class ContactForm {
     this._form.reset();
   }
 
+  validateEmail(email: string): boolean {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
+  isFormDataValid(formData: FormData): boolean {
+    let valid = true;
+
+    // Invalid name
+    if (formData.name.length < 2 || formData.name.length > 32) {
+      const nameLabel = this._formLabels['name'];
+      nameLabel.innerHTML = errors.invalidName;
+      nameLabel.classList.add('error');
+      nameLabel.scrollIntoView();
+      valid = false;
+    }
+
+    // Invalid email address
+    if (!this.validateEmail(formData.email)) {
+      const emailLabel = this._formLabels['email'];
+      emailLabel.innerHTML = errors.invalidEmail;
+      emailLabel.classList.add('error');
+      emailLabel.scrollIntoView();
+      valid = false;
+    }
+
+    // Invalid message
+    if (formData.message.length < 2) {
+      const msgLabel = this._formLabels['message'];
+      msgLabel.innerHTML = errors.invalidMsg;
+      msgLabel.classList.add('error');
+      msgLabel.scrollIntoView();
+      valid = false;
+    }
+
+    return valid;
+  }
+
   submit(e) {
     e.preventDefault();
 
@@ -87,42 +132,43 @@ export default class ContactForm {
     this.resetLabels();
     this.resetSubmitButton();
 
-    const name: string = this._form.elements['name'].value;
-    const email: string = this._form.elements['email'].value;
-    const message: string = this._form.elements['message'].value;
     const csrfToken: string = this._form.elements['_csrf'].value;
 
-    const data = {
-      name: name,
-      email: email,
-      message: message,
+    const formData: FormData = {
+      name: this._form.elements['name'].value,
+      email: this._form.elements['email'].value,
+      message: this._form.elements['message'].value,
     };
 
-    this._formSubmitBtn.innerHTML = 'Sending...';
+    // Do some client-side validation and continue if it passes
+    if (this.isFormDataValid(formData) === true) {
+      this._formSubmitBtn.innerHTML = 'Sending...';
 
-    axios({
-      method: 'POST',
-      url: '/',
-      headers: {'X-CSRF-Token': csrfToken},
-      xsrfHeaderName: 'X-CSRF-Token',
-      xsrfCookieName: 'XSRF-TOKEN',
-      data: data
-    }).catch(error => {
-      let response;
-      if (!error.response) {
-        // We got no response, so construct a response message client-side
-        response = <Response>{
-          messages: [{
-            target: 'submit',
-            text: 'Server failure. Try later?'}]
-        };
-      } else {
-        response = error.response.data;
-      }
+      axios({
+        method: 'POST',
+        url: '/',
+        headers: { 'X-CSRF-Token': csrfToken },
+        xsrfHeaderName: 'X-CSRF-Token',
+        xsrfCookieName: 'XSRF-TOKEN',
+        data: formData
+      }).catch(error => {
+        let response;
+        if (!error.response) {
+          // We got no response, so construct a response message client-side
+          response = <Response>{
+            messages: [{
+              target: 'submit',
+              text: 'Server failure. Try later?'
+            }]
+          };
+        } else {
+          response = error.response.data;
+        }
 
-      this.handleResponse(response);
-    }).then(<AxiosResponse>(response) => {
-      this.handleResponse(response.data);
-    });
+        this.handleResponse(response);
+      }).then(<AxiosResponse>(response) => {
+        this.handleResponse(response.data);
+      });
+    }
   }
 }

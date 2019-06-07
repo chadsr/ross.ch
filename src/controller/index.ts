@@ -8,14 +8,15 @@ import { Response, Message } from '../interfaces';
 import { contactMailer, Email } from '../mailer';
 import { getAggregatedFeed } from '../blog';
 import { getUserReposWithStars } from '../github';
+import { errors } from '../errors';
 
 const contactFormSchema = Joi.object().keys({
-  name: Joi.string().min(2).max(32).required().error(() => 'Name is a little short...'),
-  email: Joi.string().email(({ minDomainAtoms: 2 })).required().error(() => 'Email looks invalid :('),
-  message: Joi.string().min(2).required().error(() => 'Message is a little short...')
+  name: Joi.string().min(2).max(32).required().error(() => errors.invalidName),
+  email: Joi.string().email(({ minDomainAtoms: 2 })).required().error(() => errors.invalidEmail),
+  message: Joi.string().min(2).required().error(() => errors.invalidMsg)
 });
 
-function getResponseObj(success: boolean, msg: (Message|Message[])): Response {
+function getResponseObj(success: boolean, msg: (Message | Message[])): Response {
   // If we were passed a single Message object, put it in an array for standardisation
   if (!Array.isArray(msg)) {
     msg = [msg];
@@ -29,7 +30,7 @@ function getResponseObj(success: boolean, msg: (Message|Message[])): Response {
 
 // Validated data objects against a Joi schema, returning errors in a Message[] format
 function validateData(data: Object, schema: Joi.ObjectSchema): Message[] {
-  const res = Joi.validate(data, schema, { abortEarly : false });
+  const res = Joi.validate(data, schema, { abortEarly: false });
   const errors: Message[] = [];
 
   if (res.error) {
@@ -44,7 +45,7 @@ function validateData(data: Object, schema: Joi.ObjectSchema): Message[] {
   return errors;
 }
 
-export async function renderIndex (ctx: IRouterContext) {
+export async function renderIndex(ctx: IRouterContext) {
   const feed = await getAggregatedFeed(config.maxBlogPosts);
   let posts = feed.posts;
   if (posts.length < 1) {
@@ -66,7 +67,7 @@ export async function renderIndex (ctx: IRouterContext) {
   });
 }
 
-export async function handleContactForm (ctx: IRouterContext) {
+export async function handleContactForm(ctx: IRouterContext) {
   logger.debug('Mail received:', ctx.request.body);
 
   const validationErrors = validateData(ctx.request.body, contactFormSchema);
@@ -85,7 +86,7 @@ export async function handleContactForm (ctx: IRouterContext) {
     text: ctx.request.body.message
   };
 
-  const [ err ] = await to(contactMailer.send(config.sendEmailAddress, config.recvEmailAddress, formEmail));
+  const [err] = await to(contactMailer.send(config.sendEmailAddress, config.recvEmailAddress, formEmail));
   if (err) {
     // Return a 503 error if we couldn't deliver the email for some reason
     logger.error('Could not send contact form email:', err);
