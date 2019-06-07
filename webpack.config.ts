@@ -1,6 +1,6 @@
 // webpack v4
 import { join, resolve } from 'path';
-import CleanWebpackPlugin from 'clean-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as WebappWebpackPlugin from 'webapp-webpack-plugin';
 import ImageminPlugin from 'imagemin-webpack-plugin';
