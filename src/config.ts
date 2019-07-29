@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv';
 import * as random from 'randomatic';
+import { join } from 'path';
 
 dotenv.config({ path: '.config.env' });
 
@@ -19,6 +20,9 @@ export interface IConfig {
     maxBlogPosts: number;
     githubUser: string;
     maxRepos: number;
+    emailTemplatePath: string;
+    emailConfirmationTemplatePath: string;
+    pgpKeyPath: string;
 }
 
 const config: IConfig = {
@@ -36,7 +40,10 @@ const config: IConfig = {
     mediumUser: process.env.MEDIUM_USER || '@medium',
     maxBlogPosts: parseInt(process.env.MAX_POSTS) || 20,
     githubUser: process.env.GITHUB_USER || 'Chadsr',
-    maxRepos: parseInt(process.env.MAX_REPOS) || 20
+    maxRepos: parseInt(process.env.MAX_REPOS) || 20,
+    emailTemplatePath: join(__dirname, 'views/email.hbs'),
+    emailConfirmationTemplatePath: join(__dirname, 'views/email_confirmation.hbs'),
+    pgpKeyPath: process.env.PGP_KEY_PATH || join(__dirname, 'assets/files/2B7340DB13C85766.asc')
 };
 
 export { config };

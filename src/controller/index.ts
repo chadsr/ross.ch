@@ -1,5 +1,4 @@
 import { IRouterContext } from 'koa-router';
-import to from 'await-to-js';
 import * as Joi from 'joi';
 
 import { logger } from '../logging';
@@ -82,25 +81,25 @@ export async function handleContactForm(ctx: IRouterContext) {
   const formEmail = <Email>{
     senderName: ctx.request.body.name,
     senderAddress: ctx.request.body.email,
-    senderIP: ctx.request.ip,
     text: ctx.request.body.message
   };
 
-  const [err] = await to(contactMailer.send(config.sendEmailAddress, config.recvEmailAddress, formEmail));
-  if (err) {
-    // Return a 503 error if we couldn't deliver the email for some reason
-    logger.error('Could not send contact form email:', err);
-    ctx.status = 503;
-    ctx.body = getResponseObj(false, {
-      text: 'Server failure. Try later?',
-      target: 'submit'
-    });
-  } else {
+  try {
+    await contactMailer.send(config.sendEmailAddress, config.recvEmailAddress, formEmail, true);
     // Return a 200 status and message
     logger.info('Contact form email sent!');
     ctx.status = 200;
     ctx.body = getResponseObj(true, {
       text: 'Success!',
+      target: 'submit'
+    });
+  }
+  catch (err) {
+    // Return a 503 error if we couldn't deliver the email for some reason
+    logger.error('Could not send contact form email:', err);
+    ctx.status = 503;
+    ctx.body = getResponseObj(false, {
+      text: 'Server failure. Try later?',
       target: 'submit'
     });
   }
