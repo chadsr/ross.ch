@@ -8,13 +8,17 @@ import * as imageminMozjpeg from 'imagemin-mozjpeg';
 import * as WriteFilePlugin from 'write-file-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import WebpackDeepScopeAnalysisPlugin from 'webpack-deep-scope-plugin';
+import * as CopyPlugin from 'copy-webpack-plugin';
+import * as PostcssPresetEnv from 'postcss-preset-env';
 
 import { config } from './src/config';
 
 const srcDir = resolve(__dirname, 'src');
 const publicDir = resolve(__dirname, 'public');
 const jsDir = join(srcDir, 'scripts');
-const imagesDir = join(srcDir, 'images');
+const assetsDir = join(srcDir, 'assets');
+const imagesDir = join(assetsDir, 'images');
+const filesDir = join(assetsDir, 'files');
 const viewsDir = join(srcDir, 'views');
 const partialsDir = join(viewsDir, 'partials');
 const helpersDir = join(viewsDir, 'helpers');
@@ -144,6 +148,10 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].[hash].css',
       chunkFilename: '[id].[hash].css',
-    })
+    }),
+    new PostcssPresetEnv(),
+    new CopyPlugin([
+      { from: filesDir, to: join(publicDir, 'files') },
+    ])
   ]
 };
