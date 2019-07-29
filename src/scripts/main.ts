@@ -26,8 +26,8 @@ const CONTACT_FORM_ID = 'contact-form';
 const BG_Y_OFFSET = -0.5; // Offset from y origin for the background rendering (so cube starts halfway offscreen)
 const BG_CONTAINER_Id = 'background';
 const SVG_ID = 'isobg';
-const CUBE_SIZE = 200; // Size of a side in px (if in a 'true' 3d space)
 const INNER_ANGLE = 60;
+const NUM_CUBES_Y = 5; // The number of cubes that will be rendered on the y axis (This dictates their size)
 
 const MIN_SIDE = 0;
 const MAX_SIDE = 3;
@@ -36,7 +36,7 @@ let currentSide = MIN_SIDE;
 
 let isSafari; // We need to apply a hack to safari, to fix 3d transforms, so this is used based on the browser's useragent
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Remove the class controlling styles when javascript is disabled
     document.body.classList.remove('nojs-styles');
 
@@ -44,54 +44,54 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const swipe = new Hammer(document.body, {
         recognizers: [
-            [Hammer.Swipe, {enable: true}]
+            [Hammer.Swipe, { enable: true }]
         ]
     });
 
-    swipe.on('swipeleft', function() {
+    swipe.on('swipeleft', function () {
         rotateTo(currentSide + 1);
     });
 
-    swipe.on('swiperight', function() {
+    swipe.on('swiperight', function () {
         rotateTo(currentSide - 1);
     });
 
     // Register contact form submit event
     const contactForm = <HTMLFormElement>document.getElementById(CONTACT_FORM_ID);
     const contactHandler = new ContactForm(CONTACT_FORM_ID);
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', function (e) {
         contactHandler.submit(e);
     });
 
     // Menu cube rotate events
     const aboutButton = <HTMLLIElement>document.getElementById('about-btn');
-    aboutButton.addEventListener('mousedown', function() {
+    aboutButton.addEventListener('mousedown', function () {
         rotateTo(0);
     });
 
     const projectsButton = <HTMLLIElement>document.getElementById('projects-btn');
-    projectsButton.addEventListener('mousedown', function() {
+    projectsButton.addEventListener('mousedown', function () {
         rotateTo(1);
     });
 
     const blogButton = <HTMLLIElement>document.getElementById('blog-btn');
-    blogButton.addEventListener('mousedown', function() {
+    blogButton.addEventListener('mousedown', function () {
         rotateTo(2);
     });
 
     const contactButton = <HTMLLIElement>document.getElementById('contact-btn');
-    contactButton.addEventListener('mousedown', function() {
+    contactButton.addEventListener('mousedown', function () {
         rotateTo(3);
     });
 
     const ethAddress = <HTMLTextAreaElement>document.getElementById('eth-addr');
-    ethAddress.addEventListener('click', function() {
+    ethAddress.addEventListener('click', function () {
         this.focus();
         this.select();
     });
 
     const btcAddress = <HTMLTextAreaElement>document.getElementById('btc-addr');
-    btcAddress.addEventListener('click', function() {
+    btcAddress.addEventListener('click', function () {
         this.focus();
         this.select();
     });
@@ -100,14 +100,14 @@ document.addEventListener('DOMContentLoaded', function() {
     window.dispatchEvent(new Event('resize'));
 });
 
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', function (event) {
     const activeElement = <HTMLElement>document.activeElement;
     const inputs = ['input', 'select', 'button', 'textarea'];
 
     // Only allow keypresses to rotate when active element is not an input element
     if (activeElement && inputs.indexOf(activeElement.tagName.toLowerCase()) == -1) {
         if (event.keyCode == LEFT_ARROW) {
-        rotateTo(currentSide - 1);
+            rotateTo(currentSide - 1);
         }
         else if (event.keyCode == RIGHT_ARROW) {
             rotateTo(currentSide + 1);
@@ -131,13 +131,13 @@ function fixTranslateZ() {
 function debounce(func: Function, time: number) {
     time = time || 100; // 100 by default if no param
     let timer;
-    return function(event) {
+    return function (event) {
         if (timer) clearTimeout(timer);
         timer = setTimeout(func, time, event);
     };
 }
 
-window.addEventListener('resize', debounce(function(event) {
+window.addEventListener('resize', debounce(function (event) {
     if (isSafari) {
         fixTranslateZ();
     }
@@ -159,7 +159,8 @@ window.addEventListener('resize', debounce(function(event) {
 }, DEBOUNCE_MS));
 
 function renderBackground() {
-    EscherCubes.render(BG_CONTAINER_Id, SVG_ID, 0, BG_Y_OFFSET, CUBE_SIZE, INNER_ANGLE);
+    const cubeSize = window.innerHeight / NUM_CUBES_Y;
+    EscherCubes.render(BG_CONTAINER_Id, SVG_ID, 0, BG_Y_OFFSET, cubeSize, INNER_ANGLE);
 }
 
 function rotateTo(side: number) {

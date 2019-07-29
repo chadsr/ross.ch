@@ -1,6 +1,6 @@
 export default class EscherCubes {
   // renderEscherCubes(outer container id, svg container id, x offset from origin, y offset from origin, cube edge length in px, inner angle of cube)
-  static render(containerId, svgId, xOffset, yOffset, cubeSize, innerAngle) {
+  static render(containerId: string, svgId: string, xOffset: number, yOffset: number, cubeSize: number, innerAngle: number) {
     // Attempt to fetch the svg if it exists already
     const existing = document.getElementById(svgId);
     if (existing) {
@@ -27,14 +27,14 @@ export default class EscherCubes {
         let xPos;
         switch (odd) {
           case true:
-          xPos = x + xOffset;
-          break;
+            xPos = x + xOffset;
+            break;
 
           case false:
-          xPos = x - 0.5 + xOffset;
+            xPos = x - 0.5 + xOffset;
 
           default:
-          break;
+            break;
         }
 
         const yPos = xPos;
