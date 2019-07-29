@@ -2,8 +2,8 @@
 
 @font-face {
   font-family: "Macula";
-  src: url("../fonts/Macula-Solid.woff") format('woff');
-  src: url("../fonts/Macula-Solid.woff2") format('woff2');
+  src: url("../assets/fonts/Macula-Solid.woff") format('woff');
+  src: url("../assets/fonts/Macula-Solid.woff2") format('woff2');
   font-style: normal;
   font-weight: bold;
 }
