@@ -6,7 +6,6 @@ import * as WebappWebpackPlugin from 'webapp-webpack-plugin';
 import ImageminPlugin from 'imagemin-webpack-plugin';
 import * as imageminMozjpeg from 'imagemin-mozjpeg';
 import * as WriteFilePlugin from 'write-file-webpack-plugin';
-import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import WebpackDeepScopeAnalysisPlugin from 'webpack-deep-scope-plugin';
 import * as CopyPlugin from 'copy-webpack-plugin';
 import * as PostcssPresetEnv from 'postcss-preset-env';
@@ -159,10 +158,6 @@ module.exports = {
           appleIcon: false
         }
       }
-    }),
-    new MiniCssExtractPlugin({
-      filename: '[name].[hash].css',
-      chunkFilename: '[id].[hash].css',
     }),
     new CopyPlugin([
       { from: filesDir, to: join(publicDir, 'files') },
