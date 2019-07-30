@@ -42,8 +42,9 @@
     "webpack-cli": "^3.3.6"
   },
   "dependencies": {
+    "@hapi/joi": "^15.1.0",
     "@koa/cors": "^3.0.0",
-    "@octokit/rest": "^16.28.6",
+    "@octokit/rest": "^16.28.7",
     "axios": "^0.19.0",
     "babel-loader": "^8.0.6",
     "class-validator": "^0.9.1",
@@ -61,7 +62,6 @@
     "image-webpack-loader": "^5.0.0",
     "imagemin-mozjpeg": "^8.0.0",
     "imagemin-webpack-plugin": "^2.4.2",
-    "joi": "^14.3.1",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "koa-csrf": "^3.0.7",
@@ -88,9 +88,9 @@
     "tslint": "^5.18.0",
     "typescript": "^3.5.3",
     "webapp-webpack-plugin": "^2.7.1",
-    "webpack": "^4.37.0",
-    "webpack-deep-scope-plugin": "^1.6.1",
+    "webpack": "^4.38.0",
+    "webpack-deep-scope-plugin": "^1.6.2",
     "winston": "^3.2.1",
-    "write-file-webpack-plugin": "^4.5.0"
+    "write-file-webpack-plugin": "^4.5.1"
   }
 }

@@ -68,11 +68,19 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader
-          },
+          // {
+          //   loader: MiniCssExtractPlugin.loader
+          // },
+          'style-loader',
           'css-loader',
-          'postcss-loader'
+          {
+            loader: 'postcss-loader', options: {
+              ident: 'postcss',
+              plugins: () => [
+                PostcssPresetEnv()
+              ]
+            }
+          }
         ]
       },
       {
@@ -80,7 +88,14 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
-          'postcss-loader',
+          {
+            loader: 'postcss-loader', options: {
+              ident: 'postcss',
+              plugins: () => [
+                PostcssPresetEnv()
+              ]
+            }
+          },
           'sass-loader'
         ]
       },
@@ -149,7 +164,6 @@ module.exports = {
       filename: '[name].[hash].css',
       chunkFilename: '[id].[hash].css',
     }),
-    new PostcssPresetEnv(),
     new CopyPlugin([
       { from: filesDir, to: join(publicDir, 'files') },
     ])

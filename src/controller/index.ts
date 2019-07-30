@@ -1,5 +1,5 @@
 import { IRouterContext } from 'koa-router';
-import * as Joi from 'joi';
+import * as Joi from '@hapi/joi';
 
 import { logger } from '../logging';
 import { config } from '../config';
@@ -11,7 +11,7 @@ import { errors } from '../errors';
 
 const contactFormSchema = Joi.object().keys({
   name: Joi.string().min(2).max(32).required().error(() => errors.invalidName),
-  email: Joi.string().email(({ minDomainAtoms: 2 })).required().error(() => errors.invalidEmail),
+  email: Joi.string().email(({ minDomainSegments: 2 })).required().error(() => errors.invalidEmail),
   message: Joi.string().min(2).required().error(() => errors.invalidMsg)
 });
 
