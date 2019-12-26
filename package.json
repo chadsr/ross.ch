@@ -24,7 +24,6 @@
   "devDependencies": {
     "@babel/core": "^7.7.7",
     "@babel/preset-env": "^7.7.7",
-    "@types/dotenv": "^8.2.0",
     "@types/hammerjs": "^2.0.36",
     "@types/joi": "^14.3.4",
     "@types/koa": "^2.11.0",
