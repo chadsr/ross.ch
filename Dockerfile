@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:12
 
 ARG WORK_DIR
 ARG NODE_ENV
