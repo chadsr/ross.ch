@@ -7,6 +7,7 @@ interface FormData {
   name: string;
   email: string;
   message: string;
+  captcha: string;
 }
 
 // A basic contact form class
@@ -98,7 +99,7 @@ export default class ContactForm {
     // Invalid name
     if ( formData.name.length < 2 || formData.name.length > 32 ) {
       const nameLabel = this._formLabels[ 'name' ];
-      nameLabel.innerHTML = errors.invalidName;
+      nameLabel.innerHTML = errors.InvalidName.message;
       nameLabel.classList.add( 'error' );
       nameLabel.scrollIntoView();
       valid = false;
@@ -107,7 +108,7 @@ export default class ContactForm {
     // Invalid email address
     if ( !this.validateEmail( formData.email ) ) {
       const emailLabel = this._formLabels[ 'email' ];
-      emailLabel.innerHTML = errors.invalidEmail;
+      emailLabel.innerHTML = errors.InvalidEmail.message;
       emailLabel.classList.add( 'error' );
       emailLabel.scrollIntoView();
       valid = false;
@@ -116,7 +117,7 @@ export default class ContactForm {
     // Invalid message
     if ( formData.message.length < 2 ) {
       const msgLabel = this._formLabels[ 'message' ];
-      msgLabel.innerHTML = errors.invalidMsg;
+      msgLabel.innerHTML = errors.InvalidMsg.message;
       msgLabel.classList.add( 'error' );
       msgLabel.scrollIntoView();
       valid = false;
@@ -138,6 +139,7 @@ export default class ContactForm {
       name: this._form.elements[ 'name' ].value,
       email: this._form.elements[ 'email' ].value,
       message: this._form.elements[ 'message' ].value,
+      captcha: this._form.elements[ 'captcha' ].value,
     };
 
     // Do some client-side validation and continue if it passes

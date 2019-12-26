@@ -46,7 +46,6 @@ $width-icon-button: 50px
     src: url('../assets/fonts/Macula-Solid.woff') format('woff')
     src: url('../assets/fonts/Macula-Solid.woff2') format('woff2')
 
-
 // Extends
 %heading
     font-family: $font-macula, serif
@@ -71,6 +70,8 @@ $width-icon-button: 50px
 
 %form-input-style
     @extend %form-layout
+    font-family: $font-main
+    font-size: 16px
     background: $color_content_dark
 
 %field-title-style
@@ -91,8 +92,8 @@ $width-icon-button: 50px
     height: 100%
     overflow: hidden
     position: absolute
-    top: 0;
-    left: 0;
+    top: 0
+    left: 0
 
 %list-element
     float: left
@@ -141,13 +142,7 @@ $width-icon-button: 50px
     transform: rotateX(-60deg) translate3d(0, 50%, 0)
     top: 16px
 
-
 // Main styles
-*
-    tap-highlight-color: rgba(0, 0, 0, 0)
-    font-family: $font-main
-    @extend %no-select
-
 ::selection
     background-image: none
     background: $color_highlight
@@ -158,6 +153,9 @@ html
     overflow: hidden
 
 body
+    @extend %no-select
+    tap-highlight-color: rgba(0, 0, 0, 0)
+    font-family: $font-main
     color: $white
     height: 100%
     min-height: 100%
@@ -190,6 +188,9 @@ h4
 
 h5
     font-weight: 100
+
+p
+    margin: 8px 0
 
 a
     color: $white
@@ -330,11 +331,10 @@ section
     ul li
         @extend %transition-ease
 
-
 fieldset
     @extend %form-layout
 
-    label, button
+    .title, button
         @extend %field-title-style
 
 input
@@ -417,10 +417,10 @@ button
         text-align: center
 
 .error, .error::before, .error::after, .error:hover
-    background-color: $color_error
+    background-color: $color_error !important
 
 .success, .success::before, .success::after, .success:hover
-    background-color: $color_success
+    background-color: $color_success !important
 
 .left
     float: left
@@ -567,11 +567,12 @@ footer::after
     @extend %3d-side-top
 
 .field.perspective
-    margin-bottom: 32px
+    margin-bottom: 24px
 
-    .title
+    .title, button
+        font-size: 16px
         min-height: 32px
-        line-height: 2em;
+        line-height: 2em
         &::after
             @extend %3d-side-top
 
@@ -596,12 +597,11 @@ footer::after
         resize: vertical
         height: 128px
 
-/* Contact form stuff */
+// Contact form stuff
 #contact-form
     margin-top: 32px
-/*                    */
 
-/* Blog and Repository stuff */
+// Blog and Repository stuff
 .blog-post, .repo
     margin-bottom: 32px !important
     a
@@ -629,7 +629,7 @@ footer::after
 
 .repo-stars
     &::after
-        margin-left: 4px 
+        margin-left: 4px
         content: '\2605'
 
 .blog-post-tag, .repo-stars, .repo-language
@@ -647,4 +647,3 @@ footer::after
     font-style: italic
     font-size: 14px
     text-align: center
-/*            */

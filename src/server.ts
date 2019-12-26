@@ -16,6 +16,7 @@ import * as koaWebpack from 'koa-webpack';
 import { logger, loggerMiddleware } from './logging';
 import { config } from './config';
 import { router } from './routes';
+import Store from './store';
 
 const webpackConfig = require( '../webpack.config' );
 const compiler = webpack( webpackConfig );
@@ -76,6 +77,13 @@ async function run () {
       options: {
         partials: await getPartialsObj()
       },
+    } )
+  );
+
+  // Setup key-value store middleware for captcha keys
+  app.use( <any>
+    new Store( {
+      entryTTL: config.csrfExpiryMilis,
     } )
   );
 

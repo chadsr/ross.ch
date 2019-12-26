@@ -1,13 +1,15 @@
 export interface IErrors {
-    invalidEmail: string;
-    invalidName: string;
-    invalidMsg: string;
+    InvalidEmail: Error;
+    InvalidName: Error;
+    InvalidMsg: Error;
+    InvalidCaptcha: Error;
 }
 
 const errors: IErrors = {
-    invalidEmail: 'Email looks invalid :(',
-    invalidName: 'Name is a little short...',
-    invalidMsg: 'Message is a little short...'
+    InvalidEmail: Error( 'Email looks invalid :(' ),
+    InvalidName: Error( 'Name is a little short...' ),
+    InvalidMsg: Error( 'Message is a little short...' ),
+    InvalidCaptcha: Error( 'Captcha is invalid!' ),
 };
 
 export { errors };

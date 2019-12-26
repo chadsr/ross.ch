@@ -23,6 +23,9 @@ export interface IConfig {
     emailTemplatePath: string;
     emailConfirmationTemplatePath: string;
     pgpKeyPath: string;
+    csrfExpiryMilis: number;
+    captchaLength: number;
+    captchaFontSize: number;
 }
 
 const config: IConfig = {
@@ -43,7 +46,10 @@ const config: IConfig = {
     maxRepos: parseInt( process.env.MAX_REPOS ) || 20,
     emailTemplatePath: join( __dirname, 'views/email.hbs' ),
     emailConfirmationTemplatePath: join( __dirname, 'views/email_confirmation.hbs' ),
-    pgpKeyPath: process.env.PGP_KEY_PATH || join( __dirname, 'assets/files/2B7340DB13C85766.asc' )
+    pgpKeyPath: process.env.PGP_KEY_PATH || join( __dirname, 'assets/files/2B7340DB13C85766.asc' ),
+    captchaLength: parseInt( process.env.CAPTCHA_LEN ) || 4,
+    captchaFontSize: 18,
+    csrfExpiryMilis: parseInt( process.env.CSRF_EXPIRY ) || 36000000,
 };
 
 export { config };

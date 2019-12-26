@@ -51,7 +51,6 @@ services:
 
 volumes:
   web-root:
-  certbot-var:
 
 networks:
   default:

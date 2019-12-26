@@ -1,8 +1,7 @@
 <section>
-  <p>The content of this contact form is automatically encrypted using my <a href="/files/2B7340DB13C85766.asc"
-      target="_blank">GPG/PGP public key</a>.</p>
-  <em>...If it's super duper secret you probably shouldn't write it here, though.</em>
-  <p>You will get a confirmation email if everything worked out!</p>
+  <p>Messages are encrypted using my <a href="/files/2B7340DB13C85766.asc" target="_blank">PGP
+      public key</a>.</p>
+  <p>You will receive a confirmation email if everything worked out!</p>
 </section>
 <div id="contact-form-messages"></div>
 <form id="contact-form" method="post" role="form">
@@ -22,7 +21,13 @@
         required="required"></textarea>
     </div>
     <div class="field perspective">
-      <button id="contact-form-submit-btn" name="submit" type="submit">Submit</button>
+      <div class="title"><img src="{{captchaBase64}}" title="captcha"></div>
+      <input id="captcha" name="captcha" type="text" placeholder="Type what you see above" required="required">
+    </div>
+    <div class="field perspective">
+      <button id="contact-form-submit-btn" name="submit" type="submit">
+        Submit
+      </button>
     </div>
   </fieldset>
 </form>

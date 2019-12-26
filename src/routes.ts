@@ -4,7 +4,7 @@ import controller = require( './controller' );
 const router = new Router();
 
 // GENERAL ROUTES
-router.get( '/', controller.renderIndex );
-router.post( '/', controller.handleContactForm );
+router.get( '/', <any> controller.renderIndex );
+router.post( '/', <any> controller.handleContactForm );
 
 export { router };

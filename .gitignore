@@ -5,8 +5,6 @@ public
 # Built by webpack
 src/views/partials/webpack.hbs
 
-package-lock.json
-
 *.env
 
 # Logs

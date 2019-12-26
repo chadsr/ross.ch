@@ -87,9 +87,6 @@ module.exports = {
       title: config.title,
       meta: {
         description: config.description,
-        'Content-Security-Policy': {
-          'default-src': 'self', 'script-src': 'self', 'http-equiv': 'Content-Security-Policy', 'content': 'default-src https:'
-        }
       },
       inject: 'head',
       filename:
