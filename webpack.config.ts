@@ -85,7 +85,12 @@ module.exports = {
     new HtmlWebpackPlugin( {
       template: join( partialsDir, 'head.hbs' ),
       title: config.title,
-      meta: { description: config.description },
+      meta: {
+        description: config.description,
+        'Content-Security-Policy': {
+          'default-src': 'self', 'script-src': 'self', 'http-equiv': 'Content-Security-Policy', 'content': 'default-src https:'
+        }
+      },
       inject: 'head',
       filename:
         join( partialsDir, 'webpack.hbs' )  // Write the handlebars to the
