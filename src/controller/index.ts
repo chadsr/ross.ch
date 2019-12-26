@@ -1,5 +1,5 @@
-import { IRouterContext } from 'koa-router';
 import * as Joi from '@hapi/joi';
+import { RouterContext } from '@koa/router';
 
 import { logger } from '../logging';
 import { config } from '../config';
@@ -44,7 +44,7 @@ function validateData ( data: Object, schema: Joi.ObjectSchema ): Message[] {
   return errors;
 }
 
-export async function renderIndex ( ctx: IRouterContext ) {
+export async function renderIndex ( ctx: RouterContext ) {
   const feed = await getAggregatedFeed( config.maxBlogPosts );
   let posts = feed.posts;
   if ( posts.length < 1 ) {
@@ -66,7 +66,7 @@ export async function renderIndex ( ctx: IRouterContext ) {
   } );
 }
 
-export async function handleContactForm ( ctx: IRouterContext ) {
+export async function handleContactForm ( ctx: RouterContext ) {
   logger.debug( 'Mail received:', ctx.request.body );
 
   const validationErrors = validateData( ctx.request.body, contactFormSchema );
