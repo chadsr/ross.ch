@@ -62,7 +62,7 @@ export async function renderIndex ( ctx: ExtendedContext ) {
   try {
     ctx.setCaptcha( ctx.csrf, captcha );
   } catch ( err ) {
-    logger.error( `Failed to store captcha:\n${err}` );
+    logger.error( `Failed to store captcha: ${err}` );
   }
 
   await ctx.render( 'index', {
@@ -90,7 +90,7 @@ export async function handleContactForm ( ctx: ExtendedContext ) {
     const captchaString = await ctx.getCaptcha( csrf );
 
     if ( captchaSent !== captchaString ) {
-      logger.debug( `Captcha didn't match. Got ${captchaSent}, expected ${captchaString}` );
+      logger.warn( `Captcha didn't match. Got ${captchaSent}, expected ${captchaString}` );
 
       // Captcha didn't match, so return 401
       ctx.status = 401;
@@ -101,7 +101,7 @@ export async function handleContactForm ( ctx: ExtendedContext ) {
       return;
     }
   } catch ( err ) {
-    logger.error( `Failed to get captcha matching csrf token:\n${err}` );
+    logger.error( `Failed to get captcha matching csrf token: ${err}` );
     return;
   }
 
@@ -109,7 +109,7 @@ export async function handleContactForm ( ctx: ExtendedContext ) {
   try {
     ctx.deleteCaptcha( csrf );
   } catch ( err ) {
-    logger.error( `Failed to delete csrf/captcha key/value:]n${err}` );
+    logger.error( `Failed to delete csrf/captcha key/value: ${err}` );
   }
 
   // Construct email object from the request body
@@ -138,4 +138,12 @@ export async function handleContactForm ( ctx: ExtendedContext ) {
       target: 'submit'
     } );
   }
+}
+
+export async function serveCaptcha ( ctx: ExtendedContext ) {
+  const captcha = await getCaptcha( config.captchaLength, config.captchaFontSize );
+  ctx.status = 200;
+  ctx.body = getResponseObj( true, {
+    text: captcha.base64,
+  } );
 }

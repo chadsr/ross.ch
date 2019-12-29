@@ -111,7 +111,7 @@ class Mailer {
       }
     }
     catch ( err ) {
-      logger.error( `Could not send mail:\n${err}` );
+      logger.error( `Could not send mail: ${err}` );
     }
   }
 }

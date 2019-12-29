@@ -12,6 +12,7 @@ import { join, basename } from 'path';
 import * as glob from 'glob-promise'; // TODO: Investigate why tiny-glob is borked
 import * as webpack from 'webpack';
 import * as koaWebpack from 'koa-webpack';
+import * as Keyv from 'keyv';
 
 import { logger, loggerMiddleware } from './logging';
 import { config } from './config';
@@ -26,6 +27,10 @@ const isDeveloping = process.env.NODE_ENV !== 'production';
 const dirViews = join( __dirname, 'views' );
 const dirPublic = join( __dirname, '../public' );
 const dirPartials = join( dirViews, 'partials' );
+
+const keyv = new Keyv( {
+  ttl: config.csrfExpiryMilis,
+} );
 
 // Load environment variables from .env file
 dotenv.config( { path: '.env' } );
@@ -80,18 +85,15 @@ async function run () {
     } )
   );
 
-  // Setup key-value store middleware for captcha keys
-  app.use( <any>
-    new Store( {
-      entryTTL: config.csrfExpiryMilis,
-    } )
-  );
-
   // load the session key from our configuration
   app.keys = [ config.sessionKey ];
 
-  // add session support
-  app.use( session( app ) );
+  // add session support for csrf
+  const sessionConfig = {
+    key: 'session',
+
+  };
+  app.use( session( sessionConfig, app ) );
 
   // Enable bodyParser with default options
   app.use( bodyParser( {
@@ -99,6 +101,8 @@ async function run () {
       ctx.throw( 'Could not parse body of request', 422 );
     }
   } ) );
+
+  app.use( new Store( keyv ) as any );
 
   // Provides security headers
   app.use( helmet() );

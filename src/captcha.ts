@@ -3,7 +3,7 @@ import * as random from 'randomatic';
 
 import { Captcha, Colour } from './interfaces';
 
-export function getRandomColour (): Colour {
+function getRandomColour (): Colour {
     // Generate a random RGB colour from one random number
     const rand = Math.round( 0xffffff * Math.random() );
     const colour: Colour = {
@@ -27,6 +27,7 @@ export async function getCaptcha ( length: number, fontSize: number, pattern = '
     for ( let i = 0; i < length; i++ ) {
         const char = captchaString.charAt( i );
         const randomColour = getRandomColour();
+
         ctx.fillStyle = `rgb(${randomColour.red},${randomColour.green},${randomColour.blue})`;
         ctx.fillText( char, i * fontSize, fontSize - 1 );
     }

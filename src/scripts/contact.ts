@@ -3,6 +3,8 @@ import axios, { AxiosResponse } from 'axios';
 import { Response, Message } from '../interfaces';
 import { errors } from '../errors';
 
+const CAPTCHA_ID = 'captcha-img';
+
 interface FormData {
   name: string;
   email: string;
@@ -13,9 +15,8 @@ interface FormData {
 // A basic contact form class
 export default class ContactForm {
   private readonly _form: HTMLFormElement;
-  private readonly _formLabels: { [ key: string ]: HTMLLabelElement };
+  private readonly _formLabels: { [ key: string ]: HTMLLabelElement; };
   private readonly _formSubmitBtn: HTMLButtonElement;
-  private readonly _formPage: HTMLDivElement;
 
   constructor( formId ) {
     this._form = <HTMLFormElement> document.getElementById( formId );
@@ -61,6 +62,7 @@ export default class ContactForm {
     if ( response.success ) {
       this.resetInput();
       this.resetLabels();
+      this.refreshCaptcha();
     }
 
     // Reset the submit button back to normal after 4s
@@ -74,7 +76,29 @@ export default class ContactForm {
     this._formSubmitBtn.innerHTML = 'Submit';
     this._formSubmitBtn.className = '';
   }
-
+  refreshCaptcha () {
+    axios( {
+      method: 'GET',
+      url: '/captcha',
+    } ).catch( error => {
+      let response;
+      if ( error.response ) {
+        // We got no response, so construct a response message client-side
+        response = <Response> {
+          messages: [ {
+            target: 'submit',
+            text: 'Failed to refresh captcha!'
+          } ]
+        };
+        this.handleResponse( response );
+      }
+    } ).then( ( response: AxiosResponse ) => {
+      const resp: Response = response.data;
+      const captchaBas64 = resp.messages[ 0 ].text;
+      const captchaImg = document.getElementById( CAPTCHA_ID ) as HTMLImageElement;
+      captchaImg.src = captchaBas64;
+    } );
+  }
   resetLabels () {
     // Replace all form labels with their original text and remove classes
     Object.keys( this._formLabels ).forEach( ( key ) => {
@@ -168,7 +192,7 @@ export default class ContactForm {
         }
 
         this.handleResponse( response );
-      } ).then( <AxiosResponse> ( response ) => {
+      } ).then( ( response: AxiosResponse ) => {
         this.handleResponse( response.data );
       } );
     }

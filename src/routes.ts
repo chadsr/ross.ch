@@ -7,4 +7,6 @@ const router = new Router();
 router.get( '/', <any> controller.renderIndex );
 router.post( '/', <any> controller.handleContactForm );
 
+router.get( '/captcha', <any> controller.serveCaptcha );
+
 export { router };
