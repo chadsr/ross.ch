@@ -11,6 +11,7 @@ import WebpackDeepScopeAnalysisPlugin from 'webpack-deep-scope-plugin';
 import * as WriteFilePlugin from 'write-file-webpack-plugin';
 
 import { config } from './src/config';
+import { pathToFileURL } from 'url';
 
 const srcDir = resolve( __dirname, 'src' );
 const publicDir = resolve( __dirname, 'public' );
@@ -18,6 +19,7 @@ const jsDir = join( srcDir, 'scripts' );
 const assetsDir = join( srcDir, 'assets' );
 const imagesDir = join( assetsDir, 'images' );
 const filesDir = join( assetsDir, 'files' );
+const stylesDir = join(srcDir, 'stylesheets');
 const viewsDir = join( srcDir, 'views' );
 const partialsDir = join( viewsDir, 'partials' );
 const helpersDir = join( viewsDir, 'helpers' );
@@ -38,18 +40,7 @@ module.exports = {
         query: { partialDirs: [ partialsDir ], helperDirs: [ helpersDir ] }
       },
       { test: /\.js$/, exclude: /node_modules/, use: { loader: 'babel-loader' } },
-      { test: /\.tsx?$/, loader: 'ts-loader' }, {
-        test: /\.css$/,
-        use: [
-          // {
-          //   loader: MiniCssExtractPlugin.loader
-          // },
-          'style-loader', 'css-loader', {
-            loader: 'postcss-loader',
-            options: { ident: 'postcss', plugins: () => [ PostcssPresetEnv() ] }
-          }
-        ]
-      },
+      { test: /\.tsx?$/, loader: 'ts-loader' },
       {
         test: /\.(sass|scss)$/,
         use: [
@@ -77,7 +68,8 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(), new WebpackDeepScopeAnalysisPlugin(),
+    new CleanWebpackPlugin(),
+    new WebpackDeepScopeAnalysisPlugin(),
     new WriteFilePlugin( {
       // We need the files in dev mode due to handlebars partial...
       test: /\.hbs$/
@@ -105,6 +97,7 @@ module.exports = {
     } ),
     new CopyPlugin( [
       { from: filesDir, to: join( publicDir, 'files' ) },
+      { from: join(stylesDir, 'nojs.css'), to: publicDir},
     ] )
   ]
 };

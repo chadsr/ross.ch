@@ -2,8 +2,8 @@
 
 @font-face {
   font-family: "Macula";
-  src: url("../assets/fonts/Macula-Solid.woff") format('woff');
-  src: url("../assets/fonts/Macula-Solid.woff2") format('woff2');
+  src: url("../fonts/Macula-Solid.woff") format('woff');
+  src: url("../fonts/Macula-Solid.woff2") format('woff2');
   font-style: normal;
   font-weight: bold;
 }
@@ -17,28 +17,11 @@ html {
 body.nojs-styles {
   color: white;
   font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
-  text-shadow: 0 0 5px #C8C8C8;
   background-color: black;
   background-image: radial-gradient( rgba(31, 60, 86, 0.75), black 120% );
   margin: 0;
   padding: 0;
   height: 100vh;
-}
-
-body.nojs-styles::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-image: repeating-linear-gradient(
-    0deg,
-    rgba(black, 0.15),
-    rgba(black, 0.15) 1px,
-    transparent 1px,
-    transparent 2px
-  );
 }
 
 body.nojs-styles::selection {
@@ -51,7 +34,7 @@ body.nojs-styles .repo-stars::after {
   content: '\2605';
 }
 
-body.nojs-styles header, body.nojs-styles #crypto, body.nojs-styles #contact {
+body.nojs-styles header, body.nojs-styles #crypto, body.nojs-styles #contact-wrapper {
   display: none;
 }
 
@@ -71,13 +54,14 @@ body.nojs-styles fieldset {
 
 body.nojs-styles h1 {
   font-family: "Macula", "serif";
-  font-size: 48px;
+  font-size: 6vmin;
+  text-align: center;
   margin: 16px 0;
 }
 
 body.nojs-styles h2 {
   font-family: "Macula", "serif";
-  font-size: 32px;
+  font-size: 4vmin;
   margin: 16px 0;
 }
 
@@ -101,6 +85,14 @@ body.nojs-styles .content li {
   margin: 12px 0;
   width: 100%;
   float: left;
+}
+
+body.nojs-styles .repo, body.nojs-styles .social li {
+  transition: all 0.2s ease-in-out;
+}
+
+body.nojs-styles .repo:hover, body.nojs-styles .social li:hover {
+  text-shadow: 0 0 16px white;
 }
 
 body.nojs-styles input, body.nojs-styles textarea {
@@ -150,4 +142,5 @@ body.nojs-styles #nojs {
   padding: 6px;
   background-color: rgba(31, 60, 86, 1);
   font-size: 14px;
+  text-align: center;
 }
