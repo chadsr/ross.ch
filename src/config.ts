@@ -32,7 +32,7 @@ const config: IConfig = {
     port: +process.env.PORT || 8080,
     debugLogging: process.env.NODE_ENV == 'development',
     title: process.env.TITLE || 'Ross Chadwick',
-    description: process.env.DESCRIPTION || 'Ross Chadwick, hacker, explorer, maker of strange things that are sometimes useful.',
+    description: process.env.DESCRIPTION || 'Ross Chadwick - Hacker, explorer, maker of strange things that are sometimes useful.',
     sessionKey: process.env.SESSION_KEY || random( '*', 32 ),
     emailHost: process.env.EMAIL_HOST || 'localhost',
     sendEmailPassword: process.env.SENDER_EMAIL_PASSWORD || 'secret',
