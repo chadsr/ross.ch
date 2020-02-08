@@ -48,6 +48,11 @@ export async function getUserReposWithStars ( username: string, includeForks: bo
         lastUpdated: updatedDate
       };
 
+      if ( repository.mainLanguage == undefined ) {
+        repository.mainLanguage = 'Misc';
+      }
+
+
       github.repositories.push( repository );
       i++;
     }
