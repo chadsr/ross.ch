@@ -56,9 +56,9 @@ sudo ln -sfn "$PWD"/$SERVICE_FILE /etc/systemd/system/$SERVICE_FILE || {
     exit 1
 }
 
-echo "Reloading systemd services"
-sudo systemctl reload $SERVICE_FILE || {
-    echo "Failed to reload systemd service file"
+echo "Reloading systemd daemon"
+sudo systemctl daemon-reload || {
+    echo "Failed to reload systemd daemon"
     exit 1
 }
 
