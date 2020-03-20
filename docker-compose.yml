@@ -42,7 +42,7 @@ services:
       ACME_AGREE: "true"
 
   ghost:
-    image: ghost:alpine
+    image: ghost:latest
     restart: unless-stopped
     env_file:
       - .config.env
