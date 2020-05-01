@@ -12,7 +12,9 @@
     "serve": "node --trace-deprecation dist/src/server.js",
     "webpack": "NODE_ENV=production ./node_modules/.bin/webpack --config ./webpack.config.ts",
     "build": "npm run lint && ./node_modules/.bin/tsc && npm run webpack --display-used-exports && ./node_modules/.bin/ts-node copyStaticAssets.ts",
-    "start": "NODE_ENV=production npm run serve"
+    "start": "NODE_ENV=production npm run serve",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "engines": {
     "node": "12.x.x",
@@ -96,6 +98,8 @@
     "nodemailer-openpgp": "^1.2.0",
     "openpgp": "^4.7.2",
     "randomatic": "^3.1.1",
-    "winston": "^3.2.1"
-  }
+    "winston": "^3.2.1",
+    "snyk": "^1.316.1"
+  },
+  "snyk": true
 }
