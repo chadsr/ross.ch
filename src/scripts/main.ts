@@ -107,8 +107,7 @@ document.addEventListener( 'keydown', function ( event ) {
     if ( activeElement && inputs.indexOf( activeElement.tagName.toLowerCase() ) == -1 ) {
         if ( event.keyCode == LEFT_ARROW ) {
             rotateTo( currentSide - 1 );
-        }
-        else if ( event.keyCode == RIGHT_ARROW ) {
+        } else if ( event.keyCode == RIGHT_ARROW ) {
             rotateTo( currentSide + 1 );
         }
     }
