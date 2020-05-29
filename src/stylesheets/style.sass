@@ -2,11 +2,11 @@
 $color_background: #181411
 $white: #fff
 $color_highlight: #0f8f83
-$color_main: rgba(29, 54, 75, 0.8)
-$color_main_shadow: rgba(20, 39, 56, 0.8)
-$color_main_light: rgba(31, 60, 86, 0.8)
-$color_content_dark: rgba(25, 40, 53, 0.8)
-$color_field_title: rgba(69, 83, 95, 0.8)
+$color_main: rgba(29, 54, 75, 0.9)
+$color_main_shadow: rgba(20, 39, 56, 0.9)
+$color_main_light: rgba(31, 60, 86, 0.9)
+$color_content_dark: rgba(25, 40, 53, 0.9)
+$color_field_title: rgba(69, 83, 95, 0.9)
 $color_twitter: #00aced
 $color_mastodon: #3088d4
 $color_linkedin: #4875b4
@@ -489,7 +489,6 @@ header
     //animation: 2s linear 0s 1 cube-spin-in
 
     .face.focus
-        filter: brightness(100%)
         box-shadow: none
         z-index: 9999
 
@@ -511,7 +510,6 @@ header
     position: absolute
     box-shadow: $black_75 0px 0px 64px 8px inset
     background: $color_main
-    filter: brightness(10%)
     z-index: 100
     @extend %transition-ease-in-out
 
