@@ -86,49 +86,47 @@ $bp-larger-than-desktophd : "min-width: 1200px" !default
 
 // Larger than mini mobile
 @media only screen and (min-width : 300px) and (min-height : 300px)
-    @include cubeTransform(200px)
+    @include cubeTransform(300px)
 
 @media only screen and (min-width : 350px) and (min-height : 350px)
-    @include cubeTransform(250px)
+    @include cubeTransform(300px)
 
 // Larger than mobile
 @media only screen and (min-width : 400px) and (min-height : 400px)
-    @include cubeTransform(300px)
-
-@media only screen and (min-width : 450px) and (min-height : 450px)
     @include cubeTransform(350px)
 
-@media only screen and (min-width : 500px) and (min-height : 500px)
+@media only screen and (min-width : 450px) and (min-height : 450px)
     @include cubeTransform(400px)
+
+@media only screen and (min-width : 500px) and (min-height : 500px)
+    @include cubeTransform(450px)
 
 // Larger than phablet (also point when grid becomes active)
 @media only screen and (min-width : 550px) and (min-height : 550px)
-    @include cubeTransform(450px)
-
-@media only screen and (min-width : 600px) and (min-height : 600px)
     @include cubeTransform(500px)
 
-@media only screen and (min-width : 650px) and (min-height : 650px)
+@media only screen and (min-width : 600px) and (min-height : 600px)
     @include cubeTransform(550px)
 
-@media only screen and (min-width : 700px) and (min-height : 700px)
+@media only screen and (min-width : 650px) and (min-height : 650px)
     @include cubeTransform(600px)
+
+@media only screen and (min-width : 700px) and (min-height : 700px)
+    @include cubeTransform(650px)
 
 // Larger than tablet
 @media only screen and (min-width : 750px) and (min-height : 750px)
-    @include cubeTransform(650px)
-
-@media only screen and (min-width : 800px) and (min-height : 800px)
     @include cubeTransform(700px)
 
+@media only screen and (min-width : 800px) and (min-height : 800px)
+    @include cubeTransform(750px)
+
 @media only screen and (min-width : 900px) and (min-height : 900px)
-    @include cubeTransform(800px)
+    @include cubeTransform(850px)
 
 // Larger than desktop
 @media only screen and (min-width : 1000px) and (min-height : 1000px)
     @include cubeTransform(900px)
-    h1
-        font-size: 8em !important
 
 @media only screen and (min-width : 1100px) and (min-height : 1100px)
     @include cubeTransform(1000px)
@@ -136,6 +134,8 @@ $bp-larger-than-desktophd : "min-width: 1200px" !default
 // Larger than Desktop HD
 @media only screen and (min-width : 1200px) and (min-height : 1200px)
     @include cubeTransform(1100px)
+    h1
+        font-size: 8em !important
 
 @media only screen and (min-width : 1300px) and (min-height : 1300px)
     @include cubeTransform(1200px)
