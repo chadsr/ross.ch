@@ -87,11 +87,11 @@ body.nojs-styles .content li {
   float: left;
 }
 
-body.nojs-styles .repo, body.nojs-styles .social li {
+body.nojs-styles .field, body.nojs-styles .social li {
   transition: all 0.2s ease-in-out;
 }
 
-body.nojs-styles .repo:hover, body.nojs-styles .social li:hover {
+body.nojs-styles .field:hover, body.nojs-styles .social li:hover {
   text-shadow: 0 0 16px white;
 }
 
