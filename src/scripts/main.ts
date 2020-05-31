@@ -161,6 +161,14 @@ function renderBackground () {
     EscherCubes.render( BG_CONTAINER_Id, SVG_ID, 0, BG_Y_OFFSET, cubeSize, INNER_ANGLE );
 }
 
+function hideSwipeIndicator () {
+    const swipeIndicator = document.getElementById( 'swipe-indicator' );
+
+    if ( swipeIndicator.classList.contains( 'swiped' ) != true ) {
+        swipeIndicator.classList.add( 'swiped' );
+    }
+}
+
 function rotateTo ( side: number ) {
     if ( side != currentSide && side >= MIN_SIDE && side <= MAX_SIDE ) {
         currentSide = side;
@@ -186,6 +194,9 @@ function rotateTo ( side: number ) {
         const re = new RegExp( `rotate-[${MIN_SIDE}-${MAX_SIDE}]`, 'g' );
         // Replace the existing class with one matching the newly focused side (While preserving any other classes)
         cube.className = cube.className.replace( re, `rotate-${side}` );
+
+        // hide the swipe indicator, if not already since user managed to switch pages
+        hideSwipeIndicator();
 
         return true;
     }
