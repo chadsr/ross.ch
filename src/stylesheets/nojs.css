@@ -116,7 +116,7 @@ body.nojs-styles .face .content ul > li::before {
   content: '>';
   font-size: 48px;
   float: left;
-  line-height: 24px;
+  line-height: 16px;
   margin-right: 10px;
 }
 
@@ -143,4 +143,8 @@ body.nojs-styles #nojs {
   background-color: rgba(31, 60, 86, 1);
   font-size: 14px;
   text-align: center;
+}
+
+#swipe-indicator {
+  display: none;
 }
