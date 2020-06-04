@@ -1,0 +1,41 @@
+#Caddyfile
+
+ross.ch, www.ross.ch {
+    encode gzip
+    root * /var/www/html
+    file_server
+
+    tls {
+	    dns cloudflare {env.CLOUDFLARE_API_KEY}
+    }
+
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        Content-Security-Policy "default-src 'self'; img-src 'self' data:; script-src https: 'self'; style-src https: 'self' 'unsafe-inline';"
+        X-Frame-Options SAMEORIGIN
+        X-XSS-Protection "1; mode=block"
+        X-Content-Type-Options nosniff
+        Referrer-Policy: no-referrer
+    }
+
+    reverse_proxy webapp:8080
+}
+
+blog.ross.ch, www.blog.ross.ch {
+    encode gzip
+
+    tls {
+	    dns cloudflare {env.CLOUDFLARE_API_KEY}
+    }
+
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        Content-Security-Policy "default-src 'self'; script-src https: 'self' 'unsafe-inline'; style-src https: 'self' 'unsafe-inline';"
+        X-Frame-Options SAMEORIGIN
+        X-XSS-Protection "1; mode=block"
+        X-Content-Type-Options nosniff
+        Referrer-Policy: no-referrer
+    }
+
+    reverse_proxy ghost:2368
+}
