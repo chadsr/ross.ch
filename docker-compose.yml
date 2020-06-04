@@ -14,7 +14,7 @@ services:
     container_name: webapp
     restart: unless-stopped
     volumes:
-      - web-root:/usr/src/ross.ch/dist/public:rw,z
+      - web-root:/usr/src/ross.ch/public:rw,z
     networks:
       - default
 
