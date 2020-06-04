@@ -145,6 +145,6 @@ body.nojs-styles #nojs {
   text-align: center;
 }
 
-#swipe-indicator {
+body.nojs-styles #swipe-indicator, body.nojs-styles #footnote {
   display: none;
 }
