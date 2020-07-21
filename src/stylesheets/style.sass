@@ -123,7 +123,7 @@ $width-icon-button: 50px
 %transition-cube
     transition: all 2s cubic-bezier(0.175, 0.885, 0.32, 1)
 
-%3d-side
+%threed-side
     z-index: 2
     content: ''
     display: block
@@ -133,14 +133,14 @@ $width-icon-button: 50px
     transform-style: preserve-3d
     background: inherit
 
-%3d-side-top
-    @extend %3d-side
+%threed-side-top
+    @extend %threed-side
     filter: brightness(120%)
     transform: rotateX(60deg) translate3d(0, -50%, 0)
     top: -16px
 
-%3d-side-bottom
-    @extend %3d-side
+%threed-side-bottom
+    @extend %threed-side
     filter: brightness(60%)
     transform: rotateX(-60deg) translate3d(0, 50%, 0)
     top: 16px
@@ -240,7 +240,7 @@ ul
             &:hover
                 background: $color_highlight
                 &::after
-                    @extend %3d-side-top
+                    @extend %threed-side-top
 
             &.twitter
                 &:hover
@@ -286,9 +286,6 @@ ul
         > li
             @extend %transition-ease
             @extend %list-element
-            > textarea
-            @extend %transition-ease
-
             &.coin
                 width: $width-full-button
                 > textarea
@@ -311,7 +308,7 @@ ul
 
             &:hover
                 &::after
-                    @extend %3d-side-top
+                    @extend %threed-side-top
 
             &.bitcoin
                 &:hover
@@ -361,7 +358,7 @@ nav
         &:hover, &.selected
             background: $color_highlight
             &::after
-                @extend %3d-side-bottom
+                @extend %threed-side-bottom
 
         > a h4
             padding: 4px 10px
@@ -417,7 +414,7 @@ nav
             content: '<<'
 
     &::after
-        @extend %3d-side-top
+        @extend %threed-side-top
 
     &.swiped
         left: -100%
@@ -600,12 +597,12 @@ header
 
 header::after
     z-index: 1
-    @extend %3d-side-bottom
+    @extend %threed-side-bottom
 
 footer::after
     z-index: 1
     height: 32px
-    @extend %3d-side-top
+    @extend %threed-side-top
 
 .field.perspective
     margin-bottom: 24px
@@ -615,7 +612,7 @@ footer::after
         min-height: 32px
         line-height: 2em
         &::after
-            @extend %3d-side-top
+            @extend %threed-side-top
 
     button
         height: 32px
@@ -626,7 +623,7 @@ footer::after
         font-weight: bold
 
         &::after
-            @extend %3d-side-top
+            @extend %threed-side-top
 
         &:active
             transform: scale3d(0.98, 0.98, 0.98)
