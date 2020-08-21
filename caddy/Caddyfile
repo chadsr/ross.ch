@@ -15,7 +15,7 @@ ross.ch, www.ross.ch {
         X-Frame-Options SAMEORIGIN
         X-XSS-Protection "1; mode=block"
         X-Content-Type-Options nosniff
-        Referrer-Policy: no-referrer
+        Referrer-Policy no-referrer
     }
 
     reverse_proxy webapp:8080
@@ -34,7 +34,7 @@ blog.ross.ch, www.blog.ross.ch {
         X-Frame-Options SAMEORIGIN
         X-XSS-Protection "1; mode=block"
         X-Content-Type-Options nosniff
-        Referrer-Policy: no-referrer
+        Referrer-Policy no-referrer
     }
 
     reverse_proxy ghost:2368
