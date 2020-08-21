@@ -17,8 +17,8 @@ export async function getAggregatedFeed ( maxPosts: number ): Promise<BlogFeed> 
 
     //     // AggregatedFeed is empty, so just replace
     //     aggregatedFeed.posts = mediumFeed.posts;
-    // } catch ( err ) {
-    //     logger.error( `Could not get Medium Feed:\n${err}` );
+    // } catch ( error ) {
+    //     logger.error( `Could not get Medium Feed:\n${error}` );
     // }
 
     try {
@@ -27,8 +27,8 @@ export async function getAggregatedFeed ( maxPosts: number ): Promise<BlogFeed> 
 
         // Merge into aggregatedFeed
         aggregatedFeed.posts = aggregatedFeed.posts.concat( ghostFeed.posts );
-    } catch ( err ) {
-        logger.error( `Could not get Ghost Blog Feed:\n${err}` );
+    } catch ( error ) {
+        logger.error( `Could not get Ghost Blog Feed:\n${error}` );
     }
 
     if ( aggregatedFeed.posts.length != 0 ) {
@@ -89,9 +89,9 @@ export async function getGhostFeed ( apiKey: string, maxPosts: number ): Promise
                 }
             }
         }
-    } catch ( err ) {
-        logger.error( 'Could not get Ghost feed: ', err );
-        return Promise.reject( err );
+    } catch ( error ) {
+        logger.error( 'Could not get Ghost feed: ', error );
+        return Promise.reject( error );
     }
 
     return ghostFeed;
@@ -138,9 +138,9 @@ export async function getMediumFeed ( username: string, maxPosts: number ): Prom
             }
         }
 
-    } catch ( err ) {
-        logger.error( 'Could not get Medium feed: ', err );
-        return Promise.reject<BlogFeed>( err );
+    } catch ( error ) {
+        logger.error( 'Could not get Medium feed: ', error );
+        return Promise.reject<BlogFeed>( error );
     }
 
     return mediumFeed;

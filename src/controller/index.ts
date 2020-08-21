@@ -61,8 +61,8 @@ export async function renderIndex ( ctx: ExtendedContext ) {
 
     try {
         ctx.setCaptcha( ctx.csrf, captcha );
-    } catch ( err ) {
-        logger.error( `Failed to store captcha: ${err}` );
+    } catch ( error ) {
+        logger.error( `Failed to store captcha: ${error}` );
     }
 
     await ctx.render( 'index', {
@@ -80,7 +80,7 @@ export async function handleContactForm ( ctx: ExtendedContext ) {
 
     const validationErrors = validateData( ctx.request.body, contactFormSchema );
     if ( validationErrors.length > 0 ) {
-    // Validation against the schema failed, so respond with 422 status and relevant errors
+        // Validation against the schema failed, so respond with 422 status and relevant errors
         ctx.status = 422;
         ctx.body = getResponseObj( false, validationErrors );
         return;
@@ -100,16 +100,16 @@ export async function handleContactForm ( ctx: ExtendedContext ) {
             } );
             return;
         }
-    } catch ( err ) {
-        logger.error( `Failed to get captcha matching csrf token: ${err}` );
+    } catch ( error ) {
+        logger.error( `Failed to get captcha matching csrf token: ${error}` );
         return;
     }
 
     // Delete the key/value pair so it can only be used with this csrf token once
     try {
         ctx.deleteCaptcha( csrf );
-    } catch ( err ) {
-        logger.error( `Failed to delete csrf/captcha key/value: ${err}` );
+    } catch ( error ) {
+        logger.error( `Failed to delete csrf/captcha key/value: ${error}` );
     }
 
     // Construct email object from the request body
@@ -128,9 +128,9 @@ export async function handleContactForm ( ctx: ExtendedContext ) {
             text: 'Success!',
             target: 'submit'
         } );
-    } catch ( err ) {
-    // Return a 503 error if we couldn't deliver the email for some reason
-        logger.error( 'Could not send contact form email:', err );
+    } catch ( error ) {
+        // Return a 503 error if we couldn't deliver the email for some reason
+        logger.error( 'Could not send contact form email:', error );
         ctx.status = 503;
         ctx.body = getResponseObj( false, {
             text: 'Server failure. Try later?',

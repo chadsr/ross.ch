@@ -60,9 +60,9 @@ async function run () {
         logger.info( 'Production Mode.' );
 
         // Run the webpack compiler to get the static files to serve
-        compiler.run( ( err, stats ) => {
-            if ( err ) {
-                logger.error( 'Webpack Error:', err );
+        compiler.run( ( error, stats ) => {
+            if ( error ) {
+                logger.error( 'Webpack Error:', error );
                 return; // Just exit, since we depend on webpack
             } else {
                 logger.info( 'Webpack compiled successfully!' );
@@ -97,7 +97,7 @@ async function run () {
 
     // Enable bodyParser with default options
     app.use( bodyParser( {
-        onerror: function ( err, ctx ) {
+        onerror: function ( error, ctx ) {
             ctx.throw( 'Could not parse body of request', 422 );
         }
     } ) );
