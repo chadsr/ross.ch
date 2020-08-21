@@ -29,28 +29,27 @@ class Mailer {
 
         // Test the mail server configuration, but don't break/throw on failure
         ( async () => {
-            try {
-                await this._mailer.verify();
-            } catch ( err ) {
-                logger.error( `Could not authenticate with the mailserver:\n${err}` );
-            }
+            await this._mailer.verify().catch( error => {
+                logger.error( `Could not authenticate with the mail-server:\n${error}` );
+
+            } );
         } )();
 
         // Load main email template
-        readFile( templatePath, ( err, template ) => {
-            if ( err ) {
+        readFile( templatePath, ( error, template ) => {
+            if ( error ) {
                 logger.error( 'Could not load email template!' );
-                throw err;
+                throw error;
             }
 
             this._template = Handlebars.compile( template.toString() );
         } );
 
         // Load confirmation email template
-        readFile( confirmationTemplatePath, ( err, template ) => {
-            if ( err ) {
+        readFile( confirmationTemplatePath, ( error, template ) => {
+            if ( error ) {
                 logger.error( 'Could not load email template!' );
-                throw err;
+                throw error;
             }
 
             this._confirmationTemplate = Handlebars.compile( template.toString() );
@@ -58,10 +57,10 @@ class Mailer {
 
         // Load OpenPGP public key if a path was provided
         if ( pgpKeyPath ) {
-            readFile( pgpKeyPath, ( err, key ) => {
-                if ( err ) {
+            readFile( pgpKeyPath, ( error, key ) => {
+                if ( error ) {
                     logger.error( `Could not load OpenPGP key from ${pgpKeyPath}.` );
-                    throw err;
+                    throw error;
                 }
 
                 this._pgpPubKey = key.toString();
@@ -79,11 +78,9 @@ class Mailer {
             html: this._confirmationTemplate( email )
         };
 
-        try {
-            await this._mailer.sendMail( mail );
-        } catch ( err ) {
-            logger.error( `Could not send confirmation mail:\n${err}` );
-        }
+        await this._mailer.sendMail( mail ).catch( error => {
+            logger.error( `Could not send confirmation mail:\n${error}` );
+        } );
     }
 
     public async send ( sendAddr: string, toAddr: string, email: Email, sendConfirmation: Boolean ) {
@@ -99,17 +96,20 @@ class Mailer {
             mail.encryptionKeys = [ this._pgpPubKey ];
         }
 
-        try {
-            // Send the email to the receiving address
-            await this._mailer.sendMail( mail );
+        // Send the email to the receiving address
+        await this._mailer.sendMail( mail ).catch( error => {
+            logger.error( `Could not send mail: ${error}` );
+            throw error;
+        } );
 
-            // If chosen, send a confirmation back to sender with their provided details
-            if ( sendConfirmation ) {
-                await this.sendConfirmation( sendAddr, toAddr, email );
-            }
-        } catch ( err ) {
-            logger.error( `Could not send mail: ${err}` );
+        // If chosen, send a confirmation back to sender with their provided details
+        if ( sendConfirmation ) {
+            this.sendConfirmation( sendAddr, toAddr, email ).catch( error => {
+                logger.error( `Could not send confirmation mail: ${error}` );
+                throw error;
+            } );
         }
+
     }
 }
 
