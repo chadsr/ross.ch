@@ -16,7 +16,7 @@ services:
     volumes:
       - web-root:/usr/src/ross.ch/public:rw,z
     networks:
-      - default
+      - webapp
 
   caddy:
     build:
@@ -32,7 +32,10 @@ services:
       - 80:80 # needed for Let's Encrypt
       - 443:443
     networks:
-      - default
+      - ghost
+      - webapp
+      - override
+
     env_file:
       - .config.env
 
@@ -43,6 +46,8 @@ services:
       - .config.env
     volumes:
       - /ross.ch/ghost_content:/var/lib/ghost/content:rw,z
+    networks:
+      - ghost
 
 volumes:
   web-root:
@@ -50,5 +55,6 @@ volumes:
   caddy_config:
 
 networks:
-  default:
-    driver: bridge
+  ghost:
+  webapp:
+  override:
