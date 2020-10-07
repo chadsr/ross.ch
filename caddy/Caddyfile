@@ -39,3 +39,29 @@ blog.ross.ch, www.blog.ross.ch {
 
     reverse_proxy ghost:2368
 }
+
+vault.ross.ch, www.vault.ross.ch {
+    encode gzip
+
+    tls {
+	    dns cloudflare {env.CLOUDFLARE_API_KEY}
+    }
+
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        Content-Security-Policy "default-src 'self'; script-src https: 'self' 'unsafe-inline'; style-src https: 'self' 'unsafe-inline';"
+        X-Frame-Options SAMEORIGIN
+        X-XSS-Protection "1; mode=block"
+        X-Content-Type-Options nosniff
+        Referrer-Policy no-referrer
+    }
+
+    # The negotiation endpoint is also proxied to Rocket
+    reverse_proxy /notifications/hub/negotiate bitwarden:80
+
+    # Notifications redirected to the websockets server
+    reverse_proxy /notifications/hub bitwarden:3012
+
+    # Proxy the Root directory to Rocket
+    reverse_proxy bitwarden:80
+}
