@@ -83,6 +83,13 @@ export async function handleContactForm ( ctx: ExtendedContext ) {
         // Validation against the schema failed, so respond with 422 status and relevant errors
         ctx.status = 422;
         ctx.body = getResponseObj( false, validationErrors );
+
+        try {
+            ctx.deleteCaptcha( csrf );
+        } catch ( error ) {
+            logger.error( `Failed to delete csrf/captcha key/value: ${error}` );
+        }
+
         return;
     }
 
