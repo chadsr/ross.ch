@@ -11,6 +11,7 @@ export interface IConfig {
     debugLogging: boolean;
     sessionKey: string;
     emailHost: string;
+    smtpPort: number;
     emailUsername: string;
     emailPassword: string;
     sendEmailAddress: string;
@@ -36,6 +37,7 @@ const config: IConfig = {
     description: process.env.DESCRIPTION || 'Ross Chadwick - Hacker, explorer, maker of strange things that are sometimes useful.',
     sessionKey: process.env.SESSION_KEY || random( '*', 32 ),
     emailHost: process.env.EMAIL_HOST || 'localhost',
+    smtpPort: parseInt( process.env.SMTP_PORT ) || 465,
     emailUsername: process.env.EMAIL_USERNAME || 'foo@bar.com',
     emailPassword: process.env.EMAIL_PASSWORD || 'secret',
     sendEmailAddress: process.env.SENDER_EMAIL_ADDRESS || 'foo@bar.com',

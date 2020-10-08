@@ -17,8 +17,10 @@ class Mailer {
     private _template;
     private _confirmationTemplate;
     private _pgpPubKey: string;
-    constructor( host: string, username: string, password: string, templatePath: string, confirmationTemplatePath: string, pgpKeyPath: string ) {
+    constructor( host: string, port: number, username: string, password: string, templatePath: string, confirmationTemplatePath: string, pgpKeyPath: string ) {
         const credentials = {
+            port: port,
+            secure: true,
             host: host,
             auth: {
                 user: username,
@@ -113,6 +115,6 @@ class Mailer {
     }
 }
 
-const contactMailer = new Mailer( config.emailHost, config.emailUsername, config.emailPassword, config.emailTemplatePath, config.emailConfirmationTemplatePath, config.pgpKeyPath );
+const contactMailer = new Mailer( config.emailHost, config.smtpPort, config.emailUsername, config.emailPassword, config.emailTemplatePath, config.emailConfirmationTemplatePath, config.pgpKeyPath );
 
 export { contactMailer, Mailer };
