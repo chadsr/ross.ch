@@ -11,7 +11,8 @@ export interface IConfig {
     debugLogging: boolean;
     sessionKey: string;
     emailHost: string;
-    sendEmailPassword: string;
+    emailUsername: string;
+    emailPassword: string;
     sendEmailAddress: string;
     recvEmailAddress: string;
     mediumUser: string;
@@ -35,7 +36,8 @@ const config: IConfig = {
     description: process.env.DESCRIPTION || 'Ross Chadwick - Hacker, explorer, maker of strange things that are sometimes useful.',
     sessionKey: process.env.SESSION_KEY || random( '*', 32 ),
     emailHost: process.env.EMAIL_HOST || 'localhost',
-    sendEmailPassword: process.env.SENDER_EMAIL_PASSWORD || 'secret',
+    emailUsername: process.env.EMAIL_USERNAME || 'foo@bar.com',
+    emailPassword: process.env.EMAIL_PASSWORD || 'secret',
     sendEmailAddress: process.env.SENDER_EMAIL_ADDRESS || 'foo@bar.com',
     recvEmailAddress: process.env.RECV_EMAIL_ADDRESS || 'foo@bar.com',
     ghostUrl: process.env.GHOST_URL || 'https://blog.ross.ch',
@@ -49,7 +51,7 @@ const config: IConfig = {
     pgpKeyPath: process.env.PGP_KEY_PATH || join( __dirname, 'assets/files/2B7340DB13C85766.asc' ),
     captchaLength: parseInt( process.env.CAPTCHA_LEN ) || 4,
     captchaFontSize: 18,
-    csrfExpiryMilis: parseInt( process.env.CSRF_EXPIRY ) || 36000000,
+    csrfExpiryMilis: parseInt( process.env.CSRF_EXPIRY ) || 1800000,
 };
 
 export { config };

@@ -113,6 +113,6 @@ class Mailer {
     }
 }
 
-const contactMailer = new Mailer( config.emailHost, config.sendEmailAddress, config.sendEmailPassword, config.emailTemplatePath, config.emailConfirmationTemplatePath, config.pgpKeyPath );
+const contactMailer = new Mailer( config.emailHost, config.emailUsername, config.emailPassword, config.emailTemplatePath, config.emailConfirmationTemplatePath, config.pgpKeyPath );
 
 export { contactMailer, Mailer };

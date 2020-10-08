@@ -15,7 +15,7 @@ interface FormData {
 // A basic contact form class
 export default class ContactForm {
     private readonly _form: HTMLFormElement;
-    private readonly _formLabels: { [ key: string ]: HTMLLabelElement; };
+    private readonly _formLabels: { [ key: string ]: HTMLLabelElement };
     private readonly _formSubmitBtn: HTMLButtonElement;
 
     constructor( formId ) {
