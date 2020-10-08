@@ -1,5 +1,3 @@
-/* A stylesheet that is used only when Javascript is disabled */
-
 @font-face {
   font-family: "Macula";
   src: url("../fonts/Macula-Solid.woff") format('woff');
