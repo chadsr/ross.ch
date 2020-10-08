@@ -89,6 +89,15 @@ export async function handleContactForm ( ctx: ExtendedContext ) {
     try {
         const captchaString = await ctx.getCaptcha( csrf );
 
+        // Delete the captcha value from the store after getting the string, so it can only be used with this csrf token once
+        try {
+            ctx.deleteCaptcha( csrf );
+        } catch ( error ) {
+            logger.error( `Failed to delete csrf/captcha key/value: ${error}` );
+            ctx.status = 500;
+            return;
+        }
+
         if ( captchaSent !== captchaString ) {
             logger.warn( `Captcha didn't match. Got ${captchaSent}, expected ${captchaString}` );
 
@@ -102,14 +111,8 @@ export async function handleContactForm ( ctx: ExtendedContext ) {
         }
     } catch ( error ) {
         logger.error( `Failed to get captcha matching csrf token: ${error}` );
+        ctx.status = 401;
         return;
-    }
-
-    // Delete the key/value pair so it can only be used with this csrf token once
-    try {
-        ctx.deleteCaptcha( csrf );
-    } catch ( error ) {
-        logger.error( `Failed to delete csrf/captcha key/value: ${error}` );
     }
 
     // Construct email object from the request body
@@ -141,8 +144,28 @@ export async function handleContactForm ( ctx: ExtendedContext ) {
 
 export async function serveCaptcha ( ctx: ExtendedContext ) {
     const captcha = await getCaptcha( config.captchaLength, config.captchaFontSize );
-    ctx.status = 200;
-    ctx.body = getResponseObj( true, {
-        text: captcha.base64,
-    } );
+
+    const csrf = ctx.headers[ 'x-csrf-token' ];
+    if ( csrf !== undefined ) {
+        // Check if the provided csrf value exists in the store (e.g. it was actually served and is not a random value)
+        const existingCaptcha = await ctx.getCaptcha( csrf );
+        if ( existingCaptcha === '' ) {
+            // New captcha requested from existing csrf, so store it in the key/value store again
+            try {
+                ctx.setCaptcha( csrf, captcha );
+            } catch ( error ) {
+                logger.error( `Failed to store captcha: ${error} ` );
+            }
+
+            ctx.status = 200;
+            ctx.body = getResponseObj( true, {
+                text: captcha.base64,
+            } );
+
+            return;
+        }
+    }
+
+    // The csrf was not recognised / was not provided
+    ctx.status = 401;
 }

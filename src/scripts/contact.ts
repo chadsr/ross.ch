@@ -15,7 +15,7 @@ interface FormData {
 // A basic contact form class
 export default class ContactForm {
     private readonly _form: HTMLFormElement;
-    private readonly _formLabels: { [ key: string ]: HTMLLabelElement };
+    private readonly _formLabels: { [ key: string ]: HTMLLabelElement; };
     private readonly _formSubmitBtn: HTMLButtonElement;
 
     constructor( formId ) {
@@ -62,7 +62,6 @@ export default class ContactForm {
         if ( response.success ) {
             this.resetInput();
             this.resetLabels();
-            this.refreshCaptcha();
         }
 
         // Reset the submit button back to normal after 4s
@@ -72,14 +71,17 @@ export default class ContactForm {
     }
 
     resetSubmitButton () {
-    // Reset the submit button
+        // Reset the submit button
         this._formSubmitBtn.innerHTML = 'Submit';
         this._formSubmitBtn.className = '';
     }
-    refreshCaptcha () {
+    refreshCaptcha ( csrfToken: string ) {
         axios( {
             method: 'GET',
             url: '/captcha',
+            headers: { 'X-CSRF-Token': csrfToken },
+            xsrfHeaderName: 'X-CSRF-Token',
+            xsrfCookieName: 'XSRF-TOKEN',
         } ).catch( error => {
             let response;
             if ( error.response ) {
@@ -90,8 +92,8 @@ export default class ContactForm {
                         text: 'Failed to refresh captcha!'
                     } ]
                 };
-                this.handleResponse( response );
             }
+            this.handleResponse( response );
         } ).then( ( response: AxiosResponse ) => {
             const resp: Response = response.data;
             const captchaBas64 = resp.messages[ 0 ].text;
@@ -100,7 +102,7 @@ export default class ContactForm {
         } );
     }
     resetLabels () {
-    // Replace all form labels with their original text and remove classes
+        // Replace all form labels with their original text and remove classes
         Object.keys( this._formLabels ).forEach( ( key ) => {
             const label = this._formLabels[ key ];
             label.innerHTML = key.replace( /^\w/, c => c.toUpperCase() );
@@ -195,6 +197,8 @@ export default class ContactForm {
             } ).then( ( response: AxiosResponse ) => {
                 this.handleResponse( response.data );
             } );
+
+            this.refreshCaptcha( csrfToken );
         }
     }
 }
