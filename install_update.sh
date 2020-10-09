@@ -2,7 +2,6 @@
 
 SCRIPT_NAME=install_update.sh
 SERVICE_FILE=rossch.service
-DATA_PATH=/ross.ch
 
 OLD_SHA1=$(sha1sum "$PWD"/$SCRIPT_NAME) || {
     echo "Failed to calculate sha1"
