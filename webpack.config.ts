@@ -10,8 +10,7 @@ import WebpackDeepScopeAnalysisPlugin from 'webpack-deep-scope-plugin';
 import * as WriteFilePlugin from 'write-file-webpack-plugin';
 const FaviconsWebpackPlugin = require( 'favicons-webpack-plugin' );
 
-import { config } from './src/config';
-import { pathToFileURL } from 'url';
+import { Config } from './src/config';
 
 const srcDir = resolve( __dirname, 'src' );
 const publicDir = resolve( __dirname, 'public' );
@@ -28,6 +27,9 @@ const nodeEnv = process.env.NODE_ENV || 'development';
 
 module.exports = {
     mode: nodeEnv,
+    node: {
+        fs: 'empty'
+    },
     entry: [ join( jsDir, 'main' ) ],
     output: { path: publicDir, filename: '[name].[hash].js', publicPath: '/' },
     resolve: { extensions: [ '.ts', '.tsx', '.js' ] },
@@ -76,9 +78,9 @@ module.exports = {
         } ),
         new HtmlWebpackPlugin( {
             template: join( partialsDir, 'head.hbs' ),
-            title: config.title,
+            title: Config.title,
             meta: {
-                description: config.description,
+                description: Config.description,
             },
             inject: 'head',
             filename:

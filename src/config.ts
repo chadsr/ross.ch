@@ -1,8 +1,9 @@
 import * as dotenv from 'dotenv';
 import * as random from 'randomatic';
-import { join } from 'path';
+import { resolve } from 'path';
 
-dotenv.config( { path: '.config.env' } );
+const configEnvPath = resolve(__dirname, '../.config.env');
+dotenv.config( { path: configEnvPath } );
 
 export interface IConfig {
     port: number;
@@ -28,9 +29,17 @@ export interface IConfig {
     csrfExpiryMilis: number;
     captchaLength: number;
     captchaFontSize: number;
+
+    minNameLength: number;
+    maxNameLength: number;
+    minEmailDomainSegments: number;
+
+    minMessageLength: number;
+    formSubmitTimeoutMs: number;
+    formMessageDurationMs: number;
 }
 
-const config: IConfig = {
+const Config: IConfig = {
     port: +process.env.PORT || 8080,
     debugLogging: process.env.NODE_ENV == 'development',
     title: process.env.TITLE || 'Ross Chadwick',
@@ -48,12 +57,18 @@ const config: IConfig = {
     maxBlogPosts: parseInt( process.env.MAX_POSTS ) || 20,
     githubUser: process.env.GITHUB_USER || 'Chadsr',
     maxRepos: parseInt( process.env.MAX_REPOS ) || 20,
-    emailTemplatePath: join( __dirname, 'views/email.hbs' ),
-    emailConfirmationTemplatePath: join( __dirname, 'views/email_confirmation.hbs' ),
-    pgpKeyPath: process.env.PGP_KEY_PATH || join( __dirname, 'assets/files/2B7340DB13C85766.asc' ),
+    emailTemplatePath: resolve( __dirname, 'views/email.hbs' ),
+    emailConfirmationTemplatePath: resolve( __dirname, 'views/email_confirmation.hbs' ),
+    pgpKeyPath: process.env.PGP_KEY_PATH || resolve( __dirname, 'assets/files/2B7340DB13C85766.asc' ),
     captchaLength: parseInt( process.env.CAPTCHA_LEN ) || 4,
     captchaFontSize: 18,
     csrfExpiryMilis: parseInt( process.env.CSRF_EXPIRY ) || 1800000,
+    minNameLength: 2,
+    maxNameLength: 32,
+    minEmailDomainSegments: 2,
+    minMessageLength: 2,
+    formSubmitTimeoutMs: 5000,
+    formMessageDurationMs: 2000
 };
 
-export { config };
+export { Config };

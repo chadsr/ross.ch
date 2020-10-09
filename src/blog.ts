@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { logger } from './logging';
-import { config } from './config';
+import { Config } from './config';
 import { BlogFeed, BlogPost } from './interfaces';
 
 const MEDIUM_API_URL = 'https://https://api.medium.com/v1';
@@ -13,7 +13,7 @@ export async function getAggregatedFeed ( maxPosts: number ): Promise<BlogFeed> 
 
     // try {
     //     // Get medium posts up until maxPosts
-    //     const mediumFeed = await getMediumFeed( config.mediumUser, maxPosts );
+    //     const mediumFeed = await getMediumFeed( Config.mediumUser, maxPosts );
 
     //     // AggregatedFeed is empty, so just replace
     //     aggregatedFeed.posts = mediumFeed.posts;
@@ -23,7 +23,7 @@ export async function getAggregatedFeed ( maxPosts: number ): Promise<BlogFeed> 
 
     try {
         // Get ghost blog posts up until maxPosts
-        const ghostFeed = await getGhostFeed( config.ghostPublicApiKey, maxPosts );
+        const ghostFeed = await getGhostFeed( Config.ghostPublicApiKey, maxPosts );
 
         // Merge into aggregatedFeed
         aggregatedFeed.posts = aggregatedFeed.posts.concat( ghostFeed.posts );
@@ -50,7 +50,7 @@ export async function getGhostFeed ( apiKey: string, maxPosts: number ): Promise
     };
 
     try {
-        const res = await axios.get( `${config.ghostUrl}/ghost/api/v2/content/posts/?key=${apiKey}&include=tags` );
+        const res = await axios.get( `${Config.ghostUrl}/ghost/api/v2/content/posts/?key=${apiKey}&include=tags` );
         const postsObj = <Object> res.data[ 'posts' ];
 
         if ( postsObj ) {

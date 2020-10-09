@@ -15,7 +15,7 @@ import * as koaWebpack from 'koa-webpack';
 import * as Keyv from 'keyv';
 
 import { logger, loggerMiddleware } from './logging';
-import { config } from './config';
+import { Config } from './config';
 import { router } from './routes';
 import Store from './store';
 
@@ -29,7 +29,7 @@ const dirPublic = join( __dirname, '../public' );
 const dirPartials = join( dirViews, 'partials' );
 
 const keyv = new Keyv( {
-    ttl: config.csrfExpiryMilis,
+    ttl: Config.csrfExpiryMilis,
 } );
 
 // Load environment variables from .env file
@@ -86,7 +86,7 @@ async function run () {
     );
 
     // load the session key from our configuration
-    app.keys = [ config.sessionKey ];
+    app.keys = [ Config.sessionKey ];
 
     // add session support for csrf
     const sessionConfig = {
@@ -126,9 +126,9 @@ async function run () {
 
     app.use( router.routes() ).use( router.allowedMethods() );
 
-    app.listen( config.port );
+    app.listen( Config.port );
 
-    logger.info( `Server running on port ${config.port}` );
+    logger.info( `Server running on port ${Config.port}` );
 }
 
 run();

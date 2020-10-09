@@ -62,6 +62,12 @@ document.addEventListener( 'DOMContentLoaded', function () {
         contactHandler.submit( e );
     } );
 
+    const captchaRefreshButton = <HTMLSpanElement> document.getElementById( 'captcha-refresh-btn' );
+    captchaRefreshButton.addEventListener( 'click', function () {
+        const csrfToken: string = contactForm.elements[ '_csrf' ].value;
+        contactHandler.refreshCaptcha(csrfToken);
+    } );
+
     // Menu cube rotate events
     const aboutButton = <HTMLLIElement> document.getElementById( 'about-btn' );
     aboutButton.addEventListener( 'mousedown', function () {

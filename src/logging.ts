@@ -1,9 +1,9 @@
 import * as Koa from 'koa';
-import { config } from './config';
+import { Config } from './config';
 import { Logger, createLogger, format, transports } from 'winston';
 
 const logger = createLogger( {
-    level: config.debugLogging ? 'debug' : 'info',
+    level: Config.debugLogging ? 'debug' : 'info',
     transports: [
     // Write errors to error.log
         new transports.File( { filename: 'error.log', level: 'error' } ),

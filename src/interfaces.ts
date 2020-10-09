@@ -8,14 +8,14 @@ export interface ExtendedContext extends ParameterizedContext {
     deleteCaptcha ( csrf: string );
 }
 
-export interface Message {
+export interface ResponseMessage {
     target?: string; // Used to specify an identifier that this message applies to
     text: string;
 }
 
 export interface Response {
     success: boolean;
-    messages: Message[];
+    messages: ResponseMessage[];
 }
 
 export interface BlogPost {
@@ -43,6 +43,18 @@ export interface Repository {
 
 export interface Github {
     repositories: Repository[];
+}
+
+export interface ValidatedFormData {
+    data: ContactFormRequest;
+    errors: ResponseMessage[];
+}
+
+export interface ContactFormRequest {
+    name: string;
+    email: string;
+    message: string;
+    captcha: string;
 }
 
 export interface Captcha {

@@ -17,7 +17,7 @@ export default class Store {
             return this.store.set( csrf, captcha.string );
         };
 
-        ctx.deleteCaptcha = ( csrf: string ): Promise<boolean> => {
+        ctx.deleteCaptcha = ( csrf: string ): Promise<true> => {
             // Keep the csrf for now with non-undefined value (empty string), to handle requesting of new captcha route
             // If this was set to undefined, if would be unclear if the csrf key existed
             return this.store.set( csrf, '' );

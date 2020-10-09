@@ -1,16 +1,10 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { Response, Message } from '../interfaces';
-import { errors } from '../errors';
+import { Response, ResponseMessage, ContactFormRequest } from '../interfaces';
+import { ErrorMessages } from '../errors';
+import { Config } from '../config';
 
 const CAPTCHA_ID = 'captcha-img';
-
-interface FormData {
-    name: string;
-    email: string;
-    message: string;
-    captcha: string;
-}
 
 // A basic contact form class
 export default class ContactForm {
@@ -67,7 +61,7 @@ export default class ContactForm {
         // Reset the submit button back to normal after 4s
         setTimeout( () => {
             this.resetSubmitButton();
-        }, 4000 );
+        }, Config.formMessageDurationMs );
     }
 
     resetSubmitButton () {
@@ -81,7 +75,13 @@ export default class ContactForm {
             url: '/captcha',
             headers: { 'X-CSRF-Token': csrfToken },
             xsrfHeaderName: 'X-CSRF-Token',
-            xsrfCookieName: 'XSRF-TOKEN',
+            xsrfCookieName: 'XSRF-TOKEN'
+        } ).then( ( response: AxiosResponse ) => {
+            const resp: Response = response.data;
+            const captchaBas64 = resp.messages[ 0 ].text;
+            const captchaImg = document.getElementById( CAPTCHA_ID ) as HTMLImageElement;
+            captchaImg.src = captchaBas64;
+            this._form.captcha.value = ''; // Remove old input for user convenience
         } ).catch( error => {
             let response;
             if ( error.response ) {
@@ -89,16 +89,12 @@ export default class ContactForm {
                 response = <Response> {
                     messages: [ {
                         target: 'submit',
-                        text: 'Failed to refresh captcha!'
+                        text: 'Failed to refresh captcha. Try again?'
                     } ]
                 };
             }
+
             this.handleResponse( response );
-        } ).then( ( response: AxiosResponse ) => {
-            const resp: Response = response.data;
-            const captchaBas64 = resp.messages[ 0 ].text;
-            const captchaImg = document.getElementById( CAPTCHA_ID ) as HTMLImageElement;
-            captchaImg.src = captchaBas64;
         } );
     }
     resetLabels () {
@@ -119,13 +115,19 @@ export default class ContactForm {
         return re.test( String( email ).toLowerCase() );
     }
 
-    isFormDataValid ( formData: FormData ): boolean {
+    isFormDataValid ( formData: ContactFormRequest ): boolean {
         let valid = true;
 
         // Invalid name
-        if ( formData.name.length < 2 || formData.name.length > 32 ) {
+        if ( formData.name.length < Config.minNameLength ) {
             const nameLabel = this._formLabels[ 'name' ];
-            nameLabel.innerHTML = errors.InvalidName.message;
+            nameLabel.innerHTML = ErrorMessages.InvalidNameShort;
+            nameLabel.classList.add( 'error' );
+            nameLabel.scrollIntoView();
+            valid = false;
+        } else if ( formData.name.length > Config.maxNameLength) {
+            const nameLabel = this._formLabels[ 'name' ];
+            nameLabel.innerHTML = ErrorMessages.InvalidNameLong;
             nameLabel.classList.add( 'error' );
             nameLabel.scrollIntoView();
             valid = false;
@@ -134,20 +136,22 @@ export default class ContactForm {
         // Invalid email address
         if ( !this.validateEmail( formData.email ) ) {
             const emailLabel = this._formLabels[ 'email' ];
-            emailLabel.innerHTML = errors.InvalidEmail.message;
+            emailLabel.innerHTML = ErrorMessages.InvalidEmail;
             emailLabel.classList.add( 'error' );
             emailLabel.scrollIntoView();
             valid = false;
         }
 
         // Invalid message
-        if ( formData.message.length < 2 ) {
+        if ( formData.message.length < Config.minMessageLength ) {
             const msgLabel = this._formLabels[ 'message' ];
-            msgLabel.innerHTML = errors.InvalidMsg.message;
+            msgLabel.innerHTML = ErrorMessages.InvalidMsg;
             msgLabel.classList.add( 'error' );
             msgLabel.scrollIntoView();
             valid = false;
         }
+
+        // Only check captcha server-side, so a new one is always provided on failure
 
         return valid;
     }
@@ -161,7 +165,7 @@ export default class ContactForm {
 
         const csrfToken: string = this._form.elements[ '_csrf' ].value;
 
-        const formData: FormData = {
+        const formData: ContactFormRequest = {
             name: this._form.elements[ 'name' ].value,
             email: this._form.elements[ 'email' ].value,
             message: this._form.elements[ 'message' ].value,
@@ -178,7 +182,10 @@ export default class ContactForm {
                 headers: { 'X-CSRF-Token': csrfToken },
                 xsrfHeaderName: 'X-CSRF-Token',
                 xsrfCookieName: 'XSRF-TOKEN',
-                data: formData
+                data: formData,
+                timeout: Config.formSubmitTimeoutMs
+            } ).then( ( response: AxiosResponse ) => {
+                this.handleResponse( response.data );
             } ).catch( error => {
                 let response;
                 if ( !error.response ) {
@@ -194,8 +201,6 @@ export default class ContactForm {
                 }
 
                 this.handleResponse( response );
-            } ).then( ( response: AxiosResponse ) => {
-                this.handleResponse( response.data );
             } );
 
             this.refreshCaptcha( csrfToken );

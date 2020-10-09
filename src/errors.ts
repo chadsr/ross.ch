@@ -1,15 +1,17 @@
-export interface IErrors {
-    InvalidEmail: Error;
-    InvalidName: Error;
-    InvalidMsg: Error;
-    InvalidCaptcha: Error;
+export interface ErrorMessagesI {
+    InvalidEmail: string;
+    InvalidNameShort: string;
+    InvalidNameLong: string;
+    InvalidMsg: string;
+    InvalidCaptcha: string;
 }
 
-const errors: IErrors = {
-    InvalidEmail: Error( 'Email looks invalid :(' ),
-    InvalidName: Error( 'Name is a little short...' ),
-    InvalidMsg: Error( 'Message is a little short...' ),
-    InvalidCaptcha: Error( 'Captcha is invalid!' ),
+const ErrorMessages: ErrorMessagesI = {
+    InvalidEmail: 'Email looks invalid :(',
+    InvalidNameShort: 'Is your name really one character?',
+    InvalidNameLong: 'Do you have a shorter name I can call you?',
+    InvalidMsg: 'Message is a little short...',
+    InvalidCaptcha: 'Captcha is invalid!'
 };
 
-export { errors };
+export { ErrorMessages };

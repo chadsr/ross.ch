@@ -3,7 +3,7 @@ import { openpgpEncrypt } from 'nodemailer-openpgp';
 import * as Handlebars from 'handlebars';
 import { readFile } from 'fs';
 
-import { config } from './config';
+import { Config } from './config';
 import { logger } from './logging';
 
 export interface Email {
@@ -115,6 +115,6 @@ class Mailer {
     }
 }
 
-const contactMailer = new Mailer( config.emailHost, config.smtpPort, config.emailUsername, config.emailPassword, config.emailTemplatePath, config.emailConfirmationTemplatePath, config.pgpKeyPath );
+const contactMailer = new Mailer( Config.emailHost, Config.smtpPort, Config.emailUsername, Config.emailPassword, Config.emailTemplatePath, Config.emailConfirmationTemplatePath, Config.pgpKeyPath );
 
 export { contactMailer, Mailer };

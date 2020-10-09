@@ -20,7 +20,10 @@
           required="required"></textarea>
       </div>
       <div class="field perspective">
-        <div class="title"><img id="captcha-img" src="{{captchaBase64}}" title="captcha"></div>
+        <div class="title"><img id="captcha-img" src="{{captchaBase64}}" title="captcha">
+          <a id="captcha-refresh-btn" title="Refresh Captcha">
+          </a>
+        </div>
         <input id="captcha" name="captcha" type="text" placeholder="Type what you see above" required="required">
       </div>
       <div class="field perspective">
@@ -34,5 +37,6 @@
     <p>Messages are encrypted using my <a href="/files/2B7340DB13C85766.asc" target="_blank">PGP
         public key</a>.</p>
     <p>You will receive a confirmation email if everything worked out!</p>
+    <em>(Check your junk folder if you don't see it within a minute or so)</em>
   </div>
 </div>
