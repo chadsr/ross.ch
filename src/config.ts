@@ -26,7 +26,7 @@ export interface IConfig {
     emailTemplatePath: string;
     emailConfirmationTemplatePath: string;
     pgpKeyPath: string;
-    csrfExpiryMilis: number;
+    csrfExpiryMs: number;
     captchaLength: number;
     captchaFontSize: number;
 
@@ -62,7 +62,7 @@ const Config: IConfig = {
     pgpKeyPath: process.env.PGP_KEY_PATH || resolve( __dirname, 'assets/files/2B7340DB13C85766.asc' ),
     captchaLength: parseInt( process.env.CAPTCHA_LEN ) || 4,
     captchaFontSize: 16,
-    csrfExpiryMilis: parseInt( process.env.CSRF_EXPIRY ) || 1800000,
+    csrfExpiryMs: parseInt( process.env.CSRF_EXPIRY ) || 1800000,
     minNameLength: 2,
     maxNameLength: 32,
     minEmailDomainSegments: 2,

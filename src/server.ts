@@ -29,7 +29,7 @@ const dirPublic = join( __dirname, '../public' );
 const dirPartials = join( dirViews, 'partials' );
 
 const keyv = new Keyv( {
-    ttl: Config.csrfExpiryMilis,
+    ttl: Config.csrfExpiryMs,
 } );
 
 // Load environment variables from .env file
