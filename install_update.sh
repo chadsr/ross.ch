@@ -17,6 +17,11 @@ git fetch origin master || {
     exit 1
 }
 
+# Reset the service file which changes dynamically
+git checkout master -- rossch.service || {
+    echo "Failed to reset rossch.service"
+    exit 1
+}
 # Rebase changed onto any updates
 git rebase origin/master || {
     echo "Failed to rebase ontop of changes from origin/master"
