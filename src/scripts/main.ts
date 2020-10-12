@@ -39,7 +39,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
     // Remove the class controlling styles when javascript is disabled
     document.body.classList.remove( 'nojs-styles' );
 
-    isSafari = navigator.userAgent.indexOf( 'Safari' ) != -1 && navigator.userAgent.indexOf( 'Chrome' ) == -1;
+    isSafari = navigator.userAgent.indexOf( 'Safari' ) !== -1 && navigator.userAgent.indexOf( 'Chrome' ) === -1;
 
     const swipe = new Hammer( document.body, {
         recognizers: [
@@ -169,13 +169,13 @@ function renderBackground () {
 function hideSwipeIndicator () {
     const swipeIndicator = document.getElementById( 'swipe-indicator' );
 
-    if ( swipeIndicator.classList.contains( 'swiped' ) != true ) {
+    if ( swipeIndicator.classList.contains( 'swiped' ) !== true ) {
         swipeIndicator.classList.add( 'swiped' );
     }
 }
 
 function rotateTo ( side: number ) {
-    if ( side != currentSide && side >= MIN_SIDE && side <= MAX_SIDE ) {
+    if ( side !== currentSide && side >= MIN_SIDE && side <= MAX_SIDE ) {
         currentSide = side;
         const nav = document.getElementById( 'nav' );
         const navList = nav.getElementsByTagName( 'ul' )[ 0 ];
