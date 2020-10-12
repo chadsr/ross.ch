@@ -10,8 +10,8 @@ import ContactForm from './contact';
 import EscherCubes from './escher';
 
 // Key event codes
-const LEFT_ARROW = 37;
-const RIGHT_ARROW = 39;
+const LEFT_ARROW = 'ArrowLeft';
+const RIGHT_ARROW = 'ArrowRight';
 
 // Needs a long debounce to cover for slow CSS transitions
 const DEBOUNCE_MS = 2000;
@@ -111,9 +111,9 @@ document.addEventListener( 'keydown', function ( event ) {
 
     // Only allow keypresses to rotate when active element is not an input element
     if ( activeElement && inputs.indexOf( activeElement.tagName.toLowerCase() ) == -1 ) {
-        if ( event.keyCode == LEFT_ARROW ) {
+        if ( event.key === LEFT_ARROW ) {
             rotateTo( currentSide - 1 );
-        } else if ( event.keyCode == RIGHT_ARROW ) {
+        } else if ( event.key === RIGHT_ARROW ) {
             rotateTo( currentSide + 1 );
         }
     }
