@@ -129,7 +129,6 @@ function fixTranslateZ () {
     // Apply this value to the translateZ function of the cube's wrapper container
     const cubeWrapper = document.getElementById( CUBE_WRAPPER_ID );
     cubeWrapper.style.transform = `translateZ(-${cubeStyles.width})`;
-    cubeWrapper.style.webkitTransform = `translateZ(-${cubeStyles.width})`;
 }
 
 function debounce ( func: Function, time: number ) {
