@@ -7,7 +7,7 @@ import { contactMailer, Email } from '../mailer';
 import { getAggregatedFeed } from '../blog';
 import { getUserReposWithStars } from '../github';
 import { ErrorMessages } from '../errors';
-import { getCaptcha } from '../captcha';
+import { generateCaptcha } from '../captcha';
 
 
 
@@ -81,7 +81,7 @@ export async function renderIndex ( ctx: ExtendedContext ) {
     const year = new Date().getFullYear().toString();
 
     // Get a captcha object
-    const captcha = await getCaptcha( Config.captchaLength, Config.captchaFontSize );
+    const captcha = await generateCaptcha( Config.captchaLength, Config.captchaFontSize, Config.captchaBackgroundColour, Config.captchaMinContrastRatio );
 
     try {
         await ctx.setCaptcha( ctx.csrf, captcha );
@@ -174,7 +174,7 @@ export async function handleContactForm ( ctx: ExtendedContext ) {
 }
 
 export async function serveCaptcha ( ctx: ExtendedContext ) {
-    const captcha = await getCaptcha( Config.captchaLength, Config.captchaFontSize );
+    const captcha = await generateCaptcha( Config.captchaLength, Config.captchaFontSize, Config.captchaBackgroundColour, Config.captchaMinContrastRatio );
 
     const csrf = ctx.headers[ 'x-csrf-token' ];
     if ( csrf !== undefined ) {

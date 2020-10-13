@@ -2,6 +2,8 @@ import * as dotenv from 'dotenv';
 import * as random from 'randomatic';
 import { resolve } from 'path';
 
+import { Colour } from './interfaces';
+
 const configEnvPath = resolve(__dirname, '../.config.env');
 dotenv.config( { path: configEnvPath } );
 
@@ -29,7 +31,8 @@ export interface IConfig {
     csrfExpiryMs: number;
     captchaLength: number;
     captchaFontSize: number;
-
+    captchaBackgroundColour: Colour;
+    captchaMinContrastRatio: number; // The minimum contrast ratio between captcha text colour and the background colour (for improved readability)
     minNameLength: number;
     maxNameLength: number;
     minEmailDomainSegments: number;
@@ -61,7 +64,9 @@ const Config: IConfig = {
     emailConfirmationTemplatePath: resolve( __dirname, 'views/email_confirmation.hbs' ),
     pgpKeyPath: process.env.PGP_KEY_PATH || resolve( __dirname, 'assets/files/2B7340DB13C85766.asc' ),
     captchaLength: parseInt( process.env.CAPTCHA_LEN ) || 4,
-    captchaFontSize: 16,
+    captchaFontSize: 20,
+    captchaBackgroundColour: {red: 69, green: 83, blue: 95},
+    captchaMinContrastRatio: 3,
     csrfExpiryMs: parseInt( process.env.CSRF_EXPIRY ) || 1800000,
     minNameLength: 2,
     maxNameLength: 32,

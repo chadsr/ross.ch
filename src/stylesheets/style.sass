@@ -1,23 +1,30 @@
 // Colours
-$color_background : #181411
-$white : #fff
-$color_highlight : #0f8f83
-$color_main : rgba(29, 54, 75, 0.95)
-$color_content_dark : rgba(25, 40, 53, 0.95)
-$color_field_title : rgba(69, 83, 95, 0.95)
-$color_shadow : rgba(0, 0, 0, 0.75)
-$color_twitter : #00aced
-$color_mastodon : #3088d4
-$color_linkedin : #4875b4
-$color_github : #4183c4
-$color_bitcoin : #f7931a
-$color_ethereum : linear-gradient(90deg, #fca09a, #fcccd3, #ffcc9d, #98ddad, #81d7ec, #a0aaed)
-$color_scrollbar : $color_main
-$color_scrollbar_track : $color_main
-$color_scrollbar_thumb : $color_field_title
-$color_keybase : #4c8eff
-$color_success : #15a12a
-$color_error : #a51818
+$color-background : #0B0C10
+$color-content : rgba(29, 54, 75, 0.95)
+$color-content_highlight : #0f8f83
+$color-content_secondary : rgba(25, 40, 53, 0.95)
+$color-content_secondary_highlight: $color-content_secondary
+$color-text : #fff
+$color-text_highlight: $color-text // Applies to all click-able text (buttons. links, etc)
+$color-text-link-highlight: $color-content_highlight // Overrides the above, but only for text with class .link
+$color-heading: $color-text
+$color-text_placeholder: $color-text
+$color-text_placeholder_highlight: $color-text_highlight
+$color-title_banner : rgba(69, 83, 95, 0.95)
+$color-shadow : rgba(0, 0, 0, 0.75)
+$color-scrollbar : $color-content
+$color-scrollbar_track : $color-content
+$color-scrollbar_thumb : $color-title_banner
+
+$color-twitter : #00aced
+$color-mastodon : #3088d4
+$color-linkedin : #4875b4
+$color-github : #4183c4
+$color-bitcoin : #f7931a
+$color-ethereum : linear-gradient(90deg, #fca09a, #fcccd3, #ffcc9d, #98ddad, #81d7ec, #a0aaed)
+$color-keybase : #4c8eff
+$color-success : #15a12a
+$color-error : #a51818
 
 // URLs
 $url-background : url('../assets/images/bg.jpg')
@@ -51,6 +58,7 @@ $width-icon-button : 50px
     margin : 0 0 16px 0
     display : inline-block
     text-rendering : geometricPrecision
+    color : $color-heading
 
 %list
     margin : 0
@@ -64,18 +72,29 @@ $width-icon-button : 50px
     box-shadow : none
     padding : 0
     margin : 0
-    color : $white
+    color : $color-text
 
 %form-input-style
     @extend %form-layout
+    @extend %transition-ease
     font-family : $font-main
     font-size : 16px
-    background : $color_content_dark
+    background-color : $color-content_secondary
+    &:hover, &:focus
+        background : $color-content_secondary_highlight
+        color : $color-text_highlight
+        outline : none
+        &::placeholder
+            color : $color-text_placeholder_highlight
+            opacity : 0.5
+    &::placeholder
+        @extend %transition-ease
+        color : $color-text_placeholder
 
 %field-title-style
     @extend %form-layout
     display : block
-    background : $color_field_title
+    background : $color-title_banner
     font-weight : bold
 
 %no-select
@@ -146,7 +165,8 @@ $width-icon-button : 50px
 // Main styles
 ::selection
     background-image : none
-    background : $color_highlight
+    background : $color-content_highlight
+    color : $color-text_highlight
 
 html
     height : 100%
@@ -157,7 +177,7 @@ body
     @extend %no-select
     tap-highlight-color : rgba(0, 0, 0, 0)
     font-family : $font-main
-    color : $white
+    color : $color-text
     height : 100%
     min-height : 100%
     margin : 0
@@ -194,7 +214,7 @@ p
     margin : 8px 0
 
 a
-    color : $white
+    color : $color-text
     text-decoration : none
     outline : none
     cursor : pointer
@@ -204,6 +224,9 @@ a
 
     &:focus
         outline : none
+
+    &:hover
+        color : $color-text_highlight
 
 p
     font-weight : 100
@@ -236,41 +259,43 @@ ul
             cursor : pointer
 
             &:hover
-                background : $color_highlight
+                background : $color-content_highlight
+                color : $color-text_highlight
+
                 &::after
                     @extend %threed-side-top
 
             &.twitter
                 &:hover
-                    background : $color_twitter
+                    background : $color-twitter
                 a::before
                     @extend %button-icon
                     background-image : $url-twitter
 
             &.mastodon
                 &:hover
-                    background : $color_mastodon
+                    background : $color-mastodon
                 a::before
                     @extend %button-icon
                     background-image : $url-mastodon
 
             &.linkedin
                 &:hover
-                    background : $color_linkedin
+                    background : $color-linkedin
                 a::before
                     @extend %button-icon
                     background-image : $url-linkedin
 
             &.github
                 &:hover
-                    background : $color_github
+                    background : $color-github
                 a::before
                     @extend %button-icon
                     background-image : $url-github
 
             &.keybase
                 &:hover
-                    background : $color_keybase
+                    background : $color-keybase
                 a::before
                     @extend %button-icon
                     background-image : $url-keybase
@@ -310,14 +335,14 @@ ul
 
             &.bitcoin
                 &:hover
-                    background : $color_bitcoin
+                    background : $color-bitcoin
                 &::before
                     @extend %button-icon
                     background-image : $url-bitcoin
 
             &.ethereum
                 &:hover
-                    background : $color_ethereum
+                    background : $color-ethereum
                 &::before
                     @extend %button-icon
                     background-image : $url-ethereum
@@ -354,7 +379,10 @@ nav
     ul li
         @extend %transition-ease
         &:hover, &.selected
-            background : $color_highlight
+            background : $color-content_highlight
+            > a
+                color : $color-text_highlight
+
             &::after
                 @extend %threed-side-bottom
 
@@ -368,7 +396,7 @@ nav
     background-repeat : no-repeat
     background-attachment : fixed
     background-size : cover
-    //background : $color_background
+    //background : $color-background
     z-index : 1
     @extend %full-screen
 
@@ -396,7 +424,7 @@ nav
     position : absolute
     bottom : 64px
     left : 0px
-    background : $color_main
+    background : $color-content
     display : none
 
     .notification-text
@@ -423,10 +451,15 @@ body
     text-align : center
 
 button
+    @extend %transition-ease
     cursor : pointer
     &:hover
-        @extend %transition-ease
-        background : $color_highlight
+        background : $color-content_highlight
+        color : $color-text_highlight
+
+.link
+    &:hover, &:focus
+        color : $color-text-link-highlight
 
 .button
     cursor : pointer
@@ -436,7 +469,8 @@ button
 
     &:hover span
         @extend %transition-ease
-        background : $color_highlight
+        background : $color-content_highlight
+        color : $color-text_highlight
 
 .superscript
     vertical-align : super
@@ -453,10 +487,10 @@ button
         text-align : center
 
 .error, .error::before, .error::after, .error:hover
-    background-color : $color_error !important
+    background-color : $color-error !important
 
 .success, .success::before, .success::after, .success:hover
-    background-color : $color_success !important
+    background-color : $color-success !important
 
 .left
     float : left
@@ -477,7 +511,7 @@ button
     display : inline
 
 footer
-    background : $color_main
+    background : $color-content
     width : 100%
     max-height : 32px
     position : fixed
@@ -486,7 +520,7 @@ footer
     z-index : 2
 
 header
-    background : $color_main
+    background : $color-content
     width : 100%
     height : 32px
     position : fixed
@@ -527,7 +561,7 @@ header
     transform-style : preserve-3d
     position : relative
     display : inline-block
-    top : 64px
+    top : -100%
 
     > .face
         width : 100%
@@ -536,24 +570,31 @@ header
         overflow-x : hidden
         overflow-scrolling : touch
         position : absolute
-        box-shadow : $color_shadow 0px 0px 64px 8px inset
-        background : $color_main
+        box-shadow : $color-shadow 0px 0px 64px 8px inset
+        background : $color-content
         backface-visibility : visible
         z-index : 100
+        pointer-events : none // Disable all links until the face has .focus
         @extend %transition-ease-in-out
 
         &::-webkit-scrollbar-track
-            background : $color_scrollbar_track
+            background : $color-scrollbar_track
 
         &::-webkit-scrollbar
-            background : $color_scrollbar
+            background : $color-scrollbar
             width : 8px
 
         &::-webkit-scrollbar-thumb
-            background : $color_scrollbar_thumb
+            background : $color-scrollbar_thumb
 
             &:hover, &:active
-                background : $color_highlight
+                background : $color-content_highlight
+                color : $color-text_highlight
+
+        scrollbar-width : thin
+        scrollbar-track-color :  $color-scrollbar_track
+        scrollbar-base-color : $color-scrollbar
+        scroll-behavior : smooth
 
         .content
             margin : 32px 10%
@@ -595,6 +636,7 @@ header
                 margin-bottom : 32px
 
         &.focus
+            pointer-events : auto // Enable links
             overflow-y : scroll
             box-shadow : none
             z-index : 9999
@@ -611,7 +653,12 @@ footer::after
 .field.perspective
     margin-bottom : 24px
 
+    &:hover
+        .title
+            background-color : $color-content_highlight
+
     .title, button
+        @extend %transition-ease
         font-size : 16px
         min-height : 32px
         line-height : 2em
@@ -619,18 +666,21 @@ footer::after
             @extend %threed-side-top
 
     button
+
         height : 32px
         width : 100%
         margin : 0
         padding : 0
         border : none
         font-weight : bold
+        transform-style : preserve-3d
 
         &::after
             @extend %threed-side-top
 
         &:active
-            transform : scale3d(0.98, 0.98, 0.98)
+            outline : none
+            transform : scale3d(0.98, 0.98, 1)
 
     input
         height : 32px
@@ -643,10 +693,20 @@ footer::after
 #contact-form
     margin-top : 32px
 
-#captcha
+#captcha-title
+    line-height : 0
+
+#captcha // The input
     text-transform : uppercase
     &::placeholder
         text-transform : none
+
+#captcha-img
+    border-radius : 2px
+    top : 4px
+    position : relative
+    padding : 0 0 4px 6px
+    background-color : $color-title_banner
 
 #captcha-refresh-btn
     display : inline-block
@@ -661,18 +721,21 @@ footer::after
 
 // Blog and Repository stuff
 .blog-post, .repo
+    background-color : $color-content_secondary
     margin-bottom : 32px !important
+    @extend %transition-ease
     a
         font-weight : normal !important
-        &:hover
-            .blog-post-title, .repo-title
-                @extend %transition-ease
-                background : $color_highlight
+    &:hover
+        background : $color-content_secondary_highlight
+
+        .blog-post-title, .blog-post-tag, .repo-title, .repo-language, .repo-stars
+            background : $color-content_highlight
+            color : $color-text_highlight
     &::before
         display : none !important
 
 .blog-post-content, .repo-content
-    background-color : $color-content-dark
     padding : 8px 16px 16px 16px
 
 .blog-post-title, .repo-title
@@ -683,7 +746,6 @@ footer::after
 .blog-post-tags, .repo-stats
     line-height : 32px
     text-align : center
-    background-color : $color-content-dark
 
 .repo-stars
     &::after
@@ -691,15 +753,15 @@ footer::after
         content : '\2605'
 
 .blog-post-tag, .repo-stars, .repo-language
-    border-radius : 4px
+    border-radius : 2px
     padding : 4px
-    background-color : $color-field-title
+    background-color : $color-title_banner
+    @extend %transition-ease
 
 .blog-post-snippet, .repo-description
     margin : 0
 
 .blog-post-date, .repo-updated-date
-    background-color : $color-content-dark
     padding : 8px
     display : block
     font-style : italic
