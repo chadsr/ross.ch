@@ -574,6 +574,7 @@ header
         background : $color-content
         backface-visibility : visible
         z-index : 100
+        pointer-events : none // Disable all links until the face has .focus
         @extend %transition-ease-in-out
 
         &::-webkit-scrollbar-track
@@ -589,6 +590,11 @@ header
             &:hover, &:active
                 background : $color-content_highlight
                 color : $color-text_highlight
+
+        scrollbar-width : thin
+        scrollbar-track-color :  $color-scrollbar_track
+        scrollbar-base-color : $color-scrollbar
+        scroll-behavior : smooth
 
         .content
             margin : 32px 10%
@@ -630,6 +636,7 @@ header
                 margin-bottom : 32px
 
         &.focus
+            pointer-events : auto // Enable links
             overflow-y : scroll
             box-shadow : none
             z-index : 9999
