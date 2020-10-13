@@ -1,12 +1,12 @@
 import * as Router from '@koa/router';
-import controller = require( './controller' );
+import { renderIndex, handleContactForm, serveCaptcha } from './controller';
 
 const router = new Router();
 
 // GENERAL ROUTES
-router.get( '/', <any> controller.renderIndex );
-router.post( '/', <any> controller.handleContactForm );
+router.get('/', renderIndex);
+router.post('/', handleContactForm);
 
-router.get( '/captcha', <any> controller.serveCaptcha );
+router.get('/captcha', serveCaptcha);
 
 export { router };
