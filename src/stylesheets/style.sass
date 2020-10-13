@@ -3,18 +3,15 @@ $color_background : #181411
 $white : #fff
 $color_highlight : #0f8f83
 $color_main : rgba(29, 54, 75, 0.95)
-$color_main_shadow : rgba(20, 39, 56, 0.95)
-$color_main_light : rgba(31, 60, 86, 0.95)
 $color_content_dark : rgba(25, 40, 53, 0.95)
 $color_field_title : rgba(69, 83, 95, 0.95)
+$color_shadow : rgba(0, 0, 0, 0.75)
 $color_twitter : #00aced
 $color_mastodon : #3088d4
 $color_linkedin : #4875b4
 $color_github : #4183c4
 $color_bitcoin : #f7931a
 $color_ethereum : linear-gradient(90deg, #fca09a, #fcccd3, #ffcc9d, #98ddad, #81d7ec, #a0aaed)
-$black_100 : rgba(0, 0, 0, 1)
-$black_75 : rgba(0, 0, 0, 0.75)
 $color_scrollbar : $color_main
 $color_scrollbar_track : $color_main
 $color_scrollbar_thumb : $color_field_title
@@ -539,7 +536,7 @@ header
         overflow-x : hidden
         overflow-scrolling : touch
         position : absolute
-        box-shadow : $black_75 0px 0px 64px 8px inset
+        box-shadow : $color_shadow 0px 0px 64px 8px inset
         background : $color_main
         backface-visibility : visible
         z-index : 100
