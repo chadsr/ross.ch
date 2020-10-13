@@ -6,9 +6,9 @@ import { BlogFeed, BlogPost } from './interfaces';
 
 const MEDIUM_API_URL = 'https://https://api.medium.com/v1';
 
-export async function getAggregatedFeed ( maxPosts: number ): Promise<BlogFeed> {
+export async function getAggregatedFeed(maxPosts: number): Promise<BlogFeed> {
     const aggregatedFeed: BlogFeed = {
-        posts: []
+        posts: [],
     };
 
     // try {
@@ -23,90 +23,89 @@ export async function getAggregatedFeed ( maxPosts: number ): Promise<BlogFeed> 
 
     try {
         // Get ghost blog posts up until maxPosts
-        const ghostFeed = await getGhostFeed( Config.ghostPublicApiKey, maxPosts );
+        const ghostFeed = await getGhostFeed(Config.ghostPublicApiKey, maxPosts);
 
         // Merge into aggregatedFeed
-        aggregatedFeed.posts = aggregatedFeed.posts.concat( ghostFeed.posts );
-    } catch ( error ) {
-        logger.error( `Could not get Ghost Blog Feed:\n${error}` );
+        aggregatedFeed.posts = aggregatedFeed.posts.concat(ghostFeed.posts);
+    } catch (error) {
+        logger.error(`Could not get Ghost Blog Feed:\n${error}`);
     }
 
-    if ( aggregatedFeed.posts.length != 0 ) {
+    if (aggregatedFeed.posts.length != 0) {
         // Re-sort the merged posts by timestamp value
-        aggregatedFeed.posts.sort( ( a, b ) => b.publishTimestamp - a.publishTimestamp );
+        aggregatedFeed.posts.sort((a, b) => b.publishTimestamp - a.publishTimestamp);
 
-        if ( aggregatedFeed.posts.length > maxPosts ) {
+        if (aggregatedFeed.posts.length > maxPosts) {
             // Only keep maxPosts number of elements from the beginning of the posts array
-            aggregatedFeed.posts = aggregatedFeed.posts.slice( 0, maxPosts );
+            aggregatedFeed.posts = aggregatedFeed.posts.slice(0, maxPosts);
         }
     }
 
     return aggregatedFeed;
 }
 
-export async function getGhostFeed ( apiKey: string, maxPosts: number ): Promise<BlogFeed> {
+export async function getGhostFeed(apiKey: string, maxPosts: number): Promise<BlogFeed> {
     const ghostFeed: BlogFeed = {
-        posts: []
+        posts: [],
     };
 
     try {
-        const res = await axios.get( `${Config.ghostUrl}/ghost/api/v2/content/posts/?key=${apiKey}&include=tags` );
-        const postsObj = <Object> res.data[ 'posts' ];
+        const res = await axios.get(`${Config.ghostUrl}/ghost/api/v2/content/posts/?key=${apiKey}&include=tags`);
+        const postsObj = res.data['posts'];
 
-        if ( postsObj ) {
-            for ( const post of Object.values( postsObj ) ) {
-
+        if (postsObj) {
+            for (const post of Object.values(postsObj)) {
                 // Get any tag names from the post
                 const tags: string[] = [];
-                post[ 'tags' ].forEach( tagObj => {
-                    tags.push( tagObj[ 'name' ] );
-                } );
+                post['tags'].forEach((tagObj) => {
+                    tags.push(tagObj['name']);
+                });
 
                 // Process the publish date to timestamp and formatted string
-                const publishDate = new Date( post[ 'published_at' ] );
+                const publishDate = new Date(post['published_at']);
                 const timestamp = publishDate.valueOf();
-                const dateString = publishDate.toLocaleDateString( 'en-GB', {
+                const dateString = publishDate.toLocaleDateString('en-GB', {
                     year: 'numeric',
                     month: 'short',
-                    day: 'numeric'
-                } );
+                    day: 'numeric',
+                });
 
-                const ghostPost = <BlogPost> {
-                    title: post[ 'title' ],
-                    url: post[ 'url' ],
+                const ghostPost = <BlogPost>{
+                    title: post['title'],
+                    url: post['url'],
                     publishDate: dateString,
                     publishTimestamp: timestamp,
-                    contentSnippet: post[ 'excerpt' ],
-                    tags: tags
+                    contentSnippet: post['excerpt'],
+                    tags: tags,
                 };
 
                 // Add the post to our ghostFeed object
-                ghostFeed.posts.push( ghostPost );
+                ghostFeed.posts.push(ghostPost);
 
                 // Break out of the loop when we hit maxPosts
-                if ( ghostFeed.posts.length == maxPosts ) {
+                if (ghostFeed.posts.length == maxPosts) {
                     break;
                 }
             }
         }
-    } catch ( error ) {
-        logger.error( 'Could not get Ghost feed: ', error );
-        return Promise.reject( error );
+    } catch (error) {
+        logger.error('Could not get Ghost feed: ', error);
+        return Promise.reject(error);
     }
 
     return ghostFeed;
 }
 
-export async function getMediumFeed ( username: string, maxPosts: number ): Promise<BlogFeed> {
+export async function getMediumFeed(username: string, maxPosts: number): Promise<BlogFeed> {
     const mediumFeed: BlogFeed = {
-        posts: []
+        posts: [],
     };
 
     try {
-        const res = await axios.get( `${MEDIUM_API_URL}users/${username}/publications` );
-        const publications = res.data[ 'data' ];
+        const res = await axios.get(`${MEDIUM_API_URL}users/${username}/publications`);
+        const publications = res.data['data'];
 
-        for ( const post of Object.values( publications ) ) {
+        for (const post of Object.values(publications)) {
             // Extract post tags
             // const tags: string[] = [];
             // post[ 'virtuals' ][ 'tags' ].forEach( tagObj => {
@@ -124,23 +123,22 @@ export async function getMediumFeed ( username: string, maxPosts: number ): Prom
             // } );
 
             // Populate our MediumPost object
-            const mediumPost = <BlogPost> {
-                title: post[ 'title' ],
-                url: post[ 'url' ],
-                contentSnippet: post[ 'description' ]
+            const mediumPost = <BlogPost>{
+                title: post['title'],
+                url: post['url'],
+                contentSnippet: post['description'],
             };
 
             // Add the medium post to our MediumFeed object
-            mediumFeed.posts.push( mediumPost );
+            mediumFeed.posts.push(mediumPost);
 
-            if ( mediumFeed.posts.length == maxPosts ) {
+            if (mediumFeed.posts.length == maxPosts) {
                 break;
             }
         }
-
-    } catch ( error ) {
-        logger.error( 'Could not get Medium feed: ', error );
-        return Promise.reject<BlogFeed>( error );
+    } catch (error) {
+        logger.error('Could not get Medium feed: ', error);
+        return Promise.reject<BlogFeed>(error);
     }
 
     return mediumFeed;

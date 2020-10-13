@@ -1,28 +1,27 @@
-import { Captcha, ExtendedContext } from './interfaces';
-import { logger } from './logging';
 import * as Keyv from 'keyv';
 
-export default class Store {
-    private readonly store: Keyv;
-    constructor( store: Keyv ) {
-        this.store = store;
-        return this.middleware.bind( this );
+import { Captcha } from './interfaces';
+import { Config } from './config';
+// TODO: Make this interface with Middleware interface
+export class CaptchaStore {
+    private readonly _store: Keyv;
+    constructor() {
+        this._store = new Keyv({
+            ttl: Config.csrfExpiryMs,
+        });
     }
-    middleware ( ctx: ExtendedContext, next ) {
-        ctx.getCaptcha = ( csrf: string ): Promise<string> => {
-            return this.store.get( csrf );
-        };
 
-        ctx.setCaptcha = ( csrf: string, captcha: Captcha ): Promise<true> => {
-            return this.store.set( csrf, captcha.string );
-        };
+    getCaptcha = (csrf: string): Promise<string> => {
+        return this._store.get(csrf);
+    };
 
-        ctx.deleteCaptcha = ( csrf: string ): Promise<true> => {
-            // Keep the csrf for now with non-undefined value (empty string), to handle requesting of new captcha route
-            // If this was set to undefined, if would be unclear if the csrf key existed
-            return this.store.set( csrf, '' );
-        };
+    setCaptcha = (csrf: string, captcha: Captcha): Promise<true> => {
+        return this._store.set(csrf, captcha.string);
+    };
 
-        return next();
-    }
+    deleteCaptcha = (csrf: string): Promise<true> => {
+        // Keep the csrf for now with non-undefined value (empty string), to handle requesting of new captcha route
+        // If this was set to undefined, if would be unclear if the csrf key existed
+        return this._store.set(csrf, '');
+    };
 }

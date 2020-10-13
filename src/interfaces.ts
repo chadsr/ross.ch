@@ -1,13 +1,3 @@
-import * as Keyv from 'keyv';
-import { ParameterizedContext } from 'koa';
-
-export interface ExtendedContext extends ParameterizedContext {
-    csrf: string;
-    getCaptcha ( csrf: string ): Promise<string>;
-    setCaptcha ( csrf: string, captcha: Captcha );
-    deleteCaptcha ( csrf: string );
-}
-
 export interface ResponseMessage {
     target?: string; // Used to specify an identifier that this message applies to
     text: string;
