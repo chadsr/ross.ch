@@ -9,7 +9,7 @@
     "scripts": {
         "dev": " NODE_ENV=development nodemon --watch '*' -e ts,tsx --exec ./node_modules/.bin/ts-node src/server.ts",
         "lint": "./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx",
-        "lint-fix": "./node_modules/.bin/eslint . --fix --ext .js,.jsx,.ts,.tsx",
+        "lint-fix": "./node_modules/.bin/prettier-eslint --write 'src/**/*.{.js,.jsx,.ts,.tsx}'",
         "serve": "node --trace-deprecation dist/src/server.js",
         "webpack": "NODE_ENV=production ./node_modules/.bin/webpack --progress --config ./webpack.config.ts",
         "build": "npm run lint && ./node_modules/.bin/tsc && npm run webpack --display-used-exports && ./node_modules/.bin/ts-node copyStaticAssets.ts",
@@ -90,8 +90,12 @@
         "lint-staged": "^10.4.2",
         "node-sass": "^4.14.1",
         "nodemon": "^2.0.5",
+        "postcss": "^8.1.1",
         "postcss-loader": "^4.0.4",
         "postcss-preset-env": "^6.7.0",
+        "prettier": "^2.1.2",
+        "prettier-eslint": "^11.0.0",
+        "prettier-eslint-cli": "^5.0.0",
         "reflect-metadata": "^0.1.13",
         "sass": "^1.27.0",
         "sass-loader": "^10.0.3",
@@ -128,7 +132,6 @@
         "koa-webpack": "^6.0.0",
         "nodemailer": "^6.4.14",
         "nodemailer-openpgp": "^1.2.0",
-        "prettier": "^2.1.2",
         "randomatic": "^3.1.1",
         "winston": "^3.3.3"
     }
