@@ -6,10 +6,18 @@ import { readFile } from 'fs';
 import { Config } from './config';
 import { logger } from './logging';
 
-export interface Email {
+export interface EmailPlaintext {
     senderName: string;
     senderAddress: string;
     text: string;
+}
+
+export interface EmailFormatted {
+    from: string;
+    to: string;
+    subject: string;
+    html: string;
+    encryptionKeys?: string[];
 }
 
 class Mailer {
@@ -79,8 +87,8 @@ class Mailer {
         }
     }
 
-    private async sendConfirmation(sendAddr: string, toAddr: string, email: Email) {
-        const mail: any = {
+    private async sendConfirmation(sendAddr: string, toAddr: string, email: EmailPlaintext) {
+        const mail: EmailFormatted = {
             from: sendAddr,
             to: email.senderAddress,
             subject: 'Ross.ch - Message Received!',
@@ -92,8 +100,13 @@ class Mailer {
         });
     }
 
-    public async send(sendAddr: string, toAddr: string, email: Email, sendConfirmation: boolean) {
-        const mail: any = {
+    public async send(
+        sendAddr: string,
+        toAddr: string,
+        email: EmailPlaintext,
+        sendConfirmation: boolean,
+    ): Promise<void> {
+        const mail: EmailFormatted = {
             from: sendAddr,
             to: toAddr,
             subject: `Ross.ch - New message from  ${email.senderName}`,

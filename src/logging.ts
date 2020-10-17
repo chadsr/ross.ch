@@ -1,6 +1,6 @@
 import * as Koa from 'koa';
 import { Config } from './config';
-import { Logger, createLogger, format, transports } from 'winston';
+import { createLogger, format, transports } from 'winston';
 
 const logger = createLogger({
     level: Config.debugLogging ? 'debug' : 'info',
@@ -18,7 +18,7 @@ const logger = createLogger({
 });
 
 export function loggerMiddleware() {
-    return async (ctx: Koa.Context, next: () => Promise<any>) => {
+    return async (ctx: Koa.Context, next: Koa.Next): Promise<void> => {
         const start = new Date().getMilliseconds();
 
         await next();
