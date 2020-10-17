@@ -91,6 +91,10 @@ body.nojs-styles .content li {
     float: left;
 }
 
+body.nojs-styles .content li > p {
+    margin: 0;
+}
+
 body.nojs-styles .field,
 body.nojs-styles .social li {
     transition: all 0.2s ease-in-out;
