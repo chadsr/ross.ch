@@ -95,7 +95,18 @@ module.exports = {
         new FaviconsWebpackPlugin({
             logo: join(imagesDir, 'favicon.png'),
             inject: true,
-            favicons: { icons: { appleIcon: false } },
+            favicons: {
+                icons: {
+                    android: false,
+                    appleIcon: false,
+                    appleStartup: false,
+                    coast: false,
+                    favicons: true,
+                    firefox: false,
+                    windows: false,
+                    yandex: false,
+                },
+            },
         }),
         new CopyPlugin({
             patterns: [
@@ -107,7 +118,7 @@ module.exports = {
             minimizerOptions: {
                 plugins: [
                     ['gifsicle', { interlaced: true }],
-                    ['jpegtran', { progressive: true }],
+                    ['mozjpeg', { quality: 70 }],
                     ['optipng', { optimizationLevel: 5 }],
                     [
                         'svgo',
