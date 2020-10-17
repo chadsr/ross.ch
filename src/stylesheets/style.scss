@@ -710,7 +710,6 @@ header {
         height: 100%;
         overflow-y: hidden;
         overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
         position: absolute;
         box-shadow: $color-shadow 0 0 64px 8px inset;
         background: $color-content;
@@ -718,30 +717,6 @@ header {
         z-index: 100;
         pointer-events: none; /* Disable all links until the face has .focus */
         @extend %transition-ease-in-out;
-
-        &::-webkit-scrollbar-track {
-            background: $color-scrollbar_track;
-        }
-
-        &::-webkit-scrollbar {
-            background: $color-scrollbar;
-            width: 8px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background: $color-scrollbar_thumb;
-
-            &:hover,
-            &:active {
-                background: $color-content_highlight;
-                color: $color-text_highlight;
-            }
-        }
-
-        scrollbar-width: thin;
-        scrollbar-track-color: $color-scrollbar_track;
-        scrollbar-base-color: $color-scrollbar;
-        scroll-behavior: smooth;
 
         .content {
             margin: 32px 10%;
@@ -796,11 +771,42 @@ header {
 
         &.focus {
             pointer-events: auto; /* Enable links */
-            overflow-y: scroll;
             box-shadow: none;
             z-index: 9999;
         }
     }
+}
+
+.scrollable {
+    width: inherit;
+    height: inherit;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar-track {
+        background: $color-scrollbar_track;
+    }
+
+    &::-webkit-scrollbar {
+        background: $color-scrollbar;
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $color-scrollbar_thumb;
+
+        &:hover,
+        &:active {
+            background: $color-content_highlight;
+            color: $color-text_highlight;
+        }
+    }
+
+    scrollbar-width: thin;
+    scrollbar-track-color: $color-scrollbar_track;
+    scrollbar-base-color: $color-scrollbar;
+    scroll-behavior: smooth;
 }
 
 header::after {
