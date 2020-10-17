@@ -64,6 +64,9 @@ async function run() {
 
         // Serve the static files made by webpack
         app.use(serve(dirPublic));
+
+        // Provides security headers
+        app.use(helmet());
     }
 
     app.use(
@@ -95,9 +98,6 @@ async function run() {
             },
         }),
     );
-
-    // Provides security headers
-    app.use(helmet());
 
     app.use(
         new csrf({
