@@ -2,10 +2,8 @@
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import * as CopyPlugin from 'copy-webpack-plugin';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
-import * as imageminMozjpeg from 'imagemin-mozjpeg';
-import ImageminPlugin from 'imagemin-webpack-plugin';
+import * as ImageMinimizerPlugin from 'image-minimizer-webpack-plugin';
 import { join, resolve } from 'path';
-import * as PostcssPresetEnv from 'postcss-preset-env';
 import WebpackDeepScopeAnalysisPlugin from 'webpack-deep-scope-plugin';
 import * as WriteFilePlugin from 'write-file-webpack-plugin';
 import FaviconsWebpackPlugin = require('favicons-webpack-plugin');
@@ -43,20 +41,28 @@ module.exports = {
             { test: /\.js$/, exclude: /node_modules/, use: { loader: 'babel-loader' } },
             { test: /\.tsx?$/, loader: 'ts-loader' },
             {
-                test: /\.(sass|scss)$/,
+                test: /\.s[ac]ss$/i,
                 use: [
                     'style-loader',
                     'css-loader',
                     {
                         loader: 'postcss-loader',
-                        options: { ident: 'postcss', plugins: () => [PostcssPresetEnv()] },
+                        options: {
+                            postcssOptions: {
+                                plugins: [['postcss-preset-env', {}]],
+                            },
+                        },
                     },
                     'sass-loader',
                 ],
             },
             {
-                test: /\.(gif|png|jpe?g|svg)$/i,
-                use: ['file-loader', { loader: 'image-webpack-loader', options: { bypassOnDebug: true } }],
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                    },
+                ],
             },
             {
                 test: /\.(woff(2)?|ttf|eot|otf)(\?v=\d+\.\d+\.\d+)?$/,
@@ -86,19 +92,35 @@ module.exports = {
             filename: join(partialsDir, 'webpack.hbs'), // Write the handlebars to the
             // partials dir instead of public
         }),
-        new ImageminPlugin({
-            test: /\.(jpe?g|png|gif|svg)$/i,
-            pngquant: { quality: '50-100' },
-            plugins: [imageminMozjpeg({ quality: 50 })],
-        }),
         new FaviconsWebpackPlugin({
             logo: join(imagesDir, 'favicon.png'),
             inject: true,
             favicons: { icons: { appleIcon: false } },
         }),
-        new CopyPlugin([
-            { from: filesDir, to: join(publicDir, 'files') },
-            { from: join(stylesDir, 'nojs.css'), to: publicDir },
-        ]),
+        new CopyPlugin({
+            patterns: [
+                { from: filesDir, to: join(publicDir, 'files') },
+                { from: join(stylesDir, 'nojs.css'), to: publicDir },
+            ],
+        }),
+        new ImageMinimizerPlugin({
+            minimizerOptions: {
+                plugins: [
+                    ['gifsicle', { interlaced: true }],
+                    ['jpegtran', { progressive: true }],
+                    ['optipng', { optimizationLevel: 5 }],
+                    [
+                        'svgo',
+                        {
+                            plugins: [
+                                {
+                                    removeViewBox: false,
+                                },
+                            ],
+                        },
+                    ],
+                ],
+            },
+        }),
     ],
 };

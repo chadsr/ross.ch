@@ -3,7 +3,7 @@ import * as Joi from '@hapi/joi';
 import { logger } from '../logging';
 import { Config } from '../config';
 import { Response, ResponseMessage, ContactFormRequest, ValidatedFormData } from '../interfaces';
-import { contactMailer, Email } from '../mailer';
+import { contactMailer, EmailPlaintext } from '../mailer';
 import { getAggregatedFeed } from '../blog';
 import { getUserReposWithStars } from '../github';
 import { ErrorMessages } from '../errors';
@@ -157,7 +157,7 @@ export async function handleContactForm(ctx: ParameterizedContext): Promise<void
     }
 
     // Construct email object from the request body
-    const formEmail = <Email>{
+    const formEmail = <EmailPlaintext>{
         senderName: validatedData.data.name,
         senderAddress: validatedData.data.email,
         text: validatedData.data.message,
