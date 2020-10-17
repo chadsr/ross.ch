@@ -190,13 +190,14 @@ function rotateTo(side: number) {
 
         const cube = document.getElementById(CUBE_ID);
         // Remove the focus class from the old focused cube face
-        const focusSide = cube.querySelector('.focus');
-        focusSide.classList.remove('focus');
+        const oldFocusFace = cube.querySelector('.focus');
+        oldFocusFace.classList.remove('focus');
 
         // Add classes to menu and cube face to indicate focus
         navListElements[side].classList.add('selected');
         const faces = cube.children;
-        faces[side].classList.add('focus');
+        const focusFace = <HTMLDivElement>faces[side];
+        focusFace.classList.add('focus');
 
         // Construct a regex to match any existing classname from the rotate classes (A little overkill)
         const re = new RegExp(`rotate-[${MIN_SIDE}-${MAX_SIDE}]`, 'g');
