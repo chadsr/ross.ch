@@ -6,3 +6,6 @@ README.md
 error.log
 renew_ssl.sh
 rossch.service
+docs/
+.vscode/
+install_update.sh
