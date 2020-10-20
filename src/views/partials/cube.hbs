@@ -1,41 +1,30 @@
 <div id="content-cube-wrapper">
-  <div id="content-cube" class="rotate-0">
-    <div id="about" class="face front focus">
-      <div class="scrollable">
-        <section class="content">
-          <h1>Ross Chadwick</h1>
-          {{> about}}
-        </section>
-      </div>
+    <div id="content-cube" class="rotate-0">
+        <div id="about" class="face front focus scrollable">
+            <section class="content">
+                <h1>Ross Chadwick</h1>
+                {{> about}}
+            </section>
+        </div>
+        <div id="projects" class="face right scrollable">
+            <section class="content">
+                <h2>Projects</h2>
+                {{> projects}}
+            </section>
+        </div>
+        <div id="blog" class="face back scrollable">
+            <section class="content">
+                <h2>Blog</h2>
+                {{> blog}}
+            </section>
+        </div>
+        <div id="contact" class="face left scrollable">
+            <section class="content">
+                <h2>Contact</h2>
+                {{> contact}}
+            </section>
+        </div>
+        <div class="face bottom"></div>
+        <div class="face top"></div>
     </div>
-    <div id="projects" class="face right">
-      <div class="scrollable">
-        <section class="content">
-          <h2>Projects</h2>
-          {{> projects}}
-        </section>
-      </div>
-    </div>
-    <div id="blog" class="face back">
-      <div class="scrollable">
-
-        <section class="content">
-          <h2>Blog</h2>
-          {{> blog}}
-        </section>
-      </div>
-    </div>
-    <div id="contact" class="face left">
-      <div class="scrollable">
-        <section class="content">
-          <h2>Contact</h2>
-          {{> contact}}
-        </section>
-      </div>
-    </div>
-    <div class="face bottom">
-    </div>
-    <div class="face top">
-    </div>
-  </div>
 </div>

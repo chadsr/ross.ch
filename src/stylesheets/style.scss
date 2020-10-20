@@ -781,7 +781,7 @@ header {
 .scrollable {
     width: inherit;
     height: inherit;
-    overflow-y: scroll;
+    overflow-y: auto !important;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
 
@@ -804,7 +804,7 @@ header {
         }
     }
 
-    scrollbar-width: thin;
+    scrollbar-width: wide;
     scrollbar-track-color: $color-scrollbar_track;
     scrollbar-base-color: $color-scrollbar;
     scroll-behavior: smooth;
