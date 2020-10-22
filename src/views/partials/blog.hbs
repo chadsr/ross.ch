@@ -1,24 +1,24 @@
 {{#if blogPosts}}
-<ul class="blog-feed">
-  {{#each blogPosts}}
-  <li class="blog-post field perspective">
-    <a href="{{url}}" target="_blank">
-      <div class="blog-post-title title">
-        <h3>{{title}}</h3>
-      </div>
-      <span class="blog-post-date">Published: {{publishDate}}</span>
-      <div class="blog-post-tags">
-        {{#each tags}}
-        <span class="blog-post-tag">{{this}}</span>
+    <ul class="blog-feed">
+        {{#each blogPosts}}
+            <li class="blog-post field perspective">
+                <a href="{{url}}" target="_blank">
+                    <div class="blog-post-title title">
+                        <h3>{{title}}</h3>
+                    </div>
+                    <span class="blog-post-date">Published:{{publishDate}}</span>
+                    <div class="blog-post-tags">
+                        {{#each tags}}
+                            <span class="blog-post-tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                    <div class="blog-post-content">
+                        <p class="blog-post-snippet">{{contentSnippet}}</p>
+                    </div>
+                </a>
+            </li>
         {{/each}}
-      </div>
-      <div class="blog-post-content">
-        <p class="blog-post-snippet">{{contentSnippet}}</p>
-      </div>
-    </a>
-  </li>
-  {{/each}}
-</ul>
+    </ul>
 {{else}}
-<p>Looks like there are no posts right now. :(</p>
+    <p>Looks like there are no posts right now. :(</p>
 {{/if}}

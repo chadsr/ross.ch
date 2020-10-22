@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-{{> webpack}}
+    {{> webpack}}
+    <body class="nojs-styles">
+        {{> header}}
 
-<body class="nojs-styles">
-	{{> header}}
+        <div id="content" class="perspective">
+            {{> cube}}
+        </div>
 
-	<div id="content" class="perspective">
-		{{> cube}}
-	</div>
+        <div id="background"></div>
 
-	<div id="background">
-	</div>
+        <div id="swipe-indicator">
+            <span class="notification-text">Swipe to navigate pages</span>
+        </div>
 
-	<div id="swipe-indicator">
-		<span class="notification-text">Swipe to navigate pages</span>
-	</div>
-
-	{{> footer}}
-</body>
-
+        {{> footer}}
+    </body>
 </html>
