@@ -34,7 +34,7 @@ blog.ross.ch, www.blog.ross.ch {
         X-Frame-Options SAMEORIGIN
         X-XSS-Protection "1; mode=block"
         X-Content-Type-Options nosniff
-        Referrer-Policy no-referrer
+        Referrer-Policy origin
     }
 
     reverse_proxy ghost:2368
