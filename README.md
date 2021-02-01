@@ -1,6 +1,7 @@
 # Ross.ch Web Server
 
-[![Build Status](https://travis-ci.org/Chadsr/ross.ch.svg?branch=master)](https://travis-ci.org/Chadsr/ross.ch)
+![Node.js CI](https://github.com/Chadsr/ross.ch/workflows/Node.js%20CI/badge.svg)
+![Docker Image CI](https://github.com/Chadsr/ross.ch/workflows/Docker%20Image%20CI/badge.svg)
 
 ## Description
 
