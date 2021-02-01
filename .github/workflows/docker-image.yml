@@ -1,16 +1,29 @@
 name: Docker Image CI
 
 on:
-  release:
-    types: [published, prereleased]
+    release:
+        types: [release]
 
 jobs:
+    build-and-push-image:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+            - name: Build container image
+              uses: docker/build-push-action@v2
+              with:
+                  push: true
+                  tags: chadsr/ross.ch:latest
+                  build-args: |
+                      WORK_DIR=/usr/src/ross.ch
+                      PORT=8080
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
+                  registry: docker.pkg.github.com
+                  repository: ${{ github.repository }}/ross.ch
+                  tag_with_sha: true
+                  tag_with_ref: true
 
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+            - name: Docker image digest
+              run: echo ${{ steps.docker_build.outputs.digest }}
