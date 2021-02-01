@@ -7,9 +7,8 @@ import * as serve from 'koa-static';
 import * as cors from '@koa/cors';
 import * as session from 'koa-session';
 import * as dotenv from 'dotenv';
-import 'reflect-metadata'; // TODO: Check if useful
 import { join, basename } from 'path';
-import * as glob from 'glob-promise'; // TODO: Investigate why tiny-glob is borked
+import * as glob from 'glob-promise';
 import * as webpack from 'webpack';
 import * as koaWebpack from 'koa-webpack';
 
@@ -69,17 +68,16 @@ async function run() {
         app.use(helmet());
     }
 
-    app.use(
-        views(dirViews, {
-            extension: 'hbs',
-            map: {
-                hbs: 'handlebars',
-            },
-            options: {
-                partials: await getPartialsObj(),
-            },
-        }),
-    );
+    const render = views(dirViews, {
+        extension: 'hbs',
+        map: {
+            hbs: 'handlebars',
+        },
+        options: {
+            partials: await getPartialsObj(),
+        },
+    });
+    app.context.render = render();
 
     // load the session key from our configuration
     app.keys = [Config.sessionKey];
