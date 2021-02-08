@@ -21,9 +21,8 @@ export async function getUserReposWithStars(
         page: 1,
     });
 
-    if (res.headers.status !== '200 OK') {
-        logger.error('Github API returned failure response');
-        return;
+    if (res.status !== 200) {
+        throw new Error('Github API returned failure response');
     }
 
     const github = <Github>{

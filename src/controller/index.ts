@@ -77,10 +77,13 @@ export async function renderIndex(ctx: ParameterizedContext): Promise<void> {
     if (posts.length < 1) {
         posts = undefined;
     }
-    const github = await getUserReposWithStars(Config.githubUser, true, Config.maxRepos, 'updated');
-    let repositories = github.repositories;
-    if (repositories.length < 1) {
-        repositories = undefined;
+
+    let repositories = undefined;
+    try {
+        const github = await getUserReposWithStars(Config.githubUser, true, Config.maxRepos, 'updated');
+        repositories = github.repositories;
+    } catch (e) {
+        logger.error(e);
     }
 
     const year = new Date().getFullYear().toString();
