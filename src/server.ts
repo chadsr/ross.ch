@@ -17,6 +17,7 @@ import { Config } from './config';
 import { router } from './routes';
 
 import * as webpackConfig from '../webpack.config';
+import { exit } from 'process';
 const compiler = webpack(webpackConfig);
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
@@ -34,9 +35,7 @@ async function getPartialsObj() {
     const partialsNames = partialsPaths.map((path) => basename(path, '.hbs'));
 
     // Create an object with name as key and filepath as value
-    const partialsObj = partialsNames.reduce((obj, key, i) => ({ ...obj, [key]: partialsPaths[i] }), {});
-
-    return partialsObj;
+    return partialsNames.reduce((obj, key, i) => ({ ...obj, [key]: partialsPaths[i] }), {});
 }
 
 async function run() {
@@ -55,7 +54,7 @@ async function run() {
         compiler.run((error) => {
             if (error) {
                 logger.error('Webpack Error:', error);
-                return; // Just exit, since we depend on webpack
+                exit(1); // Just exit, since we depend on webpack
             } else {
                 logger.info('Webpack compiled successfully!');
             }
@@ -68,16 +67,17 @@ async function run() {
         app.use(helmet());
     }
 
-    const render = views(dirViews, {
-        extension: 'hbs',
-        map: {
-            hbs: 'handlebars',
-        },
-        options: {
-            partials: await getPartialsObj(),
-        },
-    });
-    app.context.render = render();
+    app.use(
+        views(dirViews, {
+            extension: 'hbs',
+            map: {
+                hbs: 'handlebars',
+            },
+            options: {
+                partials: await getPartialsObj(),
+            },
+        }),
+    );
 
     // load the session key from our configuration
     app.keys = [Config.sessionKey];
