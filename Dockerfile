@@ -6,14 +6,15 @@ ARG PORT
 
 WORKDIR ${WORK_DIR}
 
-COPY package*.json ./
+COPY package.json ./
+COPY yarn.lock ./
 RUN ["mkdir", "-p", "${WORK_DIR}/node_modules"]
 RUN ["chown", "-R", "node:node", "${WORK_DIR}"]
 
-RUN npm install
+RUN yarn install
 COPY . .
 
 EXPOSE ${PORT}
 
-RUN ["npm", "run", "build"]
+RUN ["yarn", "build"]
 CMD ["npm", "start"]
