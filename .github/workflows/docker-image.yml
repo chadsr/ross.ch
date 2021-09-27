@@ -2,28 +2,51 @@ name: Docker Image CI
 
 on:
     release:
-        types: [release]
+        types: ["released"]
 
 jobs:
     build-and-push-image:
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout
-              uses: actions/checkout@v2
-            - name: Build container image
-              uses: docker/build-push-action@v2
-              with:
-                  push: true
-                  tags: chadsr/ross.ch:latest
-                  build-args: |
-                      WORK_DIR=/usr/src/ross.ch
-                      PORT=8080
-                  username: ${{ github.actor }}
-                  password: ${{ secrets.GITHUB_TOKEN }}
-                  registry: docker.pkg.github.com
-                  repository: ${{ github.repository }}/ross.ch
-                  tag_with_sha: true
-                  tag_with_ref: true
-
-            - name: Docker image digest
-              run: echo ${{ steps.docker_build.outputs.digest }}
+          -
+            name: Checkout
+            uses: actions/checkout@v2
+          -
+            name: Docker meta
+            id: meta
+            uses: docker/metadata-action@v3
+            with:
+              images: |
+                chadsr/ross.ch
+                ghcr.io/chadsr/ross.ch
+              tags: |
+                type=semver,pattern={{version}}
+                type=semver,pattern={{major}}.{{minor}}
+                type=semver,pattern={{major}}
+                type=sha
+                latest
+          -
+            name: Set up QEMU
+            uses: docker/setup-qemu-action@v1
+          -
+            name: Set up Docker Buildx
+            uses: docker/setup-buildx-action@v1
+          -
+            name: Login to GitHub Container Registry
+            uses: docker/login-action@v1 
+            with:
+              registry: ghcr.io
+              username: ${{ github.repository_owner }}
+              password: ${{ secrets.GITHUB_TOKEN }}
+          - name: Build container image
+            uses: docker/build-push-action@v2
+            with:
+                push: true
+                platforms: linux/amd64,linux/arm64
+                tags: ${{ steps.meta.outputs.tags }}
+                context: .
+                build-args: |
+                    WORK_DIR=/usr/src/ross.ch
+                    PORT=8080
+          - name: Docker image digest
+            run: echo ${{ steps.docker_build.outputs.digest }}
