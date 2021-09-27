@@ -136,5 +136,8 @@
         "nodemailer-openpgp": "^2.0.0",
         "randomatic": "^3.1.1",
         "winston": "^3.3.3"
+    },
+    "resolutions": {
+        "@types/express-serve-static-core": "^4.17.21"
     }
 }
