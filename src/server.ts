@@ -67,16 +67,17 @@ async function run() {
         app.use(helmet());
     }
 
-    const render = views(dirViews, {
-        extension: 'hbs',
-        map: {
-            hbs: 'handlebars',
-        },
-        options: {
-            partials: await getPartialsObj(),
-        },
-    });
-    app.context.render = render;
+    app.use(
+        views(dirViews, {
+            extension: 'hbs',
+            map: {
+                hbs: 'handlebars',
+            },
+            options: {
+                partials: await getPartialsObj(),
+            },
+        }),
+    );
 
     // load the session key from our configuration
     app.keys = [Config.sessionKey];
