@@ -63,12 +63,10 @@ function validateContactFormData(data: ContactFormRequest): ValidatedFormData {
         });
     }
 
-    const validatedData: ValidatedFormData = {
+    return {
         data: value,
         errors: errors,
     };
-
-    return validatedData;
 }
 
 export async function renderIndex(ctx: ParameterizedContext): Promise<void> {
@@ -113,7 +111,14 @@ export async function renderIndex(ctx: ParameterizedContext): Promise<void> {
 
 export async function handleContactForm(ctx: ParameterizedContext): Promise<void> {
     const captchaSent: string = ctx.request.body.captcha.toUpperCase();
-    const csrf = ctx.request.headers['x-csrf-token'];
+
+    const headerCsrf = ctx.request.headers['x-csrf-token'];
+    let csrf: string;
+    if (Array.isArray(headerCsrf)) {
+        csrf = headerCsrf[0];
+    } else {
+        csrf = headerCsrf;
+    }
 
     const validatedData = validateContactFormData(ctx.request.body);
     if (validatedData.errors.length > 0) {
@@ -194,25 +199,30 @@ export async function serveCaptcha(ctx: ParameterizedContext): Promise<void> {
         Config.captchaMinContrastRatio,
     );
 
-    const csrf = ctx.headers['x-csrf-token'];
-    if (csrf !== undefined) {
-        // Check if the provided csrf value exists in the store (e.g. it was actually served and is not a random value)
-        const existingCaptcha = await captchaStore.getCaptcha(csrf);
-        if (existingCaptcha !== undefined) {
-            // New captcha requested from existing valid csrf, so store new captcha overwriting any previous
-            try {
-                await captchaStore.setCaptcha(csrf, captcha);
-            } catch (error) {
-                logger.error(`Failed to store captcha: ${error} `);
-            }
+    const headerCsrf = ctx.headers['x-csrf-token'];
+    let csrf: string;
+    if (Array.isArray(headerCsrf)) {
+        csrf = headerCsrf[0];
+    } else {
+        csrf = headerCsrf;
+    }
 
-            ctx.status = 200;
-            ctx.body = getResponseObj(true, {
-                text: captcha.base64,
-            });
-
-            return;
+    // Check if the provided csrf value exists in the store (e.g. it was actually served and is not a random value)
+    const existingCaptcha = await captchaStore.getCaptcha(csrf);
+    if (existingCaptcha !== undefined) {
+        // New captcha requested from existing valid csrf, so store new captcha overwriting any previous
+        try {
+            await captchaStore.setCaptcha(csrf, captcha);
+        } catch (error) {
+            logger.error(`Failed to store captcha: ${error} `);
         }
+
+        ctx.status = 200;
+        ctx.body = getResponseObj(true, {
+            text: captcha.base64,
+        });
+
+        return;
     }
 
     // The csrf was not recognised / was not provided
