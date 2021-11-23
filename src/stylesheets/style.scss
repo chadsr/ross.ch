@@ -1,6 +1,6 @@
 /* Colours */
 $color-background: #7c7c7c;
-$color-content: rgba(29, 54, 75, 0.95);
+$color-content: rgba(42, 42, 42, 0.95);
 $color-content_highlight: #0f8f83;
 $color-content_secondary: rgba(25, 40, 53, 0.9);
 $color-content_secondary_highlight: $color-content_secondary;
@@ -17,9 +17,11 @@ $color-scrollbar_track: $color-content;
 $color-scrollbar_thumb: $color-title_banner;
 
 // Isometric cubes
-$color-iso-top: $color-background;
-$color-iso-left: $color-background;
-$color-iso-right: $color-background;
+$color-iso-stroke: grey;
+
+$color-iso-top: black;
+$color-iso-left: black;
+$color-iso-right: black;
 
 $color-hover-iso-top: $color-content;
 $color-hover-iso-left: $color-content;
@@ -508,7 +510,7 @@ nav {
 }
 
 #content {
-    z-index: 1;
+    z-index: 2;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -683,22 +685,39 @@ header {
     height: 100%;
 }
 
+@keyframes iso-dash {
+    from {
+        stroke-dasharray: 1;
+    }
+    to {
+        stroke-dasharray: 10;
+    }
+}
+
 .iso {
     @extend %transition-ease;
 
+    > rect {
+        stroke: $color-iso-stroke;
+        animation: iso-dash 30s ease-in-out;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+    }
+
+    > .iso-line {
+        stroke: yellowgreen;
+    }
+
     > .iso-left {
         fill: $color-iso-left;
-        filter: $filter-iso-left;
     }
 
     > .iso-right {
         fill: $color-iso-right;
-        filter: $filter-iso-right;
     }
 
     > .iso-top {
         fill: $color-iso-top;
-        filter: $filter-iso-top;
     }
 
     // &:hover {
