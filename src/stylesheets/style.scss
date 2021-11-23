@@ -1,7 +1,7 @@
 /* Colours */
-$color-background: #7c7c7c;
-$color-content: rgba(42, 42, 42, 0.95);
-$color-content_highlight: #0f8f83;
+$color-background: white;
+$color-content: rgba(20, 20, 20, 0.95);
+$color-content_highlight: green;
 $color-content_secondary: rgba(25, 40, 53, 0.9);
 $color-content_secondary_highlight: $color-content_secondary;
 $color-text: #fff;
@@ -17,7 +17,7 @@ $color-scrollbar_track: $color-content;
 $color-scrollbar_thumb: $color-title_banner;
 
 // Isometric cubes
-$color-iso-stroke: grey;
+$color-iso-stroke: green;
 
 $color-iso-top: black;
 $color-iso-left: black;
@@ -687,10 +687,10 @@ header {
 
 @keyframes iso-dash {
     from {
-        stroke-dasharray: 1;
+        stroke-dashoffset: 50%;
     }
     to {
-        stroke-dasharray: 10;
+        stroke-dashoffset: 100%;
     }
 }
 
@@ -699,7 +699,12 @@ header {
 
     > rect {
         stroke: $color-iso-stroke;
-        animation: iso-dash 30s ease-in-out;
+        stroke-dasharray: 0.2vmin, 0, 0, 100px;
+        stroke-width: 2px;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+
+        animation: iso-dash 60s ease-in-out;
         animation-iteration-count: infinite;
         animation-direction: alternate;
     }
