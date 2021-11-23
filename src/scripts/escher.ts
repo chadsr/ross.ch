@@ -1,3 +1,5 @@
+const SVG_NAMESPACE_URI = 'http://www.w3.org/2000/svg';
+
 export default class EscherCubes {
     // renderEscherCubes(outer container id, svg container id, x offset from origin, y offset from origin, cube edge length in px, inner angle of cube)
     static render(
@@ -112,24 +114,25 @@ export default class EscherCubes {
             );
         }
 
-        const iso = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        const iso = document.createElementNS(SVG_NAMESPACE_URI, 'g');
         iso.setAttribute('class', 'iso');
         iso.setAttribute(
             'transform',
             'translate(' + this.calcX(cubeSize, innerAngle, x, y) + ',' + this.calcY(cubeSize, x, y, z) + ')',
         );
 
-        for (let i = 0; i < sides.length; i++) {
-            const side = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        for (const [className, transform] of sides) {
+            const side = document.createElementNS(SVG_NAMESPACE_URI, 'rect');
             side.setAttribute('x', '0');
             side.setAttribute('y', '0');
             side.setAttribute('width', cubeSize.toString());
             side.setAttribute('height', cubeSize.toString());
-            side.setAttribute('class', sides[i][0]);
-            side.setAttribute('transform', 'matrix(' + sides[i][1] + ')');
+            side.setAttribute('class', className);
+            side.setAttribute('transform', 'matrix(' + transform + ')');
 
             iso.appendChild(side);
         }
+
         parentSVG.append(iso);
     }
 
