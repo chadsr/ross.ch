@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 $bp-larger-than-mobile: 'min-width: 400px' !default;
 $bp-larger-than-phablet: 'min-width: 550px' !default;
 $bp-larger-than-tablet: 'min-width: 750px' !default;
@@ -11,9 +13,9 @@ $bp-larger-than-desktophd: 'min-width: 1200px' !default;
     }
 
     #content-cube-wrapper {
-        perspective-origin: 50% $size/2;
-        transform-origin: 50% 50% (-$size/2);
-        transform: translateZ(-$size/2);
+        perspective-origin: 50% math.div($size, 2);
+        transform-origin: 50% 50% (-(math.div($size, 2)));
+        transform: translateZ(-(math.div($size, 2)));
     }
 
     #content-cube {
@@ -22,22 +24,22 @@ $bp-larger-than-desktophd: 'min-width: 1200px' !default;
 
         > .face {
             &.top {
-                transform: rotateX(90deg) translateZ($size/2);
+                transform: rotateX(90deg) translateZ(math.div($size, 2));
             }
             &.front {
-                transform: translateZ($size/2);
+                transform: translateZ(math.div($size, 2));
             }
             &.bottom {
-                transform: rotateX(-90deg) translateZ($size/2);
+                transform: rotateX(-90deg) translateZ(math.div($size, 2));
             }
             &.left {
-                transform: rotateY(-90deg) translateZ($size/2);
+                transform: rotateY(-90deg) translateZ(math.div($size, 2));
             }
             &.right {
-                transform: rotateY(90deg) translateZ($size/2);
+                transform: rotateY(90deg) translateZ(math.div($size, 2));
             }
             &.back {
-                transform: rotateY(180deg) translateZ($size/2);
+                transform: rotateY(180deg) translateZ(math.div($size, 2));
             }
         }
 
@@ -76,7 +78,7 @@ $bp-larger-than-desktophd: 'min-width: 1200px' !default;
         @for $i from 1 through 10 {
             li:first-child:nth-last-child(#{$i}),
             li:first-child:nth-last-child(#{$i}) ~ li {
-                width: 100% / $i;
+                width: math.div(100%, $i);
             }
         }
     }
