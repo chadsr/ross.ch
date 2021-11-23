@@ -41,6 +41,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     isSafari = navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1;
 
+    // Trigger the resize event, so the cube can center on page load
+    window.dispatchEvent(new Event('resize'));
+
     const swipe = new Hammer(document.body, {
         recognizers: [[Hammer.Swipe, { enable: true }]],
     });
@@ -98,9 +101,6 @@ document.addEventListener('DOMContentLoaded', function () {
     //     this.focus();
     //     this.select();
     // });
-
-    // Trigger the resize event, so the cube can center on page load
-    window.dispatchEvent(new Event('resize'));
 });
 
 document.addEventListener('keydown', function (event) {
@@ -138,31 +138,14 @@ function debounce(func, time: number) {
     };
 }
 
-window.addEventListener(
-    'resize',
+window.addEventListener('resize', function () {
+    renderBackground();
     debounce(function () {
         if (isSafari) {
             fixTranslateZ();
         }
-
-        const cube = document.getElementById(CUBE_ID);
-        const cubeHeight = parseInt(getComputedStyle(cube).height, 10); // Get an int value from the style height string
-
-        const mainContent = document.getElementById(MAIN_CONTENT_ID);
-        const mainContentPosition = mainContent.getBoundingClientRect();
-        const header = document.querySelector('header');
-        const headerPosition = header.getBoundingClientRect();
-        const footer = document.querySelector('footer');
-        const footerPosition = footer.getBoundingClientRect();
-
-        // calculate the distance from the top needed in order to center the cube and apply it as the 'top' attribute of the cube
-        cube.style.top = `${Math.round(
-            (mainContentPosition.height + headerPosition.height - footerPosition.height - cubeHeight) / 2,
-        )}px`;
-
-        renderBackground();
-    }, DEBOUNCE_MS),
-);
+    }, DEBOUNCE_MS);
+});
 
 function renderBackground() {
     const cubeSize = window.innerHeight / NUM_CUBES_Y;
