@@ -26,7 +26,7 @@ const BG_Y_OFFSET = -0.5; // Offset from y origin for the background rendering (
 const BG_CONTAINER_Id = 'background';
 const SVG_ID = 'isobg';
 const INNER_ANGLE = 60;
-const NUM_CUBES_Y = 5; // The number of cubes that will be rendered on the y axis (This dictates their size)
+const NUM_CUBES_Y = 8; // The number of cubes that will be rendered on the y axis (This dictates their size)
 
 const MIN_SIDE = 0;
 const MAX_SIDE = 3;
@@ -178,8 +178,13 @@ function hideSwipeIndicator() {
 }
 
 function rotateTo(side: number) {
+    if (side == MAX_SIDE + 1) {
+        side = MIN_SIDE;
+    } else if (side == MIN_SIDE - 1) {
+        side = MAX_SIDE;
+    }
+
     if (side !== currentSide && side >= MIN_SIDE && side <= MAX_SIDE) {
-        currentSide = side;
         const nav = document.getElementById('nav');
         const navList = nav.getElementsByTagName('ul')[0];
         const navListElements = navList.getElementsByTagName('li');
@@ -199,10 +204,12 @@ function rotateTo(side: number) {
         const focusFace = <HTMLDivElement>faces[side];
         focusFace.classList.add('focus');
 
-        // Construct a regex to match any existing classname from the rotate classes (A little overkill)
-        const re = new RegExp(`rotate-[${MIN_SIDE}-${MAX_SIDE}]`, 'g');
+        const currentClass = cube.className.match('rotate-').input;
+
         // Replace the existing class with one matching the newly focused side (While preserving any other classes)
-        cube.className = cube.className.replace(re, `rotate-${side}`);
+        cube.className = cube.className.replace(currentClass, `rotate-${side}`);
+
+        currentSide = side;
 
         // hide the swipe indicator, if not already since user managed to switch pages
         hideSwipeIndicator();
