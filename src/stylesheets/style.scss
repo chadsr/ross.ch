@@ -1,8 +1,8 @@
 /* Colours */
-$color-background: #0b0c10;
+$color-background: #747474;
 $color-content: rgba(29, 54, 75, 0.95);
 $color-content_highlight: #0f8f83;
-$color-content_secondary: rgba(25, 40, 53, 0.95);
+$color-content_secondary: rgba(25, 40, 53, 0.9);
 $color-content_secondary_highlight: $color-content_secondary;
 $color-text: #fff;
 $color-text_highlight: $color-text; /* Applies to all click-able text (buttons. links, etc) */
@@ -16,6 +16,16 @@ $color-scrollbar: $color-content;
 $color-scrollbar_track: $color-content;
 $color-scrollbar_thumb: $color-title_banner;
 
+// Isometric cubes
+$color-iso-left: $color-background;
+$color-iso-right: $color-background;
+$color-iso-top: $color-background;
+
+$filter-iso-left: brightness(20%);
+$filter-iso-right: brightness(40%);
+$filter-iso-top: brightness(80%);
+
+// Social
 $color-twitter: #00aced;
 $color-mastodon: #3088d4;
 $color-linkedin: #4875b4;
@@ -23,11 +33,12 @@ $color-github: #4183c4;
 $color-bitcoin: #f7931a;
 $color-ethereum: linear-gradient(90deg, #fca09a, #fcccd3, #ffcc9d, #98ddad, #81d7ec, #a0aaed);
 $color-keybase: #4c8eff;
+
+// UX
 $color-success: #15a12a;
 $color-error: #a51818;
 
 /* URLs */
-$url-background: url('../assets/images/bg.jpg');
 $url-ethereum: url('../assets/images/icons/icon_ethereum.png');
 $url-bitcoin: url('../assets/images/icons/icon_bitcoin.png');
 $url-github: url('../assets/images/icons/icon_github.png');
@@ -487,12 +498,7 @@ nav {
 }
 
 #background {
-    background-image: $url-background;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    /*background : $color-background */
+    background: $color-background;
     z-index: 1;
     @extend %full-screen;
 }
@@ -672,15 +678,18 @@ header {
 
 .iso {
     .iso-left {
-        fill: rgba(195, 190, 190, 0.15);
+        fill: $color-iso-left;
+        filter: $filter-iso-left;
     }
 
     .iso-right {
-        fill: rgba(132, 132, 132, 0.15);
+        fill: $color-iso-right;
+        filter: $filter-iso-right;
     }
 
     .iso-top {
-        fill: rgba(255, 255, 255, 0.15);
+        fill: $color-iso-top;
+        filter: $filter-iso-top;
     }
 }
 
@@ -711,8 +720,8 @@ header {
         overflow-y: hidden;
         overflow-x: hidden;
         position: absolute;
-        box-shadow: $color-shadow 0 0 64px 8px inset;
         background: $color-content;
+        filter: $filter-iso-left;
         backface-visibility: visible;
         z-index: 100;
         pointer-events: none; /* Disable all links until the face has .focus */
@@ -772,8 +781,8 @@ header {
 
         &.focus {
             pointer-events: auto; /* Enable links */
-            box-shadow: none;
             z-index: 9999;
+            filter: none;
         }
     }
 }
