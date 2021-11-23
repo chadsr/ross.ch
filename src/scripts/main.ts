@@ -41,9 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     isSafari = navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1;
 
-    // Trigger the resize event, so the cube can center on page load
-    window.dispatchEvent(new Event('resize'));
-
     const swipe = new Hammer(document.body, {
         recognizers: [[Hammer.Swipe, { enable: true }]],
     });
@@ -101,6 +98,9 @@ document.addEventListener('DOMContentLoaded', function () {
     //     this.focus();
     //     this.select();
     // });
+
+    // Trigger the resize event, so the cube can center on page load
+    window.dispatchEvent(new Event('resize'));
 });
 
 document.addEventListener('keydown', function (event) {
@@ -140,11 +140,11 @@ function debounce(func, time: number) {
 
 window.addEventListener('resize', function () {
     renderBackground();
-    debounce(function () {
-        if (isSafari) {
-            fixTranslateZ();
-        }
-    }, DEBOUNCE_MS);
+
+    // Fix z translation for Safari based browsers
+    if (isSafari) {
+        fixTranslateZ();
+    }
 });
 
 function renderBackground() {
