@@ -13,12 +13,8 @@ import EscherCubes from './escher';
 const LEFT_ARROW = 'ArrowLeft';
 const RIGHT_ARROW = 'ArrowRight';
 
-// Needs a long debounce to cover for slow CSS transitions
-const DEBOUNCE_MS = 2000;
-
 const CUBE_ID = 'content-cube';
 const CUBE_WRAPPER_ID = 'content-cube-wrapper';
-const MAIN_CONTENT_ID = 'content';
 const CONTACT_FORM_ID = 'contact-form';
 
 // Freaky Escher stuff
@@ -27,6 +23,7 @@ const BG_CONTAINER_Id = 'background';
 const SVG_ID = 'isobg';
 const INNER_ANGLE = 60;
 const NUM_CUBES_Y = 8; // The number of cubes that will be rendered on the y axis (This dictates their size)
+const ISO_PADDING = 1;
 
 const MIN_SIDE = 0;
 const MAX_SIDE = 3;
@@ -129,15 +126,6 @@ function fixTranslateZ() {
     cubeWrapper.style.transform = `translateZ(-${cubeStyles.width})`;
 }
 
-function debounce(func, time: number) {
-    time = time || 100; // 100 by default if no param
-    let timer;
-    return function (event) {
-        if (timer) clearTimeout(timer);
-        timer = setTimeout(func, time, event);
-    };
-}
-
 window.addEventListener('resize', function () {
     renderBackground();
 
@@ -149,7 +137,7 @@ window.addEventListener('resize', function () {
 
 function renderBackground() {
     const cubeSize = window.innerHeight / NUM_CUBES_Y;
-    EscherCubes.render(BG_CONTAINER_Id, SVG_ID, 0, BG_Y_OFFSET, cubeSize, INNER_ANGLE);
+    EscherCubes.render(BG_CONTAINER_Id, SVG_ID, 0, BG_Y_OFFSET, cubeSize, INNER_ANGLE, ISO_PADDING, false);
 }
 
 function hideSwipeIndicator() {
