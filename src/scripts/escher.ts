@@ -86,27 +86,7 @@ export default class EscherCubes {
         const sineInner = this.sineOf(innerAngle);
         const sineOuter = this.sineOf(outerAngle);
 
-        const sides = [
-            [
-                CLASS_ISO_TOP,
-                sineInner + ' ' + -sineOuter + ' ' + sineInner + ' ' + sineOuter + ' ' + 0 + ' ' + cubeSize / 2,
-            ],
-            [CLASS_ISO_LEFT, sineInner + ' ' + sineOuter + ' ' + 0 + ' ' + 1 + ' ' + 0 + ' ' + cubeSize / 2],
-            [
-                CLASS_ISO_RIGHT,
-                sineInner +
-                    ' ' +
-                    -sineOuter +
-                    ' ' +
-                    0 +
-                    ' ' +
-                    1 +
-                    ' ' +
-                    this.sineRule(cubeSize, innerAngle) +
-                    ' ' +
-                    cubeSize,
-            ],
-        ];
+        const sides = [];
 
         if (renderHiddenSides === true) {
             sides.push(
@@ -131,6 +111,28 @@ export default class EscherCubes {
                 ],
             );
         }
+
+        sides.push(
+            [
+                CLASS_ISO_TOP,
+                sineInner + ' ' + -sineOuter + ' ' + sineInner + ' ' + sineOuter + ' ' + 0 + ' ' + cubeSize / 2,
+            ],
+            [CLASS_ISO_LEFT, sineInner + ' ' + sineOuter + ' ' + 0 + ' ' + 1 + ' ' + 0 + ' ' + cubeSize / 2],
+            [
+                CLASS_ISO_RIGHT,
+                sineInner +
+                    ' ' +
+                    -sineOuter +
+                    ' ' +
+                    0 +
+                    ' ' +
+                    1 +
+                    ' ' +
+                    this.sineRule(cubeSize, innerAngle) +
+                    ' ' +
+                    cubeSize,
+            ],
+        );
 
         const iso = document.createElementNS(SVG_NAMESPACE_URI, 'g');
         iso.setAttribute('class', 'iso');
