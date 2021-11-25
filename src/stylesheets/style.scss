@@ -1,40 +1,45 @@
 /* Colours */
 $color-background: black;
-$color-content: rgba(66, 66, 66, 0.95);
-$color-content_highlight: green;
-$color-content_secondary: rgba(25, 40, 53, 0.9);
+$color-content: rgba(40, 39, 41, 0.95);
+$color-content_highlight: #7600a1;
+$color-content_secondary: #0e0d0e;
 $color-content_secondary_highlight: $color-content_secondary;
-$color-text: #fff;
+$color-text: white;
 $color-text_highlight: $color-text; /* Applies to all click-able text (buttons. links, etc) */
 $color-text-link-highlight: $color-content_highlight; /* Overrides the above, but only for text with class .link */
 $color-heading: $color-text;
 $color-text_placeholder: $color-text;
 $color-text_placeholder_highlight: $color-text_highlight;
-$color-title_banner: rgba(69, 83, 95, 0.95);
+$color-title_banner: #363636;
 $color-shadow: rgba(0, 0, 0, 0.75);
 $color-scrollbar: $color-content;
 $color-scrollbar_track: $color-content;
 $color-scrollbar_thumb: $color-title_banner;
 
+// Content Cube
+$filter-face-no-focus: brightness(20%);
+
 // Isometric cubes
-$color-iso-stroke: green;
+$color-iso: black;
+$color-iso-top: $color-iso;
+$color-iso-left: $color-iso;
+$color-iso-right: $color-iso;
+$color-iso-back-left: $color-iso;
+$color-iso-back-right: $color-iso;
+$color-iso-bottom: $color-iso;
+
+$color-iso-stroke: $color-content_highlight;
 $color-iso-outline: rgba(110, 110, 110, 0.7);
-$color-iso-top: rgba(0, 0, 0, 0.7);
-$color-iso-left: rgba(0, 0, 0, 0.7);
-$color-iso-right: rgba(0, 0, 0, 0.7);
-$color-iso-back-left: black;
-$color-iso-back-right: black;
-$color-iso-bottom: black;
 
-$iso-back-opacity: 100%;
+$color-hover-iso-front: rgba(0, 0, 0, 0.5);
+$color-hover-iso-top: $color-hover-iso-front;
+$color-hover-iso-left: $color-hover-iso-front;
+$color-hover-iso-right: $color-hover-iso-front;
 
-$color-hover-iso-top: $color-content;
-$color-hover-iso-left: $color-content;
-$color-hover-iso-right: $color-content;
-
-$filter-iso-left: brightness(20%);
-$filter-iso-right: brightness(40%);
-$filter-iso-top: brightness(80%);
+$color-hover-iso-back: rgba(118, 0, 161, 0.2);
+$color-hover-iso-bottom: $color-hover-iso-back;
+$color-hover-iso-back-left: $color-hover-iso-back;
+$color-hover-iso-back-right: $color-hover-iso-back;
 
 // Social
 $color-twitter: #00aced;
@@ -692,28 +697,25 @@ header {
 
 @keyframes iso-dash {
     from {
-        stroke-dashoffset: 50%;
+        stroke-dashoffset: 0%;
     }
     to {
-        stroke-dashoffset: 100%;
+        stroke-dashoffset: 50%;
     }
 }
 
 .iso {
-    @extend %transition-ease;
-
     > rect {
-        stroke: $color-iso-stroke;
-        stroke-dasharray: 0.4rem, 0, 0, 100px;
-        stroke-width: 0.1rem;
-        stroke-linejoin: round;
-        stroke-linecap: round;
         outline: 1px dotted $color-iso-outline;
         outline-offset: -1px;
-
-        animation: iso-dash 60s ease-in-out;
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
+        stroke-opacity: 0%;
+        stroke: $color-iso-stroke;
+        stroke-dasharray: 0.4rem, 0, 0, 100px;
+        stroke-width: 2px;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+        will-change: stroke-dashoffset;
+        @extend %transition-ease;
     }
 
     > .iso-left {
@@ -730,46 +732,53 @@ header {
 
     > .iso-back-left {
         fill: $color-iso-back-left;
-        opacity: $iso-back-opacity;
     }
 
     > .iso-back-right {
         fill: $color-iso-back-right;
-        opacity: $iso-back-opacity;
     }
 
     > .iso-bottom {
         fill: $color-iso-bottom;
-        opacity: $iso-back-opacity;
     }
 
-    // &:hover {
-    //     @extend %transition-ease;
+    &:hover {
+        > rect {
+            stroke-opacity: 100%;
+            animation: iso-dash 30s linear;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
 
-    //     > .iso-left {
-    //         fill: $color-hover-iso-left;
-    //     }
+        > .iso-left {
+            fill: $color-hover-iso-left;
+        }
 
-    //     > .iso-right {
-    //         fill: $color-hover-iso-right;
-    //     }
+        > .iso-right {
+            fill: $color-hover-iso-right;
+        }
 
-    //     > .iso-top {
-    //         fill: $color-hover-iso-top;
-    //     }
-    // }
+        > .iso-top {
+            fill: $color-hover-iso-top;
+        }
+
+        > .iso-back-left {
+            fill: $color-hover-iso-back-left;
+        }
+
+        > .iso-back-right {
+            fill: $color-hover-iso-back-right;
+        }
+
+        > .iso-bottom {
+            fill: $color-hover-iso-bottom;
+        }
+    }
 }
 
-/* 3D content cube styles */
-/* @keyframes cube-spin-in */
-/*     0% */
-/*         transform : rotateY(-45deg) rotateX(-15deg) rotateZ(15deg) scale3d(0, 0, 0) */
-/*     100% */
-/*         transform : rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale3d(1, 1, 1) */
-
-@keyframes grow {
+@keyframes escher {
     from {
-        transform: rotateX(-30deg) rotateY(45deg) scale3d(0.01, 0.01, 0.01);
+        transform: rotateX(-35deg) rotateY(45deg) scale3d(0.5, 0.5, 0.5);
     }
     to {
         transform: rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
@@ -787,8 +796,9 @@ header {
     transform-style: preserve-3d;
     position: relative;
     display: inline-block;
+    will-change: transform;
 
-    animation-name: grow;
+    animation: escher 1s ease-in;
 
     > .face {
         width: 100%;
@@ -797,7 +807,7 @@ header {
         overflow-x: hidden;
         position: absolute;
         background: $color-content;
-        filter: $filter-iso-left;
+        filter: $filter-face-no-focus;
         backface-visibility: visible;
         z-index: 100;
         pointer-events: none; /* Disable all links until the face has .focus */
