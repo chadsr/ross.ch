@@ -31,7 +31,8 @@ const MAX_SIDE = 3;
 let currentSide = MIN_SIDE;
 
 let isWebkit = false; // We need to apply a hack to safari, to fix 3d transforms, so this is used based on the browser's useragent
-let windowHeight = 0;
+let windowHeight = window.innerHeight;
+let cubeSize: number;
 
 document.addEventListener('DOMContentLoaded', function () {
     // Remove the class controlling styles when javascript is disabled
@@ -42,8 +43,12 @@ document.addEventListener('DOMContentLoaded', function () {
         ((<any>window).webkit && (<any>window).webkit.messageHandlers) ||
         (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1)
     ) {
+        fixTranslateZ();
         isWebkit = true;
     }
+
+    // store the current cube size
+    cubeSize = parseInt(document.getElementById(CUBE_ID).style.width);
 
     const swipe = new Hammer(document.body, {
         recognizers: [[Hammer.Swipe, { enable: true }]],
@@ -103,8 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //     this.select();
     // });
 
-    // Trigger the resize event, so the cube can center on page load
-    window.dispatchEvent(new Event('resize'));
+    renderBackground();
 });
 
 document.addEventListener('keydown', function (event) {
@@ -121,8 +125,8 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
-// The cube should be rendering at the exact same size and the style sheet states. Some browser LIKE SAFARI, act differently on transform-origin and screw this up.
-// This is therefore a Safari/IOS hack to correct the size of the cube
+// The cube should be rendering at the exact same size and the style sheet states.
+// This is a hack for Safari/IOS/Webkit, to correct the size of the cube, since Webkit seems to act differently than all other web engines.
 function fixTranslateZ() {
     // Get the computed CSS size (width since it's a cube) of the cube
     const cube = <HTMLDivElement>document.getElementById(CUBE_ID);
@@ -133,32 +137,33 @@ function fixTranslateZ() {
     cubeWrapper.style.transform = `translateZ(-${cubeStyles.width})`;
 }
 
-// function debounce(func, time: number) {
-//     time = time || 100; // 100 by default if no param
-//     let timer;
-//     return function (event) {
-//         if (timer) clearTimeout(timer);
-//         timer = setTimeout(func, time, event);
-//     };
-// }
-
 window.addEventListener('resize', function () {
+    // Background is dependent on window height, so re-render if window height changes
     if (this.innerHeight !== windowHeight) {
         windowHeight = this.innerHeight;
         renderBackground();
-        console.log('resize');
     }
 
-    // Fix z translation for Apple Webkit based browsers
+    // Fix z translation for Apple Webkit based browsers, if the cube changed size
     if (isWebkit) {
-        fixTranslateZ();
-        console.log('fixed');
+        const cubeStyle = getComputedStyle(document.getElementById(CUBE_ID));
+        const newCubeSize = parseInt(cubeStyle.width);
+
+        if (cubeSize !== newCubeSize) {
+            cubeSize = newCubeSize;
+
+            // Wait until the transition is finished to fix the translateZ
+            const waitTimeSec = parseFloat(cubeStyle.transitionDuration) + 1;
+            setTimeout(() => {
+                fixTranslateZ();
+            }, waitTimeSec * 1000);
+        }
     }
 });
 
 function renderBackground() {
-    const cubeSize = window.innerHeight / NUM_CUBES_Y;
-    EscherCubes.render(BG_CONTAINER_Id, SVG_ID, 0, BG_Y_OFFSET, cubeSize, INNER_ANGLE, ISO_PADDING, true);
+    const isoCubeSize = window.innerHeight / NUM_CUBES_Y;
+    EscherCubes.render(BG_CONTAINER_Id, SVG_ID, 0, BG_Y_OFFSET, isoCubeSize, INNER_ANGLE, ISO_PADDING, true);
 }
 
 function hideSwipeIndicator() {
