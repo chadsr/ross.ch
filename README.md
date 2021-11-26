@@ -1,4 +1,4 @@
-# Ross.ch Web Server
+# https://ross.ch
 
 [![Node.js CI](https://github.com/Chadsr/ross.ch/actions/workflows/node.js.yml/badge.svg)](https://github.com/Chadsr/ross.ch/actions/workflows/node.js.yml)
 [![CodeQL](https://github.com/Chadsr/ross.ch/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Chadsr/ross.ch/actions/workflows/codeql-analysis.yml)
