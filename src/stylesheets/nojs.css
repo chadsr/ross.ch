@@ -32,9 +32,7 @@ body.nojs-styles .repo-stars::after {
     content: '\2605';
 }
 
-body.nojs-styles header,
-body.nojs-styles #crypto,
-body.nojs-styles #contact-wrapper {
+body.nojs-styles header, body.nojs-styles, body.nojs-styles #contact-wrapper {
     display: none;
 }
 

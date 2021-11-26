@@ -67,12 +67,6 @@ $bp-larger-than-desktophd: 'min-width: 1200px' !default;
 }
 
 @mixin elasticNav() {
-    nav {
-        ul {
-            float: none !important;
-        }
-    }
-
     nav > ul.fullWidth,
     .social.fullWidth {
         @for $i from 1 through 10 {
@@ -95,42 +89,18 @@ $bp-larger-than-desktophd: 'min-width: 1200px' !default;
         width: 50% !important;
     }
 
-    .coin {
-        float: left;
-        position: relative;
-
-        > textarea {
-            position: absolute;
-            left: 0;
-            padding: 4px 10px 4px 28px !important;
-        }
-
-        &:hover {
-            &::after {
-                display: none !important;
-            }
-        }
-    }
-
     footer {
         max-height: 64px;
     }
 
     #swipe-indicator {
-        display: block;
+        display: flex;
     }
 
-    nav ul li {
+    nav > ul > li {
         > a h4 {
             padding: 4px 4px;
         }
-    }
-}
-
-@media screen and (orientation: landscape) and (max-height: 500px) {
-    #crypto,
-    #swipe-indicator {
-        display: none !important;
     }
 }
 
