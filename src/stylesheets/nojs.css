@@ -6,20 +6,18 @@
     font-weight: bold;
 }
 
-html {
+body.nojs-styles {
+    color: white;
+    font-family: Hack, monospace;
+    background-color: rgb(14, 14, 14);
     margin: 0;
     padding: 0;
     overflow-x: hidden;
 }
 
-body.nojs-styles {
-    color: white;
-    font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
-    background-color: black;
-    /* background-image: radial-gradient(rgba(31, 60, 86, 0.75), black 120%); */
+body.nojs-styles ul {
     margin: 0;
-    padding: 0;
-    /* height: 100vh; */
+    display: inline-block;
 }
 
 body.nojs-styles::selection {
@@ -38,6 +36,7 @@ body.nojs-styles header, body.nojs-styles #contact-wrapper {
 
 body.nojs-styles #content {
     margin: 0 15%;
+    overflow-x: hidden;
 }
 
 body.nojs-styles .content {
@@ -45,7 +44,8 @@ body.nojs-styles .content {
 }
 
 body.nojs-styles .field {
-    margin-bottom: 16px;
+    margin-bottom: 32px;
+    padding: 8px;
 }
 
 body.nojs-styles fieldset {
@@ -85,18 +85,13 @@ body.nojs-styles ul {
 }
 
 body.nojs-styles .content li {
-    margin: 12px 0;
     width: 100%;
     float: left;
 }
 
-body.nojs-styles .content li > p {
-    margin: 0;
-}
-
 body.nojs-styles .field .title,
 body.nojs-styles .social li {
-    padding: 4px 8px;
+    padding: 8px;
     transition: all 0.2s ease-in-out;
 }
 
@@ -125,9 +120,20 @@ body.nojs-styles .face {
 body.nojs-styles .face .content ul > li::before {
     font-family: 'Macula', 'serif';
     content: '>';
+    display: inline-block;
     font-size: 48px;
     float: left;
-    /* line-height: 42px; */
+    padding-right: 4px;
+    margin: 4px 0;
+}
+
+body.nojs-styles .face .content ul > li ul > li::before {
+    font-size: 24px;
+    line-height: 48px;
+}
+
+body.nojs-styles .face .content ul > li ul > li {
+    margin: 0;
 }
 
 body.nojs-styles footer {
@@ -143,7 +149,7 @@ body.nojs-styles footer > ul {
 
 body.nojs-styles footer > ul > li,
 body.nojs-styles .repo {
-    display: block;
+    display: inline-block;
     float: left;
 }
 

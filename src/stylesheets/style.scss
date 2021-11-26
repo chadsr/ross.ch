@@ -66,7 +66,7 @@ $url-refresh: url('../assets/images/icons/icon_refresh.png');
 
 /* Fonts */
 $font-macula: 'Macula';
-$font-main: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
+$font-main: Hack, monospace;
 
 $width-full-button: 125px;
 $width-icon-button: 50px;
@@ -760,7 +760,7 @@ header {
             overflow-wrap: break-word;
 
             ul.list {
-                > li {
+                li {
                     display: flex;
                     flex-wrap: wrap;
                     width: 100%;
@@ -853,14 +853,20 @@ header {
         }
     }
 
-    &.perspective {
-        .title {
-            @extend %field-title-style;
-            h3 {
-                margin: 0;
-            }
+    .title {
+        @extend %field-title-style;
+
+        h2 {
+            font-size: 3em;
+            margin: 16px 0;
         }
 
+        h3 {
+            margin: 0;
+        }
+    }
+
+    &.perspective {
         > button {
             height: 32px;
             width: 100%;

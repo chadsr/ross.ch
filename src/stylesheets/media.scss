@@ -155,7 +155,7 @@ $bp-larger-than-desktophd: 'min-width: 1200px' !default;
 @media only screen and (min-width: 1200px) and (min-height: 1300px) {
     @include cubeTransform(1100px);
     h1 {
-        font-size: 7em;
+        font-size: 6em;
     }
 }
 
