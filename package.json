@@ -13,7 +13,7 @@
         "docs": "./node_modules/.bin/typedoc ./src",
         "serve": "node --trace-deprecation dist/src/server.js",
         "webpack": "NODE_ENV=production ./node_modules/.bin/webpack --progress --config ./webpack.config.ts",
-        "build": "npm run lint && ./node_modules/.bin/tsc && npm run webpack --display-used-exports && ./node_modules/.bin/ts-node copyStaticAssets.ts",
+        "build": "./node_modules/.bin/tsc && npm run webpack --display-used-exports && ./node_modules/.bin/ts-node copyStaticAssets.ts",
         "start": "NODE_ENV=production npm run serve"
     },
     "husky": {
