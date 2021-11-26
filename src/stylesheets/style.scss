@@ -769,7 +769,11 @@ header {
             overflow-wrap: break-word;
 
             ul.list {
+                display: block;
+                overflow: auto;
+
                 li {
+                    padding: 8px 0 0 0;
                     width: 100%;
                     text-align: left;
                     display: flex;
@@ -781,6 +785,8 @@ header {
                         align-items: center;
                         justify-content: left;
                         margin: 0;
+                        word-wrap: auto;
+                        width: 100%;
 
                         &::before {
                             @extend %heading;
@@ -791,7 +797,7 @@ header {
                     }
 
                     > ul {
-                        margin: 0 0 0 48px;
+                        margin: 0 0 0 24px;
 
                         > li {
                             margin: 0 0 4px 0;
