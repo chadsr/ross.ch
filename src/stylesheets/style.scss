@@ -58,6 +58,7 @@ $color-error: #a51818;
 $url-ethereum: url('../assets/images/icons/icon_ethereum.png');
 $url-bitcoin: url('../assets/images/icons/icon_bitcoin.png');
 $url-github: url('../assets/images/icons/icon_github.png');
+$url-gpg: url('../assets/images/icons/icon_gpg.png');
 $url-twitter: url('../assets/images/icons/icon_twitter.png');
 $url-mastodon: url('../assets/images/icons/icon_mastodon.png');
 $url-linkedin: url('../assets/images/icons/icon_linkedin.png');
@@ -267,8 +268,7 @@ h3 {
     padding: 8px;
 }
 
-h4,
-.notification-text {
+h4 {
     margin: 0;
     line-height: 24px;
     font-weight: 100;
@@ -373,6 +373,13 @@ ul {
                 a::before {
                     @extend %button-icon;
                     background-image: $url-mastodon;
+                }
+            }
+
+            &.gpg {
+                a::before {
+                    @extend %button-icon;
+                    background-image: $url-gpg;
                 }
             }
 
@@ -857,7 +864,7 @@ header {
         @extend %field-title-style;
 
         h2 {
-            font-size: 3em;
+            font-size: 3vmin;
             margin: 16px 0;
         }
 
@@ -890,11 +897,11 @@ header {
 
         .title,
         > button {
-            @extend %transition-ease;
             font-size: 16px;
             min-height: 32px;
-            line-height: 2em;
+            line-height: 32px;
             @extend %outline-dotted;
+            @extend %transition-ease;
 
             &::after {
                 @extend %threed-side-top;
