@@ -22,7 +22,7 @@ const BG_Y_OFFSET = -0.5; // Offset from y origin for the background rendering (
 const BG_CONTAINER_Id = 'background';
 const SVG_ID = 'isobg';
 const INNER_ANGLE = 60;
-const NUM_CUBES_Y = 16; // The number of cubes that will be rendered on the y axis (This dictates their size)
+const NUM_CUBES_Y = 8; // The number of cubes that will be rendered on the y axis (This dictates their size)
 const ISO_PADDING = 1;
 
 const MIN_SIDE = 0;
@@ -166,14 +166,6 @@ function renderBackground() {
     EscherCubes.render(BG_CONTAINER_Id, SVG_ID, 0, BG_Y_OFFSET, isoCubeSize, INNER_ANGLE, ISO_PADDING, true);
 }
 
-function hideSwipeIndicator() {
-    const swipeIndicator = document.getElementById('swipe-indicator');
-
-    if (swipeIndicator.classList.contains('swiped') !== true) {
-        swipeIndicator.classList.add('swiped');
-    }
-}
-
 function rotateTo(side: number) {
     if (side == MAX_SIDE + 1) {
         side = MIN_SIDE;
@@ -207,9 +199,6 @@ function rotateTo(side: number) {
         cube.className = cube.className.replace(currentClass, `rotate-${side}`);
 
         currentSide = side;
-
-        // hide the swipe indicator, if not already since user managed to switch pages
-        hideSwipeIndicator();
 
         return true;
     }

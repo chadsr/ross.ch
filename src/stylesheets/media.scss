@@ -23,22 +23,22 @@ $bp-larger-than-desktophd: 'min-width: 1200px' !default;
         height: $size;
 
         > .face {
-            &.top {
+            &.face-top {
                 transform: rotateX(90deg) translateZ(math.div($size, 2));
             }
-            &.front {
+            &.face-front {
                 transform: translateZ(math.div($size, 2));
             }
-            &.bottom {
+            &.face-bottom {
                 transform: rotateX(-90deg) translateZ(math.div($size, 2));
             }
-            &.left {
+            &.face-left {
                 transform: rotateY(-90deg) translateZ(math.div($size, 2));
             }
-            &.right {
+            &.face-right {
                 transform: rotateY(90deg) translateZ(math.div($size, 2));
             }
-            &.back {
+            &.face-back {
                 transform: rotateY(180deg) translateZ(math.div($size, 2));
             }
         }
@@ -80,28 +80,6 @@ $bp-larger-than-desktophd: 'min-width: 1200px' !default;
 
 @media only screen and (max-width: 806px) {
     @include elasticNav();
-
-    .fullWidth {
-        width: 100% !important;
-    }
-
-    .halfWidth {
-        width: 50% !important;
-    }
-
-    footer {
-        max-height: 64px;
-    }
-
-    #swipe-indicator {
-        display: flex;
-    }
-
-    nav > ul > li {
-        > a h4 {
-            padding: 4px 4px;
-        }
-    }
 }
 
 @media only screen and (min-width: 200px) and (min-height: 300px) {
@@ -177,7 +155,7 @@ $bp-larger-than-desktophd: 'min-width: 1200px' !default;
 @media only screen and (min-width: 1200px) and (min-height: 1300px) {
     @include cubeTransform(1100px);
     h1 {
-        font-size: 7em !important;
+        font-size: 7em;
     }
 }
 

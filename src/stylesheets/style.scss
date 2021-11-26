@@ -10,7 +10,7 @@ $color-text-link-highlight: $color-content-highlight; /* Overrides the above, bu
 $color-heading: $color-text;
 $color-text-placeholder: $color-text;
 $color-text-placeholder_highlight: $color-text-highlight;
-$color-title-banner: #363636;
+$color-title-banner: #1f1f1f;
 $color-shadow: rgba(0, 0, 0, 0.75);
 $color-scrollbar: $color-content;
 $color-scrollbar_track: $color-content;
@@ -31,12 +31,12 @@ $color-iso-bottom: $color-iso;
 
 $color-iso-stroke: $color-content-highlight;
 
-$color-hover-iso-front: rgba(0, 0, 0, 0.7);
+$color-hover-iso-front: rgba(0, 0, 0, 0.75);
 $color-hover-iso-top: $color-hover-iso-front;
 $color-hover-iso-left: $color-hover-iso-front;
 $color-hover-iso-right: $color-hover-iso-front;
 
-$color-hover-iso-back: rgba(118, 0, 161, 0.3);
+$color-hover-iso-back: rgba(118, 0, 161, 0.5);
 $color-hover-iso-bottom: $color-hover-iso-back;
 $color-hover-iso-back-left: $color-hover-iso-back;
 $color-hover-iso-back-right: $color-hover-iso-back;
@@ -124,6 +124,19 @@ $width-icon-button: 50px;
     &::placeholder {
         @extend %transition-ease;
         color: $color-text-placeholder;
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+        -webkit-text-fill-color: $color-text;
+        box-shadow: 0 0 0 100px $color-content-secondary inset;
     }
 }
 
@@ -447,7 +460,7 @@ nav {
                 }
             }
 
-            > a h4 {
+            > a > h4 {
                 padding: 4px 10px;
                 text-align: center;
             }
@@ -469,7 +482,6 @@ nav {
     @extend %full-screen;
 }
 
-#nojs,
 .nojs {
     display: none;
 }
@@ -482,47 +494,6 @@ nav {
         width: 100%;
         font-weight: bold;
         margin: 16px 0 8px 0;
-    }
-}
-
-#swipe-indicator {
-    @extend %transition-ease-out;
-    z-index: 9999;
-    width: 100%;
-    height: 32px;
-    position: absolute;
-    bottom: 32px;
-    left: 0;
-    background: $color-content-highlight;
-    display: none;
-    justify-content: center;
-    align-items: center;
-
-    .notification-text {
-        height: 100%;
-        display: flex;
-
-        > p {
-            flex-wrap: nowrap;
-            margin: 0;
-            line-height: 32px;
-        }
-
-        &::before {
-            @extend %heading;
-            font-size: 24px;
-            margin: 4px 16px 0 0;
-            content: '<<';
-        }
-    }
-
-    &::after {
-        @extend %threed-side-top;
-        @extend %outline-dotted;
-    }
-
-    &.swiped {
-        left: -100%;
     }
 }
 
@@ -662,8 +633,8 @@ header {
 
 %stroke-network {
     stroke: $color-iso-stroke;
-    stroke-dasharray: 0.4rem, 0, 0, 100px;
-    stroke-width: 2px;
+    stroke-dasharray: 4pt, 0, 0, 100px;
+    stroke-width: 2pt;
     stroke-linejoin: round;
     stroke-linecap: round;
     will-change: stroke-dashoffset;
@@ -777,12 +748,14 @@ header {
         background: $color-content;
         filter: $filter-face-no-focus;
         backface-visibility: visible;
-        z-index: 100;
+        // z-index: 100;
         pointer-events: none; /* Disable all links until the face has .focus */
         @extend %transition-ease-in-out;
         @extend %outline-dotted;
+        transform-style: flat;
 
         .content {
+            transform-style: flat;
             margin: 32px 10%;
             overflow-wrap: break-word;
 
@@ -823,17 +796,17 @@ header {
 
         &.focus {
             pointer-events: auto; /* Enable links */
-            z-index: 9999;
+            // z-index: 9999;
             filter: none;
+            @extend %scrollable;
         }
     }
 }
 
-.scrollable {
+%scrollable {
     width: inherit;
     height: inherit;
-    overflow-y: auto !important;
-    overflow-x: hidden;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 
     &::-webkit-scrollbar-track {
@@ -865,7 +838,7 @@ header {
     background-color: $color-content-secondary;
     display: inline-block;
     width: 100%;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
     @extend %outline-dotted;
 
     &.textarea {
@@ -873,6 +846,8 @@ header {
     }
 
     &.hover:hover {
+        background: $color-content-secondary-highlight;
+
         .title {
             background-color: $color-content-highlight;
         }
@@ -979,14 +954,9 @@ header {
 /* Blog and Repository stuff */
 .blog-post,
 .repo {
-    margin-bottom: 32px !important;
     @extend %transition-ease;
-    a {
-        font-weight: normal !important;
-    }
-    &:hover {
-        background: $color-content-secondary-highlight;
 
+    &:hover {
         .blog-post-title,
         .blog-post-tag,
         .repo-title,
@@ -995,9 +965,6 @@ header {
             background: $color-content-highlight;
             color: $color-text-highlight;
         }
-    }
-    &::before {
-        display: none !important;
     }
 }
 

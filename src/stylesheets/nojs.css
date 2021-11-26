@@ -16,14 +16,14 @@ body.nojs-styles {
     color: white;
     font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
     background-color: black;
-    background-image: radial-gradient(rgba(31, 60, 86, 0.75), black 120%);
+    /* background-image: radial-gradient(rgba(31, 60, 86, 0.75), black 120%); */
     margin: 0;
     padding: 0;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 body.nojs-styles::selection {
-    background: #0f8f83;
+    background: #7600a1;
     text-shadow: none;
 }
 
@@ -32,7 +32,7 @@ body.nojs-styles .repo-stars::after {
     content: '\2605';
 }
 
-body.nojs-styles header, body.nojs-styles, body.nojs-styles #contact-wrapper {
+body.nojs-styles header, body.nojs-styles #contact-wrapper {
     display: none;
 }
 
@@ -69,7 +69,8 @@ body.nojs-styles h2 {
 
 body.nojs-styles h3 {
     font-size: 18px;
-    margin: 0 0 16px 0;
+    margin: 0;
+    padding: 8px;
 }
 
 body.nojs-styles a {
@@ -93,14 +94,15 @@ body.nojs-styles .content li > p {
     margin: 0;
 }
 
-body.nojs-styles .field,
+body.nojs-styles .field .title,
 body.nojs-styles .social li {
+    padding: 4px 8px;
     transition: all 0.2s ease-in-out;
 }
 
-body.nojs-styles .field:hover,
+body.nojs-styles .field.hover:hover .title,
 body.nojs-styles .social li:hover {
-    text-shadow: 0 0 16px white;
+    background-color: #7600a1;
 }
 
 body.nojs-styles input,
@@ -125,9 +127,7 @@ body.nojs-styles .face .content ul > li::before {
     content: '>';
     font-size: 48px;
     float: left;
-    line-height: 16px;
-    margin-right: 10px;
-    height: 24px;
+    /* line-height: 42px; */
 }
 
 body.nojs-styles footer {
@@ -151,14 +151,9 @@ body.nojs-styles footer > ul > li {
     margin-right: 16px;
 }
 
-body.nojs-styles #nojs {
+body.nojs-styles .nojs-info {
     padding: 6px;
-    background-color: rgba(31, 60, 86, 1);
+    background-color: #7600a1;
     font-size: 14px;
     text-align: center;
-}
-
-body.nojs-styles #swipe-indicator,
-body.nojs-styles #footnote {
-    display: none;
 }
