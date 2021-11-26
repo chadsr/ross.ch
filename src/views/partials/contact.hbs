@@ -6,20 +6,20 @@
     <form id="contact-form" method="post" role="form">
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <fieldset>
-            <div class="field perspective">
-                <label class="title" for="name">Name</label>
+            <div class="field perspective hover">
+                <label class="title perspective" for="name">Name</label>
                 <input id="name" name="name" type="text" placeholder="Your name" required="required">
             </div>
-            <div class="field perspective">
-                <label class="title" for="email">Email</label>
-                <input id="email" name="email" type="text" placeholder="Your email" required="required">
+            <div class="field perspective hover">
+                <label class="title perspective" for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="Your email" required="required">
             </div>
-            <div class="field perspective">
-                <label class="title" for="message">Message</label>
+            <div class="field perspective textarea hover">
+                <label class="title perspective" for="message">Message</label>
                 <textarea id="message" name="message" placeholder="Enter your message here" rows="3" required="required"></textarea>
             </div>
-            <div class="field perspective">
-                <div id="captcha-title" class="title"><img id="captcha-img" src="{{captchaBase64}}" title="captcha">
+            <div class="field perspective hover">
+                <div id="captcha-title" class="title perspective"><img id="captcha-img" src="{{captchaBase64}}" title="captcha">
                     <a id="captcha-refresh-btn" title="Refresh Captcha"></a>
                 </div>
                 <input id="captcha" name="captcha" type="text" placeholder="Type what you see above" required="required" autocomplete="off">

@@ -7,10 +7,10 @@ export interface ErrorMessagesI {
 }
 
 const ErrorMessages: ErrorMessagesI = {
-    InvalidEmail: 'Email looks invalid :(',
-    InvalidNameShort: 'Is your name really one character?',
-    InvalidNameLong: 'Do you have a shorter name I can call you?',
-    InvalidMsg: 'Message is a little short...',
+    InvalidEmail: 'Invalid Email',
+    InvalidNameShort: 'Got a less generic name?',
+    InvalidNameLong: 'Got a nickname?',
+    InvalidMsg: 'Got something more to say?',
     InvalidCaptcha: 'Captcha is invalid!',
 };
 

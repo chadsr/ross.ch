@@ -1,10 +1,9 @@
 {{#if githubRepos}}
-    <div class="description">For a more definitive list, hit the Github button in the footer.</div>
     <ul class="repo-feed">
         {{#each githubRepos}}
-            <li class="repo field perspective">
+            <li class="repo field hover perspective">
                 <a href="{{url}}" rel="noopener" target="_blank">
-                    <div class="repo-title title">
+                    <div class="repo-title title perspective">
                         <h3>{{title}}</h3>
                     </div>
                     <span class="repo-updated-date">Updated:

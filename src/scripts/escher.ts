@@ -1,3 +1,11 @@
+const SVG_NAMESPACE_URI = 'http://www.w3.org/2000/svg';
+const CLASS_ISO_TOP = 'iso-top';
+const CLASS_ISO_LEFT = 'iso-left';
+const CLASS_ISO_RIGHT = 'iso-right';
+const CLASS_ISO_BACK_RIGHT = 'iso-back-right';
+const CLASS_ISO_BACK_LEFT = 'iso-back-left';
+const CLASS_ISO_BOTTOM = 'iso-bottom';
+
 export default class EscherCubes {
     // renderEscherCubes(outer container id, svg container id, x offset from origin, y offset from origin, cube edge length in px, inner angle of cube)
     static render(
@@ -7,6 +15,8 @@ export default class EscherCubes {
         yOffset: number,
         cubeSize: number,
         innerAngle: number,
+        sidePaddingPx: number,
+        renderHiddenSides = false,
     ): void {
         // Attempt to fetch the svg if it exists already
         const existing = document.getElementById(svgId);
@@ -15,7 +25,7 @@ export default class EscherCubes {
         }
 
         // Render svg container
-        const parentSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        const parentSVG = document.createElementNS(SVG_NAMESPACE_URI, 'svg');
         parentSVG.setAttribute('id', svgId);
 
         // Get the container and append the svgId to it
@@ -46,7 +56,16 @@ export default class EscherCubes {
                 }
 
                 const yPos = xPos;
-                this.renderIsometricCube(parentSVG, cubeSize, innerAngle, xPos, yPos, zPos, false);
+                this.renderIsometricCube(
+                    parentSVG,
+                    cubeSize,
+                    innerAngle,
+                    xPos,
+                    yPos,
+                    zPos,
+                    sidePaddingPx,
+                    renderHiddenSides,
+                );
             }
             odd = !odd;
         }
@@ -57,41 +76,22 @@ export default class EscherCubes {
         parentSVG: SVGElement,
         cubeSize: number,
         innerAngle: number,
-        x: number,
-        y: number,
-        z: number,
+        xPos: number,
+        yPos: number,
+        zPos: number,
+        sidePaddingPx: number,
         renderHiddenSides: boolean,
     ): void {
         const outerAngle = 90 - innerAngle; // Calculate the outer angle by subtracting the inner angle from 90 degrees
         const sineInner = this.sineOf(innerAngle);
         const sineOuter = this.sineOf(outerAngle);
 
-        const sides = [
-            [
-                'iso-top',
-                sineInner + ' ' + -sineOuter + ' ' + sineInner + ' ' + sineOuter + ' ' + 0 + ' ' + cubeSize / 2,
-            ],
-            ['iso-left', sineInner + ' ' + sineOuter + ' ' + 0 + ' ' + 1 + ' ' + 0 + ' ' + cubeSize / 2],
-            [
-                'iso-right',
-                sineInner +
-                    ' ' +
-                    -sineOuter +
-                    ' ' +
-                    0 +
-                    ' ' +
-                    1 +
-                    ' ' +
-                    this.sineRule(cubeSize, innerAngle) +
-                    ' ' +
-                    cubeSize,
-            ],
-        ];
+        const sides = [];
 
-        if (renderHiddenSides == true) {
+        if (renderHiddenSides === true) {
             sides.push(
                 [
-                    'iso-back-right',
+                    CLASS_ISO_BACK_RIGHT,
                     sineInner +
                         ' ' +
                         sineOuter +
@@ -104,32 +104,59 @@ export default class EscherCubes {
                         ' ' +
                         0,
                 ],
-                ['iso-back-left', sineInner + ' ' + -sineOuter + ' ' + 0 + ' ' + 1 + ' ' + 0 + ' ' + cubeSize / 2],
+                [CLASS_ISO_BACK_LEFT, sineInner + ' ' + -sineOuter + ' ' + 0 + ' ' + 1 + ' ' + 0 + ' ' + cubeSize / 2],
                 [
-                    'iso-bottom',
+                    CLASS_ISO_BOTTOM,
                     sineInner + ' ' + -sineOuter + ' ' + sineInner + ' ' + sineOuter + ' ' + 0 + ' ' + cubeSize * 1.5,
                 ],
             );
         }
 
-        const iso = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        sides.push(
+            [
+                CLASS_ISO_TOP,
+                sineInner + ' ' + -sineOuter + ' ' + sineInner + ' ' + sineOuter + ' ' + 0 + ' ' + cubeSize / 2,
+            ],
+            [CLASS_ISO_LEFT, sineInner + ' ' + sineOuter + ' ' + 0 + ' ' + 1 + ' ' + 0 + ' ' + cubeSize / 2],
+            [
+                CLASS_ISO_RIGHT,
+                sineInner +
+                    ' ' +
+                    -sineOuter +
+                    ' ' +
+                    0 +
+                    ' ' +
+                    1 +
+                    ' ' +
+                    this.sineRule(cubeSize, innerAngle) +
+                    ' ' +
+                    cubeSize,
+            ],
+        );
+
+        const iso = document.createElementNS(SVG_NAMESPACE_URI, 'g');
         iso.setAttribute('class', 'iso');
         iso.setAttribute(
             'transform',
-            'translate(' + this.calcX(cubeSize, innerAngle, x, y) + ',' + this.calcY(cubeSize, x, y, z) + ')',
+            'translate(' +
+                this.calcX(cubeSize, innerAngle, xPos, yPos) +
+                ',' +
+                this.calcY(cubeSize, xPos, yPos, zPos) +
+                ')',
         );
 
-        for (let i = 0; i < sides.length; i++) {
-            const side = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        for (const [className, transform] of sides) {
+            const side = document.createElementNS(SVG_NAMESPACE_URI, 'rect');
             side.setAttribute('x', '0');
             side.setAttribute('y', '0');
             side.setAttribute('width', cubeSize.toString());
             side.setAttribute('height', cubeSize.toString());
-            side.setAttribute('class', sides[i][0]);
-            side.setAttribute('transform', 'matrix(' + sides[i][1] + ')');
+            side.setAttribute('class', className);
+            side.setAttribute('transform', 'matrix(' + transform + ')');
 
             iso.appendChild(side);
         }
+
         parentSVG.append(iso);
     }
 
