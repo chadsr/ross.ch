@@ -2,15 +2,9 @@ version: '3'
 
 services:
   webapp:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        WORK_DIR: "/usr/src/ross.ch"
-        PORT: 8080
+    image: ghcr.io/chadsr/ross.ch:latest
     env_file:
       - .config.env
-    image: ross.ch-webapp
     container_name: webapp
     restart: unless-stopped
     volumes:
@@ -48,6 +42,12 @@ services:
       - /ross.ch/ghost_content:/var/lib/ghost/content:rw,z
     networks:
       - ghost
+
+  watchtower:
+    container_name: watchtower
+    image: containrrr/watchtower:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
 
 volumes:
   web-root:
