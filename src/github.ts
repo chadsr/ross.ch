@@ -1,4 +1,3 @@
-import { logger } from './logging';
 import { Repository, Github } from './interfaces';
 
 import { Octokit } from '@octokit/rest';
