@@ -252,13 +252,13 @@ body {
 }
 
 h1 {
-    font-size: 6vmin;
+    font-size: 6vw;
     @extend %heading;
     font-weight: 100;
 }
 
 h2 {
-    font-size: 6vmin;
+    font-size: 6vw;
     @extend %heading;
     font-weight: 100;
 }
@@ -866,13 +866,17 @@ header {
         @extend %field-title-style;
 
         h2 {
-            font-size: 3vmin;
-            margin: 16px 0;
+            font-size: 3vw;
+            margin: 8px 0;
         }
 
         h3 {
             margin: 0;
         }
+    }
+
+    label.title {
+        line-height: 32px;
     }
 
     &.perspective {
@@ -901,7 +905,6 @@ header {
         > button {
             font-size: 16px;
             min-height: 32px;
-            line-height: 32px;
             @extend %outline-dotted;
             @extend %transition-ease;
 
@@ -947,7 +950,6 @@ header {
 }
 
 #captcha-img {
-    border-radius: 2px;
     top: 4px;
     position: relative;
     padding: 0 0 4px 6px;
@@ -1004,7 +1006,6 @@ header {
 .blog-post-tag,
 .repo-stars,
 .repo-language {
-    border-radius: 2px;
     padding: 4px;
     background-color: $color-title-banner;
     @extend %transition-ease;
