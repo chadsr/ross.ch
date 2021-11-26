@@ -27,8 +27,17 @@ jobs:
         node-version: ${{ matrix.node-version }}
         check-latest: true
 
-    - name: Install & Build
+    - name: Install Dependencies
       run: |
         git config --global url."https://github.com/".insteadOf ssh://git@github.com/
         yarn install
-        yarn run build
+    
+    - name: Lint
+      uses: reviewdog/action-eslint@v1
+      with:
+        reporter: github-check
+        eslint_flags: 'src/'
+        github_token: ${{ github.token }}
+
+    - name: Build
+      run: yarn run build
