@@ -770,28 +770,34 @@ header {
 
             ul.list {
                 li {
-                    display: flex;
-                    flex-wrap: wrap;
                     width: 100%;
                     text-align: left;
-                    margin: 0 0 16px 0;
-                    align-items: center;
+                    display: flex;
+                    flex-wrap: wrap;
+                    flex-direction: column;
 
-                    &::before {
-                        @extend %heading;
-                        content: '>';
-                        margin: 0 8px 0 0;
-                        font-size: 32px;
+                    p {
+                        display: flex;
+                        align-items: center;
+                        justify-content: left;
+                        margin: 0;
+
+                        &::before {
+                            @extend %heading;
+                            content: '>';
+                            margin: 0 8px 0 0;
+                            font-size: 48px;
+                        }
                     }
 
                     > ul {
-                        margin: 0 0 0 32px;
+                        margin: 0 0 0 48px;
 
                         > li {
-                            margin-bottom: 8px;
+                            margin: 0 0 4px 0;
 
-                            &::before {
-                                font-size: 20px;
+                            p::before {
+                                font-size: 32px;
                             }
                         }
                     }
