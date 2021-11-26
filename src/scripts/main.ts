@@ -34,13 +34,20 @@ let isWebkit = false; // We need to apply a hack to safari, to fix 3d transforms
 let windowHeight = window.innerHeight;
 let cubeSize: number;
 
+declare global {
+    interface Window {
+        webkit?: Webkit;
+    }
+
+    interface Webkit {
+        messageHandlers?: unknown;
+    }
+}
 document.addEventListener('DOMContentLoaded', function () {
     // Remove the class controlling styles when javascript is disabled
     document.body.classList.remove('nojs-styles');
-
-    // I wish there was a better way to do this
     if (
-        ((<any>window).webkit && (<any>window).webkit.messageHandlers) ||
+        (<Window>window.webkit && <Window>window.webkit.messageHandlers) ||
         (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1)
     ) {
         fixTranslateZ();
