@@ -189,7 +189,7 @@ $width-icon-button: 50px;
 }
 
 %transition-ease-in-out {
-    transition: all 1s ease-in-out;
+    transition: all 500ms ease-in-out;
 }
 
 %transition-ease-out {
@@ -197,7 +197,8 @@ $width-icon-button: 50px;
 }
 
 %transition-cube {
-    transition: all 2s cubic-bezier(0.175, 0.885, 0.32, 1);
+    transition-property: transform;
+    transition: all 500ms linear;
 }
 
 %threed-side {
@@ -758,6 +759,7 @@ header {
         // z-index: 100;
         pointer-events: none; /* Disable all links until the face has .focus */
         @extend %transition-ease-in-out;
+        transition-property: filter;
         @extend %outline-dotted;
         transform-style: flat;
 
