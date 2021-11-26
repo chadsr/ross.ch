@@ -252,13 +252,13 @@ body {
 }
 
 h1 {
-    font-size: 6vw;
+    font-size: 6vmin;
     @extend %heading;
     font-weight: 100;
 }
 
 h2 {
-    font-size: 6vw;
+    font-size: 6vmin;
     @extend %heading;
     font-weight: 100;
 }
@@ -866,7 +866,7 @@ header {
         @extend %field-title-style;
 
         h2 {
-            font-size: 3vw;
+            font-size: 3vmin;
             margin: 8px 0;
         }
 
