@@ -1,4 +1,4 @@
-FROM node:lts-alpine:latest
+FROM node:lts-alpine
 
 ARG WORK_DIR
 ARG NODE_ENV
