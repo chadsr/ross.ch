@@ -1,7 +1,8 @@
 # Ross.ch Web Server
 
-![Node.js CI](https://github.com/Chadsr/ross.ch/workflows/Node.js%20CI/badge.svg)
-![Docker Image CI](https://github.com/Chadsr/ross.ch/workflows/Docker%20Image%20CI/badge.svg)
+[![Node.js CI](https://github.com/Chadsr/ross.ch/actions/workflows/node.js.yml/badge.svg)](https://github.com/Chadsr/ross.ch/actions/workflows/node.js.yml)
+[![CodeQL](https://github.com/Chadsr/ross.ch/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Chadsr/ross.ch/actions/workflows/codeql-analysis.yml)
+[![Docker Image CI](https://github.com/Chadsr/ross.ch/actions/workflows/docker-image.yml/badge.svg)](https://github.com/Chadsr/ross.ch/actions/workflows/docker-image.yml)
 
 ## Description
 
