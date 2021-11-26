@@ -22,7 +22,7 @@ const BG_Y_OFFSET = -0.5; // Offset from y origin for the background rendering (
 const BG_CONTAINER_Id = 'background';
 const SVG_ID = 'isobg';
 const INNER_ANGLE = 60;
-const NUM_CUBES_Y = 4; // The number of cubes that will be rendered on the y axis (This dictates their size)
+const NUM_CUBES_Y = 16; // The number of cubes that will be rendered on the y axis (This dictates their size)
 const ISO_PADDING = 1;
 
 const MIN_SIDE = 0;
