@@ -48,7 +48,6 @@
         /* Experimental Options */
         "experimentalDecorators": true /* Enables experimental support for ES7 decorators. */,
         "emitDecoratorMetadata": true /* Enables experimental support for emitting type metadata for decorators. */,
-        "skipLibCheck": true,
     },
     "include": ["src/**/*", "webpack.config.ts", "copyStaticAssets.ts", "postcss.config.ts"],
     "exclude": ["node_modules", "dist", "public", "src/assets"]
