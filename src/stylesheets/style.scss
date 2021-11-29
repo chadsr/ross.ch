@@ -83,6 +83,7 @@ $width-icon-button: 50px;
 /* Extends */
 %heading {
     font-family: $font-macula, serif;
+    font-display: swap;
     text-transform: uppercase;
     margin: 0 0 32px 0;
     display: inline-block;
