@@ -202,7 +202,6 @@ $width-icon-button: 50px;
 }
 
 %threed-side {
-    z-index: 2;
     content: '';
     display: block;
     position: absolute;
@@ -478,12 +477,10 @@ nav {
 
 #background {
     background: $color-background;
-    z-index: 1;
     @extend %full-screen;
 }
 
 #content {
-    z-index: 2;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -596,11 +593,10 @@ footer {
     position: fixed;
     bottom: 0;
     left: 0;
-    z-index: 4;
+    z-index: 2;
     @extend %outline-dotted;
 
     &::after {
-        z-index: 1;
         height: 32px;
         @extend %threed-side-top;
         @extend %outline-dotted;
@@ -614,11 +610,10 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 4;
+    z-index: 2;
     @extend %outline-dotted;
 
     &::after {
-        z-index: 1;
         @extend %threed-side-bottom;
         @extend %outline-dotted;
     }
@@ -733,7 +728,6 @@ header {
 }
 
 #content-cube-wrapper {
-    z-index: 2;
     position: absolute;
     transform-style: preserve-3d;
 }
@@ -756,7 +750,6 @@ header {
         background: $color-content;
         filter: $filter-face-no-focus;
         backface-visibility: visible;
-        // z-index: 100;
         pointer-events: none; /* Disable all links until the face has .focus */
         @extend %transition-ease-in-out;
         transition-property: filter;
@@ -817,7 +810,6 @@ header {
 
         &.focus {
             pointer-events: auto; /* Enable links */
-            // z-index: 9999;
             filter: none;
             @extend %scrollable;
         }
