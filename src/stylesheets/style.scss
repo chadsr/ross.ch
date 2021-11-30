@@ -2,7 +2,7 @@
 $color-background: black;
 $color-content: rgba(45, 0, 61, 0.4);
 $color-content-highlight: #7600a1;
-$color-content-secondary: #0e0d0e;
+$color-content-secondary: rgba(14, 13, 14, 0.8);
 $color-content-secondary-highlight: $color-content-secondary;
 $color-text: white;
 $color-text-highlight: $color-text; /* Applies to all click-able text (buttons. links, etc) */
@@ -638,7 +638,6 @@ header {
     width: inherit;
     height: inherit;
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
 
     &::-webkit-scrollbar-track {
         background: $color-scrollbar_track;
@@ -646,7 +645,6 @@ header {
 
     &::-webkit-scrollbar {
         background: $color-scrollbar;
-        width: 8px;
     }
 
     &::-webkit-scrollbar-thumb {
@@ -760,7 +758,6 @@ header {
         position: absolute;
         background: $color-content;
         filter: $filter-face-no-focus;
-        backface-visibility: visible;
         pointer-events: none; /* Disable all links until the face has .focus */
         transition-property: filter;
         will-change: filter;
@@ -826,9 +823,7 @@ header {
         &.focus {
             pointer-events: auto; /* Enable links */
             filter: none;
-            backface-visibility: hidden;
             z-index: 2;
-            transform: translateZ(0);
             @extend %scrollable;
         }
     }
