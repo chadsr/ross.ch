@@ -200,7 +200,7 @@ function rotateTo(side: number) {
         const focusFace = <HTMLDivElement>faces[side];
         focusFace.classList.add('focus');
 
-        const currentClass = cube.className.match('rotate-').input;
+        const currentClass = cube.className.match(/(?:^|)rotate-([\d]+)/)[0];
 
         // Replace the existing class with one matching the newly focused side (While preserving any other classes)
         cube.className = cube.className.replace(currentClass, `rotate-${side}`);
