@@ -761,6 +761,7 @@ header {
         pointer-events: none; /* Disable all links until the face has .focus */
         transition-property: filter;
         will-change: filter;
+        box-sizing: border-box;
         @extend %transition-ease-in-out;
         @extend %outline-dotted;
 
