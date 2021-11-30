@@ -30,7 +30,7 @@ body.nojs-styles .repo-stars::after {
     content: '\2605';
 }
 
-body.nojs-styles header, body.nojs-styles #contact-wrapper {
+body.nojs-styles header, body.nojs-styles #contact-form {
     display: none;
 }
 

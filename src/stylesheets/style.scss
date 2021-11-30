@@ -81,13 +81,10 @@ $width-icon-button: 50px;
 }
 
 /* Extends */
-%heading {
+%macula {
     font-family: $font-macula, serif;
     font-display: swap;
     text-transform: uppercase;
-    margin: 0 0 32px 0;
-    display: inline-block;
-    text-rendering: geometricPrecision;
     color: $color-heading;
 }
 
@@ -168,11 +165,6 @@ $width-icon-button: 50px;
     left: 0;
 }
 
-%list-element {
-    line-height: 24px;
-    height: 32px;
-}
-
 %button-icon {
     display: block;
     content: '';
@@ -249,21 +241,22 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    text-rendering: geometricPrecision;
 }
 
 h1 {
     font-size: 6vmin;
-    @extend %heading;
-    font-weight: 100;
+    @extend %macula;
 }
 
 h2 {
+    display: inline-block;
     font-size: 6vmin;
-    @extend %heading;
-    font-weight: 100;
+    @extend %macula;
 }
 
 h3 {
+    display: inline-block;
     font-size: 1em;
     font-weight: bold;
     padding: 8px;
@@ -271,10 +264,7 @@ h3 {
 
 h4 {
     margin: 0;
-    line-height: 24px;
-    font-weight: 100;
     .superscript {
-        line-height: 16px;
         font-size: 0.6em;
     }
 }
@@ -343,7 +333,6 @@ ul {
 
         > li {
             @extend %transition-ease;
-            @extend %list-element;
             width: $width-icon-button;
             cursor: pointer;
 
@@ -415,7 +404,6 @@ ul {
             }
 
             > a h4 {
-                padding: 4px 10px;
                 text-align: center;
             }
         }
@@ -452,8 +440,13 @@ nav {
 
         > li {
             width: $width-full-button;
-            @extend %list-element;
+            height: 32px;
             @extend %transition-ease;
+
+            &::after {
+                @extend %threed-side-bottom;
+                @extend %outline-dotted;
+            }
 
             &:hover,
             &.selected {
@@ -461,16 +454,12 @@ nav {
                 > a {
                     color: $color-text-highlight;
                 }
-
-                &::after {
-                    @extend %threed-side-bottom;
-                    @extend %outline-dotted;
-                }
             }
 
-            > a > h4 {
-                padding: 4px 10px;
-                text-align: center;
+            > a {
+                > h4 {
+                    line-height: 32px;
+                }
             }
         }
     }
@@ -490,17 +479,6 @@ nav {
 
 .nojs {
     display: none;
-}
-
-#footnote {
-    display: inline-block;
-
-    .footnote-header {
-        display: inline-block;
-        width: 100%;
-        font-weight: bold;
-        margin: 16px 0 8px 0;
-    }
 }
 
 body {
@@ -594,7 +572,7 @@ footer {
     position: fixed;
     bottom: 0;
     left: 0;
-    z-index: 2;
+    z-index: 3;
     @extend %outline-dotted;
 
     &::after {
@@ -611,7 +589,7 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 2;
+    z-index: 3;
     @extend %outline-dotted;
 
     &::after {
@@ -653,6 +631,37 @@ header {
 %outline-dotted {
     outline: 1px dotted $color-outline;
     outline-offset: -1px;
+}
+
+%scrollable {
+    width: inherit;
+    height: inherit;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar-track {
+        background: $color-scrollbar_track;
+    }
+
+    &::-webkit-scrollbar {
+        background: $color-scrollbar;
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $color-scrollbar_thumb;
+
+        &:hover,
+        &:active {
+            background: $color-content-highlight;
+            color: $color-text-highlight;
+        }
+    }
+
+    scrollbar-width: wide;
+    scrollbar-track-color: $color-scrollbar_track;
+    scrollbar-base-color: $color-scrollbar;
+    scroll-behavior: smooth;
 }
 
 .iso {
@@ -728,12 +737,11 @@ header {
     }
 }
 
-#content-cube-wrapper {
-    position: absolute;
-    transform-style: preserve-3d;
+.content-cube-wrapper {
+    display: contents;
 }
 
-#content-cube {
+.content-cube {
     @extend %transition-cube;
     transform-style: preserve-3d;
     position: relative;
@@ -744,6 +752,8 @@ header {
 
     > .face {
         display: flex;
+        width: 100%;
+        height: 100%;
         overflow-y: hidden;
         overflow-x: hidden;
         position: absolute;
@@ -751,13 +761,17 @@ header {
         filter: $filter-face-no-focus;
         backface-visibility: visible;
         pointer-events: none; /* Disable all links until the face has .focus */
-        @extend %transition-ease-in-out;
         transition-property: filter;
+        will-change: filter;
+        @extend %transition-ease-in-out;
         @extend %outline-dotted;
 
-        .content {
+        > .content {
+            flex: auto;
+            max-width: 100%;
+            box-sizing: border-box;
             transform-style: flat;
-            margin: 32px 10%;
+            padding: 0 10%;
             overflow-wrap: break-word;
 
             ul.list {
@@ -771,6 +785,7 @@ header {
                     display: flex;
                     flex-wrap: wrap;
                     flex-direction: column;
+                    overflow-wrap: break-word;
 
                     p {
                         display: flex;
@@ -781,7 +796,7 @@ header {
                         width: 100%;
 
                         &::before {
-                            @extend %heading;
+                            @extend %macula;
                             content: '>';
                             margin: 0 8px 0 0;
                             font-size: 48px;
@@ -810,46 +825,38 @@ header {
         &.focus {
             pointer-events: auto; /* Enable links */
             filter: none;
+            backface-visibility: hidden;
+            z-index: 2;
+            transform: translateZ(0);
             @extend %scrollable;
         }
     }
 }
 
-%scrollable {
-    width: inherit;
-    height: inherit;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+.perspective {
+    > button {
+        height: 32px;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        border: none;
+        font-weight: bold;
+        transform-style: preserve-3d;
+        @extend %outline-dotted;
 
-    &::-webkit-scrollbar-track {
-        background: $color-scrollbar_track;
-    }
+        &::after {
+            @extend %threed-side-top;
+            @extend %outline-dotted;
+        }
 
-    &::-webkit-scrollbar {
-        background: $color-scrollbar;
-        width: 8px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: $color-scrollbar_thumb;
-
-        &:hover,
         &:active {
-            background: $color-content-highlight;
-            color: $color-text-highlight;
+            transform: scale3d(0.98, 0.98, 1);
         }
     }
-
-    scrollbar-width: wide;
-    scrollbar-track-color: $color-scrollbar_track;
-    scrollbar-base-color: $color-scrollbar;
-    scroll-behavior: smooth;
 }
 
 .field {
     background-color: $color-content-secondary;
-    display: inline-block;
-    width: 100%;
     margin-bottom: 32px;
     @extend %outline-dotted;
 
@@ -883,26 +890,7 @@ header {
     }
 
     &.perspective {
-        > button {
-            height: 32px;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            border: none;
-            font-weight: bold;
-            transform-style: preserve-3d;
-            @extend %outline-dotted;
-
-            &::after {
-                @extend %threed-side-top;
-                @extend %outline-dotted;
-            }
-
-            &:active {
-                // outline: none;
-                transform: scale3d(0.98, 0.98, 1);
-            }
-        }
+        margin-top: 16px;
 
         .title,
         > button {
@@ -936,14 +924,6 @@ header {
 }
 
 /* Contact form stuff */
-#contact-form {
-    margin-top: 32px;
-}
-
-#captcha-title {
-    line-height: 0;
-}
-
 #captcha {
     /* The input */
     text-transform: uppercase;
@@ -974,30 +954,27 @@ header {
 }
 
 /* Blog and Repository stuff */
-.repo-feed,
-.blog {
-    display: block;
-}
+.feed {
+    box-sizing: border-box;
 
-.blog-post,
-.repo {
-    @extend %transition-ease;
+    > .feed-item {
+        @extend %transition-ease;
 
-    &:hover {
-        .blog-post-title,
-        .blog-post-tag,
-        .repo-title,
-        .repo-language,
-        .repo-stars {
-            background: $color-content-highlight;
-            color: $color-text-highlight;
+        &:hover {
+            .blog-post-title,
+            .blog-post-tag,
+            .repo-title,
+            .repo-language,
+            .repo-stars {
+                background: $color-content-highlight;
+                color: $color-text-highlight;
+            }
+        }
+
+        .feed-item-content {
+            padding: 8px 16px 16px 16px;
         }
     }
-}
-
-.blog-post-content,
-.repo-content {
-    padding: 8px 16px 16px 16px;
 }
 
 .blog-post-tags,
