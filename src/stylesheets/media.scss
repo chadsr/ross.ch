@@ -12,7 +12,7 @@ $bp-larger-than-desktophd: 'min-width: 1200px' !default;
         perspective: $size * 2;
     }
 
-    #content-cube-wrapper {
+    #content {
         perspective-origin: 50% math.div($size, 2);
         transform-origin: 50% 50% (-(math.div($size, 2)));
         transform: translateZ(-(math.div($size, 2)));
