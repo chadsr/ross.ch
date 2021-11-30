@@ -138,8 +138,10 @@ body.nojs-styles .face .content ul > li ul > li {
 
 body.nojs-styles footer {
     width: 100%;
-    margin: 0 15%;
-    background-color: rgba(29, 54, 75, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 }
 
 body.nojs-styles nav > ul,

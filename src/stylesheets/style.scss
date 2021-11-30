@@ -257,7 +257,6 @@ h2 {
 
 h3 {
     display: inline-block;
-    font-size: 1em;
     font-weight: bold;
     padding: 8px;
 }
@@ -987,6 +986,7 @@ header {
     &::after {
         margin-left: 4px;
         content: '\2605';
+        font-size: 28px;
     }
 }
 
