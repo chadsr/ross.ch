@@ -97,9 +97,9 @@ module.exports = {
             inject: true,
             favicons: {
                 icons: {
-                    android: false,
-                    appleIcon: false,
-                    appleStartup: false,
+                    android: true,
+                    appleIcon: true,
+                    appleStartup: true,
                     coast: false,
                     favicons: true,
                     firefox: false,
