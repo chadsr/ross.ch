@@ -7,39 +7,45 @@ $bp-larger-than-desktop: 'min-width: 1000px' !default;
 $bp-larger-than-desktophd: 'min-width: 1200px' !default;
 
 // Mixin function handling all styles related to the cube over different sizes of width/height in pixels
-@mixin cubeTransform($size) {
-    .perspective {
-        perspective: $size * 2;
-    }
-
-    #content-cube-wrapper {
-        perspective-origin: 50% math.div($size, 2);
-        transform-origin: 50% 50% (-(math.div($size, 2)));
-        transform: translateZ(-(math.div($size, 2)));
-    }
+@mixin content-cube($size) {
+    @include cube-transform($size);
 
     #content-cube {
         width: $size;
         height: $size;
+    }
+}
+
+@mixin cube-transform($size) {
+    .perspective {
+        perspective: $size * 2;
+        perspective-origin: center;
+    }
+
+    .content-cube {
+        transform-origin: center center (-(math.div($size, 2)));
+
+        &.webkit {
+            // fixes https://bugs.webkit.org/show_bug.cgi?id=88587
+            // TODO: remove if that bug is ever fixed
+            translate: 0 0 (-(math.div($size, 2)));
+        }
 
         > .face {
             &.face-top {
-                transform: rotateX(90deg) translateZ(math.div($size, 2));
-            }
-            &.face-front {
-                transform: translateZ(math.div($size, 2));
+                transform: rotateX(90deg) translateZ(math.div($size, 2)) translateY(-(math.div($size, 2)));
             }
             &.face-bottom {
-                transform: rotateX(-90deg) translateZ(math.div($size, 2));
+                transform: rotateX(-90deg) translateZ(math.div($size, 2)) translateY((math.div($size, 2)));
             }
             &.face-left {
-                transform: rotateY(-90deg) translateZ(math.div($size, 2));
+                transform: rotateY(-90deg) translateZ(math.div($size, 2)) translateX(-(math.div($size, 2)));
             }
             &.face-right {
-                transform: rotateY(90deg) translateZ(math.div($size, 2));
+                transform: rotateY(90deg) translateZ(math.div($size, 2)) translateX(math.div($size, 2));
             }
             &.face-back {
-                transform: rotateY(180deg) translateZ(math.div($size, 2));
+                transform: rotateY(180deg) translateZ($size);
             }
         }
 
@@ -76,105 +82,113 @@ $bp-larger-than-desktophd: 'min-width: 1200px' !default;
             }
         }
     }
+
+    .content-cube > .face > .content {
+        padding: 8px;
+    }
 }
 
 @media only screen and (max-width: 806px) {
     @include elasticNav();
 }
 
+@media only screen and (min-width: 100px) and (min-height: 200px) {
+    @include content-cube(100px);
+}
+
 @media only screen and (min-width: 200px) and (min-height: 300px) {
-    @include cubeTransform(200px);
+    @include content-cube(200px);
 }
 
 @media only screen and (min-width: 250px) and (min-height: 350px) {
-    @include cubeTransform(250px);
+    @include content-cube(250px);
 }
 
 // Larger than mini mobile
 @media only screen and (min-width: 300px) and (min-height: 400px) {
-    @include cubeTransform(300px);
+    @include content-cube(300px);
 }
 
 @media only screen and (min-width: 350px) and (min-height: 450px) {
-    @include cubeTransform(350px);
+    @include content-cube(350px);
 }
 
 // Larger than mobile
 @media only screen and (min-width: 400px) and (min-height: 500px) {
-    @include cubeTransform(400px);
+    @include content-cube(400px);
 }
 
 @media only screen and (min-width: 450px) and (min-height: 550px) {
-    @include cubeTransform(450px);
+    @include content-cube(450px);
 }
 
 @media only screen and (min-width: 500px) and (min-height: 600px) {
-    @include cubeTransform(500px);
+    @include content-cube(500px);
 }
 
 // Larger than phablet (also point when grid becomes active)
 @media only screen and (min-width: 550px) and (min-height: 650px) {
-    @include cubeTransform(550px);
+    @include content-cube(550px);
 }
 
 @media only screen and (min-width: 600px) and (min-height: 700px) {
-    @include cubeTransform(600px);
+    @include content-cube(600px);
 }
 
 @media only screen and (min-width: 650px) and (min-height: 750px) {
-    @include cubeTransform(650px);
+    @include content-cube(650px);
 }
 
 @media only screen and (min-width: 700px) and (min-height: 800px) {
-    @include cubeTransform(700px);
+    @include content-cube(700px);
 }
 
 // Larger than tablet
 @media only screen and (min-width: 750px) and (min-height: 850px) {
-    @include cubeTransform(700px);
+    @include content-cube(700px);
 }
 
 @media only screen and (min-width: 800px) and (min-height: 900px) {
-    @include cubeTransform(750px);
+    @include content-cube(750px);
 }
 
 @media only screen and (min-width: 900px) and (min-height: 1000px) {
-    @include cubeTransform(850px);
+    @include content-cube(850px);
 }
 
 // Larger than desktop
 @media only screen and (min-width: 1000px) and (min-height: 1100px) {
-    @include cubeTransform(900px);
+    @include content-cube(900px);
 }
 
 @media only screen and (min-width: 1100px) and (min-height: 1200px) {
-    @include cubeTransform(1000px);
+    @include content-cube(1000px);
 }
 
 // Larger than Desktop HD
 @media only screen and (min-width: 1200px) and (min-height: 1300px) {
-    @include cubeTransform(1100px);
+    @include content-cube(1100px);
     h1 {
         font-size: 6em;
     }
 }
 
 @media only screen and (min-width: 1300px) and (min-height: 1400px) {
-    @include cubeTransform(1200px);
+    @include content-cube(1200px);
 }
 
 @media only screen and (min-width: 1400px) and (min-height: 1500px) {
-    @include cubeTransform(1300px);
+    @include content-cube(1300px);
 }
 
 @media only screen and (min-width: 1500px) and (min-height: 1600px) {
-    @include cubeTransform(1400px);
+    @include content-cube(1400px);
 }
 
 @media only screen and (min-width: 1600px) and (min-height: 1700px) {
-    @include cubeTransform(1500px);
+    @include content-cube(1500px);
 }
 
 @media only screen and (min-width: 1700px) and (min-height: 1800px) {
-    @include cubeTransform(1600px);
+    @include content-cube(1600px);
 }
