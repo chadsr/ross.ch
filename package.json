@@ -52,7 +52,6 @@
         "@types/koa-session": "^5.10.4",
         "@types/koa-static": "^4.0.2",
         "@types/koa-views": "^7.0.0",
-        "@types/koa-webpack": "^6.0.4",
         "@types/koa__cors": "^3.0.3",
         "@types/koa__router": "^8.0.8",
         "@types/node": "^16.10.1",
@@ -91,7 +90,6 @@
         "prettier": "^2.4.1",
         "prettier-eslint": "^13.0.0",
         "prettier-eslint-cli": "^5.0.1",
-        "reflect-metadata": "^0.1.13",
         "sass": "^1.42.1",
         "sass-loader": "^12.3.0",
         "shelljs": "^0.8.4",
@@ -103,7 +101,7 @@
         "typescript": "^4.4.3",
         "webpack": "^5.64.4",
         "webpack-cli": "^4.8.0",
-        "webpack-deep-scope-plugin": "^1.6.2",
+        "webpack-dev-server": "^4.6.0",
         "write-file-webpack-plugin": "^4.5.1"
     },
     "dependencies": {
@@ -127,7 +125,6 @@
         "koa-session": "^6.2.0",
         "koa-static": "^5.0.0",
         "koa-views": "^8.0.0",
-        "koa-webpack": "^6.0.0",
         "nodemailer": "^6.6.5",
         "nodemailer-openpgp": "^2.0.0",
         "randomatic": "^3.1.1",

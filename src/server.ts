@@ -10,7 +10,6 @@ import * as dotenv from 'dotenv';
 import { join, basename } from 'path';
 import * as glob from 'glob-promise';
 import * as webpack from 'webpack';
-import * as koaWebpack from 'koa-webpack';
 
 import { logger, loggerMiddleware } from './logging';
 import { Config } from './config';
@@ -43,9 +42,6 @@ async function run() {
     // Load dev webpack middlewares if developing
     if (isDeveloping) {
         logger.info('Development Mode.');
-        const webpackMiddleware = await koaWebpack({ compiler });
-
-        app.use(webpackMiddleware);
     } else {
         logger.info('Production Mode.');
 

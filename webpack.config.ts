@@ -4,7 +4,6 @@ import * as CopyPlugin from 'copy-webpack-plugin';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as ImageMinimizerPlugin from 'image-minimizer-webpack-plugin';
 import { join, resolve } from 'path';
-import WebpackDeepScopeAnalysisPlugin from 'webpack-deep-scope-plugin';
 import * as WriteFilePlugin from 'write-file-webpack-plugin';
 import FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 import { Config } from './src/config';
@@ -77,7 +76,6 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
-        new WebpackDeepScopeAnalysisPlugin(),
         new WriteFilePlugin({
             // We need the files in dev mode due to handlebars partial...
             test: /\.hbs$/,
