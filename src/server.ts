@@ -7,22 +7,18 @@ import * as serve from 'koa-static';
 import * as cors from '@koa/cors';
 import * as session from 'koa-session';
 import * as dotenv from 'dotenv';
-import { join, basename } from 'path';
+import { join, basename, resolve } from 'path';
 import * as glob from 'glob-promise';
-import * as webpack from 'webpack';
 
 import { logger, loggerMiddleware } from './logging';
 import { Config } from './config';
 import { router } from './routes';
 
-import * as webpackConfig from '../webpack.config';
-const compiler = webpack(webpackConfig);
-
 const isDeveloping = process.env.NODE_ENV !== 'production';
 
-const dirViews = join(__dirname, 'views');
-const dirPublic = join(__dirname, '../public');
-const dirPartials = join(dirViews, 'partials');
+const dirViews = resolve(__dirname, 'views/');
+const dirPublic = resolve(__dirname, '../public');
+const dirPartials = join(dirViews, 'partials/');
 
 // Load environment variables from .env file
 dotenv.config({ path: '.env' });
@@ -39,11 +35,15 @@ async function getPartialsObj() {
 async function run() {
     const app = new Koa();
 
-    // Load dev webpack middlewares if developing
+    // Load dev webpack server if developing
     if (isDeveloping) {
-        logger.info('Development Mode.');
+        logger.info('Development Mode');
     } else {
+<<<<<<< HEAD
         logger.info('Production Mode.');
+=======
+        logger.info('Production Mode');
+>>>>>>> c36bacb (WIP)
 
         // Provides security headers
         app.use(helmet());

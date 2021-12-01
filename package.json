@@ -2,19 +2,19 @@
     "name": "ross.ch",
     "version": "0.1.0",
     "description": "ross.ch website",
-    "main": "dist/server.js",
+    "main": "dist/src/server.js",
     "author": "Ross Chadwick",
     "sideEffects": false,
     "private": true,
     "scripts": {
-        "dev": " NODE_ENV=development nodemon --watch '*' -e ts,tsx --exec ./node_modules/.bin/ts-node src/server.ts",
-        "lint": "./node_modules/.bin/eslint . --ext .js,.jsx,.ts,.tsx",
+        "dev": "NODE_ENV=development nodemon --watch '*' -e ts,tsx --exec ./node_modules/.bin/ts-node src/server.ts",
+        "lint": "./node_modules/.bin/eslint src/**/* --ext .js,.jsx,.ts,.tsx",
         "lint-fix": "./node_modules/.bin/prettier-eslint --write 'src/**/*.{.js,.jsx,.ts,.tsx}'",
         "docs": "./node_modules/.bin/typedoc ./src",
-        "serve": "node --trace-deprecation dist/src/server.js",
-        "webpack": "NODE_ENV=production ./node_modules/.bin/webpack --progress --config ./webpack.config.ts",
-        "build": "./node_modules/.bin/tsc && npm run webpack --display-used-exports && ./node_modules/.bin/ts-node copyStaticAssets.ts",
-        "start": "NODE_ENV=production npm run serve"
+        "webpack-dev": "./node_modules/.bin/webpack --watch --progress --config ./webpack/webpack.dev.ts",
+        "webpack-prod": "./node_modules/.bin/webpack --progress --config ./webpack/webpack.prod.ts",
+        "build": "./node_modules/.bin/tsc && yarn run webpack-prod",
+        "start": "node dist/src/server.js"
     },
     "husky": {
         "hooks": {
@@ -23,7 +23,7 @@
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx}": [
-            "npm run lint-fix"
+            "yarn run lint-fix"
         ]
     },
     "license": "GPL-3.0",
@@ -37,7 +37,6 @@
         "@types/babel__preset-env": "^7.9.2",
         "@types/copy-webpack-plugin": "^8.0.1",
         "@types/eslint": "^8.2.0",
-        "@types/file-loader": "^5.0.1",
         "@types/hammerjs": "^2.0.40",
         "@types/hapi__joi": "^17.1.7",
         "@types/imagemin-gifsicle": "^7.0.1",
@@ -68,11 +67,12 @@
         "clean-webpack-plugin": "^4.0.0",
         "copy-webpack-plugin": "^10.0.0",
         "css-loader": "^6.5.1",
+        "css-minimizer-webpack-plugin": "^3.2.0",
         "eslint": "^8.3.0",
         "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-prettier": "^4.0.0",
         "favicons": "^6.2.2",
         "favicons-webpack-plugin": "^5.0.2",
-        "file-loader": "^6.2.0",
         "handlebars-loader": "^1.7.1",
         "html-webpack-plugin": "^5.5.0",
         "husky": "^7.0.2",
@@ -80,8 +80,8 @@
         "imagemin-gifsicle": "^7.0.0",
         "imagemin-mozjpeg": "^9.0.0",
         "imagemin-optipng": "^8.0.0",
-        "imagemin-svgo": "^10.0.0",
         "lint-staged": "^12.1.2",
+        "mini-css-extract-plugin": "^2.4.5",
         "node-sass": "^6.0.1",
         "nodemon": "^2.0.13",
         "postcss": "^8.3.8",
@@ -92,7 +92,6 @@
         "prettier-eslint-cli": "^5.0.1",
         "sass": "^1.42.1",
         "sass-loader": "^12.3.0",
-        "shelljs": "^0.8.4",
         "style-loader": "^3.3.1",
         "ts-loader": "^9.2.6",
         "ts-node": "^10.2.1",
@@ -101,8 +100,9 @@
         "typescript": "^4.4.3",
         "webpack": "^5.64.4",
         "webpack-cli": "^4.8.0",
+        "webpack-dev-middleware": "^5.2.2",
         "webpack-dev-server": "^4.6.0",
-        "write-file-webpack-plugin": "^4.5.1"
+        "webpack-merge": "^5.8.0"
     },
     "dependencies": {
         "@hapi/joi": "^17.1.1",
@@ -112,7 +112,6 @@
         "axios": "^0.24.0",
         "canvas": "^2.8.0",
         "dotenv": "^10.0.0",
-        "eslint-plugin-prettier": "^4.0.0",
         "glob": "^7.1.6",
         "glob-promise": "^4.2.0",
         "hammerjs": "^2.0.8",

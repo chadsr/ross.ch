@@ -3,7 +3,7 @@ docker-compose.override.yml
 .vscode
 
 # Build directories for typescript and webpack
-dist
+dist/
 
 # Built by webpack
 src/views/partials/webpack.hbs

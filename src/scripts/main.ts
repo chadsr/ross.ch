@@ -1,4 +1,4 @@
-// Stylesheets/#
+// Stylesheets
 import '../stylesheets/style.scss';
 import '../stylesheets/media.scss';
 

@@ -64,7 +64,7 @@ const Config: IConfig = {
     maxRepos: parseInt(process.env.MAX_REPOS) || 20,
     emailTemplatePath: resolve(__dirname, 'views/email.hbs'),
     emailConfirmationTemplatePath: resolve(__dirname, 'views/email_confirmation.hbs'),
-    pgpKeyPath: process.env.PGP_KEY_PATH || resolve(__dirname, 'assets/files/2B7340DB13C85766.asc'),
+    pgpKeyPath: process.env.PGP_KEY_PATH || resolve(__dirname, '../public/files/2B7340DB13C85766.asc'),
     captchaLength: parseInt(process.env.CAPTCHA_LEN) || 4,
     captchaFontSize: 20,
     captchaBackgroundColour: { red: 31, green: 31, blue: 31 },
