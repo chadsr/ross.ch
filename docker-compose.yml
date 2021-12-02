@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 
 services:
   webapp:
@@ -21,7 +21,7 @@ services:
     container_name: caddy
     labels:
       io.containers.autoupdate: registry
-    restart: always
+    restart: unless-stopped
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data
