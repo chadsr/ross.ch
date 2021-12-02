@@ -6,6 +6,8 @@ services:
     env_file:
       - .config.env
     container_name: webapp
+    labels:
+      io.containers.autoupdate: registry
     restart: unless-stopped
     volumes:
       - web-root:/usr/src/ross.ch/public:rw,z
@@ -17,6 +19,8 @@ services:
         context: ./caddy
         dockerfile: Dockerfile
     container_name: caddy
+    labels:
+      io.containers.autoupdate: registry
     restart: always
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
@@ -37,6 +41,8 @@ services:
   ghost:
     image: ghost:alpine
     container_name: ghost
+    labels:
+      io.containers.autoupdate: registry
     restart: unless-stopped
     env_file:
       - .config.env
@@ -45,12 +51,6 @@ services:
     networks:
       - ghost
 
-  watchtower:
-    container_name: watchtower
-    image: containrrr/watchtower:latest
-    volumes:
-      - /var/run/podman/podman.sock:/var/run/docker.sock:ro
-    command: --interval 3600
 volumes:
   web-root:
   caddy_data:
