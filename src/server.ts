@@ -10,6 +10,10 @@ import * as dotenv from 'dotenv';
 import { join, basename, resolve } from 'path';
 import * as glob from 'glob-promise';
 
+import * as Webpack from 'webpack';
+import * as WebpackDevConfig from '../webpack/webpack.dev';
+import * as WebpackDevMiddleware from 'webpack-dev-middleware';
+
 import { logger, loggerMiddleware } from './logging';
 import { Config } from './config';
 import { router } from './routes';
@@ -38,6 +42,13 @@ async function run() {
     // Load dev webpack server if developing
     if (isDeveloping) {
         logger.info('Development Mode');
+
+        const compiler = Webpack(WebpackDevConfig);
+        app.use(async (ctx, next) => {
+            const mw = WebpackDevMiddleware(compiler);
+            mw(ctx.req, ctx.res, next);
+            await next();
+        });
     } else {
 <<<<<<< HEAD
         logger.info('Production Mode.');

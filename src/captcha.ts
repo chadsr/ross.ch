@@ -68,7 +68,7 @@ export async function generateCaptcha(
     for (let i = 0; i < length; i++) {
         const char = captchaString.charAt(i);
         let contrastRatio = 0;
-        let randomColour: Colour;
+        let randomColour = getRandomColour();
 
         // TODO: Figure out a more heuristic method of generating a high contrast colour instead of brute-forcing
         while (contrastRatio <= minContrastRatio) {

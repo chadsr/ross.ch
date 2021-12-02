@@ -33,7 +33,7 @@ let windowHeight = window.innerHeight;
 
 declare global {
     interface Window {
-        webkit?: Webkit;
+        webkit: Webkit;
     }
 
     interface Webkit {
@@ -48,8 +48,11 @@ document.addEventListener('DOMContentLoaded', function () {
         (<Window>window.webkit && <Window>window.webkit.messageHandlers) ||
         (navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1)
     ) {
-        // store the current cube size
-        document.getElementById(CUBE_ID).classList.add('webkit');
+        // add webkit class, so fix is applied
+        const cube = document.getElementById(CUBE_ID);
+        if (cube) {
+            cube.classList.add('webkit');
+        }
     }
 
     const swipe = new Hammer(document.body, {
@@ -73,8 +76,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const captchaRefreshButton = <HTMLSpanElement>document.getElementById('captcha-refresh-btn');
     captchaRefreshButton.addEventListener('click', function () {
-        const csrfToken: string = contactForm.elements['_csrf'].value;
-        contactHandler.refreshCaptcha(csrfToken);
+        const csrfElem = <HTMLInputElement>document.getElementById('csrf');
+
+        if (csrfElem) {
+            contactHandler.refreshCaptcha(csrfElem.value);
+        }
     });
 
     // Menu cube rotate events
@@ -137,35 +143,46 @@ function rotateTo(side: number) {
 
     if (side !== currentSide && side >= MIN_SIDE && side <= MAX_SIDE) {
         const nav = document.getElementById('nav');
-        const navList = nav.getElementsByTagName('ul')[0];
-        const navListElements = navList.getElementsByTagName('li');
-
-        // Remove the 'selected' class from the currently selected list element
-        const selected = nav.querySelector('.selected');
-        selected.classList.remove('selected');
-
         const cube = document.getElementById(CUBE_ID);
-        // Remove the focus class from the old focused cube face
-        const oldFocusFace = cube.querySelector('.focus');
-        oldFocusFace.classList.remove('focus');
 
-        // Add classes to menu and cube face to indicate focus
-        navListElements[side].classList.add('selected');
-        const focusFace = cube.querySelector(`.face-${side}`);
-        focusFace.classList.add('focus');
+        if (nav && cube) {
+            const navList = nav.getElementsByTagName('ul')[0];
+            const navListElements = navList.getElementsByTagName('li');
 
-        // remove any active focused element
-        if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+            // remove any active focused element
+            if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
 
-        const currentClass = cube.className.match(/(?:^|)rotate-([\d]+)/)[0];
+            const currentClass = cube.className.match(/(?:^|)rotate-([\d]+)/)[0];
+            const focusFace = cube.querySelector(`.face-${side}`);
 
-        // Replace the existing class with one matching the newly focused side (While preserving any other classes)
-        cube.className = cube.className.replace(currentClass, `rotate-${side}`);
+            const selected = nav.querySelector('.selected');
 
-        currentSide = side;
+            if (selected && focusFace) {
+                // Remove the 'selected' class from the currently selected list element
+                selected.classList.remove('selected');
 
-        return true;
+                // Remove the focus class from the old focused cube face
+                const oldFocusFace = cube.querySelector('.focus');
+
+                if (oldFocusFace) {
+                    oldFocusFace.classList.remove('focus');
+
+                    // Add classes to menu and cube face to indicate focus
+                    navListElements[side].classList.add('selected');
+                    focusFace.classList.add('focus');
+
+                    const classes = cube.className.match(/(?:^|)rotate-([\d]+)/);
+
+                    if (classes) {
+                        const currentClass = classes[0];
+
+                        // Replace the existing class with one matching the newly focused side (While preserving any other classes)
+                        cube.className = cube.className.replace(currentClass, `rotate-${side}`);
+
+                        currentSide = side;
+                    }
+                }
+            }
+        }
     }
-
-    return false;
 }

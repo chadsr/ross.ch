@@ -20,9 +20,12 @@ export default class EscherCubes {
     ): void {
         // Attempt to fetch the svg if it exists already
         const existing = document.getElementById(svgId);
-        if (existing) {
-            existing.parentNode.removeChild(existing); // delete it if it already exists, because we are going to re-render it
+        const parent = existing?.parentNode;
+        if (!parent) {
+            throw new Error(`could not get parent container of ID: ${svgId}`);
         }
+
+        parent.removeChild(existing); // delete it if it already exists, because we are going to re-render it
 
         // Render svg container
         const parentSVG = document.createElementNS(SVG_NAMESPACE_URI, 'svg');
@@ -31,6 +34,10 @@ export default class EscherCubes {
 
         // Get the container and append the svgId to it
         const container = document.getElementById(containerId);
+        if (!container) {
+            throw new Error(`could not get container by ID: ${containerId}`);
+        }
+
         const containerPosition = container.getBoundingClientRect();
         container.append(parentSVG);
 
@@ -42,7 +49,7 @@ export default class EscherCubes {
             for (let x = 0; x < xCount; x++) {
                 const zPos = y * 1.5 + yOffset;
 
-                let xPos;
+                let xPos = x;
                 switch (odd) {
                     case true:
                         xPos = x + xOffset;
@@ -50,9 +57,6 @@ export default class EscherCubes {
 
                     case false:
                         xPos = x - 0.5 + xOffset;
-                        break;
-
-                    default:
                         break;
                 }
 

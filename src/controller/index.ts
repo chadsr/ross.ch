@@ -10,6 +10,7 @@ import { ErrorMessages } from '../errors';
 import { generateCaptcha } from '../captcha';
 import { ParameterizedContext } from 'koa';
 import { CaptchaStore } from '../store';
+import { IncomingHttpHeaders } from 'http';
 
 const contactFormSchema = Joi.object()
     .options({ abortEarly: false })
@@ -51,8 +52,13 @@ function validateContactFormData(data: ContactFormRequest): ValidatedFormData {
     const errors: ResponseMessage[] = [];
     if (error) {
         error.details.forEach((detailObj) => {
+            let key = '';
+            if (detailObj.context !== undefined && detailObj.context.key !== undefined) {
+                key = detailObj.context.key;
+            }
+
             const responseMessage: ResponseMessage = {
-                target: detailObj.context.key,
+                target: key,
                 text: detailObj.message,
             };
 
@@ -71,10 +77,6 @@ function validateContactFormData(data: ContactFormRequest): ValidatedFormData {
 
 export async function renderIndex(ctx: ParameterizedContext): Promise<void> {
     const feed = await getAggregatedFeed(Config.maxBlogPosts);
-    let posts = feed.posts;
-    if (posts.length < 1) {
-        posts = undefined;
-    }
 
     let repositories = undefined;
     try {
@@ -103,21 +105,30 @@ export async function renderIndex(ctx: ParameterizedContext): Promise<void> {
     await ctx.render('index', {
         year: year,
         csrfToken: ctx.csrf, // Add a CSRF token for the contact form request
-        blogPosts: posts,
+        blogPosts: feed.posts,
         githubRepos: repositories,
         captchaBase64: captcha.base64,
     });
 }
 
+function getCsrfToken(headers: IncomingHttpHeaders): string {
+    const headerCsrf = headers['x-csrf-token'];
+
+    if (Array.isArray(headerCsrf)) {
+        return headerCsrf[0];
+    } else if (headerCsrf !== undefined) {
+        return headerCsrf;
+    }
+    return '';
+}
+
 export async function handleContactForm(ctx: ParameterizedContext): Promise<void> {
     const captchaSent: string = ctx.request.body.captcha.toUpperCase();
 
-    const headerCsrf = ctx.request.headers['x-csrf-token'];
-    let csrf: string;
-    if (Array.isArray(headerCsrf)) {
-        csrf = headerCsrf[0];
-    } else {
-        csrf = headerCsrf;
+    const csrf = getCsrfToken(ctx.request.headers);
+    if (csrf === '') {
+        ctx.status = 403;
+        return;
     }
 
     const validatedData = validateContactFormData(ctx.request.body);
@@ -199,12 +210,10 @@ export async function serveCaptcha(ctx: ParameterizedContext): Promise<void> {
         Config.captchaMinContrastRatio,
     );
 
-    const headerCsrf = ctx.headers['x-csrf-token'];
-    let csrf: string;
-    if (Array.isArray(headerCsrf)) {
-        csrf = headerCsrf[0];
-    } else {
-        csrf = headerCsrf;
+    const csrf = getCsrfToken(ctx.request.headers);
+    if (csrf === '') {
+        ctx.status = 403;
+        return;
     }
 
     // Check if the provided csrf value exists in the store (e.g. it was actually served and is not a random value)

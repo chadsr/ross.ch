@@ -30,22 +30,30 @@ export default class ContactForm {
         let target: HTMLElement;
 
         response.messages.forEach((message) => {
-            // Check if target has an associated label to use first
-            if (message.target in this._formLabels) {
-                target = this._formLabels[message.target];
-            } else {
-                // No label, so our target is the actual element
-                target = this._form.elements[message.target];
-            }
+            if (message.target) {
+                // Check if target has an associated label to use first
+                if (message.target in this._formLabels) {
+                    target = this._formLabels[message.target];
+                } else {
+                    // No label, so our target is the actual element
+                    const namedElem = this._form.elements.namedItem(message.target);
 
-            target.innerHTML = message.text;
+                    if (namedElem) {
+                        target = <HTMLElement>namedElem;
+                    } else {
+                        return;
+                    }
+                }
 
-            // Add a class so we can colourise the target
-            if (response.success) {
-                target.classList.add('success');
-            } else {
-                target.classList.add('error');
-                target.scrollIntoView();
+                target.innerHTML = message.text;
+
+                // Add a class so we can colourise the target
+                if (response.success) {
+                    target.classList.add('success');
+                } else {
+                    target.classList.add('error');
+                    target.scrollIntoView();
+                }
             }
         });
     }
@@ -97,9 +105,9 @@ export default class ContactForm {
                             },
                         ],
                     };
-                }
 
-                this.handleResponse(response);
+                    this.handleResponse(response);
+                }
             });
     }
     resetLabels(): void {
@@ -116,7 +124,8 @@ export default class ContactForm {
     }
 
     validateEmail(email: string): boolean {
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const re =
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(String(email).toLowerCase());
     }
 
@@ -168,13 +177,18 @@ export default class ContactForm {
         this.resetLabels();
         this.resetSubmitButton();
 
-        const csrfToken: string = this._form.elements['_csrf'].value;
+        const csrfElem = <HTMLInputElement>this._form.elements.namedItem('_csrf');
+        const csrfToken = csrfElem.value;
+        const nameElem = <HTMLInputElement>this._form.elements.namedItem('name');
+        const emailElem = <HTMLInputElement>this._form.elements.namedItem('email');
+        const messageElem = <HTMLInputElement>this._form.elements.namedItem('message');
+        const captchaElem = <HTMLInputElement>this._form.elements.namedItem('captcha');
 
         const formData: ContactFormRequest = {
-            name: this._form.elements['name'].value,
-            email: this._form.elements['email'].value,
-            message: this._form.elements['message'].value,
-            captcha: this._form.elements['captcha'].value,
+            name: nameElem.value,
+            email: emailElem.value,
+            message: messageElem.value,
+            captcha: captchaElem.value,
         };
 
         // Do some client-side validation and continue if it passes

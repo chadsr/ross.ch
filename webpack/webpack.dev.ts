@@ -15,7 +15,6 @@ module.exports = merge(WebpackCommon, {
         open: true,
         compress: true,
         hot: true,
-        port: 8080,
     },
 
     module: {

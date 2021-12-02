@@ -17,7 +17,7 @@ const logger = createLogger({
     ],
 });
 
-export function loggerMiddleware() {
+function loggerMiddleware() {
     return async (ctx: Koa.Context, next: Koa.Next): Promise<void> => {
         const start = new Date().getMilliseconds();
 
@@ -25,15 +25,11 @@ export function loggerMiddleware() {
 
         const ms = new Date().getMilliseconds() - start;
 
-        let logLevel: string;
+        let logLevel = 'info';
         if (ctx.status >= 500) {
             logLevel = 'error';
-        }
-        if (ctx.status >= 400) {
+        } else if (ctx.status >= 400) {
             logLevel = 'warn';
-        }
-        if (ctx.status >= 100) {
-            logLevel = 'info';
         }
 
         const msg = `${ctx.method} ${ctx.originalUrl} ${ctx.status} ${ms}ms`;
@@ -42,4 +38,4 @@ export function loggerMiddleware() {
     };
 }
 
-export { logger };
+export { logger, loggerMiddleware };

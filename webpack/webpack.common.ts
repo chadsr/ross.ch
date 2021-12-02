@@ -3,10 +3,8 @@ import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as ImageMinimizerPlugin from 'image-minimizer-webpack-plugin';
 import FaviconsWebpackPlugin = require('favicons-webpack-plugin');
-
 import { join } from 'path';
 
-import { Config } from '../src/config';
 import Paths from './paths';
 
 module.exports = {
@@ -60,12 +58,8 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: join(Paths.partials, 'head.hbs'),
-            title: Config.title,
-            meta: {
-                description: Config.description,
-            },
             inject: 'head',
-            filename: join(Paths.partials, 'webpack.hbs'), // Write the handlebars to the partials dir instead of public
+            filename: join(Paths.partials, 'webpack.hbs'), // Write the handlebars to the partials dir instead of dist
         }),
         // Copies files from target to destination folder
         new CopyWebpackPlugin({
@@ -79,8 +73,8 @@ module.exports = {
     // Determine how modules within the project are treated
     module: {
         rules: [
-            // Typescript: Use ts-loader
-            { test: /\.tsx?$/, loader: 'ts-loader' },
+            // Typescript: Use ts-loader and babel-loader
+            { test: /\.ts(x?)$/, exclude: /node_modules/, use: ['babel-loader', 'ts-loader'] },
 
             // JavaScript: Use Babel to transpile JavaScript files
             { test: /\.js$/, exclude: /node_modules/, use: ['babel-loader'] },
@@ -90,13 +84,6 @@ module.exports = {
 
             // Fonts and SVGs: Inline files
             { test: /\.(woff(2)?|eot|ttf|otf|svg|)$/, type: 'asset/inline' },
-
-            // Handlebars Templates
-            {
-                test: /\.hbs$/,
-                loader: 'handlebars-loader',
-                options: { partialDirs: [Paths.partials] },
-            },
         ],
     },
 };

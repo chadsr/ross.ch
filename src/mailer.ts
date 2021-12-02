@@ -1,10 +1,15 @@
 import * as NodeMailer from 'nodemailer';
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { openpgpEncrypt } from 'nodemailer-openpgp';
+
 import * as Handlebars from 'handlebars';
 import { readFile } from 'fs';
 
 import { Config } from './config';
 import { logger } from './logging';
+import SMTPTransport = require('nodemailer/lib/smtp-transport');
 
 export interface EmailPlaintext {
     senderName: string;
@@ -21,10 +26,10 @@ export interface EmailFormatted {
 }
 
 class Mailer {
-    private readonly _mailer: NodeMailer.Transporter;
-    private _template;
-    private _confirmationTemplate;
-    private _pgpPubKey: string;
+    private _mailer: NodeMailer.Transporter<SMTPTransport.SentMessageInfo>;
+    private _template!: HandlebarsTemplateDelegate<unknown>;
+    private _confirmationTemplate!: HandlebarsTemplateDelegate<unknown>;
+    private _pgpPubKey!: string;
     constructor(
         host: string,
         port: number,
@@ -43,37 +48,35 @@ class Mailer {
                 pass: password,
             },
         };
+
         this._mailer = NodeMailer.createTransport(credentials);
 
-        // Test the mail server configuration, but don't break/throw on failure
-        (async () => {
-            await this._mailer.verify().catch((error) => {
-                logger.error(`Could not authenticate with the mail-server:\n${error}`);
-            });
-        })();
-
         // Load main email template
-        readFile(templatePath, (error, template) => {
-            if (error) {
-                logger.error('Could not load email template!');
-                throw error;
-            }
+        if (templatePath !== '') {
+            readFile(templatePath, (error, template) => {
+                if (error) {
+                    logger.error('Could not load email template!');
+                    throw error;
+                }
 
-            this._template = Handlebars.compile(template.toString());
-        });
+                this._template = Handlebars.compile(template.toString());
+            });
+        }
 
         // Load confirmation email template
-        readFile(confirmationTemplatePath, (error, template) => {
-            if (error) {
-                logger.error('Could not load email template!');
-                throw error;
-            }
+        if (confirmationTemplatePath !== '') {
+            readFile(confirmationTemplatePath, (error, template) => {
+                if (error) {
+                    logger.error('Could not load email template!');
+                    throw error;
+                }
 
-            this._confirmationTemplate = Handlebars.compile(template.toString());
-        });
+                this._confirmationTemplate = Handlebars.compile(template.toString());
+            });
+        }
 
         // Load OpenPGP public key if a path was provided
-        if (pgpKeyPath) {
+        if (pgpKeyPath !== '') {
             readFile(pgpKeyPath, (error, key) => {
                 if (error) {
                     logger.error(`Could not load OpenPGP key from ${pgpKeyPath}.`);
@@ -90,7 +93,7 @@ class Mailer {
     private async sendConfirmation(sendAddr: string, toAddr: string, email: EmailPlaintext) {
         const mail: EmailFormatted = {
             from: sendAddr,
-            to: email.senderAddress,
+            to: toAddr,
             subject: 'Ross.ch - Message Received!',
             html: this._confirmationTemplate(email),
         };
@@ -114,7 +117,7 @@ class Mailer {
         };
 
         // If we are using a OpenPGP keyfile, then load the public key and add it to the email configuration
-        if (this._pgpPubKey) {
+        if (this._pgpPubKey !== undefined) {
             mail.encryptionKeys = [this._pgpPubKey];
         }
 

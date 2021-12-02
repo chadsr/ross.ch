@@ -9,8 +9,6 @@ dotenv.config({ path: configEnvPath });
 
 export interface IConfig {
     port: number;
-    title: string;
-    description: string;
     debugLogging: boolean;
     sessionKey: string;
     emailHost: string;
@@ -43,15 +41,11 @@ export interface IConfig {
 }
 
 const Config: IConfig = {
-    port: +process.env.PORT || 8080,
+    port: typeof process.env.PORT !== undefined ? parseInt(<string>process.env.PORT) : 8080,
     debugLogging: process.env.NODE_ENV == 'development',
-    title: process.env.TITLE || 'Ross Chadwick',
-    description:
-        process.env.DESCRIPTION ||
-        'Ross Chadwick - Hacker, explorer, maker of strange things that are sometimes useful.',
     sessionKey: process.env.SESSION_KEY || random('*', 32),
     emailHost: process.env.EMAIL_HOST || 'localhost',
-    smtpPort: parseInt(process.env.SMTP_PORT) || 465,
+    smtpPort: parseInt(<string>process.env.SMTP_PORT) || 465,
     emailUsername: process.env.EMAIL_USERNAME || 'foo@bar.com',
     emailPassword: process.env.EMAIL_PASSWORD || 'secret',
     sendEmailAddress: process.env.SENDER_EMAIL_ADDRESS || 'foo@bar.com',
@@ -59,17 +53,17 @@ const Config: IConfig = {
     ghostUrl: process.env.GHOST_URL || 'https://blog.ross.ch',
     ghostPublicApiKey: process.env.GHOST_PUB_KEY || '8c55bff1844399dad7ce341607',
     mediumUser: process.env.MEDIUM_USER || '@medium',
-    maxBlogPosts: parseInt(process.env.MAX_POSTS) || 20,
+    maxBlogPosts: typeof process.env.MAX_POSTS !== undefined ? parseInt(<string>process.env.MAX_POSTS) : 20,
     githubUser: process.env.GITHUB_USER || 'Chadsr',
-    maxRepos: parseInt(process.env.MAX_REPOS) || 20,
+    maxRepos: typeof process.env.MAX_REPOS !== undefined ? parseInt(<string>process.env.MAX_REPOS) : 20,
     emailTemplatePath: resolve(__dirname, 'views/email.hbs'),
     emailConfirmationTemplatePath: resolve(__dirname, 'views/email_confirmation.hbs'),
     pgpKeyPath: process.env.PGP_KEY_PATH || resolve(__dirname, '../public/files/2B7340DB13C85766.asc'),
-    captchaLength: parseInt(process.env.CAPTCHA_LEN) || 4,
+    captchaLength: typeof process.env.CAPTCHA_LEN !== undefined ? parseInt(<string>process.env.CAPTCHA_LEN) : 4,
     captchaFontSize: 20,
     captchaBackgroundColour: { red: 31, green: 31, blue: 31 },
     captchaMinContrastRatio: 3,
-    csrfExpiryMs: parseInt(process.env.CSRF_EXPIRY) || 1800000,
+    csrfExpiryMs: typeof process.env.CSRF_EXPIRY !== undefined ? parseInt(<string>process.env.CSRF_EXPIRY) : 1800000,
     minNameLength: 2,
     maxNameLength: 32,
     minEmailDomainSegments: 2,
