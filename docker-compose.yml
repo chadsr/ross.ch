@@ -10,7 +10,7 @@ services:
       io.containers.autoupdate: registry
     restart: unless-stopped
     volumes:
-      - web-root:/usr/src/ross.ch/public:rw,z
+      - web-root:/usr/src/ross.ch/dist/public:ro,z
     networks:
       - webapp
 
@@ -28,7 +28,7 @@ services:
       - caddy_config:/config
       - web-root:/var/www/html:ro,z
     ports:
-      - 80:80 # needed for Let's Encrypt
+      - 80:80
       - 443:443
     networks:
       - ghost
@@ -47,7 +47,7 @@ services:
     env_file:
       - .config.env
     volumes:
-      - /ross.ch/ghost_content:/var/lib/ghost/content:rw,z
+      - /ross.ch/ghost_content:/var/lib/ghost/content:rw
     networks:
       - ghost
 
