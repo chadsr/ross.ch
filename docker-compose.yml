@@ -35,7 +35,7 @@ services:
       - .config.env
 
   ghost:
-    image: ghost:latest
+    image: ghost:alpine
     container_name: ghost
     restart: unless-stopped
     env_file:
