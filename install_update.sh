@@ -53,6 +53,17 @@ sed -i "s#<GIT_PATH>#$PWD#g" $SERVICE_FILE || {
     exit 1
 }
 
+# Set the user and group in the unit service
+sed -i "s#<USER>#$USER#g" $SERVICE_FILE || {
+    echo "Failed to update user in service file"
+    exit 1
+}
+
+sed -i "s#<GROUP>#$USER#g" $SERVICE_FILE || {
+    echo "Failed to update group in service file"
+    exit 1
+}
+
 # Symlink the service file and enable it
 echo "Symlinking service file"
 sudo ln -sfn "$PWD"/$SERVICE_FILE /etc/systemd/system/$SERVICE_FILE || {

@@ -4,6 +4,8 @@ Requires=podman.service
 After=podman.service
 
 [Service]
+User=<USER>
+Group=<GROUP>
 WorkingDirectory=<GIT_PATH>
 Restart=always
 
