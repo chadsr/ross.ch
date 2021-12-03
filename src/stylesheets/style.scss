@@ -834,10 +834,10 @@ header {
     > button {
         height: 32px;
         width: 100%;
-        margin: 0;
+        margin: 42px 0 0 0;
         padding: 0;
         border: none;
-        font-weight: bold;
+        font-weight: bolder;
         transform-style: preserve-3d;
         @extend %outline-dotted;
 
@@ -847,7 +847,7 @@ header {
         }
 
         &:active {
-            transform: scale3d(0.98, 0.98, 1);
+            transform: rotate3d(1, 0, 0, -45deg);
         }
     }
 }
@@ -855,6 +855,7 @@ header {
 .field {
     background-color: $color-content-secondary;
     margin-bottom: 32px;
+    padding: 2px 0;
     @extend %outline-dotted;
 
     &.textarea {
