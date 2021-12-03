@@ -4,7 +4,6 @@ docker-compose.override.yml
 
 # Build directories for typescript and webpack
 dist
-public
 
 # Built by webpack
 src/views/partials/webpack.hbs

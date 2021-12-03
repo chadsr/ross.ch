@@ -17,7 +17,6 @@ import { Config } from './config';
 import { router } from './routes';
 
 import * as webpackConfig from '../webpack.config';
-import { exit } from 'process';
 const compiler = webpack(webpackConfig);
 
 const isDeveloping = process.env.NODE_ENV !== 'production';

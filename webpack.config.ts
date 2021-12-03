@@ -10,7 +10,7 @@ import FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 import { Config } from './src/config';
 
 const srcDir = resolve(__dirname, 'src');
-const publicDir = resolve(__dirname, 'public');
+const publicDir = resolve(__dirname, 'dist/public');
 const jsDir = join(srcDir, 'scripts');
 const assetsDir = join(srcDir, 'assets');
 const imagesDir = join(assetsDir, 'images');
