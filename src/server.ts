@@ -50,22 +50,12 @@ async function run() {
     } else {
         logger.info('Production Mode.');
 
-        // Run the webpack compiler to get the static files to serve
-        compiler.run((error) => {
-            if (error) {
-                logger.error('Webpack Error:', error);
-                exit(1); // Just exit, since we depend on webpack
-            } else {
-                logger.info('Webpack compiled successfully!');
-            }
-        });
-
-        // Serve the static files made by webpack
-        app.use(serve(dirPublic));
-
         // Provides security headers
         app.use(helmet());
     }
+
+    // Serve the static files made by webpack
+    app.use(serve(dirPublic));
 
     app.use(
         views(dirViews, {
