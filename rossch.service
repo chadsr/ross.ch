@@ -1,17 +1,15 @@
 [Unit]
 Description=ross.ch
-Requires=podman.service
-After=podman.service
+Requires=docker.service
+After=docker.service
 
 [Service]
-User=<USER>
-Group=<GROUP>
 WorkingDirectory=<GIT_PATH>
 Restart=always
 
-ExecStart=/usr/bin/podman-compose up --build
+ExecStart=/usr/bin/docker-compose up --build
 
-ExecStop=/usr/bin/podman-compose down
+ExecStop=/usr/bin/docker-compose down
 
 [Install]
 WantedBy=multi-user.target

@@ -53,38 +53,29 @@ sed -i "s#<GIT_PATH>#$PWD#g" $SERVICE_FILE || {
     exit 1
 }
 
-# Set the user and group in the unit service
-sed -i "s#<USER>#$USER#g" $SERVICE_FILE || {
-    echo "Failed to update user in service file"
-    exit 1
-}
-
-sed -i "s#<GROUP>#$USER#g" $SERVICE_FILE || {
-    echo "Failed to update group in service file"
-    exit 1
-}
-
-# Symlink the service file and enable it
+# Symlink the service file (if not already) and enable it
 echo "Symlinking service file"
-sudo ln -sfn "$PWD"/$SERVICE_FILE /etc/systemd/system/$SERVICE_FILE || {
-    echo "Failed to symlink systemd service file"
-    exit 1
-}
+if [ ! -f /etc/systemd/system/$SERVICE_FILE ]; then
+    sudo ln -sfn "$PWD"/$SERVICE_FILE /etc/systemd/system/$SERVICE_FILE || {
+        echo "Failed to symlink systemd service file"
+        exit 1
+    }
 
-echo "Reloading systemd daemon"
-sudo systemctl daemon-reload || {
-    echo "Failed to reload systemd daemon"
-    exit 1
-}
+    echo "Reloading systemd daemon"
+    sudo systemctl daemon-reload || {
+        echo "Failed to reload systemd daemon"
+        exit 1
+    }
 
-echo "Enabling service file"
-sudo systemctl enable $SERVICE_FILE || {
-    echo "Failed to enable systemd service file"
-    exit 1
-}
+    echo "Enabling service file"
+    sudo systemctl enable $SERVICE_FILE || {
+        echo "Failed to enable systemd service file"
+        exit 1
+    }
+fi
 
-echo "Starting systemd service"
-sudo systemctl start $SERVICE_FILE || {
+echo "Restarting systemd service"
+sudo systemctl restart $SERVICE_FILE || {
     echo "Failed to start systemd service file"
     exit 1
 }
