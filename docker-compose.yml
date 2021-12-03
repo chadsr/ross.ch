@@ -51,6 +51,13 @@ services:
     networks:
       - ghost
 
+  watchtower:
+    container_name: watchtower
+    image: containrrr/watchtower:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command: --interval 3600
+
 volumes:
   web-root:
   caddy_data:
