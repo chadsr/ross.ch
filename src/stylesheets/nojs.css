@@ -34,12 +34,12 @@ body.nojs-styles header, body.nojs-styles #contact-form {
     display: none;
 }
 
-body.nojs-styles #content {
+body.nojs-styles .content {
     margin: 0 15%;
     overflow-x: hidden;
 }
 
-body.nojs-styles .content {
+body.nojs-styles .content-section {
     margin: 0 32px;
 }
 
@@ -84,7 +84,7 @@ body.nojs-styles ul {
     list-style-type: none;
 }
 
-body.nojs-styles .content li {
+body.nojs-styles .content-section li {
     width: 100%;
     float: left;
 }
@@ -117,7 +117,7 @@ body.nojs-styles .face {
     float: left;
 }
 
-body.nojs-styles .face .content ul > li::before {
+body.nojs-styles .face .content-section ul > li::before {
     font-family: 'Macula', 'serif';
     content: '>';
     display: inline-block;
@@ -127,12 +127,12 @@ body.nojs-styles .face .content ul > li::before {
     margin: 4px 0;
 }
 
-body.nojs-styles .face .content ul > li ul > li::before {
+body.nojs-styles .face .content-section ul > li ul > li::before {
     font-size: 24px;
     line-height: 48px;
 }
 
-body.nojs-styles .face .content ul > li ul > li {
+body.nojs-styles .face .content-section ul > li ul > li {
     margin: 0;
 }
 

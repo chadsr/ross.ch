@@ -466,12 +466,12 @@ nav {
     }
 }
 
-#background {
+.background {
     background: $color-background;
     @extend %full-screen;
 }
 
-#content {
+.content {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -600,9 +600,8 @@ header {
 }
 
 /* Escher cube background styles */
-#isobg {
-    width: 100%;
-    height: 100%;
+.isobg {
+    @extend %full-screen;
 }
 
 @keyframes iso-dash {
@@ -757,7 +756,6 @@ header {
         position: absolute;
         background: $color-content;
         filter: $filter-face-no-focus;
-        pointer-events: none; /* Disable all links until the face has .focus */
         transition-property: filter;
         will-change: filter;
         box-sizing: border-box;
@@ -770,26 +768,26 @@ header {
             overflow-x: hidden;
             width: inherit;
             height: inherit;
+            padding: 0 10%;
+            pointer-events: none; /* Disable all links until the face has .focus */
         }
 
         &.focus {
-            pointer-events: auto; /* Enable links */
             filter: none;
             z-index: 2;
 
             .face-content {
+                pointer-events: auto; /* Enable links */
                 @extend %scrollable;
             }
         }
     }
 }
 
-.content {
+.content-section {
     flex: auto;
     max-width: 100%;
     box-sizing: border-box;
-    transform-style: flat;
-    padding: 0 10%;
     overflow-wrap: break-word;
 
     ul.list {
@@ -932,7 +930,7 @@ header {
 }
 
 /* Contact form stuff */
-#captcha {
+.captcha {
     /* The input */
     text-transform: uppercase;
     &::placeholder {
@@ -940,7 +938,7 @@ header {
     }
 }
 
-#captcha-img {
+.captcha-img {
     width: 80px;
     height: 20px;
     top: 4px;
@@ -949,7 +947,7 @@ header {
     background-color: $color-title-banner;
 }
 
-#captcha-refresh-btn {
+.captcha-refresh-btn {
     display: inline-block;
     background-repeat: no-repeat;
     background-image: $url-refresh;

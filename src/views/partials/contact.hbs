@@ -18,10 +18,11 @@
             <textarea id="message" name="message" placeholder="Enter your message here" rows="3" required="required"></textarea>
         </div>
         <div class="field perspective hover">
-            <div id="captcha-title" class="title perspective"><img id="captcha-img" src="{{captchaBase64}}" title="captcha">
-                <a id="captcha-refresh-btn" title="Refresh Captcha"></a>
+            <div id="captcha-title" class="title perspective captcha-title">
+                <img id="captcha-img" class="captcha-img" src="{{captchaBase64}}" title="captcha">
+                <a id="captcha-refresh-btn" class="captcha-refresh-btn" title="Refresh Captcha"></a>
             </div>
-            <input id="captcha" name="captcha" type="text" placeholder="Type what you see above" required="required" autocomplete="off">
+            <input id="captcha" class="captcha" name="captcha" type="text" placeholder="Type what you see above" required="required" autocomplete="off">
         </div>
         <div class="perspective">
             <button id="contact-form-submit-btn" name="submit" type="submit">Submit</button>

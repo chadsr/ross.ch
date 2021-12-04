@@ -10,7 +10,7 @@ $bp-larger-than-desktophd: 'min-width: 1200px' !default;
 @mixin content-cube($size) {
     @include cube-transform($size);
 
-    #content-cube {
+    .content-cube {
         width: $size;
         height: $size;
     }
@@ -83,7 +83,7 @@ $bp-larger-than-desktophd: 'min-width: 1200px' !default;
         }
     }
 
-    .content-cube > .face > .content {
+    .content-cube > .face > .face-content {
         padding: 8px;
     }
 }
