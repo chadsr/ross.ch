@@ -153,6 +153,8 @@ function rotateTo(side: number) {
         navListElements[side].classList.add('selected');
         const focusFace = cube.querySelector(`.face-${side}`);
         focusFace.classList.add('focus');
+        const faceContent = focusFace.querySelector(".face-content");
+        faceContent.focus();
 
         const currentClass = cube.className.match(/(?:^|)rotate-([\d]+)/)[0];
 
