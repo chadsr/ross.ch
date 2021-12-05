@@ -808,6 +808,54 @@ header {
             pointer-events: none; // Disable all links until the face has .focus
             overflow-wrap: break-word;
             @extend %transition-ease-in-out;
+
+            > .content-section {
+                ul.list {
+                    display: block;
+
+                    li {
+                        padding: 8px 0 0 0;
+                        width: 100%;
+                        text-align: left;
+                        display: flex;
+                        flex-wrap: wrap;
+                        flex-direction: column;
+                        overflow-wrap: break-word;
+
+                        p {
+                            display: flex;
+                            align-items: center;
+                            justify-content: left;
+                            margin: 0;
+                            word-wrap: auto;
+                            width: 100%;
+
+                            &::before {
+                                @extend %macula;
+                                content: '>';
+                                margin: 0 8px 0 0;
+                                font-size: 48px;
+                            }
+                        }
+
+                        > ul {
+                            margin: 0 0 0 24px;
+
+                            > li {
+                                margin: 0 0 4px 0;
+
+                                p::before {
+                                    font-size: 32px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                > .description {
+                    margin-bottom: 32px;
+                }
+            }
         }
 
         &.focus {
@@ -819,55 +867,6 @@ header {
                 @extend %scrollable;
             }
         }
-    }
-}
-
-.content-section {
-    ul.list {
-        display: block;
-        overflow: auto;
-
-        li {
-            padding: 8px 0 0 0;
-            width: 100%;
-            text-align: left;
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: column;
-            overflow-wrap: break-word;
-
-            p {
-                display: flex;
-                align-items: center;
-                justify-content: left;
-                margin: 0;
-                word-wrap: auto;
-                width: 100%;
-
-                &::before {
-                    @extend %macula;
-                    content: '>';
-                    margin: 0 8px 0 0;
-                    font-size: 48px;
-                }
-            }
-
-            > ul {
-                margin: 0 0 0 24px;
-
-                > li {
-                    margin: 0 0 4px 0;
-
-                    p::before {
-                        font-size: 32px;
-                    }
-                }
-            }
-        }
-    }
-
-    > .description {
-        margin-bottom: 32px;
     }
 }
 
