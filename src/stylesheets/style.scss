@@ -634,8 +634,8 @@ header {
 }
 
 %outline-dotted {
-    outline: 1px dotted $color-outline;
-    outline-offset: -1px;
+    outline: 2px dotted $color-outline;
+    outline-offset: -2px;
 }
 
 %scrollable {
