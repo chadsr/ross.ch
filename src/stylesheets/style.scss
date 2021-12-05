@@ -92,6 +92,7 @@ $width-icon-button: 50px;
     margin: 0;
     padding: 0;
     list-style: none;
+    box-sizing: border-box;
 }
 
 %form-layout {
@@ -797,6 +798,7 @@ header {
         @extend %outline-dotted;
 
         > .face-content {
+            display: flex;
             overflow-y: hidden;
             overflow-x: hidden;
             width: inherit;
@@ -807,10 +809,15 @@ header {
             filter: $filter-face-no-focus;
             transition-property: filter;
             pointer-events: none; // Disable all links until the face has .focus
-            overflow-wrap: break-word;
+            transform-style: flat;
             @extend %transition-ease-in-out;
 
             > .content-section {
+                flex: auto;
+                max-width: 100%;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+
                 ul.list {
                     display: block;
 
@@ -834,16 +841,17 @@ header {
                             &::before {
                                 @extend %macula;
                                 content: '>';
-                                margin: 0 8px 0 0;
+                                padding: 0 8px 0 0;
                                 font-size: 48px;
                             }
                         }
 
                         > ul {
-                            margin: 0 0 0 24px;
+                            padding: 0 0 0 24px;
+                            max-width: 100%;
 
                             > li {
-                                margin: 0 0 4px 0;
+                                padding: 0 0 8px 0;
 
                                 p::before {
                                     font-size: 32px;
