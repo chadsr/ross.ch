@@ -792,6 +792,7 @@ header {
         will-change: transform;
         transition-property: transform;
         @extend %transition-cube;
+        outline-offset: 0;
         @extend %outline-dotted;
 
         > .face-content {
