@@ -11,7 +11,7 @@ $color-heading: $color-text;
 $color-text-placeholder: $color-text;
 $color-text-placeholder_highlight: $color-text-highlight;
 $color-title-banner: rgba(31, 31, 31, 0.8);
-$color-shadow: rgba(0, 0, 0, 0.75);
+$color-shadow: rgba(0, 0, 0, 0.4);
 $color-scrollbar: $color-content;
 $color-scrollbar_track: $color-content;
 $color-scrollbar-thumb: $color-title-banner;
@@ -791,6 +791,7 @@ header {
         transform-style: preserve-3d;
         will-change: transform;
         transition-property: transform;
+        background: $color-shadow;
         @extend %transition-cube;
         outline-offset: 0;
         @extend %outline-dotted;
