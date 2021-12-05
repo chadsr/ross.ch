@@ -154,6 +154,9 @@ function rotateTo(side: number) {
         const focusFace = cube.querySelector(`.face-${side}`);
         focusFace.classList.add('focus');
 
+        // remove any active focused element
+        if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+
         const currentClass = cube.className.match(/(?:^|)rotate-([\d]+)/)[0];
 
         // Replace the existing class with one matching the newly focused side (While preserving any other classes)

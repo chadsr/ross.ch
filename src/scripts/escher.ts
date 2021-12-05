@@ -27,6 +27,7 @@ export default class EscherCubes {
         // Render svg container
         const parentSVG = document.createElementNS(SVG_NAMESPACE_URI, 'svg');
         parentSVG.setAttribute('id', svgId);
+        parentSVG.classList.add(svgId);
 
         // Get the container and append the svgId to it
         const container = document.getElementById(containerId);
