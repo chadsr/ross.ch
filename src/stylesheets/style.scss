@@ -14,11 +14,11 @@ $color-title-banner: rgba(31, 31, 31, 0.8);
 $color-shadow: rgba(0, 0, 0, 0.75);
 $color-scrollbar: $color-content;
 $color-scrollbar_track: $color-content;
-$color-scrollbar_thumb: $color-title-banner;
+$color-scrollbar-thumb: $color-title-banner;
 $color-outline: rgba(110, 110, 110, 0.8);
 
 // Content Cube
-$filter-face-no-focus: brightness(20%);
+$filter-face-no-focus: brightness(10%);
 
 // Isometric cubes
 $color-iso: black;
@@ -411,7 +411,12 @@ ul {
     }
 }
 
+form {
+    display: contents;
+}
+
 fieldset {
+    display: contents;
     @extend %form-layout;
 
     .title,
@@ -634,13 +639,11 @@ header {
 }
 
 %scrollable {
-    width: inherit;
-    height: inherit;
     overflow-y: auto;
     -webkit-overflow-scrolling: auto;
 
     &::-webkit-scrollbar-track {
-        background: $color-scrollbar_track;
+        background: $color-scrollbar-track;
     }
 
     &::-webkit-scrollbar {
@@ -648,7 +651,7 @@ header {
     }
 
     &::-webkit-scrollbar-thumb {
-        background: $color-scrollbar_thumb;
+        background: $color-scrollbar-thumb;
 
         &:hover,
         &:active {
@@ -657,8 +660,8 @@ header {
         }
     }
 
-    scrollbar-width: wide;
-    scrollbar-track-color: $color-scrollbar_track;
+    scrollbar-width: thin;
+    scrollbar-track-color: $color-scrollbar-track;
     scrollbar-base-color: $color-scrollbar;
     scroll-behavior: smooth;
 }
@@ -736,48 +739,82 @@ header {
     }
 }
 
-.content-cube-wrapper {
-    display: contents;
+@mixin rotate-faces($deg) {
+    .face-front {
+        transform: rotateY($deg);
+    }
+
+    .face-left {
+        transform: rotateY(-90deg + $deg);
+    }
+
+    .face-right {
+        transform: rotateY(90deg + $deg);
+    }
+
+    .face-back {
+        transform: rotateY(180deg + $deg);
+    }
+
+    .face-top {
+        transform: rotateX(90deg) rotateZ(-$deg);
+    }
+
+    .face-bottom {
+        transform: rotateX(-90deg) rotateZ($deg);
+    }
 }
 
 .content-cube {
-    @extend %transition-cube;
     transform-style: preserve-3d;
-    will-change: transform;
 
-    // animation: escher 1s ease-in;
+    &.rotate {
+        &-0 {
+            @include rotate-faces(0deg);
+        }
+        &-1 {
+            @include rotate-faces(-90deg);
+        }
+        &-2 {
+            @include rotate-faces(-180deg);
+        }
+        &-3 {
+            @include rotate-faces(-270deg);
+        }
+    }
 
     > .face {
-        transform-style: flat;
+        z-index: 1;
         width: 100%;
         height: 100%;
-        overflow-y: hidden;
-        overflow-x: hidden;
         position: absolute;
-        background: $color-content;
-        filter: $filter-face-no-focus;
-        transition-property: filter;
-        will-change: filter;
-        box-sizing: border-box;
-        @extend %transition-ease-in-out;
+        transform-style: preserve-3d;
+        will-change: transform;
+        transition-property: transform;
+        @extend %transition-cube;
         @extend %outline-dotted;
 
-        .face-content {
-            display: flex;
+        > .face-content {
             overflow-y: hidden;
             overflow-x: hidden;
             width: inherit;
             height: inherit;
             padding: 0 10%;
-            pointer-events: none; /* Disable all links until the face has .focus */
+            box-sizing: border-box;
+            background: $color-content;
+            filter: $filter-face-no-focus;
+            transition-property: filter;
+            pointer-events: none; // Disable all links until the face has .focus
+            overflow-wrap: break-word;
+            @extend %transition-ease-in-out;
         }
 
         &.focus {
-            filter: none;
             z-index: 2;
 
-            .face-content {
-                pointer-events: auto; /* Enable links */
+            > .face-content {
+                filter: none;
+                pointer-events: auto; // Enable links
                 @extend %scrollable;
             }
         }
@@ -785,11 +822,6 @@ header {
 }
 
 .content-section {
-    flex: auto;
-    max-width: 100%;
-    box-sizing: border-box;
-    overflow-wrap: break-word;
-
     ul.list {
         display: block;
         overflow: auto;
