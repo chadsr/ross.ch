@@ -152,9 +152,7 @@ function rotateTo(side: number) {
             // remove any active focused element
             if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
 
-            const currentClass = cube.className.match(/(?:^|)rotate-([\d]+)/)[0];
             const focusFace = cube.querySelector(`.face-${side}`);
-
             const selected = nav.querySelector('.selected');
 
             if (selected && focusFace) {

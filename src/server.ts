@@ -50,11 +50,7 @@ async function run() {
             await next();
         });
     } else {
-<<<<<<< HEAD
-        logger.info('Production Mode.');
-=======
         logger.info('Production Mode');
->>>>>>> c36bacb (WIP)
 
         // Provides security headers
         app.use(helmet());
