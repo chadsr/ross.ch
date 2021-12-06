@@ -405,8 +405,12 @@ ul {
                 }
             }
 
-            > a h4 {
+            > a {
                 text-align: center;
+
+                > span {
+                    display: none;
+                }
             }
         }
     }
