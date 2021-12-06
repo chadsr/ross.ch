@@ -39,7 +39,6 @@
         "@types/copy-webpack-plugin": "^8.0.1",
         "@types/eslint": "^8.2.0",
         "@types/hammerjs": "^2.0.40",
-        "@types/hapi__joi": "^17.1.7",
         "@types/imagemin-gifsicle": "^7.0.1",
         "@types/imagemin-mozjpeg": "^8.0.1",
         "@types/imagemin-optipng": "^5.2.1",
@@ -51,7 +50,6 @@
         "@types/koa-helmet": "^6.0.4",
         "@types/koa-session": "^5.10.4",
         "@types/koa-static": "^4.0.2",
-        "@types/koa-views": "^7.0.0",
         "@types/koa__cors": "^3.0.3",
         "@types/koa__router": "^8.0.8",
         "@types/mini-css-extract-plugin": "^2.4.0",
@@ -110,7 +108,6 @@
         "webpack-merge": "^5.8.0"
     },
     "dependencies": {
-        "@hapi/joi": "^17.1.1",
         "@koa/cors": "^3.1.0",
         "@koa/router": "^10.1.1",
         "@octokit/rest": "^18.11.1",
@@ -122,6 +119,7 @@
         "glob-promise": "^4.2.0",
         "hammerjs": "^2.0.8",
         "handlebars": "^4.7.7",
+        "joi": "^17.5.0",
         "keyv": "^4.0.3",
         "koa": "^2.13.3",
         "koa-bodyparser": "^4.3.0",
