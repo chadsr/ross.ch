@@ -542,18 +542,21 @@ button {
     }
 }
 
-.error,
-.error::before,
-.error::after,
-.error:hover {
-    background-color: $color-error !important;
-}
+.title,
+button {
+    &.error,
+    &.error::before,
+    &.error::after,
+    &.error:hover {
+        background-color: $color-error;
+    }
 
-.success,
-.success::before,
-.success::after,
-.success:hover {
-    background-color: $color-success !important;
+    &.success,
+    &.success::before,
+    &.success::after,
+    &.success:hover {
+        background-color: $color-success;
+    }
 }
 
 .hidden {
