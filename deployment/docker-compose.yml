@@ -4,7 +4,7 @@ services:
   webapp:
     image: ghcr.io/chadsr/ross.ch:latest
     env_file:
-      - .config.env
+      - ../config.env
     container_name: webapp
     labels:
       io.containers.autoupdate: registry
@@ -36,7 +36,7 @@ services:
       - override
 
     env_file:
-      - .config.env
+      - ./caddy/.caddy.env
 
   ghost:
     image: ghost:alpine
@@ -45,7 +45,7 @@ services:
       io.containers.autoupdate: registry
     restart: unless-stopped
     env_file:
-      - .config.env
+      - ./ghost/.ghost.env
     volumes:
       - /ross.ch/ghost_content:/var/lib/ghost/content:rw,z
     networks:
