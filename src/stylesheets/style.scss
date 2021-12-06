@@ -2,7 +2,7 @@
 $color-background: black;
 $color-content: rgba(45, 0, 61, 0.4);
 $color-content-highlight: #7600a1;
-$color-content-secondary: rgba(14, 13, 14, 0.8);
+$color-content-secondary: rgb(14, 13, 14);
 $color-content-secondary-highlight: $color-content-secondary;
 $color-text: white;
 $color-text-highlight: $color-text; /* Applies to all click-able text (buttons. links, etc) */
@@ -10,7 +10,7 @@ $color-text-link-highlight: $color-content-highlight; /* Overrides the above, bu
 $color-heading: $color-text;
 $color-text-placeholder: $color-text;
 $color-text-placeholder_highlight: $color-text-highlight;
-$color-title-banner: rgba(31, 31, 31, 0.8);
+$color-title-banner: rgb(31, 31, 31);
 $color-shadow: rgba(0, 0, 0, 0.4);
 $color-scrollbar: $color-content;
 $color-scrollbar_track: $color-content;
@@ -792,7 +792,6 @@ header {
         transform-style: preserve-3d;
         will-change: transform;
         transition-property: transform;
-        background: $color-shadow;
         @extend %transition-cube;
         outline-offset: 0;
         @extend %outline-dotted;
@@ -871,6 +870,7 @@ header {
             z-index: 2;
 
             > .face-content {
+                transform: translateZ(0); // fixes incorrect z-index calculations due to 3d transforms
                 filter: none;
                 pointer-events: auto; // Enable links
                 @extend %scrollable;
@@ -881,12 +881,13 @@ header {
 
 .perspective {
     > button {
-        height: 32px;
+        height: 64px;
         width: 100%;
         margin: 42px 0 0 0;
         padding: 0;
         border: none;
         font-weight: bolder;
+        font-size: 1em;
         transform-style: preserve-3d;
         @extend %outline-dotted;
 
