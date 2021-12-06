@@ -63,7 +63,6 @@ $url-twitter: url('../assets/images/icons/icon_twitter.png');
 $url-mastodon: url('../assets/images/icons/icon_mastodon.png');
 $url-linkedin: url('../assets/images/icons/icon_linkedin.png');
 $url-keybase: url('../assets/images/icons/icon_keybase.png');
-$url-refresh: url('../assets/images/icons/icon_refresh.png');
 
 /* Fonts */
 $font-macula: 'Macula';
@@ -113,7 +112,7 @@ $width-icon-button: 50px;
     background-color: $color-content-secondary;
     &:hover,
     &:focus {
-        background: $color-content-secondary-highlight;
+        background-color: $color-content-secondary-highlight;
         color: $color-text-highlight;
         outline: none;
         &::placeholder {
@@ -143,7 +142,7 @@ $width-icon-button: 50px;
 %field-title-style {
     @extend %form-layout;
     display: block;
-    background: $color-title-banner;
+    background-color: $color-title-banner;
     font-weight: bold;
     @extend %outline-dotted;
 }
@@ -202,7 +201,7 @@ $width-icon-button: 50px;
     width: inherit;
     height: 32px;
     transform-style: preserve-3d;
-    background: inherit;
+    background-color: inherit;
 }
 
 %threed-side-top {
@@ -281,6 +280,7 @@ p {
 
 a {
     color: $color-text;
+    display: contents;
     text-decoration: none;
     outline: none;
     cursor: pointer;
@@ -339,7 +339,7 @@ ul {
             cursor: pointer;
 
             &:hover {
-                background: $color-content-highlight;
+                background-color: $color-content-highlight;
                 color: $color-text-highlight;
 
                 &::after {
@@ -350,7 +350,7 @@ ul {
 
             &.twitter {
                 &:hover {
-                    background: $color-twitter;
+                    background-color: $color-twitter;
                 }
                 a::before {
                     @extend %button-icon;
@@ -360,7 +360,7 @@ ul {
 
             &.mastodon {
                 &:hover {
-                    background: $color-mastodon;
+                    background-color: $color-mastodon;
                 }
                 a::before {
                     @extend %button-icon;
@@ -377,7 +377,7 @@ ul {
 
             &.linkedin {
                 &:hover {
-                    background: $color-linkedin;
+                    background-color: $color-linkedin;
                 }
                 a::before {
                     @extend %button-icon;
@@ -387,7 +387,7 @@ ul {
 
             &.github {
                 &:hover {
-                    background: $color-github;
+                    background-color: $color-github;
                 }
                 a::before {
                     @extend %button-icon;
@@ -397,7 +397,7 @@ ul {
 
             &.keybase {
                 &:hover {
-                    background: $color-keybase;
+                    background-color: $color-keybase;
                 }
                 a::before {
                     @extend %button-icon;
@@ -457,7 +457,7 @@ nav {
 
             &:hover,
             &.selected {
-                background: $color-content-highlight;
+                background-color: $color-content-highlight;
                 > a {
                     color: $color-text-highlight;
                 }
@@ -473,7 +473,7 @@ nav {
 }
 
 .background {
-    background: $color-background;
+    background-color: $color-background;
     @extend %full-screen;
 }
 
@@ -498,7 +498,7 @@ button {
     @extend %transition-ease;
     cursor: pointer;
     &:hover {
-        background: $color-content-highlight;
+        background-color: $color-content-highlight;
         color: $color-text-highlight;
     }
 }
@@ -519,7 +519,7 @@ button {
 
     &:hover span {
         @extend %transition-ease;
-        background: $color-content-highlight;
+        background-color: $color-content-highlight;
         color: $color-text-highlight;
     }
 }
@@ -576,7 +576,7 @@ button {
 }
 
 footer {
-    background: $color-content;
+    background-color: $color-content;
     width: 100%;
     max-height: 32px;
     position: fixed;
@@ -593,7 +593,7 @@ footer {
 }
 
 header {
-    background: $color-content;
+    background-color: $color-content;
     width: 100%;
     height: 32px;
     position: fixed;
@@ -807,7 +807,7 @@ header {
             height: inherit;
             padding: 0 10%;
             box-sizing: border-box;
-            background: $color-content;
+            background-color: $color-content;
             filter: $filter-face-no-focus;
             transition-property: filter;
             pointer-events: none; // Disable all links until the face has .focus
@@ -886,7 +886,7 @@ header {
     > button {
         height: 64px;
         width: 100%;
-        margin: 42px 0 0 0;
+        margin-top: 16px;
         padding: 0;
         border: none;
         font-weight: bolder;
@@ -911,12 +911,8 @@ header {
     padding: 2px 0;
     @extend %outline-dotted;
 
-    &.textarea {
-        outline: none;
-    }
-
     &.hover:hover {
-        background: $color-content-secondary-highlight;
+        background-color: $color-content-secondary-highlight;
 
         .title {
             background-color: $color-content-highlight;
@@ -940,6 +936,28 @@ header {
         line-height: 32px;
     }
 
+    input {
+        height: 32px;
+    }
+
+    &.textarea {
+        outline: none;
+    }
+
+    textarea {
+        width: 100%;
+        height: 100%;
+        min-height: 128px;
+        box-sizing: border-box;
+        resize: vertical;
+        @extend %outline-dotted;
+    }
+
+    > ul {
+        padding: 16px;
+        display: inline-block;
+    }
+
     &.perspective {
         margin-top: 16px;
 
@@ -954,22 +972,6 @@ header {
                 @extend %threed-side-top;
                 @extend %outline-dotted;
             }
-        }
-
-        input {
-            height: 32px;
-        }
-
-        textarea {
-            @extend %outline-dotted;
-            resize: vertical;
-            height: 128px;
-            min-height: 128px;
-        }
-
-        > ul {
-            padding: 16px;
-            display: inline-block;
         }
     }
 }
@@ -986,22 +988,45 @@ header {
 .captcha-img {
     width: 80px;
     height: 20px;
-    top: 4px;
-    position: relative;
     padding: 0 0 4px 6px;
+    margin-left: 32px;
     background-color: $color-title-banner;
 }
 
-.captcha-refresh-btn {
+.captcha-title-wrapper {
+    display: flex;
+}
+
+.title.captcha-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
     display: inline-block;
-    background-repeat: no-repeat;
-    background-image: $url-refresh;
-    background-size: contain;
-    position: absolute;
-    right: 4px;
-    top: 4px;
-    width: 24px;
-    height: 24px;
+}
+
+button.captcha-refresh-btn {
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    display: inline-block;
+    font-family: $font-main;
+    font-size: 24px;
+
+    > .icon {
+        transition: transform 200ms ease;
+    }
+
+    &:active > .icon {
+        transform: rotate(180deg);
+    }
+
+    &::after {
+        // TODO: figure out if there's a way to fix this
+        width: 100%;
+    }
 }
 
 /* Blog and Repository stuff */
@@ -1017,7 +1042,7 @@ header {
             .repo-title,
             .repo-language,
             .repo-stars {
-                background: $color-content-highlight;
+                background-color: $color-content-highlight;
                 color: $color-text-highlight;
             }
         }
