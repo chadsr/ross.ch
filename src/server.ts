@@ -1,24 +1,19 @@
-import * as Koa from 'koa';
-import * as bodyParser from 'koa-bodyparser';
-import * as helmet from 'koa-helmet';
-import * as csrf from 'koa-csrf';
-import * as views from 'koa-views';
-import * as serve from 'koa-static';
-import * as cors from '@koa/cors';
-import * as session from 'koa-session';
+import fastify, { FastifyInstance, RouteShorthandOptions } from 'fastify';
+import fastifyHelmet from 'fastify-helmet';
+import fastifyCors from 'fastify-cors';
+import fastifyPov from 'point-of-view';
+import fastifyStatic from 'fastify-static';
+import fastifyCsrf from 'fastify-csrf';
+import * as handlebars from 'handlebars';
+import { Server, IncomingMessage, ServerResponse } from 'http';
 import * as dotenv from 'dotenv';
 import { join, basename, resolve } from 'path';
 import * as glob from 'glob-promise';
 
-import * as Webpack from 'webpack';
-import * as WebpackDevConfig from '../webpack/webpack.dev';
-import * as WebpackDevMiddleware from 'webpack-dev-middleware';
-
-import { logger, loggerMiddleware } from './logging';
 import { Config } from './config';
 import { router } from './routes';
 
-const isDeveloping = process.env.NODE_ENV !== 'production';
+const isDevelopment = process.env.NODE_ENV !== 'production';
 
 const dirViews = resolve(__dirname, 'views/');
 const dirPublic = resolve(__dirname, '../public');
@@ -37,60 +32,54 @@ async function getPartialsObj() {
 }
 
 async function run() {
-    const app = new Koa();
+    const server: FastifyInstance<Server, IncomingMessage, ServerResponse> = fastify({
+        logger: {
+            prettyPrint: isDevelopment ? { translateTime: 'HH:MM:ss Z', ignore: 'pid,hostname' } : false,
+        },
+    });
 
-    // Load dev webpack server if developing
-    if (isDeveloping) {
+    if (isDevelopment) {
         logger.info('Development Mode');
 
-        const compiler = Webpack(WebpackDevConfig);
-        const wd = WebpackDevMiddleware(compiler);
-        app.use(async (ctx, next) => {
-            wd(ctx.req, ctx.res, resolve);
-
-            await next();
-        });
-
-        app.use(serve(resolve(__dirname, '../dist/public')));
+        // Load dev webpack dev middleware
     } else {
         logger.info('Production Mode');
 
         // Provides security headers
-        app.use(helmet());
-
-        // Serve the static files in the public directory
-        app.use(serve(dirPublic));
+        server.register(fastifyHelmet);
     }
 
-    app.use(
-        views(dirViews, {
-            extension: 'hbs',
-            map: {
-                hbs: 'handlebars',
-            },
-            options: {
-                partials: await getPartialsObj(),
-            },
-        }),
-    );
+    // Serve the static files in the public directory
+    server.register(fastifyStatic, {
+        root: dirPublic,
+    });
 
-    // load the session key from our configuration
-    app.keys = [Config.sessionKey];
+    server.register(fastifyPov, {
+        engine: {
+            handlebars: handlebars,
+        },
+    });
 
-    // add session support for csrf
-    const sessionConfig = {
-        key: 'session',
-    };
-    app.use(session(sessionConfig, app));
+    // app.use(
+    //     views(dirViews, {
+    //         extension: 'hbs',
+    //         map: {
+    //             hbs: 'handlebars',
+    //         },
+    //         options: {
+    //             partials: await getPartialsObj(),
+    //         },
+    //     }),
+    // );
 
-    // Enable bodyParser with default options
-    app.use(
-        bodyParser({
-            onerror: function (error, ctx) {
-                ctx.throw('Could not parse body of request', 422);
-            },
-        }),
-    );
+    // // Enable bodyParser with default options
+    // app.use(
+    //     bodyParser({
+    //         onerror: function (error, ctx) {
+    //             ctx.throw('Could not parse body of request', 422);
+    //         },
+    //     }),
+    // );
 
     app.use(
         new csrf({
@@ -104,16 +93,16 @@ async function run() {
     );
 
     // Enable cors with default options
-    app.use(cors());
+    server.register(fastifyCors);
 
-    // Logger middleware -> use winston as logger (logging.ts with config)
-    app.use(loggerMiddleware());
+    server.listen(8080, (err, address) => {
+        if (err) {
+            console.error(err);
+            process.exit(1);
+        }
 
-    app.use(router.routes()).use(router.allowedMethods());
-
-    app.listen(Config.port);
-
-    logger.info(`Server running on port ${Config.port}`);
+        logger.info(`Server running on ${address}`);
+    });
 }
 
 run();
