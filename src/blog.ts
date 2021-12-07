@@ -1,6 +1,5 @@
 import GhostContentAPI from '@tryghost/content-api';
 
-import { logger } from './logging';
 import { Config } from './config';
 import { BlogFeed, BlogPost } from './interfaces';
 

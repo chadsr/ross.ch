@@ -4,32 +4,22 @@ import fastifyCors from 'fastify-cors';
 import fastifyPov from 'point-of-view';
 import fastifyStatic from 'fastify-static';
 import fastifyCsrf from 'fastify-csrf';
+import fastifySession from 'fastify-session';
+import fastifyCookie from 'fastify-cookie';
 import * as handlebars from 'handlebars';
 import { Server, IncomingMessage, ServerResponse } from 'http';
 import * as dotenv from 'dotenv';
-import { join, basename, resolve } from 'path';
-import * as glob from 'glob-promise';
+import { resolve } from 'path';
 
+import { renderIndex, handleContactForm, serveCaptcha, getIndex } from './controller';
 import { Config } from './config';
-import { router } from './routes';
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
-const dirViews = resolve(__dirname, 'views/');
 const dirPublic = resolve(__dirname, '../public');
-const dirPartials = join(dirViews, 'partials/');
 
 // Load environment variables from .env file
 dotenv.config({ path: '.env' });
-
-// Returns an object with handlebars partial names as key and path as value
-async function getPartialsObj() {
-    const partialsPaths = await glob(join(dirPartials + '/*.hbs'));
-    const partialsNames = partialsPaths.map((path) => basename(path, '.hbs'));
-
-    // Create an object with name as key and filepath as value
-    return partialsNames.reduce((obj, key, i) => ({ ...obj, [key]: partialsPaths[i] }), {});
-}
 
 async function run() {
     const server: FastifyInstance<Server, IncomingMessage, ServerResponse> = fastify({
@@ -60,40 +50,37 @@ async function run() {
         },
     });
 
-    // app.use(
-    //     views(dirViews, {
-    //         extension: 'hbs',
-    //         map: {
-    //             hbs: 'handlebars',
-    //         },
-    //         options: {
-    //             partials: await getPartialsObj(),
-    //         },
-    //     }),
-    // );
-
-    // // Enable bodyParser with default options
-    // app.use(
-    //     bodyParser({
-    //         onerror: function (error, ctx) {
-    //             ctx.throw('Could not parse body of request', 422);
-    //         },
-    //     }),
-    // );
-
-    app.use(
-        new csrf({
-            invalidSessionSecretMessage: 'Invalid session secret',
-            invalidSessionSecretStatusCode: 403,
-            invalidTokenMessage: 'Invalid CSRF token',
-            invalidTokenStatusCode: 403,
-            excludedMethods: ['GET', 'HEAD', 'OPTIONS'],
-            disableQuery: false,
-        }),
-    );
+    server.register(fastifyCookie);
+    server.register(fastifySession, { secret: Config.sessionKey });
+    server.register(fastifyCsrf, { sessionPlugin: 'fastify-session' });
 
     // Enable cors with default options
     server.register(fastifyCors);
+
+    // GENERAL ROUTES
+    // router.get('/', renderIndex);
+    // router.post('/', handleContactForm);
+
+    // router.get('/captcha', serveCaptcha);
+    server.route({
+        method: 'GET',
+        path: '/',
+        onRequest: server.csrfProtection,
+        handler: getIndex,
+    });
+
+    server.get<{
+        Querystring: PingQuerystring;
+        Params: PingParams;
+        Headers: PingHeaders;
+        Body: PingBody;
+    }>('/ping/:bar', opts, (request, reply) => {
+        console.log(request.query); // this is of type `PingQuerystring`
+        console.log(request.params); // this is of type `PingParams`
+        console.log(request.headers); // this is of type `PingHeaders`
+        console.log(request.body); // this is of type `PingBody`
+        reply.code(200).send({ pong: 'it worked!' });
+    });
 
     server.listen(8080, (err, address) => {
         if (err) {
