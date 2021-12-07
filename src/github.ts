@@ -1,7 +1,7 @@
-import { Repository, Github } from './interfaces';
-
 import { Octokit } from '@octokit/rest';
 const octokit = new Octokit();
+
+import { Repository, Github } from './interfaces';
 
 export async function getUserReposWithStars(
     username: string,

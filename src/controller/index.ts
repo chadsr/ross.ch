@@ -25,7 +25,7 @@ const contactFormSchema = Joi.object()
         message: Joi.string().min(Config.minMessageLength).required().messages({
             'string.min': ErrorMessages.InvalidMsg,
         }),
-        captcha: Joi.string().min(Config.captchaLength).max(Config.captchaLength).required().messages({
+        captcha: Joi.string().length(Config.captchaLength).required().messages({
             'string.min': ErrorMessages.InvalidCaptcha,
             'string.max': ErrorMessages.InvalidCaptcha,
         }),

@@ -4,12 +4,6 @@ import { logger } from './logging';
 import { Config } from './config';
 import { BlogFeed, BlogPost } from './interfaces';
 
-const ghostApi = GhostContentAPI({
-    url: Config.ghostUrl,
-    key: Config.ghostPublicApiKey,
-    version: 'v3',
-});
-
 export async function getAggregatedFeed(maxPosts: number): Promise<BlogFeed> {
     const aggregatedFeed: BlogFeed = {
         posts: [],
@@ -17,7 +11,7 @@ export async function getAggregatedFeed(maxPosts: number): Promise<BlogFeed> {
 
     try {
         // Get ghost blog posts up until maxPosts
-        const ghostFeed = await getGhostFeed(maxPosts);
+        const ghostFeed = await getGhostFeed(Config.ghostUrl, Config.ghostPublicApiKey, maxPosts);
 
         // Merge into aggregatedFeed
         aggregatedFeed.posts = aggregatedFeed.posts.concat(ghostFeed.posts);
@@ -38,7 +32,13 @@ export async function getAggregatedFeed(maxPosts: number): Promise<BlogFeed> {
     return aggregatedFeed;
 }
 
-export async function getGhostFeed(maxPosts: number): Promise<BlogFeed> {
+async function getGhostFeed(ghostUrl: string, ghostApiKey: string, maxPosts: number): Promise<BlogFeed> {
+    const ghostApi = new GhostContentAPI({
+        url: ghostUrl,
+        key: ghostApiKey,
+        version: 'v3',
+    });
+
     const ghostFeed: BlogFeed = {
         posts: [],
     };
