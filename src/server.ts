@@ -44,20 +44,23 @@ async function run() {
         logger.info('Development Mode');
 
         const compiler = Webpack(WebpackDevConfig);
+        const wd = WebpackDevMiddleware(compiler);
         app.use(async (ctx, next) => {
-            const mw = WebpackDevMiddleware(compiler);
-            mw(ctx.req, ctx.res, next);
+            wd(ctx.req, ctx.res, resolve);
+
             await next();
         });
+
+        app.use(serve(resolve(__dirname, '../dist/public')));
     } else {
         logger.info('Production Mode');
 
         // Provides security headers
         app.use(helmet());
-    }
 
-    // Serve the static files made by webpack
-    app.use(serve(dirPublic));
+        // Serve the static files in the public directory
+        app.use(serve(dirPublic));
+    }
 
     app.use(
         views(dirViews, {
