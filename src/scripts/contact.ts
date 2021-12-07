@@ -2,7 +2,6 @@ import axios, { AxiosResponse } from 'axios';
 
 import { Response, ContactFormRequest } from '../interfaces';
 import { ErrorMessages } from '../errors';
-import { Config } from '../config';
 
 const CAPTCHA_ID = 'captcha-img';
 
@@ -12,6 +11,11 @@ export default class ContactForm {
     private readonly _formLabels: { [key: string]: HTMLLabelElement };
     private readonly _formSubmitBtn: HTMLButtonElement;
 
+    private readonly _formSubmitTimeoutMs = 5000;
+    private readonly _formMessageDurationMs = 2000;
+    private readonly _minNameLength = 2;
+    private readonly _maxNameLength = 32;
+    private readonly _minMessageLength = 2;
     constructor(formId: string) {
         this._form = <HTMLFormElement>document.getElementById(formId);
 
@@ -70,7 +74,7 @@ export default class ContactForm {
         // Reset the submit button back to normal after 4s
         setTimeout(() => {
             this.resetSubmitButton();
-        }, Config.formMessageDurationMs);
+        }, this._formMessageDurationMs);
     }
 
     resetSubmitButton(): void {
@@ -133,13 +137,13 @@ export default class ContactForm {
         let valid = true;
 
         // Invalid name
-        if (formData.name.length < Config.minNameLength) {
+        if (formData.name.length < this._minNameLength) {
             const nameLabel = this._formLabels['name'];
             nameLabel.innerHTML = ErrorMessages.InvalidNameShort;
             nameLabel.classList.add('error');
             nameLabel.scrollIntoView();
             valid = false;
-        } else if (formData.name.length > Config.maxNameLength) {
+        } else if (formData.name.length > this._maxNameLength) {
             const nameLabel = this._formLabels['name'];
             nameLabel.innerHTML = ErrorMessages.InvalidNameLong;
             nameLabel.classList.add('error');
@@ -157,7 +161,7 @@ export default class ContactForm {
         }
 
         // Invalid message
-        if (formData.message.length < Config.minMessageLength) {
+        if (formData.message.length < this._minMessageLength) {
             const msgLabel = this._formLabels['message'];
             msgLabel.innerHTML = ErrorMessages.InvalidMsg;
             msgLabel.classList.add('error');
@@ -202,7 +206,7 @@ export default class ContactForm {
                 xsrfHeaderName: 'X-CSRF-Token',
                 xsrfCookieName: 'XSRF-TOKEN',
                 data: formData,
-                timeout: Config.formSubmitTimeoutMs,
+                timeout: this._formSubmitTimeoutMs,
             })
                 .then((response: AxiosResponse) => {
                     this.handleResponse(response.data);

@@ -36,8 +36,6 @@ export interface IConfig {
     minEmailDomainSegments: number;
 
     minMessageLength: number;
-    formSubmitTimeoutMs: number;
-    formMessageDurationMs: number;
 }
 
 const Config: IConfig = {
@@ -68,8 +66,6 @@ const Config: IConfig = {
     maxNameLength: 32,
     minEmailDomainSegments: 2,
     minMessageLength: 2,
-    formSubmitTimeoutMs: 5000,
-    formMessageDurationMs: 2000,
 };
 
 export { Config };
