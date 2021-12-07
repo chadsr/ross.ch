@@ -1,8 +1,8 @@
 import { merge } from 'webpack-merge';
 
-import * as WebpackCommon from './webpack.common';
+import commonConfig from './webpack.common';
 
-module.exports = merge(WebpackCommon, {
+const devConfig = merge(commonConfig, {
     // Set the mode to development or production
     mode: 'development',
 
@@ -35,3 +35,5 @@ module.exports = merge(WebpackCommon, {
         ],
     },
 });
+
+export { devConfig as default };

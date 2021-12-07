@@ -2,9 +2,9 @@ import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import { merge } from 'webpack-merge';
 
-import * as Common from './webpack.common';
+import commonConfig from './webpack.common';
 
-module.exports = merge(Common, {
+const prodConfig = merge(commonConfig, {
     mode: 'production',
     devtool: false,
     module: {
@@ -54,3 +54,5 @@ module.exports = merge(Common, {
         maxAssetSize: 512000,
     },
 });
+
+export { prodConfig as default };

@@ -3,11 +3,12 @@ import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as ImageMinimizerPlugin from 'image-minimizer-webpack-plugin';
 import FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+import * as Webpack from 'webpack';
 import { join } from 'path';
 
 import Paths from './paths';
 
-module.exports = {
+const commonConfig: Webpack.Configuration = {
     // Where webpack looks to start building the bundle
     entry: [join(Paths.scripts, 'main.ts')],
 
@@ -87,3 +88,5 @@ module.exports = {
         ],
     },
 };
+
+export { commonConfig as default };
