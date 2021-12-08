@@ -1,10 +1,4 @@
 {
     "name": "Documentation",
-    "inputFiles": ["./src"],
-    "out": "docs/code",
-    "theme": "pages-plugin",
-    "pages": {
-        "groups": [],
-        "output": "pages"
-    }
+    "out": "docs/code"
 }
