@@ -22,4 +22,8 @@ COPY . .
 EXPOSE ${PORT}
 
 RUN ["yarn", "build"]
+
+# Remove dev dependencies
+RUN ["yarn", "install", "--production"]
+
 CMD ["yarn", "start"]
