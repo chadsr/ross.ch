@@ -1,4 +1,4 @@
-import fastify, { FastifyInstance, RouteShorthandOptions } from 'fastify';
+import fastify, { FastifyInstance } from 'fastify';
 import fastifyHelmet from 'fastify-helmet';
 import fastifyCors from 'fastify-cors';
 import fastifyPov from 'point-of-view';
@@ -20,8 +20,6 @@ import { getCaptcha } from './controller/captcha';
 import { Config } from './config';
 import devConfig from '../webpack/webpack.dev';
 
-const isDevelopment = process.env.NODE_ENV !== 'production';
-
 const publicPath = resolve(__dirname, '../public');
 
 // Load environment variables from .env file
@@ -30,17 +28,11 @@ dotenv.config({ path: '.env' });
 async function run() {
     const server: FastifyInstance<Server, IncomingMessage, ServerResponse> = fastify({
         logger: {
-            prettyPrint: isDevelopment ? { translateTime: 'HH:MM:ss Z', ignore: 'pid,hostname' } : false,
+            prettyPrint: !Config.production ? { translateTime: 'HH:MM:ss Z', ignore: 'pid,hostname' } : false,
         },
     });
 
-    if (isDevelopment) {
-        server.log.info('Development Mode');
-
-        await server.register(fastifyExpress);
-        const compiler = webpack(devConfig);
-        server.use(webpackDev(compiler, { publicPath }));
-    } else {
+    if (Config.production) {
         server.log.info('Production Mode');
 
         // security headers
@@ -50,6 +42,12 @@ async function run() {
         await server.register(fastifyStatic, {
             root: publicPath,
         });
+    } else {
+        server.log.info('Development Mode');
+
+        await server.register(fastifyExpress);
+        const compiler = webpack(devConfig);
+        server.use(webpackDev(compiler, { publicPath }));
     }
 
     // template rendering
@@ -69,21 +67,11 @@ async function run() {
 
     // Routes
     // TODO: create schema
-    const getIndexOpts: RouteShorthandOptions = {
-        onRequest: server.csrfProtection,
-    };
-    server.get('/', getIndexOpts, getIndex);
+    server.get('/', {}, getIndex);
 
-    const postContactOpts: RouteShorthandOptions = {
-        onRequest: server.csrfProtection,
-    };
-    server.post('/contact', postContactOpts, postContact);
+    server.post('/contact', { onRequest: server.csrfProtection }, postContact);
 
-    const getCaptchaOpts: RouteShorthandOptions = {
-        onRequest: server.csrfProtection,
-    };
-
-    server.get('/captcha', getCaptchaOpts, getCaptcha);
+    server.get('/captcha', { onRequest: server.csrfProtection }, getCaptcha);
 
     server.listen(8080, (err) => {
         if (err) {
