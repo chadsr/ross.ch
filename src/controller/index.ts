@@ -1,14 +1,15 @@
+import { Repository } from './../interfaces';
 import * as Joi from 'joi';
 
 import { Config } from '../config';
-import { Response, ResponseMessage, ContactFormRequest, ValidatedFormData } from '../interfaces';
+import { Response, ResponseMessage, ContactFormRequest, ValidatedFormData, Captcha } from '../interfaces';
 import { contactMailer, EmailPlaintext } from '../mailer';
 import { getAggregatedFeed } from '../blog';
 import { getUserReposWithStars } from '../github';
 import { ErrorMessages } from '../errors';
 import { generateCaptcha } from '../captcha';
-import { CaptchaStore } from '../store';
 import { IncomingHttpHeaders } from 'http';
+import { FastifyReply, FastifyRequest } from 'fastify';
 
 const contactFormSchema = Joi.object()
     .options({ abortEarly: false })
@@ -29,9 +30,7 @@ const contactFormSchema = Joi.object()
         }),
     });
 
-const captchaStore = new CaptchaStore();
-
-function getResponseObj(success: boolean, msg: ResponseMessage | ResponseMessage[]): Response {
+export function getResponseObj(success: boolean, msg: ResponseMessage | ResponseMessage[]): Response {
     // If we were passed a single Message object, put it in an array for standardisation
     if (!Array.isArray(msg)) {
         msg = [msg];
@@ -73,15 +72,15 @@ function validateContactFormData(data: ContactFormRequest): ValidatedFormData {
     };
 }
 
-const getIndex =  async (request, reply) => { {
+export const getIndex = async (request: FastifyRequest, reply: FastifyReply) => {
     const feed = await getAggregatedFeed(Config.maxBlogPosts);
 
-    let repositories = undefined;
+    let repositories: Repository[] = [];
     try {
         const github = await getUserReposWithStars(Config.githubUser, true, Config.maxRepos, 'updated');
         repositories = github.repositories;
     } catch (e) {
-        logger.error(e);
+        request.log.error(e);
     }
 
     const year = new Date().getFullYear().toString();
@@ -95,19 +94,19 @@ const getIndex =  async (request, reply) => { {
     );
 
     try {
-        await captchaStore.setCaptcha(reply.csrf, captcha);
+        request.session.captcha = captcha;
     } catch (error) {
-        logger.error(`Failed to store captcha: ${error}`);
+        request.log.error(`Failed to store captcha: ${error}`);
     }
 
-    await reply.render('index', {
+    await reply.view('index', {
         year: year,
-        csrfToken: await reply.generateCsrf(), // Add a CSRF token for the contact form request
+        csrfToken: await reply.generateCsrf(),
         blogPosts: feed.posts,
         githubRepos: repositories,
         captchaBase64: captcha.base64,
     });
-}
+};
 
 function getCsrfToken(headers: IncomingHttpHeaders): string {
     const headerCsrf = headers['x-csrf-token'];
@@ -120,58 +119,43 @@ function getCsrfToken(headers: IncomingHttpHeaders): string {
     return '';
 }
 
-export async function handleContactForm(ctx: ParameterizedContext): Promise<void> {
-    const captchaSent: string = ctx.request.body.captcha.toUpperCase();
+export const postContact = async (request: FastifyRequest, reply: FastifyReply) => {
+    const req = <ContactFormRequest>request.body; // TODO: fix this properly
+    const reqCaptcha: string = req.captcha.toUpperCase();
 
-    const csrf = getCsrfToken(ctx.request.headers);
+    const csrf = getCsrfToken(request.headers);
     if (csrf === '') {
-        ctx.status = 403;
+        reply.code(403);
         return;
     }
 
-    const validatedData = validateContactFormData(ctx.request.body);
+    const validatedData = validateContactFormData(<ContactFormRequest>request.body);
     if (validatedData.errors.length > 0) {
         // Validation against the schema failed, so respond with 422 status and relevant errors
-        ctx.status = 422;
-        ctx.body = getResponseObj(false, validatedData.errors);
+        request.session.captcha = undefined;
 
-        try {
-            await captchaStore.deleteCaptcha(csrf);
-        } catch (error) {
-            logger.error(`Failed to delete csrf/captcha key/value: ${error}`);
-        }
-
+        reply.code(422);
+        reply.send(getResponseObj(false, validatedData.errors));
         return;
     }
 
-    try {
-        const captchaString = await captchaStore.getCaptcha(csrf);
+    const captcha = <Captcha>request.session.captcha;
+    if (reqCaptcha !== captcha.string) {
+        request.log.warn(`Captcha didn't match. Got ${reqCaptcha}, expected ${captcha.string}`);
 
-        // Delete the captcha value from the store after getting the string, so it can only be used with this csrf token once
-        try {
-            await captchaStore.deleteCaptcha(csrf);
-        } catch (error) {
-            logger.error(`Failed to delete csrf/captcha key/value: ${error}`);
-            ctx.status = 500;
-            return;
-        }
-
-        if (captchaSent !== captchaString) {
-            logger.warn(`Captcha didn't match. Got ${captchaSent}, expected ${captchaString}`);
-
-            // Captcha didn't match, so return 401
-            ctx.status = 401;
-            ctx.body = getResponseObj(false, {
+        // Captcha didn't match, so return 401
+        reply.code(401);
+        reply.send(
+            getResponseObj(false, {
                 target: 'submit',
                 text: ErrorMessages.InvalidCaptcha,
-            });
-            return;
-        }
-    } catch (error) {
-        logger.error(`Failed to get captcha matching csrf token: ${error}`);
-        ctx.status = 401;
+            }),
+        );
         return;
     }
+
+    // Delete the captcha value from the session after getting the string, so it can only be used with this csrf token once
+    request.session.captcha = undefined;
 
     // Construct email object from the request body
     const formEmail = <EmailPlaintext>{
@@ -182,20 +166,21 @@ export async function handleContactForm(ctx: ParameterizedContext): Promise<void
 
     try {
         await contactMailer.send(Config.sendEmailAddress, Config.recvEmailAddress, formEmail, true);
-        // Return a 200 status and message
-        logger.info('Contact form email sent!');
-        ctx.status = 200;
-        ctx.body = getResponseObj(true, {
-            text: 'Success!',
-            target: 'submit',
-        });
+        reply.send(
+            getResponseObj(true, {
+                text: 'Success!',
+                target: 'submit',
+            }),
+        );
     } catch (error) {
         // Return a 503 error if we couldn't deliver the email for some reason
-        logger.error('Could not send contact form email:', error);
-        ctx.status = 503;
-        ctx.body = getResponseObj(false, {
-            text: 'Server failure. Try later?',
-            target: 'submit',
-        });
+        request.log.error('Could not send contact form email:', error);
+        reply.code(503);
+        reply.send(
+            getResponseObj(false, {
+                text: 'Server failure. Try later?',
+                target: 'submit',
+            }),
+        );
     }
-}
+};

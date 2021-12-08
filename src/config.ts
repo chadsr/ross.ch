@@ -9,7 +9,6 @@ dotenv.config({ path: configEnvPath });
 
 export interface IConfig {
     port: number;
-    debugLogging: boolean;
     sessionKey: string;
     emailHost: string;
     smtpPort: number;
@@ -40,7 +39,6 @@ export interface IConfig {
 
 const Config: IConfig = {
     port: process.env.PORT !== undefined ? parseInt(process.env.PORT) : 8080,
-    debugLogging: process.env.NODE_ENV == 'development',
     sessionKey: process.env.SESSION_KEY || random('*', 32),
     emailHost: process.env.EMAIL_HOST || 'localhost',
     smtpPort: process.env.SMTP_PORT !== undefined ? parseInt(process.env.SMTP_PORT) : 465,

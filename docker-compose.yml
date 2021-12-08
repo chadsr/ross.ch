@@ -5,6 +5,8 @@ services:
     image: ghcr.io/chadsr/ross.ch:latest
     env_file:
       - .config.env
+    environment:
+      - REDIS_URL=redis://redis
     container_name: webapp
     labels:
       io.containers.autoupdate: registry
@@ -13,6 +15,15 @@ services:
       - web-root:/usr/src/ross.ch/dist/public:ro,z
     networks:
       - webapp
+
+  # redis:
+  #   image: redis:alpine
+  #   container_name: redis
+  #   restart: unless-stopped
+  #   ports:
+  #     - 6379:6379
+  #   networks:
+  #     - webapp
 
   caddy:
     build:

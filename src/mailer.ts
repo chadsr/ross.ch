@@ -1,4 +1,5 @@
 import * as NodeMailer from 'nodemailer';
+import * as SMTPTransport from 'nodemailer/lib/smtp-transport';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -8,8 +9,6 @@ import * as Handlebars from 'handlebars';
 import { readFile } from 'fs';
 
 import { Config } from './config';
-import { logger } from './logging';
-import SMTPTransport = require('nodemailer/lib/smtp-transport');
 
 export interface EmailPlaintext {
     senderName: string;
@@ -55,7 +54,6 @@ class Mailer {
         if (templatePath !== '') {
             readFile(templatePath, (error, template) => {
                 if (error) {
-                    logger.error('Could not load email template!');
                     throw error;
                 }
 
@@ -67,7 +65,6 @@ class Mailer {
         if (confirmationTemplatePath !== '') {
             readFile(confirmationTemplatePath, (error, template) => {
                 if (error) {
-                    logger.error('Could not load email template!');
                     throw error;
                 }
 
@@ -79,7 +76,6 @@ class Mailer {
         if (pgpKeyPath !== '') {
             readFile(pgpKeyPath, (error, key) => {
                 if (error) {
-                    logger.error(`Could not load OpenPGP key from ${pgpKeyPath}.`);
                     throw error;
                 }
 
@@ -98,9 +94,7 @@ class Mailer {
             html: this._confirmationTemplate(email),
         };
 
-        await this._mailer.sendMail(mail).catch((error) => {
-            logger.error(`Could not send confirmation mail:\n${error}`);
-        });
+        await this._mailer.sendMail(mail);
     }
 
     public async send(
@@ -122,17 +116,11 @@ class Mailer {
         }
 
         // Send the email to the receiving address
-        await this._mailer.sendMail(mail).catch((error) => {
-            logger.error(`Could not send mail: ${error}`);
-            throw error;
-        });
+        await this._mailer.sendMail(mail);
 
         // If chosen, send a confirmation back to sender with their provided details
         if (sendConfirmation) {
-            this.sendConfirmation(sendAddr, toAddr, email).catch((error) => {
-                logger.error(`Could not send confirmation mail: ${error}`);
-                throw error;
-            });
+            await this.sendConfirmation(sendAddr, toAddr, email);
         }
     }
 }

@@ -8,15 +8,11 @@ export async function getAggregatedFeed(maxPosts: number): Promise<BlogFeed> {
         posts: [],
     };
 
-    try {
-        // Get ghost blog posts up until maxPosts
-        const ghostFeed = await getGhostFeed(Config.ghostUrl, Config.ghostPublicApiKey, maxPosts);
+    // Get ghost blog posts up until maxPosts
+    const ghostFeed = await getGhostFeed(Config.ghostUrl, Config.ghostPublicApiKey, maxPosts);
 
-        // Merge into aggregatedFeed
-        aggregatedFeed.posts = aggregatedFeed.posts.concat(ghostFeed.posts);
-    } catch (error) {
-        logger.error(`Could not get Ghost Blog Feed:\n${error}`);
-    }
+    // Merge into aggregatedFeed
+    aggregatedFeed.posts = aggregatedFeed.posts.concat(ghostFeed.posts);
 
     if (aggregatedFeed.posts.length != 0) {
         // Re-sort the merged posts by timestamp value
@@ -42,43 +38,38 @@ async function getGhostFeed(ghostUrl: string, ghostApiKey: string, maxPosts: num
         posts: [],
     };
 
-    try {
-        const posts = await ghostApi.posts.browse({ limit: maxPosts, include: 'tags' });
+    const posts = await ghostApi.posts.browse({ limit: maxPosts, include: 'tags' });
 
-        for (const post of posts) {
-            const publishedAtTimestamp = Date.parse(post.published_at || '');
-            const publishedAtDate = new Date(publishedAtTimestamp);
+    for (const post of posts) {
+        const publishedAtTimestamp = Date.parse(post.published_at || '');
+        const publishedAtDate = new Date(publishedAtTimestamp);
 
-            const dateString = publishedAtDate.toLocaleDateString('en-GB', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-            });
+        const dateString = publishedAtDate.toLocaleDateString('en-GB', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        });
 
-            const tags: string[] = [];
-            if (post.tags !== undefined) {
-                for (const tag of post.tags) {
-                    if (tag.name !== undefined) {
-                        tags.push(tag.name);
-                    }
+        const tags: string[] = [];
+        if (post.tags !== undefined) {
+            for (const tag of post.tags) {
+                if (tag.name !== undefined) {
+                    tags.push(tag.name);
                 }
             }
-
-            const ghostPost = <BlogPost>{
-                title: post.title || '',
-                url: post.url,
-                publishDate: dateString,
-                publishTimestamp: publishedAtTimestamp,
-                contentSnippet: post.excerpt || '',
-                tags: tags,
-            };
-
-            // Add the post to our ghostFeed object
-            ghostFeed.posts.push(ghostPost);
         }
-    } catch (error) {
-        logger.error('Could not get Ghost feed: ', error);
-        return Promise.reject(error);
+
+        const ghostPost = <BlogPost>{
+            title: post.title || '',
+            url: post.url,
+            publishDate: dateString,
+            publishTimestamp: publishedAtTimestamp,
+            contentSnippet: post.excerpt || '',
+            tags: tags,
+        };
+
+        // Add the post to our ghostFeed object
+        ghostFeed.posts.push(ghostPost);
     }
 
     return ghostFeed;

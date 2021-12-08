@@ -6,17 +6,23 @@ import fastifyStatic from 'fastify-static';
 import fastifyCsrf from 'fastify-csrf';
 import fastifySession from 'fastify-session';
 import fastifyCookie from 'fastify-cookie';
+import fastifyExpress from 'fastify-express';
 import * as handlebars from 'handlebars';
 import { Server, IncomingMessage, ServerResponse } from 'http';
 import * as dotenv from 'dotenv';
 import { resolve } from 'path';
 
-import { renderIndex, handleContactForm, serveCaptcha, getIndex } from './controller';
+import * as webpack from 'webpack';
+import * as webpackDev from 'webpack-dev-middleware';
+
+import { getIndex, postContact } from './controller/index';
+import { getCaptcha } from './controller/captcha';
 import { Config } from './config';
+import devConfig from '../webpack/webpack.dev';
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
-const dirPublic = resolve(__dirname, '../public');
+const publicPath = resolve(__dirname, '../public');
 
 // Load environment variables from .env file
 dotenv.config({ path: '.env' });
@@ -29,66 +35,60 @@ async function run() {
     });
 
     if (isDevelopment) {
-        logger.info('Development Mode');
+        server.log.info('Development Mode');
 
         // Load dev webpack dev middleware
+        await server.register(fastifyExpress);
+        const compiler = webpack(devConfig);
+        server.use(webpackDev(compiler, { publicPath }));
     } else {
-        logger.info('Production Mode');
+        server.log.info('Production Mode');
 
         // Provides security headers
-        server.register(fastifyHelmet);
+        await server.register(fastifyHelmet);
+
+        // Serve the static files in the public directory
+        await server.register(fastifyStatic, {
+            root: publicPath,
+        });
     }
 
-    // Serve the static files in the public directory
-    server.register(fastifyStatic, {
-        root: dirPublic,
-    });
-
-    server.register(fastifyPov, {
+    await server.register(fastifyPov, {
         engine: {
             handlebars: handlebars,
         },
     });
 
-    server.register(fastifyCookie);
-    server.register(fastifySession, { secret: Config.sessionKey });
-    server.register(fastifyCsrf, { sessionPlugin: 'fastify-session' });
+    await server.register(fastifyCookie);
+    await server.register(fastifySession, { secret: Config.sessionKey });
+    await server.register(fastifyCsrf, { sessionPlugin: 'fastify-session' });
 
     // Enable cors with default options
-    server.register(fastifyCors);
+    await server.register(fastifyCors);
 
-    // GENERAL ROUTES
-    // router.get('/', renderIndex);
-    // router.post('/', handleContactForm);
-
-    // router.get('/captcha', serveCaptcha);
-    server.route({
-        method: 'GET',
-        path: '/',
+    // Routes
+    // TODO: create schema
+    const getIndexOpts: RouteShorthandOptions = {
         onRequest: server.csrfProtection,
-        handler: getIndex,
-    });
+    };
+    server.get('/', getIndexOpts, getIndex);
 
-    server.get<{
-        Querystring: PingQuerystring;
-        Params: PingParams;
-        Headers: PingHeaders;
-        Body: PingBody;
-    }>('/ping/:bar', opts, (request, reply) => {
-        console.log(request.query); // this is of type `PingQuerystring`
-        console.log(request.params); // this is of type `PingParams`
-        console.log(request.headers); // this is of type `PingHeaders`
-        console.log(request.body); // this is of type `PingBody`
-        reply.code(200).send({ pong: 'it worked!' });
-    });
+    const postContactOpts: RouteShorthandOptions = {
+        onRequest: server.csrfProtection,
+    };
+    server.post('/contact', postContactOpts, postContact);
+
+    const getCaptchaOpts: RouteShorthandOptions = {
+        onRequest: server.csrfProtection,
+    };
+
+    server.get('/captcha', getCaptchaOpts, getCaptcha);
 
     server.listen(8080, (err, address) => {
         if (err) {
             console.error(err);
             process.exit(1);
         }
-
-        logger.info(`Server running on ${address}`);
     });
 }
 
