@@ -23,7 +23,7 @@
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx}": [
-            "yarn run lint-fix"
+            "yarn run lint-fix && yarn run docs"
         ]
     },
     "license": "GPL-3.0",
