@@ -8,6 +8,7 @@ const configEnvPath = resolve(__dirname, '../.config.env');
 dotenv.config({ path: configEnvPath });
 
 export interface IConfig {
+    production: boolean;
     port: number;
     sessionKey: string;
     emailHost: string;
@@ -38,6 +39,7 @@ export interface IConfig {
 }
 
 const Config: IConfig = {
+    production: process.env.NODE_ENV === 'production',
     port: process.env.PORT !== undefined ? parseInt(process.env.PORT) : 8080,
     sessionKey: process.env.SESSION_KEY || random('*', 32),
     emailHost: process.env.EMAIL_HOST || 'localhost',
