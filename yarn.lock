@@ -976,6 +976,15 @@
     tsscmp "^1.0.6"
     uid-safe "^2.1.5"
 
+"@fastify/session@^6.2.2":
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/@fastify/session/-/session-6.2.2.tgz#c196421e3f6205fb0f6143f38bf0cb4d94ed3d94"
+  integrity sha512-etYCDjuC6wtBHOUDDFv8Wi42yCi2OnDajW0R28Bov3xvQ/1S+xtIWN5RY+0+cWjzmrDMRajO0KN8s2l/4x6gHA==
+  dependencies:
+    cookie-signature "^1.1.0"
+    fastify-plugin "^3.0.0"
+    uid-safe "^2.1.5"
+
 "@hapi/hoek@^9.0.0":
   version "9.2.1"
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.2.1.tgz#9551142a1980503752536b5050fd99f4a7f13b17"
@@ -4558,15 +4567,6 @@ fastify-rate-limit@^5.6.2:
     fastify-plugin "^3.0.0"
     ms "^2.1.1"
     tiny-lru "^7.0.0"
-
-fastify-session@^5.2.1:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/fastify-session/-/fastify-session-5.2.1.tgz#0811ccd1ef3ca0806cf6f9cf0f2da91b197f8832"
-  integrity sha512-2ZOLPGPeeBE35HOgYD4/v9c304IGF2ExOh35tuKegrB3QSNB+kKeqqzUXrUJ2h0Vr5nTyvrimtPAPQZG963vOw==
-  dependencies:
-    cookie-signature "^1.1.0"
-    fastify-plugin "^3.0.0"
-    uid-safe "^2.1.5"
 
 fastify-static@^4.0.0, fastify-static@^4.5.0:
   version "4.5.0"

@@ -4,8 +4,8 @@ import fastifyCors from 'fastify-cors';
 import fastifyPov from 'point-of-view';
 import fastifyStatic from 'fastify-static';
 import fastifyCsrf from 'fastify-csrf';
-import fastifySession from 'fastify-session';
 import fastifyCookie from 'fastify-cookie';
+import fastifySession from '@fastify/session';
 import fastifyExpress from 'fastify-express';
 import * as handlebars from 'handlebars';
 import { Server, IncomingMessage, ServerResponse } from 'http';
@@ -37,28 +37,29 @@ async function run() {
     if (isDevelopment) {
         server.log.info('Development Mode');
 
-        // Load dev webpack dev middleware
         await server.register(fastifyExpress);
         const compiler = webpack(devConfig);
         server.use(webpackDev(compiler, { publicPath }));
     } else {
         server.log.info('Production Mode');
 
-        // Provides security headers
+        // security headers
         await server.register(fastifyHelmet);
 
-        // Serve the static files in the public directory
+        // serve the static files in the public directory
         await server.register(fastifyStatic, {
             root: publicPath,
         });
     }
 
+    // template rendering
     await server.register(fastifyPov, {
         engine: {
             handlebars: handlebars,
         },
     });
 
+    // sessions
     await server.register(fastifyCookie);
     await server.register(fastifySession, { secret: Config.sessionKey });
     await server.register(fastifyCsrf, { sessionPlugin: 'fastify-session' });
