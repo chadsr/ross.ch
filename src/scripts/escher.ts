@@ -15,7 +15,6 @@ export default class EscherCubes {
         yOffset: number,
         cubeSize: number,
         innerAngle: number,
-        sidePaddingPx: number,
         renderHiddenSides = false,
     ): void {
         // Attempt to fetch the svg if it exists already
@@ -61,16 +60,7 @@ export default class EscherCubes {
                 }
 
                 const yPos = xPos;
-                this.renderIsometricCube(
-                    parentSVG,
-                    cubeSize,
-                    innerAngle,
-                    xPos,
-                    yPos,
-                    zPos,
-                    sidePaddingPx,
-                    renderHiddenSides,
-                );
+                this.renderIsometricCube(parentSVG, cubeSize, innerAngle, xPos, yPos, zPos, renderHiddenSides);
             }
             odd = !odd;
         }
@@ -84,7 +74,6 @@ export default class EscherCubes {
         xPos: number,
         yPos: number,
         zPos: number,
-        sidePaddingPx: number,
         renderHiddenSides: boolean,
     ): void {
         const outerAngle = 90 - innerAngle; // Calculate the outer angle by subtracting the inner angle from 90 degrees
