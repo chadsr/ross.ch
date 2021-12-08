@@ -84,7 +84,7 @@ async function run() {
 
     server.get('/captcha', getCaptchaOpts, getCaptcha);
 
-    server.listen(8080, (err, address) => {
+    server.listen(8080, (err) => {
         if (err) {
             console.error(err);
             process.exit(1);
