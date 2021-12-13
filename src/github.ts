@@ -1,107 +1,109 @@
-import { Repository, Github } from './interfaces';
+import { GithubRepository } from './interfaces';
 
 import { graphql } from '@octokit/graphql';
 import { Config } from './config';
+import { Exception } from 'handlebars';
 
 export enum OrderBy {
     PushedAt = 'PUSHED_AT',
+    Stargazers = 'STARGAZERS',
 }
-export async function getUserReposWithStars(numberRepos: number, username: string, orderBy: OrderBy): Promise<Github> {
-    console.log(Config.githubToken);
+
+interface RespositoryQuery {
+    data: {
+        viewer: {
+            repositories: {
+                edges: GithubRepository[];
+            };
+        };
+    };
+}
+
+const MAX_LANGUAGES = 4;
+export async function getRepositoriesWithStars(
+    username: string,
+    numberRepos: number,
+    minStars: number,
+    orderBy: OrderBy,
+): Promise<GithubRepository[]> {
     const graphqlWithAuth = graphql.defaults({
         headers: {
-            authorization: Config.githubToken,
+            authorization: `token ${Config.githubToken}`,
         },
     });
 
-    const resRepos = await graphqlWithAuth(
+    const resRepos: RespositoryQuery = await graphqlWithAuth(
         `{
-            viewer {
-              repositories(first: ${numberRepos}, orderBy: {field: ${orderBy}, direction: DESC}, privacy: PUBLIC) {
-                nodes {
+          viewer {
+            repositories(first: ${numberRepos}, orderBy: {field: ${orderBy}, direction: DESC}, privacy: PUBLIC) {
+              edges {
+                node {
                   id
+                  url
                   name
                   description
+                  updatedAt
+                  languages(first: ${MAX_LANGUAGES}) {
+                    nodes {
+                      name
+                    }
+                  }
                   isFork
-                }
-              }
-            }
-            user(login: "${username}") {
-              contributionsCollection {
-                repositoryContributions(first: 10) {
-                  nodes {
-                    repository {
-                      id
-                      url
-                      description
+                  stargazerCount
+                  parent {
+                    id
+                    url
+                    stargazerCount
+                    collaborators(first: 1, query: "${username}") {
+                      nodes {
+                        id
+                      }
                     }
                   }
                 }
               }
             }
-          }`,
+          }
+        }`,
     );
 
-    // const resRepos = await octokit.search.repos({
-    //     q: query,
-    //     sort: sort,
-    //     per_page: 100,
-    //     order: 'desc',
-    //     page: 1,
-    // });
-
-    // if (resRepos.status !== 200) {
-    //     throw new Error('Github API returned failure response');
-    // }
-
-    // const resUser = await octokit.users.getByUsername({ username: username });
-
-    // if (resUser.status !== 200) {
-    //     throw new Error('Github API returned failure response');
-    // }
-
-    const github = <Github>{
-        repositories: [],
-    };
-
-    let i = 0;
-    resRepos['repositories'].forEach(async (repoObj) => {
-        // Only process repositories with at-least 1 star and while we haven't reached the requested count
-        if (i < numberRepos && repoObj['stargazers_count'] > 0) {
-            if (repoObj.fork) {
+    const repositories: GithubRepository[] = [];
+    for (const repo of resRepos.data.viewer.repositories.edges) {
+        if (repo.stargazersCount >= minStars) {
+            // Only process repositories with at-least 1 star and while we haven't reached the requested count
+            if (repo.isFork) {
                 // If the repo is a fork, fetch the original repo and check if the username is a contributor
                 // if the user is a contributor, then include that repo instead of the fork
+                if (repo.parent) {
+                    // if collaborators is > 0 then username is a collaborator
+                    if (repo.parent.collaborators && repo.parent.collaborators.nodes.length > 0) {
+                        // If the parent has more stars, show the parent repo
+                        if (repo.stargazersCount < repo.parent.stargazersCount) {
+                            repo.id = repo.parent.id;
+                            repo.stargazersCount = repo.parent.stargazersCount;
+                            repo.url = repo.parent.url;
+                        }
+
+                        repo.parent = undefined; // remove the parent reference
+                    }
+                } else {
+                    throw new Exception('Expected parent object due to being a fork');
+                }
             }
 
-            console.log(repoObj);
-
             // Get the UNIX timestamp in ms
-            const updatedMs = Date.parse(repoObj['updated_at']);
+            const updatedMs = Date.parse(repo.updatedAt);
 
             // Convert to a date string
-            const updatedDate = new Date(updatedMs).toLocaleDateString('en-GB', {
+            repo.updatedAtFormatted = new Date(updatedMs).toLocaleDateString('en-GB', {
                 year: 'numeric',
                 month: 'short',
                 day: 'numeric',
             });
 
-            const repository = <Repository>{
-                title: repoObj['name'],
-                url: repoObj['html_url'],
-                description: repoObj['description'],
-                numberStars: repoObj['stargazers_count'],
-                mainLanguage: repoObj['language'],
-                lastUpdated: updatedDate,
-            };
-
-            if (repository.mainLanguage == undefined) {
-                repository.mainLanguage = 'Misc';
-            }
-
-            github.repositories.push(repository);
-            i++;
+            repositories.push(repo);
         }
-    });
+    }
 
-    return github;
+    return repositories;
 }

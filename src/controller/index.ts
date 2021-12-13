@@ -5,7 +5,7 @@ import { Config } from '../config';
 import { Response, ResponseMessage, ContactFormRequest, ValidatedFormData } from '../interfaces';
 import { contactMailer, EmailPlaintext } from '../mailer';
 import { getAggregatedFeed } from '../blog';
-import { getUserReposWithStars, OrderBy } from '../github';
+import { getRepositoriesWithStars, OrderBy } from '../github';
 import { ErrorMessages } from '../errors';
 import { generateCaptcha } from '../captcha';
 import { ParameterizedContext } from 'koa';
@@ -76,13 +76,12 @@ export async function renderIndex(ctx: ParameterizedContext): Promise<void> {
         posts = undefined;
     }
 
-    let repositories = undefined;
-    try {
-        const github = await getUserReposWithStars(Config.maxRepos, Config.githubUser, OrderBy.PushedAt);
-        repositories = github.repositories;
-    } catch (e) {
-        logger.error(e);
-    }
+    const repositories = await getRepositoriesWithStars(
+        Config.githubUser,
+        Config.maxRepos,
+        Config.minStargazers,
+        OrderBy.Stargazers,
+    );
 
     const year = new Date().getFullYear().toString();
 

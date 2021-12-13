@@ -26,6 +26,8 @@ export interface IConfig {
     githubUser: string;
     githubToken: string;
     maxRepos: number;
+
+    minStargazers: number;
     emailTemplatePath: string;
     emailConfirmationTemplatePath: string;
     pgpKeyPath: string;
@@ -64,6 +66,7 @@ const Config: IConfig = {
     githubUser: process.env.GITHUB_USER || 'Chadsr',
     githubToken: process.env.GITHUB_TOKEN || 'some_secret_token',
     maxRepos: parseInt(process.env.MAX_REPOS) || 20,
+    minStargazers: parseInt(process.env.MIN_STARGAZERS) || 1,
     emailTemplatePath: resolve(__dirname, 'views/email.hbs'),
     emailConfirmationTemplatePath: resolve(__dirname, 'views/email_confirmation.hbs'),
     pgpKeyPath: process.env.PGP_KEY_PATH || resolve(__dirname, 'assets/files/2B7340DB13C85766.asc'),

@@ -22,17 +22,28 @@ export interface BlogFeed {
     posts: BlogPost[];
 }
 
-export interface Repository {
-    title: string;
-    url: string;
-    description: string;
-    numberStars: number;
-    mainLanguage: string;
-    lastUpdated: string;
+export interface GithubUser {
+    id: string;
 }
 
-export interface Github {
-    repositories: Repository[];
+export interface GithubLanguage {
+    name: string;
+}
+export interface GithubRepository {
+    id: string;
+    url: string;
+    name: string;
+    description: string;
+    updatedAt: string;
+    updatedAtFormatted: string;
+    isFork: string;
+    stargazersCount: number;
+    languages: GithubLanguage[];
+    parent?: GithubRepository;
+
+    collaborators?: {
+        nodes: GithubUser[];
+    };
 }
 
 export interface ValidatedFormData {

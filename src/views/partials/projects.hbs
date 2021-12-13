@@ -4,13 +4,14 @@
             <li class="feed-item repo field hover perspective">
                 <a href="{{url}}" rel="noopener" target="_blank">
                     <div class="repo-title title perspective">
-                        <h3>{{title}}</h3>
+                        <h3>{{name}}</h3>
                     </div>
-                    <span class="repo-updated-date">Updated:
-                        {{lastUpdated}}</span>
+                    <span class="repo-updated-date">Updated: {{updatedAt}}</span>
                     <div class="repo-stats">
-                        <span class="repo-language">{{mainLanguage}}</span>
-                        <span class="repo-stars">{{numberStars}}</span>
+                        {{#each languages}}
+                            <span class="repo-language">{{name}}</span>
+                        {{/each}} 
+                        <span class="repo-stars">{{stargazersCount}}</span>
                     </div>
                     <div class="feed-item-content repo-content">
                         <p class="repo-description">{{description}}</p>
