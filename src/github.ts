@@ -1,37 +1,80 @@
 import { Repository, Github } from './interfaces';
 
-import { Octokit } from '@octokit/rest';
-const octokit = new Octokit();
+import { graphql } from '@octokit/graphql';
+import { Config } from './config';
 
-export async function getUserReposWithStars(
-    username: string,
-    includeForks: boolean,
-    numberRepos: number,
-    sort: 'stars' | 'forks' | 'updated',
-): Promise<Github> {
-    let query = `user:${username}`;
-    query = includeForks ? query + ' fork:true' : query;
-
-    const res = await octokit.search.repos({
-        q: query,
-        sort: sort,
-        per_page: 100,
-        order: 'desc',
-        page: 1,
+export enum OrderBy {
+    PushedAt = 'PUSHED_AT',
+}
+export async function getUserReposWithStars(numberRepos: number, username: string, orderBy: OrderBy): Promise<Github> {
+    console.log(Config.githubToken);
+    const graphqlWithAuth = graphql.defaults({
+        headers: {
+            authorization: Config.githubToken,
+        },
     });
 
-    if (res.status !== 200) {
-        throw new Error('Github API returned failure response');
-    }
+    const resRepos = await graphqlWithAuth(
+        `{
+            viewer {
+              repositories(first: ${numberRepos}, orderBy: {field: ${orderBy}, direction: DESC}, privacy: PUBLIC) {
+                nodes {
+                  id
+                  name
+                  description
+                  isFork
+                }
+              }
+            }
+            user(login: "${username}") {
+              contributionsCollection {
+                repositoryContributions(first: 10) {
+                  nodes {
+                    repository {
+                      id
+                      url
+                      description
+                    }
+                  }
+                }
+              }
+            }
+          }`,
+    );
+
+    // const resRepos = await octokit.search.repos({
+    //     q: query,
+    //     sort: sort,
+    //     per_page: 100,
+    //     order: 'desc',
+    //     page: 1,
+    // });
+
+    // if (resRepos.status !== 200) {
+    //     throw new Error('Github API returned failure response');
+    // }
+
+    // const resUser = await octokit.users.getByUsername({ username: username });
+
+    // if (resUser.status !== 200) {
+    //     throw new Error('Github API returned failure response');
+    // }
 
     const github = <Github>{
         repositories: [],
     };
 
     let i = 0;
-    res.data['items'].forEach((repoObj) => {
+    resRepos['repositories'].forEach(async (repoObj) => {
         // Only process repositories with at-least 1 star and while we haven't reached the requested count
         if (i < numberRepos && repoObj['stargazers_count'] > 0) {
+            if (repoObj.fork) {
+                // If the repo is a fork, fetch the original repo and check if the username is a contributor
+                // if the user is a contributor, then include that repo instead of the fork
+            }
+
+            console.log(repoObj);
+
             // Get the UNIX timestamp in ms
             const updatedMs = Date.parse(repoObj['updated_at']);
 

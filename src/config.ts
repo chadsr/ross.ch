@@ -24,6 +24,7 @@ export interface IConfig {
     ghostPublicApiKey: string;
     maxBlogPosts: number;
     githubUser: string;
+    githubToken: string;
     maxRepos: number;
     emailTemplatePath: string;
     emailConfirmationTemplatePath: string;
@@ -61,6 +62,7 @@ const Config: IConfig = {
     mediumUser: process.env.MEDIUM_USER || '@medium',
     maxBlogPosts: parseInt(process.env.MAX_POSTS) || 20,
     githubUser: process.env.GITHUB_USER || 'Chadsr',
+    githubToken: process.env.GITHUB_TOKEN || 'some_secret_token',
     maxRepos: parseInt(process.env.MAX_REPOS) || 20,
     emailTemplatePath: resolve(__dirname, 'views/email.hbs'),
     emailConfirmationTemplatePath: resolve(__dirname, 'views/email_confirmation.hbs'),
