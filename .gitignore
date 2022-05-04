@@ -2,6 +2,8 @@ docker-compose.override.yml
 
 .vscode
 
+.yarn
+
 # Build directories for typescript and webpack
 dist
 
