@@ -35,7 +35,7 @@
         "@octokit/types": "^6.31.0",
         "@types/babel__core": "^7.1.16",
         "@types/babel__preset-env": "^7.9.2",
-        "@types/copy-webpack-plugin": "^8.0.1",
+        "@types/copy-webpack-plugin": "^10.1.0",
         "@types/eslint": "^8.2.0",
         "@types/file-loader": "^5.0.1",
         "@types/hammerjs": "^2.0.40",
