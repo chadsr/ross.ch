@@ -2,7 +2,7 @@ import * as Joi from 'joi';
 
 import { logger } from '../logging';
 import { Config } from '../config';
-import { Response, ResponseMessage, ContactFormRequest, ValidatedFormData } from '../interfaces';
+import { ResponseData, ResponseMessage, ContactFormRequest, ValidatedFormData } from '../interfaces';
 import { contactMailer, EmailPlaintext } from '../mailer';
 import { getAggregatedFeed } from '../blog';
 import { getUserReposWithStars } from '../github';
@@ -32,7 +32,7 @@ const contactFormSchema = Joi.object()
 
 const captchaStore = new CaptchaStore();
 
-function getResponseObj(success: boolean, msg: ResponseMessage | ResponseMessage[]): Response {
+function getResponseObj(success: boolean, msg: ResponseMessage | ResponseMessage[]): ResponseData {
     // If we were passed a single Message object, put it in an array for standardisation
     if (!Array.isArray(msg)) {
         msg = [msg];

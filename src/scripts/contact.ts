@@ -1,10 +1,13 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { Response, ContactFormRequest } from '../interfaces';
+import { ResponseData, ContactFormRequest } from '../interfaces';
 import { ErrorMessages } from '../errors';
 import { Config } from '../config';
 
 const CAPTCHA_ID = 'captcha-img';
+
+// Exclude resetting labels for the following field IDs
+const EXCLUDE_LABELS_FOR = ['captcha']
 
 // A basic contact form class
 export default class ContactForm {
@@ -18,43 +21,44 @@ export default class ContactForm {
         // Make formLabels object where key is the label's 'for' element name and value is the HTMLLabelElement
         this._formLabels = {};
         const labels = this._form.getElementsByTagName('label');
-        for (let i = 0; i < labels.length; i++) {
-            const key = labels[i].htmlFor;
-            this._formLabels[key] = labels[i];
+        for ( let i = 0; i < labels.length; i++ ) {
+            const key = labels[ i ].htmlFor;
+            if (!EXCLUDE_LABELS_FOR.includes( key ) ) {
+                this._formLabels[key] = labels[i];
+            }
         }
 
         this._formSubmitBtn = <HTMLButtonElement>document.getElementById(formId + '-submit-btn');
     }
 
-    displayResponse(response: Response): void {
+    displayResponse(responseData: ResponseData): void {
         let target: HTMLElement;
-
-        response.messages.forEach((message) => {
+        responseData.messages.forEach( ( message ) => {
             // Check if target has an associated label to use first
-            if (message.target in this._formLabels) {
-                target = this._formLabels[message.target];
+            if ( message.target in this._formLabels ) {
+                target = this._formLabels[ message.target ];
             } else {
                 // No label, so our target is the actual element
-                target = this._form.elements[message.target];
+                target = this._form.elements[ message.target ];
             }
 
             target.innerHTML = message.text;
 
             // Add a class so we can colourise the target
-            if (response.success) {
-                target.classList.add('success');
+            if ( responseData.success ) {
+                target.classList.add( 'success' );
             } else {
-                target.classList.add('error');
+                target.classList.add( 'error' );
                 target.scrollIntoView();
             }
-        });
+        } );
     }
 
-    handleResponse(response: Response): void {
-        this.displayResponse(response);
+    handleResponseData ( responseData: ResponseData ): void {
+        this.displayResponse(responseData);
 
         // If it was a success response, reset the form
-        if (response.success) {
+        if (responseData.success) {
             this.resetInput();
             this.resetLabels();
         }
@@ -79,17 +83,17 @@ export default class ContactForm {
             xsrfCookieName: 'XSRF-TOKEN',
         })
             .then((response: AxiosResponse) => {
-                const resp: Response = response.data;
-                const captchaBas64 = resp.messages[0].text;
+                const data: ResponseData = response.data;
+                const captchaBas64 = data.messages[0].text;
                 const captchaImg = document.getElementById(CAPTCHA_ID) as HTMLImageElement;
                 captchaImg.src = captchaBas64;
                 this._form.captcha.value = ''; // Remove old input for user convenience
             })
             .catch((error) => {
-                let response;
-                if (error.response) {
+                let data: ResponseData;
+                if (error.response === undefined) {
                     // We got no response, so construct a response message client-side
-                    response = <Response>{
+                    data = <ResponseData>{
                         messages: [
                             {
                                 target: 'submit',
@@ -97,9 +101,11 @@ export default class ContactForm {
                             },
                         ],
                     };
+                } else {
+                    data = error.response.data;
                 }
 
-                this.handleResponse(response);
+                this.handleResponseData(data);
             });
     }
     resetLabels(): void {
@@ -191,13 +197,13 @@ export default class ContactForm {
                 timeout: Config.formSubmitTimeoutMs,
             })
                 .then((response: AxiosResponse) => {
-                    this.handleResponse(response.data);
+                    this.handleResponseData(response.data);
                 })
                 .catch((error) => {
-                    let response;
-                    if (!error.response) {
+                    let data: ResponseData;
+                    if (error.response === undefined) {
                         // We got no response, so construct a response message client-side
-                        response = <Response>{
+                        data = <ResponseData>{
                             messages: [
                                 {
                                     target: 'submit',
@@ -206,10 +212,10 @@ export default class ContactForm {
                             ],
                         };
                     } else {
-                        response = error.response.data;
+                        data = error.response.data;
                     }
 
-                    this.handleResponse(response);
+                    this.handleResponseData(data);
                 });
 
             this.refreshCaptcha(csrfToken);

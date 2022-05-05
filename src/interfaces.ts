@@ -3,7 +3,7 @@ export interface ResponseMessage {
     text: string;
 }
 
-export interface Response {
+export interface ResponseData {
     success: boolean;
     messages: ResponseMessage[];
 }
