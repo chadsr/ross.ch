@@ -26,7 +26,7 @@ const dirPublic = join(__dirname, '../public');
 const dirPartials = join(dirViews, 'partials');
 
 // Load environment variables from .env file
-dotenv.config({ path: '.env' });
+dotenv.config( { path: '../.config.env' } );
 
 // Returns an object with handlebars partial names as key and path as value
 async function getPartialsObj() {
