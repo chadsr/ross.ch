@@ -1,11 +1,7 @@
-import * as dotenv from 'dotenv';
 import * as random from 'randomatic';
 import { resolve } from 'path';
 
 import { Colour } from './interfaces';
-
-const configEnvPath = resolve(__dirname, '../.config.env');
-dotenv.config({ path: configEnvPath });
 
 export interface IConfig {
     port: number;

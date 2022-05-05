@@ -1,7 +1,6 @@
 FROM node:lts-slim
 
 ARG WORK_DIR
-ARG NODE_ENV
 ARG PORT
 
 WORKDIR ${WORK_DIR}

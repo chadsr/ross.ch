@@ -3,12 +3,27 @@ version: '3.7'
 services:
   webapp:
     image: ghcr.io/chadsr/ross.ch:latest
-    env_file:
-      - .config.env
+    # build:
+    #   context: ./
+    #   args:
+    #     WORK_DIR: /usr/src/ross.ch
+    #     PORT: 8080
     container_name: webapp
     labels:
       io.containers.autoupdate: registry
     restart: unless-stopped
+    environment:
+      PORT: "${APP_PORT}"
+      NODE_ENV: "${APP_ENV}"
+      EMAIL_HOST: "${APP_EMAIL_HOST}"
+      EMAIL_USERNAME: "${APP_EMAIL_USERNAME}"
+      EMAIL_PASSWORD: "${APP_EMAIL_PASSWORD}"
+      SENDER_EMAIL_ADDRESS: "${APP_SENDER_EMAIL_ADDRESS}"
+      RECV_EMAIL_ADDRESS: "${APP_RECV_EMAIL_ADDRESS}"
+      MAX_POSTS: "${APP_MAX_POSTS}"
+      MAX_REPOS: "${APP_MAX_REPOS}"
+      MEDIUM_USER: "${APP_MEDIUM_USER}"
+      GITHUB_USER: "${APP_GITHUB_USER}"
     volumes:
       - web-root:/usr/src/ross.ch/public:rw,z
     networks:
@@ -22,6 +37,10 @@ services:
     labels:
       io.containers.autoupdate: registry
     restart: unless-stopped
+    environment:
+      EMAIL: "${LETSENCRYPT_EMAIL}"
+      CLOUDFLARE_EMAIL: "${CLOUDFLARE_EMAIL}"
+      CLOUDFLARE_API_KEY: "${CLOUDFLARE_API_KEY}"
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data
@@ -34,18 +53,14 @@ services:
       - ghost
       - webapp
       - override
-
-    env_file:
-      - .config.env
-
   ghost:
     image: ghost:alpine
     container_name: ghost
     labels:
       io.containers.autoupdate: registry
     restart: unless-stopped
-    env_file:
-      - .config.env
+    environment:
+      URL: "${BLOG_URL}"
     volumes:
       - /ross.ch/ghost_content:/var/lib/ghost/content:rw,z
     networks:

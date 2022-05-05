@@ -6,7 +6,6 @@ import * as views from 'koa-views';
 import * as serve from 'koa-static';
 import * as cors from '@koa/cors';
 import * as session from 'koa-session';
-import * as dotenv from 'dotenv';
 import { join, basename } from 'path';
 import * as glob from 'glob-promise';
 import * as webpack from 'webpack';
@@ -24,9 +23,6 @@ const isDeveloping = process.env.NODE_ENV !== 'production';
 const dirViews = join(__dirname, 'views');
 const dirPublic = join(__dirname, '../public');
 const dirPartials = join(dirViews, 'partials');
-
-// Load environment variables from .env file
-dotenv.config( { path: '../.config.env' } );
 
 // Returns an object with handlebars partial names as key and path as value
 async function getPartialsObj() {
