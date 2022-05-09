@@ -75,7 +75,7 @@
         "file-loader": "^6.2.0",
         "handlebars-loader": "^1.7.1",
         "html-webpack-plugin": "^4.5.2",
-        "husky": "^7.0.4",
+        "husky": "^8.0.1",
         "image-minimizer-webpack-plugin": "^1.0.0",
         "imagemin-gifsicle": "^7.0.0",
         "imagemin-mozjpeg": "^10.0.0",
