@@ -30,7 +30,7 @@
     "homepage": "https://github.com/Chadsr/ross.ch",
     "repository": "github:chadsr/ross.ch",
     "devDependencies": {
-        "@babel/core": "^7.15.5",
+        "@babel/core": "^7.18.0",
         "@babel/preset-env": "^7.15.6",
         "@octokit/types": "^6.31.0",
         "@types/babel__core": "^7.1.16",
