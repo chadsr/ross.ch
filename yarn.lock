@@ -2705,15 +2705,10 @@ async-limiter@~1.0.0:
   resolved "https://registry.yarnpkg.com/async-limiter/-/async-limiter-1.0.1.tgz#dd379e94f0db8310b08291f9d64c3209766617fd"
   integrity sha512-csOlWGAcRFJaI6m+F2WKdnMKr4HhdhFVBk0H/QbJFMCr+uO2kwohwXQPxw/9OCxp05r5ghVBFSyioixx3gfkNQ==
 
-async@^3.2.3:
+async@^3.2.2, async@^3.2.3:
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/async/-/async-3.2.3.tgz#ac53dafd3f4720ee9e8a160628f18ea91df196c9"
   integrity sha512-spZRyzKL5l5BZQrr/6m/SqFdBN0q3OCI0f9rjfBzCMBIP4p75P620rR3gTmaksNOhmzgdxcaxdNfMy6anrbM0g==
-
-async@~0.2.10:
-  version "0.2.10"
-  resolved "https://registry.yarnpkg.com/async/-/async-0.2.10.tgz#b6bbe0b0674b9d719708ca38de8c237cb526c3d1"
-  integrity sha1-trvgsGdLnXGXCMo43owjfLUmw9E=
 
 asynckit@^0.4.0:
   version "0.4.0"
@@ -5749,12 +5744,12 @@ hammerjs@^2.0.8:
   resolved "https://registry.yarnpkg.com/hammerjs/-/hammerjs-2.0.8.tgz#04ef77862cff2bb79d30f7692095930222bf60f1"
   integrity sha1-BO93hiz/K7edMPdpIJWTAiK/YPE=
 
-handlebars-loader@^1.7.1:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/handlebars-loader/-/handlebars-loader-1.7.1.tgz#07088f09d8a559344908f7c88c68c0ffdacc555d"
-  integrity sha512-Q+Z/hDPQzU8ZTlVnAe/0T1LHABlyhL7opNcSKcQDhmUXK2ByGTqib1Z2Tfv4Ic50WqDcLFWQcOb3mhjcBRbscQ==
+handlebars-loader@^1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/handlebars-loader/-/handlebars-loader-1.7.2.tgz#1694cc7cb3de1d16bec718af257eed853e4af84d"
+  integrity sha512-rEzru8REzqeJlbotJD+gPQ8AHyxcAjeXbGqGmrz3+sbjecI0ungieONwMR27Htr+AoKI5W36oPLwcwGrPzO8gw==
   dependencies:
-    async "~0.2.10"
+    async "^3.2.2"
     fastparse "^1.0.0"
     loader-utils "1.0.x"
     object-assign "^4.1.0"
