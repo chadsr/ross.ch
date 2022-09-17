@@ -15,7 +15,7 @@ $color-shadow: rgba(0, 0, 0, 0.4);
 $color-scrollbar: $color-content;
 $color-scrollbar_track: $color-content;
 $color-scrollbar-thumb: $color-title-banner;
-$color-outline: rgba(110, 110, 110, 0.8);
+$color-outline: rgba(110, 110, 110, 0.2);
 
 // Content Cube
 $filter-face-no-focus: brightness(10%);
@@ -642,8 +642,8 @@ header {
 }
 
 %outline-dotted {
-    outline: 0.1vmin dotted $color-outline;
-    outline-offset: -0.1vmin;
+    outline: 2px dotted $color-outline;
+    outline-offset: -2px;
 }
 
 %scrollable {
