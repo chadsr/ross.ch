@@ -1,4 +1,4 @@
-FROM node:lts-slim
+FROM node:20.12.2-slim
 
 ARG WORK_DIR
 ARG PORT
