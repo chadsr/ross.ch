@@ -129,6 +129,6 @@
         "nodemailer": "^6.6.5",
         "nodemailer-openpgp": "^2.0.0",
         "randomatic": "^3.1.1",
-        "winston": "^3.3.3"
+        "winston": "^3.13.0"
     }
 }
