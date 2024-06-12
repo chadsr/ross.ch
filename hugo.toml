@@ -1,0 +1,10 @@
+baseURL = 'https://ross.ch/'
+languageCode = 'en-gb'
+title = 'Ross Chadwick'
+
+[taxonomies]
+category = 'categories'
+tag = 'tags'
+
+[build]
+noJSConfigInAssets = true

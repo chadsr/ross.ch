@@ -1,0 +1,49 @@
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        node-version: [lts/*]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          check-latest: true
+          cache: 'npm'
+      - name: Install Dependencies
+        run: |
+          npm ci
+      - name: Lint
+        uses: reviewdog/action-eslint@v1
+        with:
+          reporter: github-check
+          github_token: ${{ github.token }}
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        node-version: [lts/*]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          check-latest: true
+          cache: 'npm'
+      - name: Install Dependencies
+        run: |
+          npm ci
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+      - name: Build
+        run: hugo --minify

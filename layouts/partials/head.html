@@ -1,0 +1,26 @@
+<head>
+    <title>{{ .Site.Title }}</title>
+    <meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    {{ $opts := dict
+    "transpiler" "dartsass"
+    "targetPath" "css/main.css"
+    "vars" site.Params.styles
+    "enableSourceMap" (not hugo.IsProduction)
+    }}
+    {{ with resources.Get "styles/main.scss" | toCSS $opts | postCSS | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+    {{ end }}
+
+    {{ $opts := dict
+    "transpiler" "dartsass"
+    "targetPath" "css/media.css"
+    "vars" site.Params.styles
+    "enableSourceMap" (not hugo.IsProduction)
+    }}
+    {{ with resources.Get "styles/media.scss" | toCSS $opts | postCSS | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+    {{ end }}
+
+    {{ $js := resources.Get "ts/main.ts" | js.Build | minify | fingerprint }}
+    <script src="{{ $js.Permalink }}" defer></script>
+</head>

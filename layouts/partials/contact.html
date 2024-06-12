@@ -1,0 +1,27 @@
+<form id="contact-form" method="post" role="form">
+    <fieldset>
+        <div class="field perspective hover">
+            <label class="title perspective" for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" required="required">
+        </div>
+        <div class="field perspective hover">
+            <label class="title perspective" for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="Your email" required="required">
+        </div>
+        <div class="field perspective textarea hover">
+            <label class="title perspective" for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Enter your message here" rows="3" required="required"></textarea>
+        </div>
+        <div class="perspective">
+            <button id="contact-form-submit-btn" name="submit" type="submit">Submit</button>
+        </div>
+    </fieldset>
+</form>
+<div class="field">
+    <p>
+        Messages are encrypted using my
+        <a class="link" href="/files/2B7340DB13C85766.asc" target="_blank">PGP public key</a>.
+    </p>
+    <p>You will receive a confirmation email if everything worked out!</p>
+    <p><em>(Check your junk folder if you don't see it within a minute or so)</em></p>
+</div>
