@@ -1,0 +1,16 @@
+<li class="feed-item blog-post field hover perspective">
+    <a href="{{ .RelPermalink }}" rel="noopener" target="_blank">
+        <div class="title blog-post-title feed-item-title perspective">
+            <h3>{{ .Title }}</h3>
+        </div>
+        <span class="blog-post-date feed-item-date">Published: {{ .Date }}</span>
+        <div class="blog-post-tags feed-item-tags">
+            {{ range $tag := (.Params.tags) }}
+            <span class="blog-post-tag feed-item-tag">{{ $tag }}</span>
+            {{ end}}
+        </div>
+        <div class="feed-item-content blog-post-content">
+            <p class="blog-post-summary feed-item-summary">{{ .Summary }}</p>
+        </div>
+    </a>
+</li>

@@ -1,0 +1,15 @@
+<li class="feed-item project field hover perspective">
+    <a href="{{ .RelPermalink }}" rel="noopener" target="_blank">
+        <div class="title project-title feed-item-title perspective">
+            <h3>{{ .Title }}</h3>
+        </div>
+        <div class="project-tags feed-item-tags">
+            {{ range $tag := (.Params.tags) }}
+            <span class="project-tag feed-item-tag">{{ $tag }}</span>
+            {{ end}}
+        </div>
+        <div class="feed-item-content project-content">
+            <p class="project-summary feed-item-summary">{{ .Summary }}</p>
+        </div>
+    </a>
+</li>

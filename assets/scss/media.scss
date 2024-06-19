@@ -6,11 +6,10 @@ $bp-larger-than-tablet: 'min-width: 750px' !default;
 $bp-larger-than-desktop: 'min-width: 1000px' !default;
 $bp-larger-than-desktophd: 'min-width: 1200px' !default;
 
-// Mixin function handling all styles related to the cube over different sizes of width/height in pixels
 @mixin content-cube($size) {
     .perspective {
         perspective: $size * 2;
-        perspective-origin: center;
+        perspective-origin: top;
     }
 
     .content-cube {
@@ -18,8 +17,8 @@ $bp-larger-than-desktophd: 'min-width: 1200px' !default;
         height: $size;
 
         &.webkit {
-            // fixes https://bugs.webkit.org/show_bug.cgi?id=88587
-            // TODO: remove if that bug is ever fixed
+            /* fixes https://bugs.webkit.org/show_bug.cgi?id=88587
+            TODO: remove if that bug is ever fixed */
             translate: 0 0 (-(math.div($size, 2)));
         }
 
@@ -30,8 +29,8 @@ $bp-larger-than-desktophd: 'min-width: 1200px' !default;
 }
 
 @mixin elasticNav() {
-    nav > ul.fullWidth,
-    .social.fullWidth {
+    nav > ul.full-width,
+    .social.social.full-width {
         @for $i from 1 through 10 {
             li:first-child:nth-last-child(#{$i}),
             li:first-child:nth-last-child(#{$i}) ~ li {
@@ -125,6 +124,7 @@ $bp-larger-than-desktophd: 'min-width: 1200px' !default;
 // Larger than Desktop HD
 @media only screen and (min-width: 1200px) and (min-height: 1300px) {
     @include content-cube(1100px);
+
     h1 {
         font-size: 6em;
     }

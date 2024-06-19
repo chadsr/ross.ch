@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+{{- partial "head.html" . -}}
+
+<body>
+    <div class="content">
+        {{- partial "background.html" . -}}
+        <div class="perspective">
+            <div class="title perspective">
+                <h1>When you stare into the abyss...</h1>
+            </div>
+            <p>
+                <a href="{{ .Site.Home.RelPermalink }}">
+                    <h3>return home</h3>
+                </a>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

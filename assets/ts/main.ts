@@ -1,4 +1,5 @@
 // local function imports
+// import SwipeNav from './swipe'
 import EscherCubes from './escher'
 
 // Key event codes
@@ -20,6 +21,13 @@ const MAX_SIDE = 3
 // The currently facing side of the content-cube
 let currentSide = MIN_SIDE
 
+const NAV_MAPPING = {
+    'nav-about': 0,
+    'nav-work': 1,
+    'nav-thoughts': 2,
+    'nav-contact': 3,
+}
+
 let windowHeight = window.innerHeight
 
 declare global {
@@ -32,43 +40,33 @@ declare global {
     }
 }
 document.addEventListener('DOMContentLoaded', function () {
-    if (
-        (<Window>window.webkit && <Window>window.webkit.messageHandlers) ||
-        (navigator.userAgent.indexOf('Safari') !== -1 &&
-            navigator.userAgent.indexOf('Chrome') === -1)
-    ) {
-        // store the current cube size
-        document.getElementById(CUBE_ID).classList.add('webkit')
+    const cube = document.getElementById(CUBE_ID)
+    if (cube) {
+        // const swipeNav = new SwipeNav(CUBE_ID, rotateTo)
+
+        if (
+            (<Window>window.webkit && <Window>window.webkit.messageHandlers) ||
+            (navigator.userAgent.indexOf('Safari') !== -1 &&
+                navigator.userAgent.indexOf('Chrome') === -1)
+        ) {
+            cube.classList.add('webkit')
+        }
     }
-
     // Menu cube rotate events
-    const aboutButton = <HTMLLIElement>document.getElementById('about-btn')
-    aboutButton.addEventListener('mousedown', function () {
-        rotateTo(0)
-    })
-
-    const projectsButton = <HTMLLIElement>(
-        document.getElementById('projects-btn')
-    )
-    projectsButton.addEventListener('mousedown', function () {
-        rotateTo(1)
-    })
-
-    const blogButton = <HTMLLIElement>document.getElementById('blog-btn')
-    blogButton.addEventListener('mousedown', function () {
-        rotateTo(2)
-    })
-
-    const contactButton = <HTMLLIElement>document.getElementById('contact-btn')
-    contactButton.addEventListener('mousedown', function () {
-        rotateTo(3)
-    })
+    for (const [navId, rotateValue] of Object.entries(NAV_MAPPING)) {
+        const navButton = document.getElementById(navId)
+        if (navButton) {
+            navButton.addEventListener('mousedown', function () {
+                rotateTo(rotateValue)
+            })
+        }
+    }
 
     renderBackground()
 })
 
 document.addEventListener('keydown', function (event) {
-    const activeElement = <HTMLElement>document.activeElement
+    const activeElement = document.activeElement
     const inputs = ['input', 'select', 'button', 'textarea']
 
     // Only allow keypresses to rotate when active element is not an input element

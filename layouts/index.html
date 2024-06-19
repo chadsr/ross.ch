@@ -1,7 +1,7 @@
 {{ define "main" }}
 <main aria-role="main">
     <div id="content" class="content perspective">
-        <div id="background" class="background"></div>
+        {{- partial "background.html" . -}}
         {{- partial "cube.html" . -}}
     </div>
     </body>

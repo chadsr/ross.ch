@@ -1,6 +1,7 @@
 baseURL = 'https://ross.ch/'
 languageCode = 'en-gb'
 title = 'Ross Chadwick'
+enableRobotsTXT = true
 
 [taxonomies]
 category = 'categories'
@@ -8,3 +9,17 @@ tag = 'tags'
 
 [build]
 noJSConfigInAssets = true
+
+[module]
+[[module.mounts]]
+source = 'static'
+target = 'static'
+[[module.mounts]]
+source = 'node_modules/@fontsource/geist-mono/files'
+target = 'static/fonts/geist'
+[[module.mounts]]
+source = 'assets'
+target = 'assets'
+[[module.mounts]]
+source = 'node_modules/@fortawesome/fontawesome-free/scss'
+target = 'assets/scss/fontawesome'
