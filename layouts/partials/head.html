@@ -9,7 +9,7 @@
     "vars" site.Params.styles
     "enableSourceMap" (not hugo.IsProduction)
     }}
-    {{ with resources.Get "scss/main.scss" | toCSS $opts | postCSS | minify | fingerprint }}
+    {{ with resources.Get "scss/main.scss" | toCSS $opts | postCSS | minify | fingerprint | resources.PostProcess }}
     <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
     {{ end }}
 
@@ -19,10 +19,15 @@
     "vars" site.Params.styles
     "enableSourceMap" (not hugo.IsProduction)
     }}
-    {{ with resources.Get "scss/media.scss" | toCSS $opts | postCSS | minify | fingerprint }}
+    {{ with resources.Get "scss/media.scss" | toCSS $opts | postCSS | minify | fingerprint | resources.PostProcess }}
     <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
     {{ end }}
 
-    {{ $js := resources.Get "ts/main.ts" | js.Build | minify | fingerprint }}
-    <script src="{{ $js.Permalink }}" defer></script>
+    {{ $opts := dict
+    "targetPath" "js/main.js"
+    "enableSourceMap" (not hugo.IsProduction)
+    }}
+    {{ with resources.Get "ts/main.ts" | js.Build $opts | minify | fingerprint }}
+    <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
+    {{ end }}
 </head>

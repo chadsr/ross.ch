@@ -9,14 +9,16 @@ tag = 'tags'
 
 [build]
 noJSConfigInAssets = true
+[build.buildStats]
+enable = true
 
 [module]
 [[module.mounts]]
 source = 'static'
 target = 'static'
 [[module.mounts]]
-source = 'node_modules/@fontsource/geist-mono/files'
-target = 'static/fonts/geist'
+source = 'node_modules/@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2'
+target = 'static/fonts/space-grotesk-latin-wght-normal.woff2'
 [[module.mounts]]
 source = 'assets'
 target = 'assets'

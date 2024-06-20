@@ -1,4 +1,5 @@
 const SVG_NAMESPACE_URI = 'http://www.w3.org/2000/svg'
+const CLASS_ISO_FACE = 'iso-face'
 const CLASS_ISO_TOP = 'iso-top'
 const CLASS_ISO_LEFT = 'iso-left'
 const CLASS_ISO_RIGHT = 'iso-right'
@@ -198,7 +199,7 @@ export default class EscherCubes {
             side.setAttribute('y', '0')
             side.setAttribute('width', cubeSize.toString())
             side.setAttribute('height', cubeSize.toString())
-            side.setAttribute('class', className)
+            side.setAttribute('class', className + ' ' + CLASS_ISO_FACE)
             side.setAttribute('transform', 'matrix(' + transform + ')')
 
             iso.appendChild(side)
