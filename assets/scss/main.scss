@@ -1,16 +1,16 @@
 /* Colours */
-$color-background: light-dark(rgb(240, 240, 240), rgb(8, 8, 8));
+$color-background: light-dark(rgb(230, 230, 230), rgb(8, 8, 8));
 $color-background-transparent: light-dark(
     rgba(240, 240, 240, 0.8),
     rgba(8, 8, 8, 0.6)
 );
 $color-content: light-dark(rgb(250, 250, 250), rgb(40, 40, 40));
 $gradient-background: linear-gradient(
-        -20deg,
-        rgba(76, 57, 202, 0.4) 40%,
-        rgba(222, 42, 99, 0.4)
-    ),
-    linear-gradient(60deg, rgb(109, 53, 176) 10%, rgb(233, 41, 102));
+    to right,
+    rgb(108, 52, 185) 30%,
+    rgb(147, 70, 255) 60%,
+    rgb(199, 35, 87) 100%
+);
 $background-content-highlight: rgb(138, 65, 241);
 $color-content-secondary: light-dark(rgb(240, 240, 240), rgb(20, 20, 20));
 $color-content-secondary-highlight: $color-content-secondary;
@@ -48,11 +48,12 @@ $color-hover-iso-bottom: $color-hover-iso-back;
 $color-hover-iso-back-left: $color-hover-iso-back;
 $color-hover-iso-back-right: $color-hover-iso-back;
 
-$color-linkedin: #4875b4;
-$color-github: #4183c4;
-$color-keybase: #4c8eff;
-$color-bluesky: #004daa;
-$color-gpg: #e98007;
+$color-linkedin: rgb(72, 117, 180);
+$color-github: rgb(71, 139, 230) 2;
+$color-gitlab: rgb(252, 109, 38);
+$color-keybase: rgb(76, 142, 255);
+$color-bluesky: rgb(0, 77, 170);
+$color-gpg: rgb(0, 147, 221);
 
 $color-success: #15a12a;
 $color-error: #a51818;
@@ -129,11 +130,9 @@ $width-icon-button: 50px;
     &:hover,
     &:focus {
         background-color: $color-content-secondary-highlight;
-        color: $color-text-highlight;
         outline: none;
 
         &::placeholder {
-            color: $color-text-placeholder-highlight;
             opacity: 0.5;
         }
     }
@@ -226,14 +225,14 @@ $width-icon-button: 50px;
 
 %threed-side-top {
     @extend %threed-side;
-    filter: brightness(120%);
+    filter: brightness(110%);
     transform: rotateX(60deg) translate3d(0, -50%, 0);
     top: -16px;
 }
 
 %threed-side-bottom {
     @extend %threed-side;
-    filter: brightness(80%);
+    filter: brightness(90%);
     transform: rotateX(-60deg) translate3d(0, 50%, 0);
     top: 16px;
 }
@@ -242,7 +241,7 @@ $width-icon-button: 50px;
 ::selection {
     background-image: none;
     background: $background-content-highlight;
-    color: $color-text-highlight;
+    color: white;
 }
 
 html {
@@ -264,15 +263,26 @@ body {
     text-rendering: geometricPrecision;
 }
 
+@keyframes headingGradientAnimation {
+    0% {
+        background-position: 0;
+    }
+    to {
+        background-position: 100%;
+    }
+}
+
 h1 {
-    --a: 10deg;
     display: inline-block;
-    font-size: 6vmin;
+    font-size: 7vmin;
     margin: 0;
     @extend %macula;
     background: $gradient-background;
     background-clip: text;
     color: transparent;
+    background-size: 300% 100%;
+    animation: headingGradientAnimation 16s linear infinite;
+    animation-direction: alternate;
 }
 
 h2 {
@@ -284,7 +294,7 @@ h2 {
 
 h3 {
     display: inline-block;
-    font-weight: bold;
+    font-weight: 700;
     padding: 8px;
     margin: 0;
 }
@@ -292,7 +302,7 @@ h3 {
 h4 {
     font-size: 16px;
     margin: 0;
-    font-weight: normal;
+    font-weight: 700;
     .superscript {
         font-size: 0.6em;
     }
@@ -304,13 +314,12 @@ h5 {
 
 p {
     margin: 8px 0;
+    font-weight: 400;
 }
 
 a {
     color: $color-text;
-    display: contents;
     text-decoration: none;
-    outline: none;
     cursor: pointer;
     @extend %transition-ease;
 
@@ -367,7 +376,7 @@ ul {
             cursor: pointer;
             height: inherit;
 
-            > a {
+            > .social-link {
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -375,25 +384,49 @@ ul {
 
                 &.linkedin {
                     &:hover {
-                        color: $color-linkedin;
+                        > .social-icon {
+                            fill: $color-linkedin;
+                        }
                     }
                 }
 
                 &.bluesky {
                     &:hover {
-                        color: $color-bluesky;
+                        > .social-icon {
+                            fill: $color-bluesky;
+                        }
                     }
                 }
 
                 &.github {
                     &:hover {
-                        color: $color-github;
+                        > .social-icon {
+                            fill: $color-github;
+                        }
+                    }
+                }
+
+                &.gitlab {
+                    &:hover {
+                        > .social-icon {
+                            fill: $color-gitlab;
+                        }
                     }
                 }
 
                 &.keybase {
                     &:hover {
-                        color: $color-keybase;
+                        > .social-icon {
+                            fill: $color-keybase;
+                        }
+                    }
+                }
+
+                &.gpg {
+                    &:hover {
+                        > .social-icon {
+                            fill: $color-gpg;
+                        }
                     }
                 }
             }
@@ -405,6 +438,7 @@ ul {
     width: 20px;
     height: 20px;
     fill: $color-text;
+    @extend %transition-ease;
 }
 
 form {
@@ -467,6 +501,10 @@ nav {
     }
 }
 
+.nav-home {
+    font-size: 3vmin;
+}
+
 .light {
     color-scheme: light;
 }
@@ -512,9 +550,12 @@ button {
 }
 
 .link {
+    font-weight: 700;
+    border-bottom: 2px dotted $color-text;
     &:hover,
     &:focus {
         color: $color-text-link-highlight;
+        border-color: $color-text-link-highlight;
     }
 }
 
@@ -556,6 +597,12 @@ button {
     padding: 8px;
 }
 
+.title-section {
+    > .title-wordmark {
+        padding: 0 0 32px 0;
+    }
+}
+
 .title,
 button {
     &.error,
@@ -571,10 +618,6 @@ button {
     &.success:hover {
         background-color: $color-success;
     }
-}
-
-.title-wordmark {
-    padding: 0 0 32px 0;
 }
 
 .hidden {
@@ -1013,7 +1056,7 @@ header {
 }
 
 .field-text {
-    padding: 8px 0;
+    padding-bottom: 8px;
     margin: 0 16px;
 }
 
