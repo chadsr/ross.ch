@@ -1,6 +1,13 @@
 <head>
     <meta charset="utf-8">
-    <title>{{ .Site.Title }}</title>
+    <title>
+        {{ if not .IsHome }}
+        {{ if .Page.Title }}
+        {{ .Page.Title }} -
+        {{ end }}
+        {{ end }}
+        {{ .Site.Title }}
+    </title>
     <meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta name="darkreader-lock">
     {{ $main := resources.Get "scss/main.scss" }}

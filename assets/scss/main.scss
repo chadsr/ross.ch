@@ -1,26 +1,25 @@
 /* Colours */
 $color-background: light-dark(rgb(230, 230, 230), rgb(8, 8, 8));
 $color-background-transparent: light-dark(
-    rgba(240, 240, 240, 0.8),
+    rgba(230, 230, 230, 0.8),
     rgba(8, 8, 8, 0.6)
 );
-$color-content: light-dark(rgb(250, 250, 250), rgb(40, 40, 40));
+$color-content: light-dark(rgba(250, 250, 250, 99%), rgba(40, 40, 40, 99%));
+$content-highlight: light-dark(rgb(126, 58, 221), rgb(156, 89, 250));
 $gradient-background: linear-gradient(
     to right,
     rgb(108, 52, 185) 30%,
-    rgb(147, 70, 255) 60%,
+    $content-highlight 60%,
     rgb(199, 35, 87) 100%
 );
-$background-content-highlight: rgb(138, 65, 241);
 $color-content-secondary: light-dark(rgb(240, 240, 240), rgb(20, 20, 20));
 $color-content-secondary-highlight: $color-content-secondary;
 $color-text: light-dark(#333, white);
-$color-text-highlight: $background-content-highlight;
-$color-text-link-highlight: $background-content-highlight;
-$color-heading: light-dark(#333, white);
+$color-text-highlight: $content-highlight;
+$color-text-link-highlight: $content-highlight;
 $color-text-placeholder: $color-text;
 $color-text-placeholder-highlight: $color-text-highlight;
-$color-banner-heading: white;
+$color-banner-text: white;
 $color-banner-background: light-dark(#333, rgb(25, 25, 25));
 $color-scrollbar: $color-content;
 $color-scrollbar_track: $color-content;
@@ -36,7 +35,7 @@ $color-iso-back-left: $color-iso;
 $color-iso-back-right: $color-iso;
 $color-iso-bottom: $color-iso;
 
-$color-iso-stroke: $background-content-highlight;
+$color-iso-stroke: $content-highlight;
 
 $color-hover-iso-front: $color-background-transparent;
 $color-hover-iso-top: $color-hover-iso-front;
@@ -49,7 +48,7 @@ $color-hover-iso-back-left: $color-hover-iso-back;
 $color-hover-iso-back-right: $color-hover-iso-back;
 
 $color-linkedin: rgb(72, 117, 180);
-$color-github: rgb(71, 139, 230) 2;
+$color-github: rgb(71, 139, 230);
 $color-gitlab: rgb(252, 109, 38);
 $color-keybase: rgb(76, 142, 255);
 $color-bluesky: rgb(0, 77, 170);
@@ -96,7 +95,6 @@ $width-icon-button: 50px;
 %macula {
     font-family: $font-macula, serif;
     text-transform: uppercase;
-    color: $color-heading;
 }
 
 %grotesk {
@@ -122,7 +120,7 @@ $width-icon-button: 50px;
 
 %form-input-style {
     @extend %form-layout;
-    @extend %transition-ease;
+    @extend %transition-ease-in-out;
     font-family: $font-main;
     font-size: 16px;
     background-color: $color-content-secondary;
@@ -138,21 +136,8 @@ $width-icon-button: 50px;
     }
 
     &::placeholder {
-        @extend %transition-ease;
+        @extend %transition-ease-in-out;
         color: $color-text-placeholder;
-    }
-
-    &:-webkit-autofill,
-    &:-webkit-autofill:hover,
-    &:-webkit-autofill:focus,
-    &:-webkit-autofill,
-    &:-webkit-autofill:hover,
-    &:-webkit-autofill:focus,
-    &:-webkit-autofill,
-    &:-webkit-autofill:hover,
-    &:-webkit-autofill:focus {
-        -webkit-text-fill-color: $color-text;
-        box-shadow: 0 0 0 100px $color-content-secondary inset;
     }
 }
 
@@ -162,6 +147,7 @@ $width-icon-button: 50px;
     background-color: $color-banner-background;
     font-weight: bold;
     @extend %outline-dotted;
+    @extend %transition-ease-in-out;
 }
 
 %no-select {
@@ -194,16 +180,8 @@ $width-icon-button: 50px;
     background-position: center center;
 }
 
-%transition-ease {
-    transition: all 200ms ease;
-}
-
 %transition-ease-in-out {
-    transition: all 500ms ease-in-out;
-}
-
-%transition-ease-out {
-    transition: all 500ms ease-out;
+    transition: all 200ms ease-in-out;
 }
 
 %transition-cube {
@@ -225,14 +203,14 @@ $width-icon-button: 50px;
 
 %threed-side-top {
     @extend %threed-side;
-    filter: brightness(110%);
+    filter: light-dark(brightness(110%), brightness(120%));
     transform: rotateX(60deg) translate3d(0, -50%, 0);
     top: -16px;
 }
 
 %threed-side-bottom {
     @extend %threed-side;
-    filter: brightness(90%);
+    filter: light-dark(brightness(90%), brightness(80%));
     transform: rotateX(-60deg) translate3d(0, 50%, 0);
     top: 16px;
 }
@@ -240,7 +218,7 @@ $width-icon-button: 50px;
 /* Main styles */
 ::selection {
     background-image: none;
-    background: $background-content-highlight;
+    background: $content-highlight;
     color: white;
 }
 
@@ -255,12 +233,21 @@ body {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     font-family: $font-main;
     color: $color-text;
-    height: 100%;
-    min-height: 100%;
     margin: 0;
     padding: 0;
     overflow: hidden;
     text-rendering: geometricPrecision;
+}
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    @extend %full-screen;
+}
+
+.center-vertical {
+    display: flex;
+    align-items: center;
 }
 
 @keyframes headingGradientAnimation {
@@ -272,22 +259,29 @@ body {
     }
 }
 
-h1 {
-    display: inline-block;
-    font-size: 7vmin;
-    margin: 0;
-    @extend %macula;
+%gradient-background {
     background: $gradient-background;
     background-clip: text;
     color: transparent;
     background-size: 300% 100%;
-    animation: headingGradientAnimation 16s linear infinite;
+    animation: headingGradientAnimation 15s linear infinite;
     animation-direction: alternate;
+}
+
+.text-gradient {
+    @extend %gradient-background;
+}
+
+h1 {
+    display: inline-block;
+    font-size: 8vw;
+    margin: 0;
+    @extend %macula;
 }
 
 h2 {
     display: inline-block;
-    font-size: 5vmin;
+    font-size: 5vw;
     @extend %macula;
     margin: 0;
 }
@@ -321,7 +315,7 @@ a {
     color: $color-text;
     text-decoration: none;
     cursor: pointer;
-    @extend %transition-ease;
+    @extend %transition-ease-in-out;
 
     &:active {
         outline: none;
@@ -371,7 +365,7 @@ ul {
         height: inherit;
 
         > li {
-            @extend %transition-ease;
+            @extend %transition-ease-in-out;
             width: $width-icon-button;
             cursor: pointer;
             height: inherit;
@@ -434,11 +428,16 @@ ul {
     }
 }
 
-.social-icon {
-    width: 20px;
-    height: 20px;
+.full-screen {
+    @extend %full-screen;
+}
+
+.icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
     fill: $color-text;
-    @extend %transition-ease;
+    @extend %transition-ease-in-out;
 }
 
 form {
@@ -451,7 +450,7 @@ fieldset {
 
     button {
         @extend %field-title-style;
-        color: $color-banner-heading;
+        color: $color-banner-text;
     }
 }
 
@@ -478,11 +477,28 @@ nav {
         > li {
             width: $width-full-button;
             height: 32px;
-            @extend %transition-ease;
+            @extend %transition-ease-in-out;
 
             &::after {
+                display: inline-block;
+                content: '•';
+                color: $color-text-highlight;
+                @extend %macula;
                 z-index: 4;
-                @extend %threed-side-bottom;
+                font-size: 42px;
+                position: relative;
+                transform: rotateX(-60deg) translate3d(0, 50%, 0);
+                height: 32px;
+                width: inherit;
+                top: -18px;
+                opacity: 0;
+                transition: opacity 200ms ease-out;
+            }
+
+            &.selected {
+                &::after {
+                    opacity: 0.5;
+                }
             }
 
             &:hover,
@@ -522,13 +538,6 @@ nav {
     @extend %full-screen;
 }
 
-.content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    @extend %full-screen;
-}
-
 .content-section {
     margin: 32px 0;
 }
@@ -540,12 +549,12 @@ body {
 }
 
 button {
-    @extend %transition-ease;
+    @extend %transition-ease-in-out;
     cursor: pointer;
-    color: $color-banner-heading;
+    color: $color-banner-text;
 
     &:hover {
-        background-color: $background-content-highlight;
+        background-color: $content-highlight;
     }
 }
 
@@ -563,13 +572,13 @@ button {
     cursor: pointer;
 
     span {
-        @extend %transition-ease;
+        @extend %transition-ease-in-out;
         padding: 0 5px;
     }
 
     &:hover span {
-        @extend %transition-ease;
-        background-color: $background-content-highlight;
+        @extend %transition-ease-in-out;
+        background-color: $content-highlight;
         color: $color-text-highlight;
     }
 }
@@ -678,7 +687,7 @@ header {
 }
 
 /* Escher cube background styles */
-#isobg {
+.isobg {
     @extend %full-screen;
 }
 
@@ -729,7 +738,7 @@ header {
 
         &:hover,
         &:active {
-            background: $background-content-highlight;
+            background: $content-highlight;
             color: $color-text-highlight;
         }
     }
@@ -745,7 +754,7 @@ header {
         stroke-opacity: 0%;
         @extend %outline-dotted;
         @extend %stroke-network;
-        @extend %transition-ease;
+        @extend %transition-ease-in-out;
     }
 
     > .iso-left {
@@ -965,7 +974,7 @@ header {
 }
 
 .perspective {
-    > button {
+    button {
         height: 64px;
         width: 100%;
         margin-top: 16px;
@@ -974,15 +983,20 @@ header {
         font-weight: bolder;
         font-size: 1em;
         transform-style: preserve-3d;
+        min-height: 32px;
         @extend %outline-dotted;
-
-        &::after {
-            @extend %threed-side-top;
-            @extend %outline-dotted;
-        }
+        @extend %transition-ease-in-out;
 
         &:active {
             transform: rotate3d(1, 0, 0, -45deg);
+        }
+    }
+
+    button,
+    .title {
+        &::after {
+            @extend %threed-side-top;
+            @extend %outline-dotted;
         }
     }
 }
@@ -996,27 +1010,31 @@ header {
         background-color: $color-content-secondary-highlight;
 
         .title {
-            background-color: $background-content-highlight;
+            background-color: $content-highlight;
         }
     }
 
     .title {
         @extend %field-title-style;
 
+        h1 {
+            color: $color-banner-text;
+        }
+
         h2 {
-            color: $color-banner-heading;
+            color: $color-banner-text;
             font-size: 3vmin;
             margin: 8px 0;
         }
 
         h3 {
-            color: $color-banner-heading;
+            color: $color-banner-text;
             margin: 0;
         }
     }
 
     label.title {
-        color: $color-banner-heading;
+        color: $color-banner-text;
         line-height: 32px;
     }
 
@@ -1037,22 +1055,6 @@ header {
         padding: 16px;
         display: inline-block;
     }
-
-    &.perspective {
-        margin-top: 16px;
-
-        .title,
-        > button {
-            min-height: 32px;
-            @extend %outline-dotted;
-            @extend %transition-ease;
-
-            &::after {
-                @extend %threed-side-top;
-                @extend %outline-dotted;
-            }
-        }
-    }
 }
 
 .field-text {
@@ -1060,16 +1062,12 @@ header {
     margin: 0 16px;
 }
 
-.icon {
-    display: inline-block;
-}
-
 /* Blog and Repositories */
 .feed {
     box-sizing: border-box;
 
     > .feed-item {
-        @extend %transition-ease;
+        @extend %transition-ease-in-out;
 
         &:hover {
             .feed-item-title,
@@ -1077,24 +1075,22 @@ header {
             .feed-item-title,
             .repo-language,
             .repo-stars {
-                background-color: $background-content-highlight;
+                background-color: $content-highlight;
+            }
+
+            .icon {
+                fill: $content-highlight;
             }
         }
 
         .feed-item-title {
-            @extend %transition-ease;
+            @extend %transition-ease-in-out;
         }
 
         .feed-item-content {
             padding: 8px 16px 16px 16px;
         }
     }
-}
-
-.feed-item-tags,
-.repo-stats {
-    line-height: 32px;
-    text-align: center;
 }
 
 .repo-stars {
@@ -1108,10 +1104,10 @@ header {
 .feed-item-tag,
 .repo-stars,
 .repo-language {
-    color: $color-banner-heading;
+    color: $color-banner-text;
     padding: 4px;
     background-color: $color-banner-background;
-    @extend %transition-ease;
+    @extend %transition-ease-in-out;
     @extend %outline-dotted;
 }
 
@@ -1119,18 +1115,58 @@ header {
     margin: 0;
 }
 
-.feed-item-date {
-    padding: 8px;
-    display: block;
+.feed-item-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 0;
     font-style: italic;
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
+
+    > .icon {
+        padding: 0 4px 0 0;
+    }
 }
 
-.project-tags {
+.feed-item-tag {
+    padding: 8px;
+    margin: 0 8px 0 0;
+}
+
+.feed-item-tags {
     padding: 8px 0 0 0;
 }
 
-.theme-switch input {
-    display: none;
+.post {
+    height: calc(100% - 4vh - 48px);
+    margin: 2vh 4vw;
+    max-width: 1000px;
+    @extend %outline-dotted;
+    overflow: hidden;
+    position: relative;
+
+    > .post-title {
+        font-size: 0.5vw;
+        color: $color-banner-text;
+        background-color: $color-banner-background;
+        &::before {
+            @extend %threed-side-top;
+            @extend %outline-dotted;
+        }
+    }
+
+    > .post-stats {
+        background-color: $color-banner-background;
+        color: $color-banner-text;
+        padding: 8px;
+    }
+
+    > .post-text {
+        height: inherit;
+        padding: 0 16px;
+        background-color: $color-content;
+        @extend %scrollable;
+        @extend %outline-dotted;
+    }
 }

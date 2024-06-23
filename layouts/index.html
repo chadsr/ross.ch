@@ -1,9 +1,6 @@
 {{ define "main" }}
-<main aria-role="main">
-    <div id="content" class="content perspective">
-        {{- partial "background.html" . -}}
-        {{- partial "cube.html" . -}}
-    </div>
-    </body>
+{{- partial "header.html" . -}}
+<main aria-role="main" class="center-vertical perspective">
+    {{- partial "cube.html" . -}}
 </main>
 {{ end }}

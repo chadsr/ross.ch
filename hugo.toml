@@ -1,11 +1,23 @@
 baseURL = 'https://ross.ch/'
-languageCode = 'en-gb'
+languageCode = 'en-GB'
 title = 'Ross Chadwick'
 enableRobotsTXT = true
+summaryLength = 10
 
 [taxonomies]
 category = 'categories'
 tag = 'tags'
+
+[params]
+dateFormat = "02 Jan 2006"
+
+[languages]
+[languages.en]
+languageCode = 'en-GB'
+languageName = 'English'
+weight = 1
+[languages.en.params]
+reading_speed = 238
 
 [build]
 noJSConfigInAssets = true

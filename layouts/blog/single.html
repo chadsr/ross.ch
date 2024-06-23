@@ -1,0 +1,18 @@
+{{ define "main" }}
+<article class="post perspective">
+    <div class="title post-title perspective">
+        <h1>{{ .Title }}</h1>
+    </div>
+    <div class="post-stats">
+        <span class="post-date">{{ .Params.date.Format .Site.Params.dateFormat }}</span>
+        <div class="post-tags">
+            {{ range $tag := (.Params.tags) }}
+            <span class="post-tag">{{ $tag }}</span>
+            {{ end}}
+        </div>
+    </div>
+    <div class="post-text">
+        {{ .Content }}
+    </div>
+</article>
+{{ end }}

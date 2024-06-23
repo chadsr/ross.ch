@@ -1,16 +1,27 @@
-<li class="feed-item blog-post field hover perspective">
+<li class="feed-item blog-post field perspective">
     <a href="{{ .RelPermalink }}" rel="noopener" target="_blank">
-        <div class="title blog-post-title feed-item-title perspective">
+        <div class="title feed-item-title perspective">
             <h3>{{ .Title }}</h3>
         </div>
-        <span class="blog-post-date feed-item-date">Published: {{ .Date }}</span>
-        <div class="blog-post-tags feed-item-tags">
+        <div>
+            {{ $readingTime := div (float .WordCount) .Site.Params.reading_speed }}
+            {{ $readingTime = math.Ceil $readingTime }}
+            <span class="feed-item-info feed-item-date">
+                {{- partial "icons/calendar.html" . -}}
+                {{ .Params.date.Format .Site.Params.dateFormat }}
+            </span>
+            <span class="feed-item-info feed-item-stats">
+                {{- partial "icons/hourglass.html" . -}}
+                {{ $readingTime }} min
+            </span>
+        </div>
+        <div class="feed-item-info feed-item-tags">
             {{ range $tag := (.Params.tags) }}
-            <span class="blog-post-tag feed-item-tag">{{ $tag }}</span>
+            <span class="feed-item-tag">{{ $tag }}</span>
             {{ end}}
         </div>
-        <div class="feed-item-content blog-post-content">
-            <p class="blog-post-summary feed-item-summary">{{ .Summary }}</p>
+        <div class="feed-item-content">
+            <p class="feed-item-summary">{{ .Summary }}</p>
         </div>
     </a>
 </li>
