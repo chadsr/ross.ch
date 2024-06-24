@@ -1,11 +1,11 @@
-const SVG_NAMESPACE_URI = 'http://www.w3.org/2000/svg'
-const CLASS_ISO_FACE = 'iso-face'
-const CLASS_ISO_TOP = 'iso-top'
-const CLASS_ISO_LEFT = 'iso-left'
-const CLASS_ISO_RIGHT = 'iso-right'
-const CLASS_ISO_BACK_RIGHT = 'iso-back-right'
-const CLASS_ISO_BACK_LEFT = 'iso-back-left'
-const CLASS_ISO_BOTTOM = 'iso-bottom'
+const SVG_NAMESPACE_URI = 'http://www.w3.org/2000/svg';
+const CLASS_ISO_FACE = 'iso-face';
+const CLASS_ISO_TOP = 'iso-top';
+const CLASS_ISO_LEFT = 'iso-left';
+const CLASS_ISO_RIGHT = 'iso-right';
+const CLASS_ISO_BACK_RIGHT = 'iso-back-right';
+const CLASS_ISO_BACK_LEFT = 'iso-back-left';
+const CLASS_ISO_BOTTOM = 'iso-bottom';
 
 export default class EscherCubes {
     // renderEscherCubes(outer container id, svg container id, x offset from origin, y offset from origin, cube edge length in px, inner angle of cube)
@@ -20,44 +20,44 @@ export default class EscherCubes {
         renderHiddenSides = false
     ): void {
         // Attempt to fetch the svg if it exists already
-        const existing = document.getElementById(svgId)
+        const existing = document.getElementById(svgId);
         if (existing) {
-            existing.parentNode.removeChild(existing) // delete it if it already exists, because we are going to re-render it
+            existing.parentNode.removeChild(existing); // delete it if it already exists, because we are going to re-render it
         }
 
         // Render svg container
-        const parentSVG = document.createElementNS(SVG_NAMESPACE_URI, 'svg')
-        parentSVG.setAttribute('id', svgId)
-        parentSVG.classList.add(svgId)
+        const parentSVG = document.createElementNS(SVG_NAMESPACE_URI, 'svg');
+        parentSVG.setAttribute('id', svgId);
+        parentSVG.classList.add(svgId);
 
         // Get the container and append the svgId to it
-        const container = document.getElementById(containerId)
-        const containerPosition = container.getBoundingClientRect()
-        container.append(parentSVG)
+        const container = document.getElementById(containerId);
+        const containerPosition = container.getBoundingClientRect();
+        container.append(parentSVG);
 
-        const xCount = Math.ceil(containerPosition.width / cubeSize)
-        const yCount = Math.ceil(containerPosition.height / cubeSize)
+        const xCount = Math.ceil(containerPosition.width / cubeSize);
+        const yCount = Math.ceil(containerPosition.height / cubeSize);
 
-        let odd = true
+        let odd = true;
         for (let y = 0; y < yCount; y++) {
             for (let x = 0; x < xCount; x++) {
-                const zPos = y * 1.5 + yOffset
+                const zPos = y * 1.5 + yOffset;
 
-                let xPos
+                let xPos;
                 switch (odd) {
                     case true:
-                        xPos = x + xOffset
-                        break
+                        xPos = x + xOffset;
+                        break;
 
                     case false:
-                        xPos = x - 0.5 + xOffset
-                        break
+                        xPos = x - 0.5 + xOffset;
+                        break;
 
                     default:
-                        break
+                        break;
                 }
 
-                const yPos = xPos
+                const yPos = xPos;
                 this.renderIsometricCube(
                     parentSVG,
                     cubeSize,
@@ -67,9 +67,9 @@ export default class EscherCubes {
                     zPos,
                     sidePaddingPx,
                     renderHiddenSides
-                )
+                );
             }
-            odd = !odd
+            odd = !odd;
         }
     }
 
@@ -84,11 +84,11 @@ export default class EscherCubes {
         sidePaddingPx: number,
         renderHiddenSides: boolean
     ): void {
-        const outerAngle = 90 - innerAngle // Calculate the outer angle by subtracting the inner angle from 90 degrees
-        const sineInner = this.sineOf(innerAngle)
-        const sineOuter = this.sineOf(outerAngle)
+        const outerAngle = 90 - innerAngle; // Calculate the outer angle by subtracting the inner angle from 90 degrees
+        const sineInner = this.sineOf(innerAngle);
+        const sineOuter = this.sineOf(outerAngle);
 
-        const sides = []
+        const sides = [];
 
         if (renderHiddenSides === true) {
             sides.push(
@@ -134,7 +134,7 @@ export default class EscherCubes {
                         ' ' +
                         cubeSize * 1.5,
                 ]
-            )
+            );
         }
 
         sides.push(
@@ -180,10 +180,10 @@ export default class EscherCubes {
                     ' ' +
                     cubeSize,
             ]
-        )
+        );
 
-        const iso = document.createElementNS(SVG_NAMESPACE_URI, 'g')
-        iso.setAttribute('class', 'iso')
+        const iso = document.createElementNS(SVG_NAMESPACE_URI, 'g');
+        iso.setAttribute('class', 'iso');
         iso.setAttribute(
             'transform',
             'translate(' +
@@ -191,21 +191,21 @@ export default class EscherCubes {
                 ',' +
                 this.calcY(cubeSize, xPos, yPos, zPos) +
                 ')'
-        )
+        );
 
         for (const [className, transform] of sides) {
-            const side = document.createElementNS(SVG_NAMESPACE_URI, 'rect')
-            side.setAttribute('x', '0')
-            side.setAttribute('y', '0')
-            side.setAttribute('width', cubeSize.toString())
-            side.setAttribute('height', cubeSize.toString())
-            side.setAttribute('class', className + ' ' + CLASS_ISO_FACE)
-            side.setAttribute('transform', 'matrix(' + transform + ')')
+            const side = document.createElementNS(SVG_NAMESPACE_URI, 'rect');
+            side.setAttribute('x', '0');
+            side.setAttribute('y', '0');
+            side.setAttribute('width', cubeSize.toString());
+            side.setAttribute('height', cubeSize.toString());
+            side.setAttribute('class', className + ' ' + CLASS_ISO_FACE);
+            side.setAttribute('transform', 'matrix(' + transform + ')');
 
-            iso.appendChild(side)
+            iso.appendChild(side);
         }
 
-        parentSVG.append(iso)
+        parentSVG.append(iso);
     }
 
     static calcX(
@@ -214,20 +214,20 @@ export default class EscherCubes {
         x: number,
         y: number
     ): number {
-        const sineInner = this.sineOf(innerAngle)
-        return x * sineInner * size + y * sineInner * size
+        const sineInner = this.sineOf(innerAngle);
+        return x * sineInner * size + y * sineInner * size;
     }
 
     static calcY(size: number, x: number, y: number, z: number): number {
-        return x * (size / 2) - (y * size) / 2 - -z * size
+        return x * (size / 2) - (y * size) / 2 - -z * size;
     }
 
     static sineOf(deg: number): number {
-        const denom = 180 / deg
-        return Math.sin(Math.PI / denom)
+        const denom = 180 / deg;
+        return Math.sin(Math.PI / denom);
     }
 
     static sineRule(len: number, deg: number): number {
-        return this.sineOf(deg) * (len / this.sineOf(90))
+        return this.sineOf(deg) * (len / this.sineOf(90));
     }
 }

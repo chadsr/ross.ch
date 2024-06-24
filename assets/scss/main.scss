@@ -5,7 +5,7 @@ $color-background-transparent: light-dark(
     rgba(8, 8, 8, 0.6)
 );
 $color-content: light-dark(rgba(250, 250, 250, 99%), rgba(40, 40, 40, 99%));
-$content-highlight: light-dark(rgb(126, 58, 221), rgb(156, 89, 250));
+$content-highlight: light-dark(rgb(118, 54, 207), rgb(156, 89, 250));
 $gradient-background: linear-gradient(
     to right,
     rgb(108, 52, 185) 30%,
@@ -20,11 +20,11 @@ $color-text-link-highlight: $content-highlight;
 $color-text-placeholder: $color-text;
 $color-text-placeholder-highlight: $color-text-highlight;
 $color-banner-text: white;
-$color-banner-background: light-dark(#333, rgb(25, 25, 25));
+$color-banner-background: light-dark(rgb(90, 90, 90), rgb(25, 25, 25));
 $color-scrollbar: $color-content;
 $color-scrollbar_track: $color-content;
 $color-scrollbar-thumb: $color-banner-background;
-$color-outline: light-dark(rgba(0, 0, 0, 0.2), rgba(180, 180, 180, 0.2));
+$color-outline: light-dark(rgba(50, 50, 50, 0.4), rgba(200, 200, 200, 0.2));
 $filter-face-no-focus: brightness(80%);
 
 $color-iso: $color-background;
@@ -54,16 +54,16 @@ $color-keybase: rgb(76, 142, 255);
 $color-bluesky: rgb(0, 77, 170);
 $color-gpg: rgb(0, 147, 221);
 
-$color-success: #15a12a;
-$color-error: #a51818;
+$color-success: light-dark(rgb(60, 150, 60), rgb(64, 173, 64));
+$color-error: light-dark(rgb(150, 14, 14), rgb(165, 24, 24));
 
 /* Fonts */
 $font-macula: 'Macula';
 $font-space-grotesk: 'Space Grotesk Variable';
 $font-main: $font-space-grotesk;
 
-$width-full-button: 125px;
-$width-icon-button: 50px;
+$width-full-button: 100px;
+$width-icon-button: 48px;
 
 @font-face {
     font-family: $font-macula;
@@ -184,9 +184,12 @@ $width-icon-button: 50px;
     transition: all 200ms ease-in-out;
 }
 
+%transition-shadow {
+    transition: filter 500ms ease-in-out;
+}
+
 %transition-cube {
-    transition-property: transform;
-    transition: all 500ms linear;
+    transition: transform 500ms linear;
 }
 
 %threed-side {
@@ -239,6 +242,11 @@ body {
     text-rendering: geometricPrecision;
 }
 
+main {
+    height: fit-content;
+    width: fit-content;
+}
+
 .center-container {
     display: flex;
     justify-content: center;
@@ -274,14 +282,14 @@ body {
 
 h1 {
     display: inline-block;
-    font-size: 8vw;
+    font-size: calc(12px + 4vmin);
     margin: 0;
     @extend %macula;
 }
 
 h2 {
     display: inline-block;
-    font-size: 5vw;
+    font-size: calc(12px + 2vmin);
     @extend %macula;
     margin: 0;
 }
@@ -462,10 +470,6 @@ input {
     @extend %form-input-style;
 }
 
-audio {
-    display: none;
-}
-
 nav {
     > ul {
         width: inherit;
@@ -518,7 +522,7 @@ nav {
 }
 
 .nav-home {
-    font-size: 3vmin;
+    font-size: calc(12px + 2vmin);
 }
 
 .light {
@@ -612,7 +616,6 @@ button {
     }
 }
 
-.title,
 button {
     &.error,
     &.error::before,
@@ -853,8 +856,21 @@ header {
     }
 }
 
+@property --cube-margin {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 10vh;
+}
+
 .content-cube {
+    position: relative;
     transform-style: preserve-3d;
+    margin-top: var(
+        --cube-margin
+    ); /* Allows for the top face to be shown in the perspective */
+    top: calc(
+        var(--cube-margin) * -1 / pi
+    ); /* Offset to center the cube, with transformed top face */
 
     &.rotate {
         &-0 {
@@ -900,10 +916,9 @@ header {
             box-sizing: border-box;
             background-color: $color-content;
             filter: $filter-face-no-focus;
-            transition-property: filter;
             pointer-events: none;
             transform-style: flat;
-            @extend %transition-ease-in-out;
+            @extend %transition-shadow;
 
             > .content-section {
                 flex: auto;
@@ -935,7 +950,7 @@ header {
                                 @extend %macula;
                                 content: '>';
                                 padding: 0 8px 0 0;
-                                font-size: 48px;
+                                font-size: 32px;
                             }
                         }
 
@@ -1023,7 +1038,7 @@ header {
 
         h2 {
             color: $color-banner-text;
-            font-size: 3vmin;
+            font-size: 4vmin;
             margin: 8px 0;
         }
 
@@ -1045,7 +1060,7 @@ header {
     textarea {
         width: 100%;
         height: 100%;
-        min-height: 128px;
+        min-height: 200px;
         box-sizing: border-box;
         resize: vertical;
         @extend %outline-dotted;
@@ -1130,7 +1145,7 @@ header {
 }
 
 .feed-item-tag {
-    padding: 8px;
+    padding: 4px 8px;
     margin: 0 8px 0 0;
 }
 

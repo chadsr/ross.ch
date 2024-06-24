@@ -2,12 +2,15 @@
     "compilerOptions": {
         "target": "es2022",
         "module": "es2022",
+        "moduleResolution": "Bundler",
         "lib": [
             "es2022",
-            "dom"
+            "dom",
+            "webworker"
         ],
         "removeComments": true,
         "noImplicitAny": true,
+        "strict": true
     },
     "include": [
         "assets/ts/**/*",
