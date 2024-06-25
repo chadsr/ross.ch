@@ -1,12 +1,22 @@
 {
     "compilerOptions": {
-        "target": "esnext",
-        "module": "esnext",
+        "target": "ES2021",
+        "module": "ES2022",
+        "moduleResolution": "Bundler",
         "lib": [
-            "esnext"
+            "ES2021"
         ],
         "types": [
             "@cloudflare/workers-types"
-        ]
-    }
+        ],
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true,
+        "removeComments": true,
+        "noImplicitAny": true,
+        "strict": true,
+        "skipLibCheck": true
+    },
+    "exclude": [
+        "test/**/*"
+    ]
 }

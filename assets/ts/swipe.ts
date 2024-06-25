@@ -50,18 +50,17 @@ export default class SwipeNav {
         );
     }
 
-    private touchStart(event: TouchEvent) {
+    private touchStart = (event: TouchEvent) => {
         const touch = event.targetTouches[0];
         this.startX = touch.pageX;
-    }
+    };
 
-    private touchMove(event: TouchEvent) {
+    private touchMove = (event: TouchEvent) => {
         const touch = event.targetTouches[0];
         this.endX = touch.pageX;
-        event.preventDefault();
-    }
+    };
 
-    private touchEnd(event: TouchEvent) {
+    private touchEnd = () => {
         if (this.endX - this.startX > this.swipeThreshold) {
             // Swipe right
             if (this.currentIndex > 0) {
@@ -75,7 +74,5 @@ export default class SwipeNav {
                 this.swipeFunc(this.currentIndex);
             }
         }
-
-        event.preventDefault();
-    }
+    };
 }

@@ -26,6 +26,7 @@ $color-scrollbar_track: $color-content;
 $color-scrollbar-thumb: $color-banner-background;
 $color-outline: light-dark(rgba(50, 50, 50, 0.4), rgba(200, 200, 200, 0.2));
 $filter-face-no-focus: brightness(80%);
+$color-shadow: rgba(51, 51, 51, 0.5);
 
 $color-iso: $color-background;
 $color-iso-top: $color-iso;
@@ -64,6 +65,9 @@ $font-main: $font-space-grotesk;
 
 $width-full-button: 100px;
 $width-icon-button: 48px;
+
+$h1-size: clamp(1.6rem, -0.875rem + 8.333vw, 4rem);
+$h2-size: clamp(1.4rem, -0.875rem + 8.333vw, 2rem);
 
 @font-face {
     font-family: $font-macula;
@@ -202,6 +206,8 @@ $width-icon-button: 48px;
     perspective: inherit;
     perspective-origin: inherit;
     background-color: inherit;
+    width: 100%;
+    left: 0;
 }
 
 %threed-side-top {
@@ -250,6 +256,8 @@ main {
 .center-container {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
     @extend %full-screen;
 }
 
@@ -282,14 +290,14 @@ main {
 
 h1 {
     display: inline-block;
-    font-size: calc(12px + 4vmin);
+    font-size: $h1-size;
     margin: 0;
     @extend %macula;
 }
 
 h2 {
     display: inline-block;
-    font-size: calc(12px + 2vmin);
+    font-size: $h2-size;
     @extend %macula;
     margin: 0;
 }
@@ -445,7 +453,16 @@ ul {
     width: 18px;
     height: 18px;
     fill: $color-text;
+    @extend %macula;
     @extend %transition-ease-in-out;
+}
+
+.box-shadow::before {
+    content: '';
+    position: relative;
+    width: 100%;
+    top: 2px;
+    box-shadow: 0px 0px 4px 2px rgba(51, 51, 51, 0.5);
 }
 
 form {
@@ -460,10 +477,6 @@ fieldset {
         @extend %field-title-style;
         color: $color-banner-text;
     }
-}
-
-.button {
-    @extend %field-title-style;
 }
 
 input {
@@ -553,12 +566,14 @@ body {
 }
 
 button {
-    @extend %transition-ease-in-out;
     cursor: pointer;
     color: $color-banner-text;
+    @extend %transition-ease-in-out;
+    @extend %outline-dotted;
 
     &:hover {
         background-color: $content-highlight;
+        outline-color: $content-highlight;
     }
 }
 
@@ -591,11 +606,6 @@ button {
     vertical-align: super;
 }
 
-.copyright {
-    margin: 4px 10px;
-    text-align: center;
-}
-
 .banner {
     height: 32px;
     width: 100%;
@@ -608,6 +618,26 @@ button {
 
 .title {
     padding: 8px;
+}
+
+.site-title {
+    color: $color-text;
+    z-index: 4;
+    position: relative;
+    margin: 8px 0;
+}
+
+.site-title-link {
+    > .site-title {
+        @extend %transition-ease-in-out;
+    }
+
+    &:hover,
+    &:focus {
+        > .site-title {
+            @extend %gradient-background;
+        }
+    }
 }
 
 .title-section {
@@ -656,41 +686,42 @@ button {
     justify-content: space-between;
 }
 
+header,
 footer {
     background-color: $color-content;
     width: 100%;
     max-height: 32px;
     height: 32px;
     position: fixed;
-    bottom: 0;
-    left: 0;
     z-index: 3;
     @extend %outline-dotted;
 
     &::after {
-        @extend %threed-side-top;
         @extend %outline-dotted;
     }
 }
 
 header {
-    background-color: $color-content;
-    width: 100%;
-    height: 32px;
-    position: fixed;
     top: 0;
     left: 0;
-    z-index: 3;
-    @extend %outline-dotted;
 
     &::after {
         @extend %threed-side-bottom;
-        @extend %outline-dotted;
+    }
+}
+
+footer {
+    bottom: 0;
+    left: 0;
+
+    &::after {
+        @extend %threed-side-top;
     }
 }
 
 /* Escher cube background styles */
 .isobg {
+    z-index: 0;
     @extend %full-screen;
 }
 
@@ -898,8 +929,8 @@ header {
         transform-style: preserve-3d;
         will-change: transform;
         transition-property: transform;
-        @extend %transition-cube;
         outline-offset: 0;
+        @extend %transition-cube;
         @extend %outline-dotted;
 
         &.face-top {
@@ -919,6 +950,10 @@ header {
             pointer-events: none;
             transform-style: flat;
             @extend %transition-shadow;
+
+            .title-section > h2 {
+                font-size: $h1-size;
+            }
 
             > .content-section {
                 flex: auto;
@@ -1007,8 +1042,7 @@ header {
         }
     }
 
-    button,
-    .title {
+    button {
         &::after {
             @extend %threed-side-top;
             @extend %outline-dotted;
@@ -1020,31 +1054,31 @@ header {
     background-color: $color-content-secondary;
     margin-bottom: 32px;
     @extend %outline-dotted;
+    @extend %transition-ease-in-out;
 
     &.hover:hover {
+        outline-color: $content-highlight;
         background-color: $color-content-secondary-highlight;
 
         .title {
             background-color: $content-highlight;
+            outline-color: $content-highlight;
         }
     }
 
     .title {
         @extend %field-title-style;
 
-        h1 {
-            color: $color-banner-text;
-        }
-
-        h2 {
-            color: $color-banner-text;
-            font-size: 4vmin;
-            margin: 8px 0;
-        }
-
+        h1,
+        h2,
         h3 {
             color: $color-banner-text;
-            margin: 0;
+            margin: 8px 4px;
+        }
+
+        &::after {
+            @extend %threed-side-top;
+            @extend %outline-dotted;
         }
     }
 
@@ -1063,7 +1097,6 @@ header {
         min-height: 200px;
         box-sizing: border-box;
         resize: vertical;
-        @extend %outline-dotted;
     }
 
     > ul {
@@ -1084,13 +1117,18 @@ header {
     > .feed-item {
         @extend %transition-ease-in-out;
 
-        &:hover {
+        &.hover:hover {
             .feed-item-title,
             .feed-item-tag,
             .feed-item-title,
             .repo-language,
             .repo-stars {
                 background-color: $content-highlight;
+            }
+
+            .feed-item-summary,
+            .feed-item-info {
+                color: $color-text;
             }
 
             .icon {
@@ -1126,7 +1164,9 @@ header {
     @extend %outline-dotted;
 }
 
-.feed-item-summary {
+.feed-item-summary,
+.feed-item-info {
+    color: $color-text;
     margin: 0;
 }
 
@@ -1154,34 +1194,38 @@ header {
 }
 
 .post {
-    height: calc(100% - 4vh - 48px);
-    margin: 2vh 4vw;
-    max-width: 1000px;
-    @extend %outline-dotted;
+    max-width: 80ch;
     overflow: hidden;
-    position: relative;
 
-    > .post-title {
-        font-size: 0.5vw;
-        color: $color-banner-text;
+    > .post-header {
+        margin: 16px 0 0 0;
         background-color: $color-banner-background;
-        &::before {
+        color: $color-banner-text;
+        @extend %outline-dotted;
+
+        &::after {
             @extend %threed-side-top;
             @extend %outline-dotted;
         }
+
+        > .post-stats {
+            padding: 0 0 8px 0;
+        }
     }
 
-    > .post-stats {
-        background-color: $color-banner-background;
-        color: $color-banner-text;
-        padding: 8px;
-    }
-
-    > .post-text {
-        height: inherit;
-        padding: 0 16px;
+    > .post-content {
+        display: flex;
+        flex-direction: column;
         background-color: $color-content;
-        @extend %scrollable;
+        height: calc(100% - $h1-size - $h2-size - 128px);
         @extend %outline-dotted;
+
+        > .post-text {
+            flex-grow: 1;
+            padding: 8px 16px;
+            text-align: left;
+            @extend %scrollable;
+            @extend %allow-select-text;
+        }
     }
 }

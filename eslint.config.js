@@ -5,7 +5,12 @@ import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
     {
-        ignores: ['resources/**/*', 'public/**/*', 'static/**/*'],
+        ignores: [
+            'resources/**/*',
+            'public/**/*',
+            'static/**/*',
+            '.wrangler/**/*',
+        ],
     },
     eslint.configs.recommended,
     ...tseslint.configs.recommended,

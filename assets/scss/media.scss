@@ -109,8 +109,4 @@
 
 @media only screen and (min-width: 1100px) and (min-height: 1200px) {
     @include content-cube(1000px);
-    h1,
-    h2 {
-        font-size: 5em;
-    }
 }

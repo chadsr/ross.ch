@@ -7,6 +7,8 @@
         {{ $feedTypes := slice "project" "repo" }}
         {{ range ( where .Site.RegularPages "Type" "in" $feedTypes ).ByDate.Reverse }}
         {{ .Render "li" }}
+        {{ else }}
+        <h3 class="no-content"><em>Nothing here... Check back later</em></h3>
         {{ end }}
     </ul>
 </section>

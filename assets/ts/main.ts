@@ -32,6 +32,8 @@ const NAV_MAPPING = {
     'nav-thoughts': 2,
     'nav-contact': 3,
 };
+
+const CLASS_ROTATE_PREFIX = 'rotate-';
 const MIN_SIDE = 0;
 const MAX_SIDE = 3;
 // The currently facing side of the content-cube
@@ -74,38 +76,45 @@ function rotateTo(side: number) {
 
     if (side !== currentSide && side >= MIN_SIDE && side <= MAX_SIDE) {
         const nav = document.getElementById('nav');
-        const navList = nav.getElementsByTagName('ul')[0];
-        const navListElements = navList.getElementsByTagName('li');
+        if (nav) {
+            const navList = nav.getElementsByTagName('ul')[0];
+            const navListElements = navList.getElementsByTagName('li');
 
-        // Remove the 'selected' class from the currently selected list element
-        const selected = nav.querySelector('.selected');
-        selected.classList.remove('selected');
+            // Remove the 'selected' class from the currently selected list element
+            const selected = nav.querySelector('.selected');
+            if (selected) {
+                selected.classList.remove('selected');
+            }
+
+            // Add the 'selected' class to the newly selected list element
+            navListElements[side].classList.add('selected');
+        }
 
         const cube = document.getElementById(CUBE_ID);
-        // Remove the focus class from the old focused cube face
-        const oldFocusFace = cube.querySelector('.focus');
-        oldFocusFace.classList.remove('focus');
+        if (cube) {
+            // Remove the focus class from the old focused cube face
+            const oldFocusFace = cube.querySelector('.focus');
+            if (oldFocusFace) {
+                oldFocusFace.classList.remove('focus');
+            }
 
-        // Add classes to menu and cube face to indicate focus
-        navListElements[side].classList.add('selected');
-        const focusFace = cube.querySelector(`.face-${side}`);
-        focusFace.classList.add('focus');
+            // Add classes to cube face to indicate focus
+            const focusFace = cube.querySelector(`.face-${side}`);
+            if (focusFace) {
+                focusFace.classList.add('focus');
+            }
 
-        // remove any active focused element
-        if (document.activeElement instanceof HTMLElement)
-            document.activeElement.blur();
+            // remove any active focused element
+            if (document.activeElement instanceof HTMLElement)
+                document.activeElement.blur();
 
-        const currentClass = cube.className.match(/(?:^|)rotate-([\d]+)/)[0];
-
-        // Replace the existing class with one matching the newly focused side (While preserving any other classes)
-        cube.className = cube.className.replace(currentClass, `rotate-${side}`);
+            // Remove the old focus class and add the focus class to the new focused cube face
+            cube.classList.remove(`${CLASS_ROTATE_PREFIX}${currentSide}`);
+            cube.classList.add(`${CLASS_ROTATE_PREFIX}${side}`);
+        }
 
         currentSide = side;
-
-        return true;
     }
-
-    return false;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -120,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
         );
 
         if (
-            (<Window>window.webkit && <Window>window.webkit.messageHandlers) ||
+            (window.webkit && window.webkit.messageHandlers) ||
             (navigator.userAgent.indexOf('Safari') !== -1 &&
                 navigator.userAgent.indexOf('Chrome') === -1)
         ) {
@@ -154,44 +163,55 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (formWorkerScript) {
                 const workerPath = formWorkerScript.getAttribute('src');
-                formWorker = new Worker(workerPath);
+                if (workerPath) {
+                    formWorker = new Worker(workerPath);
 
-                contactForm.addEventListener('submit', (submitEvent) => {
-                    submitEvent.preventDefault();
+                    contactForm.addEventListener('submit', (submitEvent) => {
+                        submitEvent.preventDefault();
 
-                    const formMessage: FormMessage = {
-                        name: contactForm.fullName.value.toString(),
-                        email: contactForm.email.value.toString(),
-                        message: contactForm.message.value.toString(),
-                    };
-                    formWorker.postMessage(formMessage);
-                });
+                        if (formWorker) {
+                            const formMessage: FormMessage = {
+                                name: contactForm.fullName.value.toString(),
+                                email: contactForm.email.value.toString(),
+                                message: contactForm.message.value.toString(),
+                            };
 
-                // Listen for the worker to send an encrypted message back
-                formWorker.addEventListener(
-                    'message',
-                    (event: MessageEvent) => {
-                        const encryptedMessage = event.data as string;
+                            formWorker.postMessage(formMessage);
+                        }
+                    });
 
-                        // Send the encrypted message to the API endpoint via a hidden form
-                        const apiForm = <HTMLFormElement>(
-                            document.getElementById(CONTACT_FORM_API_ID)
-                        );
-                        apiForm.message.value = encryptedMessage;
-                        apiForm.submit();
+                    // Listen for the worker to send an encrypted message back
+                    formWorker.addEventListener(
+                        'message',
+                        (event: MessageEvent) => {
+                            const encryptedMessage = event.data as string;
 
-                        // Give the user a success message and reset the form after a timeout
-                        const submitBtnText = contactFormBtn.innerText;
-                        contactFormBtn.classList.add('success');
-                        contactFormBtn.innerText = SUCCESS_MESSAGE;
+                            // Send the encrypted message to the API endpoint via a hidden form
+                            const apiForm = <HTMLFormElement>(
+                                document.getElementById(CONTACT_FORM_API_ID)
+                            );
+                            apiForm.message.value = encryptedMessage;
+                            apiForm.addEventListener(
+                                'submit',
+                                (submitEvent) => {
+                                    submitEvent.preventDefault();
+                                }
+                            );
+                            apiForm.submit();
 
-                        setTimeout(() => {
-                            contactFormBtn.classList.remove('success');
-                            contactFormBtn.innerText = submitBtnText;
-                        }, FORM_RESET_TIMEOUT);
-                        contactForm.reset();
-                    }
-                );
+                            // Give the user a success message and reset the form after a timeout
+                            const submitBtnText = contactFormBtn.innerText;
+                            contactFormBtn.classList.add('success');
+                            contactFormBtn.innerText = SUCCESS_MESSAGE;
+
+                            setTimeout(() => {
+                                contactFormBtn.classList.remove('success');
+                                contactFormBtn.innerText = submitBtnText;
+                            }, FORM_RESET_TIMEOUT);
+                            contactForm.reset();
+                        }
+                    );
+                }
             }
         } else {
             // TODO: form handling without web worker
