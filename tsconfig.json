@@ -11,6 +11,7 @@
         "forceConsistentCasingInFileNames": true,
         "removeComments": true,
         "noImplicitAny": true,
+        "noUnusedLocals": true,
         "strict": true
     },
     "include": [

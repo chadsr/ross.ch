@@ -1,7 +1,7 @@
 import postForm, { AxiosError } from 'axios';
 
 // local function imports
-import SwipeNav from './swipe';
+import SwipeNav, { ISwipeFunc } from './swipe';
 import EscherCubes from './escher';
 import { FormMessage } from './contact';
 
@@ -10,6 +10,14 @@ const API_CONTACT = '/api/contact';
 // Key event codes
 const LEFT_ARROW = 'ArrowLeft';
 const RIGHT_ARROW = 'ArrowRight';
+
+const ELEMENTS_ROTATE_DISABLED = [
+    'input',
+    'select',
+    'button',
+    'textarea',
+    'label',
+];
 
 const CONTACT_FORM_ID = 'contact-form';
 const CONTACT_FORM_API_ID = 'contact-form-encrypted';
@@ -60,12 +68,20 @@ declare global {
     }
 }
 
+/**
+ * Interface for the ContactForm type. This defines the structure of the contact form fields.
+ */
 interface ContactForm extends HTMLFormElement {
     fullName: HTMLInputElement;
     email: HTMLInputElement;
     message: HTMLTextAreaElement;
 }
 
+/**
+ * This function renders the Escher-inspired background using the EscherCubes module.
+ *
+ * @summary Render the Escher-inspired background.
+ */
 const renderBackground = () => {
     const isoCubeSize = window.innerHeight / NUM_CUBES_Y;
     EscherCubes.render(
@@ -80,7 +96,12 @@ const renderBackground = () => {
     );
 };
 
-const rotateTo = (side: number) => {
+/**
+ * Rotates the content cube to a specified side.
+ *
+ * @param {number} side - The index of the side to rotate to (0-3).
+ */
+const rotateTo: ISwipeFunc = (side: number) => {
     if (side == MAX_SIDE + 1) {
         side = MIN_SIDE;
     } else if (side == MIN_SIDE - 1) {
@@ -130,6 +151,14 @@ const rotateTo = (side: number) => {
     }
 };
 
+/**
+ * Shows a status message on a form button for a specified amount of time.
+ *
+ * @param {string} message The message to display
+ * @param {string} statusClass The CSS class to apply to the form button (e.g. 'success' or 'error')
+ * @param {HTMLButtonElement} formButtonElement The HTML button element to update
+ * @param {number} timeoutMs The time in milliseconds to keep the message displayed before resetting it
+ */
 const showStatusMessage = (
     message: string,
     statusClass: string,
@@ -162,6 +191,8 @@ document.addEventListener('DOMContentLoaded', function () {
         new SwipeNav(
             CUBE_ID,
             SWIPE_NAVIGATION_THRESHOLD,
+            ELEMENTS_ROTATE_DISABLED,
+            currentSide,
             MIN_SIDE,
             MAX_SIDE,
             rotateTo
@@ -281,14 +312,23 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+/**
+ * Handles keyboard events to rotate the cube.
+ *
+ * This function checks if the active element is not an input element and then
+ * handles left and right arrow key presses. The `rotateTo` function is called
+ * with the new side number as a parameter.
+ *
+ * @param {KeyboardEvent} event - The keyboard event object.
+ */
 document.addEventListener('keydown', (event: KeyboardEvent) => {
     const activeElement = document.activeElement;
-    const inputs = ['input', 'select', 'button', 'textarea'];
 
     // Only allow keypresses to rotate when active element is not an input element
     if (
         activeElement &&
-        inputs.indexOf(activeElement.tagName.toLowerCase()) == -1
+        ELEMENTS_ROTATE_DISABLED.indexOf(activeElement.tagName.toLowerCase()) ==
+            -1
     ) {
         if (event.key === LEFT_ARROW) {
             if (currentSide > MIN_SIDE) {
@@ -302,6 +342,15 @@ document.addEventListener('keydown', (event: KeyboardEvent) => {
     }
 });
 
+/**
+ * Handles window resize events.
+ *
+ * This function re-renders the background after a delay to allow for the browser
+ * to finish resizing the window. It checks if the new window height is different
+ * from the previous one before re-rendering the background.
+ *
+ * @param {Event} event - The window resize event object.
+ */
 window.addEventListener('resize', function () {
     // Background is dependent on window height, so re-render if window height changes
     if (this.innerHeight !== windowHeight) {
