@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 /* Colours */
 $color-background: light-dark(rgb(230, 230, 230), rgb(8, 8, 8));
 $color-background-transparent: light-dark(
@@ -66,8 +68,8 @@ $font-main: $font-space-grotesk;
 $width-full-button: 100px;
 $width-icon-button: 48px;
 
-$h1-size: clamp(1.6rem, -0.875rem + 8.333vw, 4rem);
-$h2-size: clamp(1.4rem, -0.875rem + 8.333vw, 2rem);
+$h1-size: clamp(1.6rem, -0.875rem + 8.333vmin, 4rem);
+$h2-size: clamp(1.4rem, -0.875rem + 8.333vmin, 2rem);
 
 @font-face {
     font-family: $font-macula;
@@ -875,6 +877,8 @@ footer {
     position: relative;
     transform-style: preserve-3d;
     margin-top: 10vh; /* Allows for the top face to be shown in the perspective */
+
+    /* TODO: validate this */
     top: calc(
         10vh * -1 / pi
     ); /* Offset to center the cube, with transformed top face */
@@ -1025,6 +1029,54 @@ footer {
         }
     }
 }
+
+@mixin content-cube($size) {
+    .perspective {
+        perspective: calc($size * 2);
+        perspective-origin: top;
+    }
+
+    .content-cube {
+        width: $size;
+        height: $size;
+
+        &.webkit-old {
+            /* 
+            fixes https://bugs.webkit.org/show_bug.cgi?id=88587 for devices running older versions of Safari/Webkit.
+            Thanks @Apple for taking 10 years to fix this and not including this fix in older versions of Webkit.
+            */
+            translate: 0 0 calc(-1 * ($size / 2));
+        }
+
+        .face {
+            transform-origin: center center calc(-1 * ($size / 2));
+        }
+    }
+}
+
+@mixin elasticNav() {
+    nav > ul.full-width,
+    .social.social.full-width {
+        @for $i from 1 through 10 {
+            li:first-child:nth-last-child(#{$i}),
+            li:first-child:nth-last-child(#{$i}) ~ li {
+                width: math.div(100%, $i);
+            }
+        }
+    }
+
+    .content-cube > .face > .face-content {
+        padding: 8px; /* TODO: Replace padding changes with character count width? */
+    }
+}
+
+@media only screen and (max-width: 806px) {
+    @include elasticNav();
+}
+
+@include content-cube(
+    calc(100vmin - 120px)
+); /* TODO: make pixel offset based on perspective */
 
 .field {
     background-color: $color-content-secondary;
