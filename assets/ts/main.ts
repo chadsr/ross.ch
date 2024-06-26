@@ -172,6 +172,7 @@ const showStatusMessage = (
 document.addEventListener('DOMContentLoaded', function () {
     const cube = document.getElementById(CUBE_ID);
     if (cube) {
+        console.log(navigator.userAgent);
         if (navigator.userAgent.indexOf('AppleWebkit') !== -1) {
             console.log('AppleWebkit');
 
