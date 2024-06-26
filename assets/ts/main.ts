@@ -265,13 +265,22 @@ document.addEventListener('DOMContentLoaded', function () {
                                     }
                                 })
                                 .catch((error: AxiosError) => {
-                                    let errorMessage: string = error.name;
-                                    if (error.response) {
+                                    let errorMessage: string = '';
+
+                                    if (
+                                        error.response &&
+                                        error.response.data &&
+                                        error.response.status < 500 &&
+                                        error.response.status != 404
+                                    ) {
                                         const responseData = error.response
                                             .data as ResponseData;
                                         errorMessage = JSON.stringify(
                                             responseData.message
                                         );
+                                    } else {
+                                        errorMessage =
+                                            'Server issue. Please try again later.';
                                     }
 
                                     showStatusMessage(
