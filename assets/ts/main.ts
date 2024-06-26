@@ -201,6 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (webkitMatch) {
             const webkitVersion = webkitMatch[1];
+            console.log(navigator.userAgent);
             console.log(`Webkit: ${webkitVersion}`);
             if (compareVersions(webkitVersion, WEBKIT_FIX_VERSION) === -1) {
                 // Enable fix for old AppleWebkit versions, not supporting CSS transforms on 3D elements
