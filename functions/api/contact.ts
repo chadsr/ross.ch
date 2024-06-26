@@ -1,5 +1,5 @@
 import { Resend } from 'resend';
-import { readMessage, readKey } from 'openpgp/lightweight';
+import { readMessage } from 'openpgp/lightweight';
 
 /**
  * POST /api/contact
@@ -20,35 +20,41 @@ export const onRequestPost: PagesFunction<Env> = async (ctx) => {
     }
 
     const formData = await ctx.request.formData();
-    const messageString: string | null = formData.get('message');
-    if (!messageString) {
+    const messageArmored: string | null = formData.get('message');
+    if (!messageArmored) {
         return new Response(null, {
             status: 400,
             statusText: 'Message Required',
         });
     }
 
-    const message = await readMessage({ armoredMessage: messageString });
-
-    // Verify the message signature
-    const pubkeyString = await ctx.env.MAIN.get('PUBKEY');
-    if (!pubkeyString) {
-        throw new Error('Could not fetch public key');
-    }
-    const pubkey = await readKey({ armoredKey: pubkeyString });
-    const result = await message.verify([pubkey]);
-    if (!result[0].verified) {
-        return new Response('Invalid message signature', {
-            status: 400,
-        });
-    }
+    const message = await readMessage({ armoredMessage: messageArmored }).catch(
+        () => {
+            console.log('Invalid OpenPGP Message', message);
+            return new Response(null, {
+                status: 400,
+                statusText: 'Invalid OpenPGP Message',
+            });
+        }
+    );
 
     const resend = new Resend(ctx.env.RESEND_API_KEY);
     const { data, error } = await resend.emails.send({
+        headers: {
+            protocol: 'application/pgp-encrypted',
+            contentType: 'multipart/encrypted',
+            'Content-Disposition': 'inline; filename="msg.asc"',
+        },
         from: ctx.env.EMAIL_SENDER_ADDRESS,
         to: ctx.env.EMAIL_RECIPIENT_ADDRESS,
         subject: 'Contact form - New Message!',
-        text: messageString,
+        text: '',
+        attachments: [
+            {
+                filename: 'msg.asc',
+                content: messageArmored,
+            },
+        ],
     });
 
     if (error) {

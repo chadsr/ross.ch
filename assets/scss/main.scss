@@ -496,22 +496,6 @@ nav {
             height: 32px;
             @extend %transition-ease-in-out;
 
-            &::after {
-                display: inline-block;
-                content: '•';
-                color: $color-text-highlight;
-                @extend %macula;
-                z-index: 4;
-                font-size: 42px;
-                position: relative;
-                transform: rotateX(-60deg) translate3d(0, 50%, 0);
-                height: 32px;
-                width: inherit;
-                top: -18px;
-                opacity: 0;
-                transition: opacity 200ms ease-out;
-            }
-
             &.selected {
                 &::after {
                     opacity: 0.5;
@@ -887,20 +871,12 @@ footer {
     }
 }
 
-@property --cube-margin {
-    syntax: '<length>';
-    inherits: false;
-    initial-value: 10vh;
-}
-
 .content-cube {
     position: relative;
     transform-style: preserve-3d;
-    margin-top: var(
-        --cube-margin
-    ); /* Allows for the top face to be shown in the perspective */
+    margin-top: 10vh; /* Allows for the top face to be shown in the perspective */
     top: calc(
-        var(--cube-margin) * -1 / pi
+        10vh * -1 / pi
     ); /* Offset to center the cube, with transformed top face */
 
     &.rotate {

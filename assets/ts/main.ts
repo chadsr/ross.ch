@@ -1,7 +1,11 @@
+import axios from 'axios';
+
 // local function imports
 import SwipeNav from './swipe';
 import EscherCubes from './escher';
 import { FormMessage } from './contact';
+
+const API_CONTACT = '/api/contact';
 
 // Key event codes
 const LEFT_ARROW = 'ArrowLeft';
@@ -13,10 +17,13 @@ const CONTACT_FORM_BUTTON = 'contact-submit';
 const CUBE_ID = 'content-cube';
 const FORM_WORKER_ID = 'form-worker';
 
-const FORM_RESET_TIMEOUT = 3000;
+const FORM_RESET_TIMEOUT = 4000;
 const SWIPE_NAVIGATION_THRESHOLD = 50;
 
-const SUCCESS_MESSAGE = 'Success!';
+const CLASS_SUCCESS = 'success';
+const CLASS_ERROR = 'error';
+const SUCCESS_MESSAGE = 'Your message was sent!';
+const ERROR_MESSAGE = 'Error!';
 
 // Freaky Escher stuff
 const BG_Y_OFFSET = -0.5; // Offset from y origin for the background rendering (so cube starts halfway offscreen)
@@ -43,17 +50,13 @@ let windowHeight = window.innerHeight;
 
 let formWorker: Worker | undefined = undefined;
 
-declare global {
-    interface Window {
-        webkit?: Webkit;
-    }
-
-    interface Webkit {
-        messageHandlers?: unknown;
-    }
+interface ContactForm extends HTMLFormElement {
+    fullName: HTMLInputElement;
+    email: HTMLInputElement;
+    message: HTMLTextAreaElement;
 }
 
-function renderBackground() {
+const renderBackground = () => {
     const isoCubeSize = window.innerHeight / NUM_CUBES_Y;
     EscherCubes.render(
         BG_CONTAINER_Id,
@@ -65,9 +68,9 @@ function renderBackground() {
         ISO_PADDING,
         true
     );
-}
+};
 
-function rotateTo(side: number) {
+const rotateTo = (side: number) => {
     if (side == MAX_SIDE + 1) {
         side = MIN_SIDE;
     } else if (side == MIN_SIDE - 1) {
@@ -115,7 +118,24 @@ function rotateTo(side: number) {
 
         currentSide = side;
     }
-}
+};
+
+const showStatusMessage = (
+    message: string,
+    statusClass: string,
+    formButtonElement: HTMLButtonElement,
+    timeoutMs: number
+) => {
+    const buttonText = formButtonElement.innerText;
+
+    formButtonElement.classList.add(statusClass);
+    formButtonElement.innerText = message;
+
+    setTimeout(() => {
+        formButtonElement.classList.remove(statusClass);
+        formButtonElement.innerText = buttonText;
+    }, timeoutMs);
+};
 
 document.addEventListener('DOMContentLoaded', function () {
     const cube = document.getElementById(CUBE_ID);
@@ -127,15 +147,8 @@ document.addEventListener('DOMContentLoaded', function () {
             MAX_SIDE,
             rotateTo
         );
-
-        if (
-            (window.webkit && window.webkit.messageHandlers) ||
-            (navigator.userAgent.indexOf('Safari') !== -1 &&
-                navigator.userAgent.indexOf('Chrome') === -1)
-        ) {
-            cube.classList.add('webkit');
-        }
     }
+
     // Menu cube rotate events
     for (const [navId, rotateValue] of Object.entries(NAV_MAPPING)) {
         const navButton = document.getElementById(navId);
@@ -148,10 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     renderBackground();
 
-    const contactForm = <HTMLFormElement>(
-        document.getElementById(CONTACT_FORM_ID)
-    );
-
+    const contactForm = <ContactForm>document.getElementById(CONTACT_FORM_ID);
     if (contactForm) {
         const contactFormBtn = <HTMLButtonElement>(
             document.getElementById(CONTACT_FORM_BUTTON)
@@ -165,20 +175,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 const workerPath = formWorkerScript.getAttribute('src');
                 if (workerPath) {
                     formWorker = new Worker(workerPath);
-
-                    contactForm.addEventListener('submit', (submitEvent) => {
-                        submitEvent.preventDefault();
-
-                        if (formWorker) {
-                            const formMessage: FormMessage = {
-                                name: contactForm.fullName.value.toString(),
-                                email: contactForm.email.value.toString(),
-                                message: contactForm.message.value.toString(),
-                            };
-
-                            formWorker.postMessage(formMessage);
-                        }
-                    });
 
                     // Listen for the worker to send an encrypted message back
                     formWorker.addEventListener(
@@ -197,20 +193,54 @@ document.addEventListener('DOMContentLoaded', function () {
                                     submitEvent.preventDefault();
                                 }
                             );
-                            apiForm.submit();
 
-                            // Give the user a success message and reset the form after a timeout
-                            const submitBtnText = contactFormBtn.innerText;
-                            contactFormBtn.classList.add('success');
-                            contactFormBtn.innerText = SUCCESS_MESSAGE;
-
-                            setTimeout(() => {
-                                contactFormBtn.classList.remove('success');
-                                contactFormBtn.innerText = submitBtnText;
-                            }, FORM_RESET_TIMEOUT);
-                            contactForm.reset();
+                            axios
+                                .postForm(API_CONTACT, apiForm)
+                                .then((response) => {
+                                    if (response.status === 200) {
+                                        // Give the user a success message and reset the form after a timeout
+                                        showStatusMessage(
+                                            SUCCESS_MESSAGE,
+                                            CLASS_SUCCESS,
+                                            contactFormBtn,
+                                            FORM_RESET_TIMEOUT
+                                        );
+                                        contactForm.reset();
+                                    } else {
+                                        throw new Error(response.data);
+                                    }
+                                })
+                                .catch((error: Error) => {
+                                    showStatusMessage(
+                                        `${ERROR_MESSAGE} ${error.message}`,
+                                        CLASS_ERROR,
+                                        contactFormBtn,
+                                        FORM_RESET_TIMEOUT
+                                    );
+                                    // don't reset the form on error, so the user can try again
+                                });
                         }
                     );
+
+                    contactForm.addEventListener('submit', (submitEvent) => {
+                        submitEvent.preventDefault();
+
+                        if (
+                            contactForm.fullName.value &&
+                            contactForm.email.value &&
+                            contactForm.message.value
+                        ) {
+                            if (formWorker) {
+                                const formMessage: FormMessage = {
+                                    name: contactForm.fullName.value,
+                                    email: contactForm.email.value,
+                                    message: contactForm.message.value,
+                                };
+
+                                formWorker.postMessage(formMessage);
+                            }
+                        }
+                    });
                 }
             }
         } else {
