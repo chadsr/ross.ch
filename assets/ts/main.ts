@@ -18,7 +18,7 @@ const CUBE_ID = 'content-cube';
 const FORM_WORKER_ID = 'form-worker';
 
 const FORM_RESET_TIMEOUT = 4000;
-const SWIPE_NAVIGATION_THRESHOLD = 50;
+const SWIPE_NAVIGATION_THRESHOLD = 100;
 
 const CLASS_SUCCESS = 'success';
 const CLASS_ERROR = 'error';
