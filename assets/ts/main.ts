@@ -173,6 +173,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const cube = document.getElementById(CUBE_ID);
     if (cube) {
         if (navigator.userAgent.indexOf('AppleWebkit') !== -1) {
+            console.log('AppleWebkit');
+
             const webkitMatch = navigator.userAgent.match(
                 /Version\/(\d+(\.\d+)*)/
             );
