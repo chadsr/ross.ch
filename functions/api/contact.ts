@@ -38,7 +38,14 @@ export const onRequestPost: PagesFunction<Env> = async (ctx) => {
         }
     );
 
-    const resend = new Resend(ctx.env.RESEND_API_KEY);
+    let resend: Resend | null = null;
+    try {
+        resend = new Resend(ctx.env.RESEND_API_KEY);
+    } catch (error) {
+        console.log('Resend error', error);
+        throw new Error('Email provider error');
+    }
+
     const { data, error } = await resend.emails.send({
         headers: {
             protocol: 'application/pgp-encrypted',
