@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 /Version\/(\d+(\.\d+)*)/
             );
 
-            console.log(webkitMatch);
+            console.log('match', webkitMatch);
 
             if (webkitMatch) {
                 const webkitVersion = parseFloat(webkitMatch[1]);
