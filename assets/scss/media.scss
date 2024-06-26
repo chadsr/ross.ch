@@ -10,10 +10,10 @@
         width: $size;
         height: $size;
 
-        &.webkit {
+        &.webkit-old {
             /* 
-            fixes https://bugs.webkit.org/show_bug.cgi?id=88587
-            TODO: remove if that bug is ever fixed
+            fixes https://bugs.webkit.org/show_bug.cgi?id=88587 for devices running older versions of Safari/Webkit.
+            Thanks @Apple for taking 10 years to fix this and not including this fix in older versions of Webkit.
             */
             translate: 0 0 (-(math.div($size, 2)));
         }

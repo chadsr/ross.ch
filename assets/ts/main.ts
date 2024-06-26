@@ -32,6 +32,9 @@ const CLASS_SUCCESS = 'success';
 const CLASS_ERROR = 'error';
 const ERROR_MESSAGE_PREFIX = 'Error!';
 
+const WEBKIT_FIX_VERSION = '614.3.7';
+const WEBKIT_FIX_CLASS = 'webkit-old';
+
 // Freaky Escher stuff
 const BG_Y_OFFSET = -0.5; // Offset from y origin for the background rendering (so cube starts halfway offscreen)
 const BG_CONTAINER_Id = 'background';
@@ -57,16 +60,6 @@ let windowHeight = window.innerHeight;
 
 let formButtonText = '';
 let formWorker: Worker | undefined = undefined;
-
-declare global {
-    interface Window {
-        webkit?: Webkit;
-    }
-
-    interface Webkit {
-        messageHandlers?: unknown;
-    }
-}
 
 /**
  * Interface for the ContactForm type. This defines the structure of the contact form fields.
@@ -176,16 +169,42 @@ const showStatusMessage = (
     }, timeoutMs);
 };
 
+/**
+ * Compare two version strings in semver format and determine if the second version is newer or older.
+ *
+ * @param {string} version1 - The first version to compare
+ * @param {string} version2 - The second version to compare
+ * @return {number} Returns 1 if version1 is newer, 1 if version2 is newer, or 0 if they are equal.
+ */
+const compareVersions = (version1: string, version2: string) => {
+    const [major1, minor1, patch1] = version1.split('.').map(Number);
+    const [major2, minor2, patch2] = version2.split('.').map(Number);
+
+    if (major1 < major2) return -1; // version1 is older
+    if (major1 > major2) return 1; // version1 is newer
+
+    if (minor1 < minor2) return -1; // version1 is older
+    if (minor1 > minor2) return 1; // version1 is newer
+
+    if (patch1 < patch2) return -1; // version1 is older
+    if (patch1 > patch2) return 1; // version1 is newer
+
+    return 0; // versions are equal
+};
+
 document.addEventListener('DOMContentLoaded', function () {
     const cube = document.getElementById(CUBE_ID);
     if (cube) {
-        if (
-            (window.webkit && window.webkit.messageHandlers) ||
-            (navigator.userAgent.indexOf('Safari') !== -1 &&
-                navigator.userAgent.indexOf('Chrome') === -1)
-        ) {
-            // Enable fix for iOS Safari not supporting CSS transforms on 3D elements
-            cube.classList.add('webkit');
+        const webkitMatch = navigator.userAgent.match(
+            /AppleWebKit\/(\d+(\.\d+)*)/
+        );
+
+        if (webkitMatch) {
+            const webkitVersion = webkitMatch[1];
+            if (compareVersions(webkitVersion, WEBKIT_FIX_VERSION) === -1) {
+                // Enable fix for old AppleWebkit versions, not supporting CSS transforms on 3D elements
+                cube.classList.add(WEBKIT_FIX_CLASS);
+            }
         }
 
         new SwipeNav(
