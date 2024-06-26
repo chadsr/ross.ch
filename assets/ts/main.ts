@@ -50,6 +50,16 @@ let windowHeight = window.innerHeight;
 let formButtonText = '';
 let formWorker: Worker | undefined = undefined;
 
+declare global {
+    interface Window {
+        webkit?: Webkit;
+    }
+
+    interface Webkit {
+        messageHandlers?: unknown;
+    }
+}
+
 interface ContactForm extends HTMLFormElement {
     fullName: HTMLInputElement;
     email: HTMLInputElement;
@@ -140,6 +150,15 @@ const showStatusMessage = (
 document.addEventListener('DOMContentLoaded', function () {
     const cube = document.getElementById(CUBE_ID);
     if (cube) {
+        if (
+            (window.webkit && window.webkit.messageHandlers) ||
+            (navigator.userAgent.indexOf('Safari') !== -1 &&
+                navigator.userAgent.indexOf('Chrome') === -1)
+        ) {
+            // Enable fix for iOS Safari not supporting CSS transforms on 3D elements
+            cube.classList.add('webkit');
+        }
+
         new SwipeNav(
             CUBE_ID,
             SWIPE_NAVIGATION_THRESHOLD,
