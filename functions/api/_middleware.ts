@@ -12,13 +12,23 @@ export const onRequestOptions: PagesFunction<Env> = async () => {
 };
 
 const errorHandling: PagesFunction<Env> = async (ctx) => {
+    const errorResponseData: ResponseData = {
+        status: 'error',
+        message: 'unknown error',
+    };
+
     try {
         return await ctx.next();
     } catch (err: unknown) {
         if (err instanceof Error) {
-            return new Response(`${err.message}`, { status: 500 });
+            errorResponseData.message = err.message;
+            return new Response(JSON.stringify(errorResponseData), {
+                status: 500,
+            });
         }
-        return new Response('unknown error', { status: 500 });
+        return new Response(JSON.stringify(errorResponseData), {
+            status: 500,
+        });
     }
 };
 
@@ -29,5 +39,5 @@ const setHeaders: PagesFunction<Env> = async (ctx) => {
     return response;
 };
 
-// Set CORS/Error handling to all /api responses
+// Set Error handling/CORS to all /api responses
 export const onRequest = [errorHandling, setHeaders];

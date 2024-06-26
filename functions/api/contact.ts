@@ -71,5 +71,10 @@ export const onRequestPost: PagesFunction<Env> = async (ctx) => {
 
     console.log('Email sent', data);
 
-    return new Response('Success', { status: 200 });
+    const responseData: ResponseData = {
+        status: 'ok',
+        message: 'Your message has been sent!',
+    };
+
+    return new Response(JSON.stringify(responseData), { status: 200 });
 };

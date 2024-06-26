@@ -16,6 +16,11 @@
         "strict": true,
         "skipLibCheck": true
     },
+    "include": [
+        "api/**/*.ts",
+        "worker-configuration.d.ts",
+        "../assets/ts/responses.d.ts"
+    ],
     "exclude": [
         "test/**/*"
     ]

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import postForm, { AxiosError } from 'axios';
 
 // local function imports
 import SwipeNav from './swipe';
@@ -22,8 +22,7 @@ const SWIPE_NAVIGATION_THRESHOLD = 50;
 
 const CLASS_SUCCESS = 'success';
 const CLASS_ERROR = 'error';
-const SUCCESS_MESSAGE = 'Your message was sent!';
-const ERROR_MESSAGE = 'Error!';
+const ERROR_MESSAGE_PREFIX = 'Error!';
 
 // Freaky Escher stuff
 const BG_Y_OFFSET = -0.5; // Offset from y origin for the background rendering (so cube starts halfway offscreen)
@@ -48,6 +47,7 @@ let currentSide = MIN_SIDE;
 
 let windowHeight = window.innerHeight;
 
+let formButtonText = '';
 let formWorker: Worker | undefined = undefined;
 
 interface ContactForm extends HTMLFormElement {
@@ -126,7 +126,7 @@ const showStatusMessage = (
     formButtonElement: HTMLButtonElement,
     timeoutMs: number
 ) => {
-    const buttonText = formButtonElement.innerText;
+    const buttonText = formButtonText;
 
     formButtonElement.classList.add(statusClass);
     formButtonElement.innerText = message;
@@ -166,6 +166,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const contactFormBtn = <HTMLButtonElement>(
             document.getElementById(CONTACT_FORM_BUTTON)
         );
+        formButtonText = contactFormBtn.innerText;
+
         if (window.Worker) {
             const formWorkerScript = document.getElementById(
                 FORM_WORKER_ID
@@ -194,13 +196,15 @@ document.addEventListener('DOMContentLoaded', function () {
                                 }
                             );
 
-                            axios
-                                .postForm(API_CONTACT, apiForm)
+                            postForm(API_CONTACT, apiForm)
                                 .then((response) => {
                                     if (response.status === 200) {
+                                        const responseData =
+                                            response.data as ResponseData;
+
                                         // Give the user a success message and reset the form after a timeout
                                         showStatusMessage(
-                                            SUCCESS_MESSAGE,
+                                            responseData.message,
                                             CLASS_SUCCESS,
                                             contactFormBtn,
                                             FORM_RESET_TIMEOUT
@@ -210,9 +214,18 @@ document.addEventListener('DOMContentLoaded', function () {
                                         throw new Error(response.data);
                                     }
                                 })
-                                .catch((error: Error) => {
+                                .catch((error: AxiosError) => {
+                                    let errorMessage: string = error.name;
+                                    if (error.response) {
+                                        const responseData = error.response
+                                            .data as ResponseData;
+                                        errorMessage = JSON.stringify(
+                                            responseData.message
+                                        );
+                                    }
+
                                     showStatusMessage(
-                                        `${ERROR_MESSAGE} ${error.message}`,
+                                        `${ERROR_MESSAGE_PREFIX} ${errorMessage}`,
                                         CLASS_ERROR,
                                         contactFormBtn,
                                         FORM_RESET_TIMEOUT
