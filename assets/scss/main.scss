@@ -71,7 +71,7 @@ $h2-size: clamp(1.4rem, -0.875rem + 8.333vmin, 2rem);
 $threed-height: 100%;
 $threed-angle: 60deg;
 
-$outline-size: 2px;
+$outline-size: 1px;
 
 @font-face {
     font-family: $font-macula;
@@ -561,7 +561,7 @@ button {
 
 .link {
     font-weight: 700;
-    border-bottom: 2px dashed $color-text;
+    border-bottom: $outline-size dashed $color-text;
     &:hover,
     &:focus {
         color: $color-text-link-highlight;
@@ -1067,7 +1067,9 @@ button.threed-top {
         outline: none;
 
         > textarea {
-            margin-top: -2px; /* offset the textarea to match outline on other input elements */
+            margin-top: calc(
+                -1 * $outline-size
+            ); /* offset the textarea to match outline on other input elements */
             background-color: $color-content-secondary;
             width: 100%;
             min-height: 128px;
