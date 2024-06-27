@@ -1,23 +1,23 @@
-<li class="feed-item blog-post field hover perspective">
+<li class="feed-item blog-post field hover">
     <a href="{{ .RelPermalink }}" rel="noopener" target="_blank">
-        <div class="title feed-item-title perspective">
+        <div class="title feed-item-title hover threed-top perspective">
             <h3>{{ .Title }}</h3>
         </div>
         <div>
             {{ $readingTime := div (float .WordCount) .Site.Params.reading_speed }}
             {{ $readingTime = math.Ceil $readingTime }}
-            <span class="feed-item-info feed-item-date">
+            <span class=" feed-item-info feed-item-date hover">
                 {{- partial "icons/calendar.html" . -}}
                 {{ .Params.date.Format .Site.Params.dateFormat }}
             </span>
-            <span class="feed-item-info feed-item-stats">
+            <span class="feed-item-info feed-item-stats hover">
                 {{- partial "icons/hourglass.html" . -}}
                 {{ $readingTime }} min
             </span>
         </div>
         <div class="feed-item-info feed-item-tags">
             {{ range $tag := (.Params.tags) }}
-            <span class="feed-item-tag">{{ $tag }}</span>
+            <span class="feed-item-tag hover">{{ $tag }}</span>
             {{ end}}
         </div>
         <div class="feed-item-content">

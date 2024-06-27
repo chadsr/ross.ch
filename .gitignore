@@ -7,3 +7,5 @@ hugo_stats.json
 .wrangler
 .dev.vars
 *.log
+content/blog/posts/test.md
+content/project/posts/test.md

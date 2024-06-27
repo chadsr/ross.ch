@@ -13,24 +13,22 @@
     </div>
     <form id="contact-form">
         <fieldset>
-            <div class="field perspective hover">
-                <label class="title perspective" for="i-name">Name</label>
+            <div class="field hover">
+                <label class="title threed-top perspective hover" for="i-name">Name</label>
                 <input id="i-name" name="fullName" type="text" autocomplete="name" pattern="[A-Za-z]+"
                     placeholder="Your name" required="required">
             </div>
-            <div class="field perspective hover">
-                <label class="title perspective" for="i-email">Email</label>
+            <div class="field hover">
+                <label class="title threed-top perspective hover" for="i-email">Email</label>
                 <input id="i-email" name="email" type="email" autocomplete="email" placeholder="Your email"
                     required="required">
             </div>
-            <div class="field perspective text-area hover">
-                <label class="title perspective" for="i-message">Message</label>
-                <textarea id="i-message" name="message" placeholder="Enter your message here" rows="3"
+            <div class="field text-area hover">
+                <label class="title threed-top perspective hover" for="i-message">Message</label>
+                <textarea id="i-message" class="hover" name="message" placeholder="Enter your message here" rows="3"
                     required="required"></textarea>
             </div>
-            <div class="perspective">
-                <button id="contact-submit" name="submit" type="submit">Submit</button>
-            </div>
+            <button id="contact-submit" class="perspective threed-top hover" name="submit" type="submit">Submit</button>
         </fieldset>
     </form>
     <form class="hidden" id="contact-form-encrypted">
