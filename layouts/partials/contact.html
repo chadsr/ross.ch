@@ -1,0 +1,37 @@
+<section class="content-section content-contact">
+    <div class="title-section">
+
+        <h2>Contact</h2>
+        <p class="title-wordmark">
+            <em>
+                Messages are <a class="link" href="https://en.wikipedia.org/wiki/End-to-end_encryption"
+                    target="_blank">end-to-end
+                    encrypted</a> in your browser, using my
+                <a class="link" href="/files/2B7340DB13C85766.asc" target="_blank">public key</a>.
+            </em>
+        </p>
+    </div>
+    <form id="contact-form">
+        <fieldset>
+            <div class="field hover">
+                <label class="title threed-top perspective hover" for="i-name">Name</label>
+                <input id="i-name" name="fullName" type="text" autocomplete="name" pattern="[A-Za-z]+"
+                    placeholder="Your name" required="required">
+            </div>
+            <div class="field hover">
+                <label class="title threed-top perspective hover" for="i-email">Email</label>
+                <input id="i-email" name="email" type="email" autocomplete="email" placeholder="Your email"
+                    required="required">
+            </div>
+            <div class="field text-area hover">
+                <label class="title threed-top perspective hover" for="i-message">Message</label>
+                <textarea id="i-message" class="hover" name="message" placeholder="Enter your message here" rows="3"
+                    required="required"></textarea>
+            </div>
+            <button id="contact-submit" class="perspective threed-top hover" name="submit" type="submit">Submit</button>
+        </fieldset>
+    </form>
+    <form class="hidden" id="contact-form-encrypted">
+        <textarea name="message" required="required"></textarea>
+    </form>
+</section>

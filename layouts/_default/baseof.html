@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+{{- partial "head.html" . -}}
+
+<body>
+    <div class="center-container{{ if .IsHome }} center-vertical{{ end }}">
+        {{- partial "background.html" . -}}
+        {{- block "main" . }}{{- end }}
+    </div>
+    {{- partial "footer.html" . -}}
+</body>
+
+</html>

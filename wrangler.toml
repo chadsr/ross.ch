@@ -1,0 +1,9 @@
+name = "ross-ch"
+# pages_build_output_dir = "./public"
+compatibility_date = "2024-06-20"
+compatibility_flags = ["nodejs_compat"]
+services = [{ binding = "ASSETS", service = "ross-ch" }]
+
+[[kv_namespaces]]
+binding = "MAIN"
+id = "475f2f5b9c4545ceb235d37e282383cd"

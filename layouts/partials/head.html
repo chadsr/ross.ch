@@ -1,0 +1,54 @@
+<head>
+    <meta charset="utf-8">
+    <title>
+        {{ if not .IsHome }}
+        {{ if .Page.Title }}
+        {{ .Page.Title }} -
+        {{ end }}
+        {{ end }}
+        {{ .Site.Title }}
+    </title>
+    <meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="darkreader-lock">
+    {{ $main := resources.Get "scss/main.scss" }}
+    {{ $opts := dict
+    "transpiler" "dartsass"
+    "targetPath" "css/main.css"
+    "vars" site.Params.styles
+    "enableSourceMap" (not hugo.IsProduction)
+    }}
+    {{ if hugo.IsProduction }}
+    {{ $main = $main | toCSS $opts | postCSS | minify | fingerprint | resources.PostProcess}}
+    {{ else }}
+    {{ $main = $main | toCSS $opts | postCSS | fingerprint }}
+    {{ end }}
+
+    <link rel="stylesheet" href="{{ $main.RelPermalink }}" integrity="{{ $main.Data.Integrity }}"
+        crossorigin="anonymous">
+
+    {{ $opts := dict
+    "targetPath" "js/main.js"
+    "enableSourceMap" (not hugo.IsProduction)
+    }}
+    {{ with resources.Get "ts/main.ts" | js.Build $opts | minify | fingerprint }}
+    <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
+    {{ end }}
+
+    {{ if .IsHome }}
+    {{ $opts := dict
+    "targetPath" "js/formWorker.js"
+    "enableSourceMap" (not hugo.IsProduction)
+    }}
+    {{ with resources.Get "ts/formWorker.ts" | js.Build $opts | minify | fingerprint }}
+    <script id="form-worker" src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
+    {{ end }}
+    {{ end }}
+
+    <link rel="shortcut alternate icon" type="image/png" href="/favicon.png">
+    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg">
+
+    {{ with .OutputFormats.Get "rss" -}}
+    {{ printf `
+    <link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}
+    {{ end }}
+</head>

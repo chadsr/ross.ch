@@ -1,0 +1,20 @@
+<article class="post">
+    <div class="post-header perspective threed-top">
+        <div class="title post-title">
+            <h1>{{ .Title }}</h1>
+        </div>
+        <div class="post-stats">
+            <span class="post-date">{{ .Params.date.Format .Site.Params.dateFormat }}</span>
+            <div class="post-tags">
+                {{ range $tag := (.Params.tags) }}
+                <span class="post-tag"><em>{{ $tag }}</em></span>
+                {{ end}}
+            </div>
+        </div>
+    </div>
+    <div class="post-content box-shadow">
+        <div class="post-text scrollable">
+            {{ .Content }}
+        </div>
+    </div>
+</article>

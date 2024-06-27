@@ -1,0 +1,20 @@
+<li class="feed-item repo field hover perspective">
+    <a href="{{ .RelPermalink }}" rel="noopener" target="_blank">
+        <div class="title repo-title feed-item-title perspective">
+            <h3>{{ .Title }}</h3>
+        </div>
+        <span class="repo-updated-date feed-item-date">Updated: {{ .Date }}</span>
+        <div class="repo-stats">
+            <span class="repo-language">{{ .Language }}</span>
+            <span class="repo-stars">{{ .Stars }}</span>
+        </div>
+        <div class="repo-tags feed-item-tags">
+            {{ range $tag := (.Params.tags) }}
+            <span class="repo-tag feed-item-tag">{{ $tag }}</span>
+            {{ end}}
+        </div>
+        <div class="feed-item-content repo-content">
+            <p class="repo-summary feed-item-summary">{{ .Summary }}</p>
+        </div>
+    </a>
+</li>

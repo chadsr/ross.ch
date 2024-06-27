@@ -1,0 +1,14 @@
+<section class="content-section content-work">
+    <div class="title-section">
+        <h2>Work</h2>
+        <p class="title-wordmark"><em>A non-definitive collection of my work and projects.</em></p>
+    </div>
+    <ul class="feed">
+        {{ $feedTypes := slice "project" "repo" }}
+        {{ range ( where .Site.RegularPages "Type" "in" $feedTypes ).ByDate.Reverse }}
+        {{ .Render "li" }}
+        {{ else }}
+        <h3 class="no-content"><em>Nothing here... Check back later</em></h3>
+        {{ end }}
+    </ul>
+</section>
