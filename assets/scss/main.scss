@@ -718,7 +718,6 @@ footer {
     }
 
     &::-webkit-scrollbar {
-        z-index: 99;
         width: 12px;
         background: $color-scrollbar-track;
     }
@@ -948,7 +947,7 @@ footer {
         }
 
         &.focus {
-            z-index: 2;
+            z-index: 3;
 
             > .face-content {
                 transform: translateZ(0);
