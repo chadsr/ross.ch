@@ -32,7 +32,7 @@ const CLASS_SUCCESS = 'success';
 const CLASS_ERROR = 'error';
 const ERROR_MESSAGE_PREFIX = 'Error!';
 
-const SAFARI_FIX_VERSION = '16.2'; // TODO: Find exact version where this is fixed
+const SAFARI_FIX_VERSION = '17.5.1'; // TODO: Find exact version where this is fixed
 const WEBKIT_FIX_CLASS = 'webkit-old';
 
 // Freaky Escher stuff
