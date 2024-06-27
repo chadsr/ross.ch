@@ -4,6 +4,12 @@ title = 'Ross Chadwick'
 enableRobotsTXT = true
 summaryLength = 10
 
+[params]
+dateFormat = "02 Jan 2006"
+description = "Hacker, explorer, maker of strange things that are sometimes useful."
+[params.author]
+name = 'Ross Chadwick'
+
 [outputs]
 home = ['html', 'rss']
 section = ['html']
@@ -13,11 +19,6 @@ term = ['html']
 [taxonomies]
 category = 'categories'
 tag = 'tags'
-
-[params]
-dateFormat = "02 Jan 2006"
-[params.author]
-name = 'Ross Chadwick'
 
 [languages]
 [languages.en]
