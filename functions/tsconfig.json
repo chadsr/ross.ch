@@ -19,7 +19,7 @@
     "include": [
         "api/**/*.ts",
         "worker-configuration.d.ts",
-        "../assets/ts/responses.d.ts"
+        "../assets/ts/interfaces.d.ts"
     ],
     "exclude": [
         "test/**/*"

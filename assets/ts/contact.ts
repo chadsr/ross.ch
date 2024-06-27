@@ -12,9 +12,9 @@ export const encryptMessage = async (
 ): Promise<string> => {
     const publicKey = await readKey({ armoredKey: pubkeyArmored });
     const emailText = `Name: ${formMessage.name}
-    Email: ${formMessage.email}
-    Message:
-    ${formMessage.message}`;
+Email: ${formMessage.email}
+Message:
+${formMessage.message}`;
 
     const encryptedMessage = (await encrypt({
         message: await createMessage({
