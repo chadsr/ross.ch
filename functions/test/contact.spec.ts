@@ -27,7 +27,7 @@ describe('Contact form worker', () => {
     it('responds with 415 when wrong content-type set', async () => {
         const request = new IncomingRequest('http://example.com/api/contact', {
             method: 'POST',
-            headers: { 'content-type': 'application/json' },
+            headers: { 'content-type': 'multipart/form-data' },
         });
         const ctx = createPagesEventContext<
             typeof contactFunction.onRequestPost

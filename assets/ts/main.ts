@@ -1,4 +1,4 @@
-import postForm, { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 
 // local function imports
 import SwipeNav, { ISwipeFunc } from './swipe';
@@ -20,7 +20,6 @@ const ELEMENTS_ROTATE_DISABLED = [
 ];
 
 const CONTACT_FORM_ID = 'contact-form';
-const CONTACT_FORM_API_ID = 'contact-form-encrypted';
 const CONTACT_FORM_BUTTON = 'contact-submit';
 const CUBE_ID = 'content-cube';
 const FORM_WORKER_ID = 'form-worker';
@@ -264,20 +263,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         'message',
                         (event: MessageEvent) => {
                             const encryptedMessage = event.data as string;
+                            const contactData: RequestContact = {
+                                message: encryptedMessage,
+                            };
 
-                            // Send the encrypted message to the API endpoint via a hidden form
-                            const apiForm = <HTMLFormElement>(
-                                document.getElementById(CONTACT_FORM_API_ID)
-                            );
-                            apiForm.message.value = encryptedMessage;
-                            apiForm.addEventListener(
-                                'submit',
-                                (submitEvent) => {
-                                    submitEvent.preventDefault();
-                                }
-                            );
-
-                            postForm(API_CONTACT, apiForm)
+                            axios
+                                .post(API_CONTACT, contactData)
                                 .then((response) => {
                                     if (response.status === 200) {
                                         const responseData =
@@ -343,6 +334,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                 formWorker.postMessage(formMessage);
                             }
                         }
+
+                        return false;
                     });
                 }
             }

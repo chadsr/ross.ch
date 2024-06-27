@@ -5,7 +5,7 @@ import { readMessage } from 'openpgp/lightweight';
  * POST /api/contact
  */
 export const onRequestPost: PagesFunction<Env> = async (ctx) => {
-    const contentType = ctx.request.headers.get('content-type');
+    const contentType = ctx.request.headers.get('content-type') as string;
     if (!contentType) {
         return new Response(null, {
             status: 400,
@@ -13,14 +13,14 @@ export const onRequestPost: PagesFunction<Env> = async (ctx) => {
         });
     }
 
-    if (!contentType.includes('form')) {
+    if (!contentType.includes('application/json')) {
         return new Response('Unsupported content-type', {
             status: 415,
         });
     }
 
-    const formData = await ctx.request.formData();
-    const messageArmored: string | null = formData.get('message');
+    const contactData = (await ctx.request.data) as RequestContact;
+    const messageArmored: string | null = contactData.message;
     if (!messageArmored) {
         return new Response(null, {
             status: 400,
