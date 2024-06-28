@@ -124,23 +124,29 @@ export default class SwipeNav {
     };
 
     /**
-     * The touchend event handler. It detects whether the swipe gesture is a left or right swipe and executes the swipeFunc in the appropriate index direction.
+     * The touchend event handler. It determines whether a swipe action has been performed and, if so, adjusts the current index accordingly.
      *
-     * @param {TouchEvent} event - The touch event that triggered this function
+     * @param none
      */
     private touchEnd = () => {
-        if (this.endX - this.startX > this.swipeThreshold) {
-            // Swipe right
-            if (this.currentIndex > this.minIndex) {
-                this.currentIndex -= 1;
-                this.swipeFunc(this.currentIndex);
-            }
-        } else if (this.startX - this.endX > this.swipeThreshold) {
-            // Swipe left
-            if (this.currentIndex < this.maxIndex) {
-                this.currentIndex += 1;
-                this.swipeFunc(this.currentIndex);
+        // both values should be non-zero
+        if (this.endX !== 0 && this.startX !== 0) {
+            if (this.endX - this.startX > this.swipeThreshold) {
+                // Swipe right
+                if (this.currentIndex > this.minIndex) {
+                    this.currentIndex -= 1;
+                    this.swipeFunc(this.currentIndex);
+                }
+            } else if (this.startX - this.endX > this.swipeThreshold) {
+                // Swipe left
+                if (this.currentIndex < this.maxIndex) {
+                    this.currentIndex += 1;
+                    this.swipeFunc(this.currentIndex);
+                }
             }
         }
+
+        this.startX = 0;
+        this.endX = 0;
     };
 }
