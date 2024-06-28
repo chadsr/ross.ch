@@ -243,6 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const contactForm = <ContactForm>document.getElementById(CONTACT_FORM_ID);
     if (contactForm) {
+        const contactFieldset = contactForm.querySelector('fieldset');
         const contactFormBtn = <HTMLButtonElement>(
             document.getElementById(CONTACT_FORM_BUTTON)
         );
@@ -313,11 +314,19 @@ document.addEventListener('DOMContentLoaded', function () {
                                     );
                                     // don't reset the form on error, so the user can try again
                                 });
+
+                            if (contactFieldset) {
+                                contactFieldset.disabled = false;
+                            }
                         }
                     );
 
                     contactForm.addEventListener('submit', (submitEvent) => {
                         submitEvent.preventDefault();
+
+                        if (contactFieldset) {
+                            contactFieldset.disabled = true;
+                        }
 
                         if (
                             contactForm.fullName.value &&
