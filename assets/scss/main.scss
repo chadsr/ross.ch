@@ -392,6 +392,10 @@ ul {
                 align-items: center;
                 text-align: center;
 
+                .icon {
+                    @extend %hover;
+                }
+
                 &.linkedin {
                     &:hover {
                         > .social-icon {
@@ -732,13 +736,17 @@ footer {
     }
 }
 
+%hover {
+    cursor: pointer;
+    @extend %transition-ease-in-out;
+}
+
 .scrollable {
     @extend %scrollable;
 }
 
 .hover {
-    cursor: pointer;
-    @extend %transition-ease-in-out;
+    @extend %hover;
 }
 
 .iso {
@@ -947,7 +955,7 @@ footer {
         }
 
         &.focus {
-            z-index: 3;
+            z-index: 99;
 
             > .face-content {
                 transform: translateZ(0);
@@ -1143,6 +1151,10 @@ button.threed-top {
         .feed-item-content {
             padding: 8px 16px 16px 16px;
         }
+
+        .icon {
+            @extend %hover;
+        }
     }
 }
 
@@ -1201,8 +1213,21 @@ button.threed-top {
         color: $color-banner-text;
         @extend %outline-dashed;
 
+        .icon {
+            width: 12px;
+            height: 12px;
+        }
+
         > .post-stats {
             padding: 0 0 8px 0;
+
+            > .post-stats-item {
+                margin-bottom: 4px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+            }
         }
     }
 

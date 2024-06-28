@@ -4,8 +4,19 @@
             <h1>{{ .Title }}</h1>
         </div>
         <div class="post-stats">
-            <span class="post-date">{{ .Params.date.Format .Site.Params.dateFormat }}</span>
-            <div class="post-tags">
+            <div class="post-stats-item post-date">
+                <span>
+                    {{ .Params.date.Format .Site.Params.dateFormat }}{{if .Lastmod}}<em>, Updated {{ .Lastmod.Format
+                        .Site.Params.dateFormat }}</em>{{ end }}
+                </span>
+            </div>
+            {{ $readingTime := div (float .WordCount) .Site.Params.reading_speed }}
+            {{ $readingTime = math.Ceil $readingTime }}
+            <div class="post-stats-item post-read-time">
+                {{- partial "icons/hourglass.html" . -}}
+                {{ $readingTime }} minute read
+            </div>
+            <div class="post-stats-item post-tags">
                 {{ range $tag := (.Params.tags) }}
                 <span class="post-tag"><em>{{ $tag }}</em></span>
                 {{ end}}
