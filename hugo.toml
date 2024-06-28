@@ -7,6 +7,8 @@ summaryLength = 10
 [params]
 dateFormat = "02 Jan 2006"
 description = "Hacker, explorer, maker of strange things that are sometimes useful."
+logo = "favicon.svg"
+copyright = "Copyright (c)"
 [params.author]
 name = 'Ross Chadwick'
 
