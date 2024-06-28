@@ -60,6 +60,18 @@ let windowHeight = window.innerHeight;
 let formButtonText = '';
 let formWorker: Worker | undefined = undefined;
 
+declare global {
+    interface Window {
+        webkit?: {
+            messageHandlers: {
+                [x: string]: {
+                    postMessage: (data: string) => void;
+                };
+            };
+        };
+    }
+}
+
 /**
  * Interface for the ContactForm type. This defines the structure of the contact form fields.
  */
@@ -201,7 +213,10 @@ const compareVersions = (version1: string, version2: string) => {
 document.addEventListener('DOMContentLoaded', function () {
     const cube = document.getElementById(CUBE_ID);
     if (cube) {
-        if (navigator.userAgent.indexOf('AppleWebKit') !== -1) {
+        if (
+            window.webkit &&
+            navigator.userAgent.indexOf('AppleWebKit') !== -1
+        ) {
             const versionMatch = navigator.userAgent.match(
                 /Version\/(\d+(\.\d+)*)/
             );
