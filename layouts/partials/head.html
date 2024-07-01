@@ -20,7 +20,7 @@
 
     {{- partial "schema.html" . -}}
 
-    {{ $main := resources.Get "scss/main.scss" }}
+    {{ $css := resources.Get "scss/main.scss" }}
     {{ $opts := dict
     "transpiler" "dartsass"
     "targetPath" "css/main.css"
@@ -28,28 +28,30 @@
     "enableSourceMap" (not hugo.IsProduction)
     }}
     {{ if hugo.IsProduction }}
-    {{ $main = $main | toCSS $opts | postCSS | minify | fingerprint | resources.PostProcess}}
+    {{ $css = $css | toCSS $opts | postCSS | minify | fingerprint | resources.PostProcess}}
     {{ else }}
-    {{ $main = $main | toCSS $opts | postCSS | fingerprint }}
+    {{ $css = $css | toCSS $opts | postCSS | fingerprint }}
     {{ end }}
 
-    <link rel="stylesheet" href="{{ $main.RelPermalink }}" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" crossorigin="anonymous">
 
     {{ $opts := dict
     "targetPath" "js/main.js"
+    "minify" true
     "enableSourceMap" (not hugo.IsProduction)
     }}
     {{ with resources.Get "ts/main.ts" | js.Build $opts | minify | fingerprint }}
-    <script src="{{ .RelPermalink }}" defer></script>
+    <script src="{{ .RelPermalink }}" crossorigin="anonymous" defer></script>
     {{ end }}
 
     {{ if .IsHome }}
     {{ $opts := dict
     "targetPath" "js/formWorker.js"
+    "minify" true
     "enableSourceMap" (not hugo.IsProduction)
     }}
     {{ with resources.Get "ts/formWorker.ts" | js.Build $opts | minify | fingerprint }}
-    <script id="form-worker" src="{{ .RelPermalink }}" defer></script>
+    <script id="form-worker" src="{{ .RelPermalink }}" crossorigin="anonymous" defer></script>
     {{ end }}
     {{ end }}
 
