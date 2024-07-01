@@ -41,7 +41,7 @@
     "enableSourceMap" (not hugo.IsProduction)
     }}
     {{ with resources.Get "ts/main.ts" | js.Build $opts | minify | fingerprint }}
-    <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
+    <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" defer></script>
     {{ end }}
 
     {{ if .IsHome }}
@@ -51,7 +51,7 @@
     "enableSourceMap" (not hugo.IsProduction)
     }}
     {{ with resources.Get "ts/formWorker.ts" | js.Build $opts | minify | fingerprint }}
-    <script id="form-worker" src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
+    <script id="form-worker" src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" defer></script>
     {{ end }}
     {{ end }}
 
