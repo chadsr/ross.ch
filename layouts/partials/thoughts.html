@@ -7,7 +7,9 @@
         {{ range ( where .Site.RegularPages "Type" "blog" ).ByDate.Reverse }}
         {{ .Render "li" }}
         {{ else }}
-        <h3 class="no-content"><em>Nothing here... Check back later</em></h3>
+        <li>
+            <h3 class="no-content"><em>Nothing here... Check back later</em></h3>
+        </li>
         {{ end }}
     </ul>
 </section>
