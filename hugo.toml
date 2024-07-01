@@ -9,6 +9,7 @@ dateFormat = "02 Jan 2006"
 description = "Hacker, explorer, maker of strange things that are sometimes useful."
 logo = "favicon.svg"
 copyright = "Copyright (c)"
+license = "https://raw.githubusercontent.com/chadsr/ross.ch/master/LICENSE"
 [params.author]
 name = 'Ross Chadwick'
 

@@ -1,7 +1,8 @@
-{{ $copyright_year := now.Format "2006" }}
+{{ $org_name := .Site.Title }}
 {{ $author := .Site.Params.author.name }}
+{{ $copyright_year := now.Format "2006" }}
+{{ $copyright_notice := $author | printf "%s %s" $copyright_year | printf "%s %s" .Site.Params.Copyright }}
 {{ if .IsHome -}}
-{{ $license := .Site.Params.Copyright | printf "%s %s" $copyright_year | printf "%s %s" $author }}
 <script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -10,11 +11,13 @@
     "url": "{{ .Site.BaseURL }}",
     "description": "{{ .Site.Params.description }}",
     "thumbnailUrl": "{{ .Site.Params.Logo | absURL }}",
-    "license": "{{ $license }}",
+    "license": "{{ .Site.Params.License }}",
+    "copyrightHolder" : "{{ $org_name }}",
+    "copyrightYear" : "{{ $copyright_year }}",
+    "copyrightNotice": "{{ $copyright_notice }}"
 }
 </script>
 {{ else if .IsPage }}
-{{ $org_name := .Site.Title }}
 {{ $year_modified := .Lastmod.Format "2006" }}
 {{ $copyright_notice := $author | printf "%s %s" $copyright_year
 | printf "%s-%s" $year_modified | printf "%s %s" .Site.Params.Copyright }}
