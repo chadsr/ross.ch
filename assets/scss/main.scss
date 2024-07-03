@@ -47,6 +47,12 @@ $color-hover-iso-bottom: $color-hover-iso-back;
 $color-hover-iso-back-left: $color-hover-iso-back;
 $color-hover-iso-back-right: $color-hover-iso-back;
 
+$brightness-hover-iso-top: 120%;
+$brightness-hover-iso-left: 100%;
+$brightness-hover-iso-right: 90%;
+$brightness-hover-iso-back: 60%;
+$brightness-hover-iso-bottom: 60%;
+
 $color-linkedin: rgb(72, 117, 180);
 $color-github: rgb(71, 139, 230);
 $color-gitlab: rgb(252, 109, 38);
@@ -789,30 +795,32 @@ footer {
 
         > .iso-left {
             fill: $color-hover-iso-left;
+            filter: brightness($brightness-hover-iso-left);
         }
 
         > .iso-right {
             fill: $color-hover-iso-right;
+            filter: brightness($brightness-hover-iso-right);
         }
 
         > .iso-top {
             fill: $color-hover-iso-top;
-            filter: brightness(120%);
+            filter: brightness($brightness-hover-iso-top);
         }
 
         > .iso-back-left {
             fill: $color-hover-iso-back-left;
-            filter: brightness(60%);
+            filter: brightness($brightness-hover-iso-back);
         }
 
         > .iso-back-right {
             fill: $color-hover-iso-back-right;
-            filter: brightness(60%);
+            filter: brightness($brightness-hover-iso-back);
         }
 
         > .iso-bottom {
             fill: $color-hover-iso-bottom;
-            filter: brightness(40%);
+            filter: brightness($brightness-hover-iso-bottom);
         }
     }
 }
