@@ -38,6 +38,7 @@
     "prettier": "^3.3.2",
     "resend": "^3.4.0",
     "stylelint": "^16.6.1",
+    "stylelint-config-standard-scss": "^13.1.0",
     "stylelint-prettier": "^5.0.0",
     "stylelint-scss": "^6.3.2",
     "typescript": "^5.5.3",
