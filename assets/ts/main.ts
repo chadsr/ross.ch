@@ -4,6 +4,8 @@ import axios, { AxiosError } from 'axios';
 import SwipeNav, { ISwipeFunc } from './swipe';
 import EscherCubes from './escher';
 import { FormMessage } from './contact';
+import { FORM_WORKER_TARGET } from './formWorker';
+import { FormWorkerData, RequestContact, ResponseData } from './interfaces';
 
 const API_CONTACT = '/api/contact';
 
@@ -253,103 +255,102 @@ document.addEventListener('DOMContentLoaded', function () {
             const formWorkerScript = document.getElementById(
                 FORM_WORKER_ID
             ) as HTMLScriptElement;
+            const workerPath = formWorkerScript.getAttribute('src');
+            if (workerPath) {
+                formWorker = new Worker(workerPath);
 
-            if (formWorkerScript) {
-                const workerPath = formWorkerScript.getAttribute('src');
-                if (workerPath) {
-                    formWorker = new Worker(workerPath);
+                // Listen for the worker to send an encrypted message back
+                formWorker.onmessage = (event: MessageEvent) => {
+                    const encryptedMessage = event.data as string;
+                    const contactData: RequestContact = {
+                        message: encryptedMessage,
+                    };
 
-                    // Listen for the worker to send an encrypted message back
-                    formWorker.addEventListener(
-                        'message',
-                        (event: MessageEvent) => {
-                            const encryptedMessage = event.data as string;
-                            const contactData: RequestContact = {
-                                message: encryptedMessage,
+                    axios
+                        .post(API_CONTACT, contactData)
+                        .then((response) => {
+                            if (response.status === 200) {
+                                const responseData =
+                                    response.data as ResponseData;
+
+                                // Give the user a success message and reset the form after a timeout
+                                showStatusMessage(
+                                    responseData.message,
+                                    CLASS_SUCCESS,
+                                    contactFormBtn,
+                                    FORM_RESET_TIMEOUT
+                                );
+                                contactForm.reset();
+                            } else {
+                                throw new Error(response.data);
+                            }
+                        })
+                        .catch((error: AxiosError) => {
+                            let errorMessage: string = '';
+
+                            if (
+                                error.response &&
+                                error.response.data &&
+                                error.response.status < 500 &&
+                                error.response.status != 404
+                            ) {
+                                const responseData = error.response
+                                    .data as ResponseData;
+                                errorMessage = JSON.stringify(
+                                    responseData.message
+                                );
+                            } else {
+                                errorMessage =
+                                    'Server issue. Please try again later.';
+                            }
+
+                            showStatusMessage(
+                                `${ERROR_MESSAGE_PREFIX} ${errorMessage}`,
+                                CLASS_ERROR,
+                                contactFormBtn,
+                                FORM_RESET_TIMEOUT
+                            );
+                            // don't reset the form on error, so the user can try again
+                        });
+
+                    if (contactFieldset) {
+                        contactFieldset.disabled = false;
+                    }
+                };
+
+                contactForm.addEventListener('submit', (submitEvent) => {
+                    submitEvent.preventDefault();
+
+                    if (contactFieldset) {
+                        contactFieldset.disabled = true;
+                    }
+
+                    if (
+                        contactForm.fullName.value &&
+                        contactForm.email.value &&
+                        contactForm.message.value
+                    ) {
+                        if (formWorker) {
+                            const formMessage: FormMessage = {
+                                name: contactForm.fullName.value,
+                                email: contactForm.email.value,
+                                message: contactForm.message.value,
                             };
 
-                            axios
-                                .post(API_CONTACT, contactData)
-                                .then((response) => {
-                                    if (response.status === 200) {
-                                        const responseData =
-                                            response.data as ResponseData;
+                            const formWorkerData: FormWorkerData = {
+                                data: formMessage,
+                                target: FORM_WORKER_TARGET,
+                            };
 
-                                        // Give the user a success message and reset the form after a timeout
-                                        showStatusMessage(
-                                            responseData.message,
-                                            CLASS_SUCCESS,
-                                            contactFormBtn,
-                                            FORM_RESET_TIMEOUT
-                                        );
-                                        contactForm.reset();
-                                    } else {
-                                        throw new Error(response.data);
-                                    }
-                                })
-                                .catch((error: AxiosError) => {
-                                    let errorMessage: string = '';
-
-                                    if (
-                                        error.response &&
-                                        error.response.data &&
-                                        error.response.status < 500 &&
-                                        error.response.status != 404
-                                    ) {
-                                        const responseData = error.response
-                                            .data as ResponseData;
-                                        errorMessage = JSON.stringify(
-                                            responseData.message
-                                        );
-                                    } else {
-                                        errorMessage =
-                                            'Server issue. Please try again later.';
-                                    }
-
-                                    showStatusMessage(
-                                        `${ERROR_MESSAGE_PREFIX} ${errorMessage}`,
-                                        CLASS_ERROR,
-                                        contactFormBtn,
-                                        FORM_RESET_TIMEOUT
-                                    );
-                                    // don't reset the form on error, so the user can try again
-                                });
-
-                            if (contactFieldset) {
-                                contactFieldset.disabled = false;
-                            }
+                            formWorker.postMessage(formWorkerData);
                         }
-                    );
+                    }
 
-                    contactForm.addEventListener('submit', (submitEvent) => {
-                        submitEvent.preventDefault();
-
-                        if (contactFieldset) {
-                            contactFieldset.disabled = true;
-                        }
-
-                        if (
-                            contactForm.fullName.value &&
-                            contactForm.email.value &&
-                            contactForm.message.value
-                        ) {
-                            if (formWorker) {
-                                const formMessage: FormMessage = {
-                                    name: contactForm.fullName.value,
-                                    email: contactForm.email.value,
-                                    message: contactForm.message.value,
-                                };
-
-                                formWorker.postMessage(formMessage);
-                            }
-                        }
-
-                        return false;
-                    });
-                }
+                    return false;
+                });
+            } else {
+                // TODO: form handling without web worker
             }
-        } else {
-            // TODO: form handling without web worker
         }
     }
 });
