@@ -1,3 +1,5 @@
+import { FormMessage } from './contact';
+
 interface ResponseData {
     status: string;
     message: string;
@@ -5,4 +7,9 @@ interface ResponseData {
 
 interface RequestContact {
     message: string;
+}
+
+interface FormWorkerData {
+    data: FormMessage;
+    target: string;
 }
