@@ -1,18 +1,18 @@
 /* Colours */
-$color-background: light-dark(rgb(230, 230, 230), rgb(8, 8, 8));
+$color-background: light-dark(rgb(230 230 230), rgb(8 8 8));
 $color-background-transparent: light-dark(
-    rgba(230, 230, 230, 0.8),
-    rgba(8, 8, 8, 0.6)
+    rgb(230 230 230 / 80%),
+    rgb(8 8 8 / 60%)
 );
-$color-content: light-dark(rgba(250, 250, 250, 99%), rgba(40, 40, 40, 99%));
-$content-highlight: light-dark(rgb(118, 54, 207), rgb(156, 89, 250));
+$color-content: light-dark(rgb(250 250 250 / 99%), rgb(40 40 40 / 99%));
+$content-highlight: light-dark(rgb(118 54 207), rgb(156 89 250));
 $gradient-background: linear-gradient(
     to right,
-    rgb(108, 52, 185) 30%,
+    rgb(108 52 185) 30%,
     $content-highlight 60%,
-    rgb(199, 35, 87) 100%
+    rgb(199 35 87) 100%
 );
-$color-content-secondary: light-dark(rgb(240, 240, 240), rgb(20, 20, 20));
+$color-content-secondary: light-dark(rgb(240 240 240), rgb(20 20 20));
 $color-content-secondary-highlight: $color-content-secondary;
 $color-text: light-dark(#333, white);
 $color-text-highlight: $content-highlight;
@@ -20,13 +20,12 @@ $color-text-link-highlight: $content-highlight;
 $color-text-placeholder: $color-text;
 $color-text-placeholder-highlight: $color-text-highlight;
 $color-banner-text: white;
-$color-banner-background: light-dark(rgb(90, 90, 90), rgb(25, 25, 25));
+$color-banner-background: light-dark(rgb(90 90 90), rgb(25 25 25));
 $color-scrollbar-track: $color-content;
 $color-scrollbar-thumb: $color-banner-background;
-$color-outline: light-dark(rgba(100, 100, 100, 0.4), rgba(200, 200, 200, 0.2));
+$color-outline: light-dark(rgb(100 100 100 / 40%), rgb(200 200 200 / 20%));
 $filter-face-no-focus: brightness(80%);
-$color-shadow: rgba(51, 51, 51, 0.5);
-
+$color-shadow: rgb(51 51 51 / 50%);
 $color-iso: $color-background;
 $color-iso-top: $color-iso;
 $color-iso-left: $color-iso;
@@ -34,49 +33,39 @@ $color-iso-right: $color-iso;
 $color-iso-back-left: $color-iso;
 $color-iso-back-right: $color-iso;
 $color-iso-bottom: $color-iso;
-
 $color-iso-stroke: $content-highlight;
-
 $color-hover-iso-front: $color-background-transparent;
 $color-hover-iso-top: $color-hover-iso-front;
 $color-hover-iso-left: $color-hover-iso-front;
 $color-hover-iso-right: $color-hover-iso-front;
-
-$color-hover-iso-back: rgba(138, 65, 241, 0.2);
+$color-hover-iso-back: rgb(138 65 241 / 20%);
 $color-hover-iso-bottom: $color-hover-iso-back;
 $color-hover-iso-back-left: $color-hover-iso-back;
 $color-hover-iso-back-right: $color-hover-iso-back;
-
 $brightness-hover-iso-top: 120%;
 $brightness-hover-iso-left: 100%;
 $brightness-hover-iso-right: 90%;
 $brightness-hover-iso-back: 60%;
 $brightness-hover-iso-bottom: 60%;
-
-$color-linkedin: rgb(72, 117, 180);
-$color-github: rgb(71, 139, 230);
-$color-gitlab: rgb(252, 109, 38);
-$color-keybase: rgb(76, 142, 255);
-$color-bluesky: rgb(0, 77, 170);
-$color-gpg: rgb(0, 147, 221);
-
-$color-success: light-dark(rgb(60, 150, 60), rgb(64, 173, 64));
-$color-error: light-dark(rgb(150, 14, 14), rgb(165, 24, 24));
+$color-linkedin: rgb(72 117 180);
+$color-github: rgb(71 139 230);
+$color-gitlab: rgb(252 109 38);
+$color-keybase: rgb(76 142 255);
+$color-bluesky: rgb(0 77 170);
+$color-gpg: rgb(0 147 221);
+$color-success: light-dark(rgb(60 150 60), rgb(64 173 64));
+$color-error: light-dark(rgb(150 14 14), rgb(165 24 24));
 
 /* Fonts */
 $font-macula: 'Macula';
 $font-space-grotesk: 'Space Grotesk Variable';
 $font-main: $font-space-grotesk;
-
 $width-nav-button: 120px;
 $width-icon-button: 48px;
-
 $h1-size: clamp(1.6rem, -0.875rem + 8.333vmin, 4rem);
 $h2-size: clamp(1.4rem, -0.875rem + 8.333vmin, 2rem);
-
 $threed-height: 100%;
 $threed-angle: 60deg;
-
 $outline-size: 1px;
 
 @font-face {
@@ -94,7 +83,7 @@ $outline-size: 1px;
     font-style: normal;
     font-display: swap;
     font-weight: 300 700;
-    src: url(/fonts/space-grotesk-latin-wght-normal.woff2)
+    src: url('/fonts/space-grotesk-latin-wght-normal.woff2')
         format('woff2-variations');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
         U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
@@ -134,6 +123,7 @@ $outline-size: 1px;
 
 %form-input-style {
     @extend %form-layout;
+
     font-family: $font-main;
     font-size: 16px;
     background-color: $color-content-secondary;
@@ -150,15 +140,18 @@ $outline-size: 1px;
 
     &::placeholder {
         @extend %transition-ease-in-out;
+
         color: $color-text-placeholder;
     }
 }
 
 %field-title-style {
     @extend %form-layout;
+
     display: inline-block;
     background-color: $color-banner-background;
     font-weight: bold;
+
     @extend %outline-dashed;
 }
 
@@ -197,7 +190,6 @@ $outline-size: 1px;
     content: '';
     display: inline-block;
     position: absolute;
-    width: inherit;
     height: var(--threed-height);
     transform-style: preserve-3d;
     perspective: inherit;
@@ -206,6 +198,7 @@ $outline-size: 1px;
     width: 100%;
     left: 0;
     content-visibility: visible;
+
     @extend %outline-dashed;
 }
 
@@ -214,6 +207,7 @@ $outline-size: 1px;
 
     &::before {
         @extend %threed-side;
+
         filter: light-dark(brightness(110%), brightness(120%));
         transform: rotateX(calc($threed-angle))
             translate3d(0, -50%, calc(-1 * $outline-size / 2));
@@ -226,6 +220,7 @@ $outline-size: 1px;
 
     &::after {
         @extend %threed-side;
+
         filter: light-dark(brightness(90%), brightness(80%));
         transform: rotateX(calc(-1 * $threed-angle))
             translate3d(0, 50%, calc(-1 * $outline-size / 2));
@@ -235,7 +230,6 @@ $outline-size: 1px;
 
 /* Main styles */
 ::selection {
-    background-image: none;
     background: $content-highlight;
     color: white;
 }
@@ -248,12 +242,16 @@ html {
 
 body {
     @extend %no-select;
+
+    width: 100%;
+    height: 100%;
     font-family: $font-main;
     color: $color-text;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    text-rendering: geometricPrecision;
+    text-align: center;
+    text-rendering: geometricprecision;
 }
 
 main {
@@ -266,6 +264,7 @@ main {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
     @extend %full-screen;
 }
 
@@ -274,11 +273,12 @@ main {
     align-items: center;
 }
 
-@keyframes headingGradientAnimation {
+@keyframes heading-gradient-animation {
     0% {
         background-position: 0;
     }
-    to {
+
+    100% {
         background-position: 100%;
     }
 }
@@ -288,7 +288,7 @@ main {
     background-clip: text;
     color: transparent;
     background-size: 300% 100%;
-    animation: headingGradientAnimation 15s linear infinite;
+    animation: heading-gradient-animation 15s linear infinite;
     animation-direction: alternate;
 }
 
@@ -300,13 +300,16 @@ h1 {
     display: inline-block;
     font-size: $h1-size;
     margin: 0;
+
     @extend %macula;
 }
 
 h2 {
     display: inline-block;
     font-size: $h2-size;
+
     @extend %macula;
+
     margin: 0;
 }
 
@@ -321,9 +324,6 @@ h4 {
     font-size: 16px;
     margin: 0;
     font-weight: 700;
-    .superscript {
-        font-size: 0.6em;
-    }
 }
 
 h5 {
@@ -339,6 +339,7 @@ a {
     color: $color-text;
     text-decoration: none;
     cursor: pointer;
+
     @extend %transition-ease-in-out;
 
     &:active {
@@ -361,7 +362,8 @@ strong {
 textarea {
     line-height: 32px;
     text-decoration: none;
-    margin: 0 0 -4px 0;
+    margin: 0 0 -4px;
+
     @extend %form-input-style;
 }
 
@@ -369,89 +371,13 @@ li {
     @extend %list;
 }
 
-nav,
-footer {
-    ul > li > a {
-        width: 100%;
-        height: 100%;
-        display: inline-block;
-    }
-}
-
 ul {
     @extend %list;
+}
 
-    &.social {
-        display: flex;
-        justify-content: left;
-        align-items: flex-start;
-        flex-wrap: nowrap;
-        height: inherit;
-
-        > li {
-            width: $width-icon-button;
-            height: inherit;
-
-            > .social-link {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-
-                .icon {
-                    @extend %hover;
-                }
-
-                &.linkedin {
-                    &:hover {
-                        > .social-icon {
-                            fill: $color-linkedin;
-                        }
-                    }
-                }
-
-                &.bluesky {
-                    &:hover {
-                        > .social-icon {
-                            fill: $color-bluesky;
-                        }
-                    }
-                }
-
-                &.github {
-                    &:hover {
-                        > .social-icon {
-                            fill: $color-github;
-                        }
-                    }
-                }
-
-                &.gitlab {
-                    &:hover {
-                        > .social-icon {
-                            fill: $color-gitlab;
-                        }
-                    }
-                }
-
-                &.keybase {
-                    &:hover {
-                        > .social-icon {
-                            fill: $color-keybase;
-                        }
-                    }
-                }
-
-                &.gpg {
-                    &:hover {
-                        > .social-icon {
-                            fill: $color-gpg;
-                        }
-                    }
-                }
-            }
-        }
-    }
+.superscript {
+    font-size: inherit;
+    vertical-align: super;
 }
 
 .full-screen {
@@ -463,6 +389,7 @@ ul {
     width: 18px;
     height: 18px;
     fill: $color-text;
+
     @extend %macula;
 }
 
@@ -471,7 +398,40 @@ ul {
     position: relative;
     width: 100%;
     top: 2px;
-    box-shadow: 0px 0px 4px 2px rgba(51, 51, 51, 0.5);
+    box-shadow: 0 0 4px 2px rgb(51 51 51 / 50%);
+}
+
+button {
+    cursor: pointer;
+    color: $color-banner-text;
+    min-height: 64px;
+    width: 100%;
+    padding: 0;
+    border: none;
+    font-weight: bolder;
+    font-size: 1em;
+
+    @extend %outline-dashed;
+    @extend %grotesk;
+
+    &.hover:hover {
+        background-color: $content-highlight;
+        outline-color: $content-highlight;
+    }
+
+    &.error,
+    &.error::before,
+    &.error::after,
+    &.error:hover {
+        background-color: $color-error;
+    }
+
+    &.success,
+    &.success::before,
+    &.success::after,
+    &.success:hover {
+        background-color: $color-success;
+    }
 }
 
 form {
@@ -480,10 +440,12 @@ form {
 
 fieldset {
     display: contents;
+
     @extend %form-layout;
 
     button {
         @extend %field-title-style;
+
         color: $color-banner-text;
     }
 }
@@ -510,14 +472,14 @@ nav {
                     color: $color-text-highlight;
                 }
             }
-
-            > a {
-                > h4 {
-                    line-height: 32px;
-                }
-            }
         }
     }
+}
+
+.nav-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .nav-home {
@@ -538,6 +500,7 @@ nav {
 
 .background {
     background-color: $color-background;
+
     @extend %full-screen;
 }
 
@@ -545,42 +508,15 @@ nav {
     margin: 32px 0;
 }
 
-body {
-    width: 100%;
-    height: 100%;
-    text-align: center;
-}
-
-button {
-    cursor: pointer;
-    color: $color-banner-text;
-    min-height: 64px;
-    width: 100%;
-    padding: 0;
-    border: none;
-    font-weight: bolder;
-    font-size: 1em;
-    @extend %outline-dashed;
-    @extend %grotesk;
-
-    &.hover:hover {
-        background-color: $content-highlight;
-        outline-color: $content-highlight;
-    }
-}
-
 .link {
     font-weight: 700;
     border-bottom: $outline-size dashed $color-text;
+
     &:hover,
     &:focus {
         color: $color-text-link-highlight;
         border-color: $color-text-link-highlight;
     }
-}
-
-.superscript {
-    vertical-align: super;
 }
 
 .banner {
@@ -615,23 +551,7 @@ button {
 
 .title-section {
     > .title-wordmark {
-        padding: 0 0 32px 0;
-    }
-}
-
-button {
-    &.error,
-    &.error::before,
-    &.error::after,
-    &.error:hover {
-        background-color: $color-error;
-    }
-
-    &.success,
-    &.success::before,
-    &.success::after,
-    &.success:hover {
-        background-color: $color-success;
+        padding: 0 0 32px;
     }
 }
 
@@ -667,24 +587,306 @@ footer {
     height: 32px;
     position: fixed;
     z-index: 3;
+
     @extend %outline-dashed;
 }
 
 header {
     top: 0;
     left: 0;
+
     @extend %threed-side-bottom;
 }
 
 footer {
     bottom: 0;
     left: 0;
+
     @extend %threed-side-top;
+}
+
+.field {
+    background-color: $color-content-secondary;
+
+    @extend %outline-dashed;
+
+    /* TODO: make this dynamic, based on 3d header height */
+    margin-bottom: 48px;
+
+    .title {
+        @extend %field-title-style;
+
+        h1,
+        h2,
+        h3 {
+            color: $color-banner-text;
+            margin: 8px 4px;
+        }
+    }
+
+    &.hover:hover {
+        outline-color: $content-highlight;
+        background-color: $color-content-secondary-highlight;
+
+        .title {
+            background-color: $content-highlight;
+            outline-color: $content-highlight;
+        }
+    }
+
+    &.text-area {
+        background-color: transparent;
+        outline: none;
+
+        > textarea {
+            margin-top: calc(-1 * $outline-size);
+
+            /* offset the textarea to match outline on other input elements */
+
+            background-color: $color-content-secondary;
+            width: 100%;
+            min-height: 128px;
+            box-sizing: border-box;
+            resize: vertical;
+
+            @extend %outline-dashed;
+        }
+
+        &.hover:hover {
+            > textarea {
+                outline-color: $content-highlight;
+                background-color: $color-content-secondary-highlight;
+            }
+        }
+    }
+
+    label.title {
+        color: $color-banner-text;
+        line-height: 32px;
+    }
+
+    input {
+        height: 32px;
+    }
+
+    > ul {
+        padding: 16px;
+        display: inline-block;
+    }
+}
+
+.field-text {
+    padding-bottom: 8px;
+    margin: 0 16px;
+}
+
+ul.social {
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    height: inherit;
+
+    > .social-li {
+        width: $width-icon-button;
+        height: inherit;
+
+        > .social-link {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+
+            .social-icon {
+                @extend %hover;
+            }
+
+            &.linkedin {
+                &:hover {
+                    > .social-icon {
+                        fill: $color-linkedin;
+                    }
+                }
+            }
+
+            &.bluesky {
+                &:hover {
+                    > .social-icon {
+                        fill: $color-bluesky;
+                    }
+                }
+            }
+
+            &.github {
+                &:hover {
+                    > .social-icon {
+                        fill: $color-github;
+                    }
+                }
+            }
+
+            &.gitlab {
+                &:hover {
+                    > .social-icon {
+                        fill: $color-gitlab;
+                    }
+                }
+            }
+
+            &.keybase {
+                &:hover {
+                    > .social-icon {
+                        fill: $color-keybase;
+                    }
+                }
+            }
+
+            &.gpg {
+                &:hover {
+                    > .social-icon {
+                        fill: $color-gpg;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Blog and Repositories */
+.repo-stars {
+    &::after {
+        margin-left: 4px;
+        content: '\2605';
+        font-size: 22px;
+    }
+}
+
+.feed-item-tag,
+.repo-stars,
+.repo-language {
+    color: $color-banner-text;
+    padding: 4px;
+    background-color: $color-banner-background;
+
+    @extend %outline-dashed;
+}
+
+.feed-item-summary,
+.feed-item-info {
+    color: $color-text;
+    margin: 0;
+}
+
+.feed-item-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 0;
+    font-style: italic;
+    font-size: 12px;
+    text-align: center;
+
+    > .icon {
+        padding: 0 4px 0 0;
+    }
+}
+
+.feed-item-tag {
+    padding: 4px 8px;
+    margin: 0 8px 0 0;
+}
+
+.feed-item-tags {
+    padding: 8px 0 0;
+}
+
+.post {
+    max-width: 80ch;
+    overflow: hidden;
+
+    > .post-header {
+        background-color: $color-banner-background;
+        color: $color-banner-text;
+
+        @extend %outline-dashed;
+
+        .icon {
+            width: 12px;
+            height: 12px;
+        }
+
+        > .post-stats {
+            padding: 0 0 8px;
+
+            > .post-stats-item {
+                margin-bottom: 4px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+            }
+        }
+    }
+
+    > .post-content {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        background-color: $color-content;
+        height: calc(100% - $h1-size - $h2-size - 128px);
+
+        @extend %outline-dashed;
+
+        top: calc(-1 * $outline-size);
+
+        > .post-text {
+            flex-grow: 1;
+            padding: 8px 16px;
+            text-align: left;
+
+            @extend %allow-select-text;
+        }
+    }
+}
+
+.feed {
+    box-sizing: border-box;
+
+    > .feed-item {
+        .icon {
+            @extend %hover;
+        }
+
+        &.hover:hover {
+            .feed-item-title,
+            .feed-item-tag,
+            .repo-language,
+            .repo-stars {
+                background-color: $content-highlight;
+            }
+
+            .feed-item-summary,
+            .feed-item-info {
+                color: $color-text;
+            }
+
+            .icon {
+                fill: $content-highlight;
+            }
+        }
+
+        .feed-item-content {
+            padding: 8px 16px 16px;
+        }
+    }
 }
 
 /* Escher cube background styles */
 .isobg {
     z-index: 0;
+
     @extend %full-screen;
 }
 
@@ -744,6 +946,7 @@ footer {
 
 %hover {
     cursor: pointer;
+
     @extend %transition-ease-in-out;
 }
 
@@ -757,7 +960,8 @@ footer {
 
 .iso {
     > .iso-face {
-        stroke-opacity: 0%;
+        stroke-opacity: 0;
+
         @extend %outline-dashed;
         @extend %stroke-network;
         @extend %transition-ease-in-out;
@@ -789,7 +993,8 @@ footer {
 
     &:hover {
         > .iso-face {
-            stroke-opacity: 100%;
+            stroke-opacity: 1;
+
             @extend %stroke-network-animation;
         }
 
@@ -882,6 +1087,7 @@ footer {
         will-change: transform;
         transition-property: transform;
         outline-offset: 0;
+
         @extend %transition-cube;
         @extend %outline-dashed;
 
@@ -891,8 +1097,7 @@ footer {
 
         > .face-content {
             display: flex;
-            overflow-y: hidden;
-            overflow-x: hidden;
+            overflow: hidden hidden;
             width: inherit;
             height: inherit;
             padding: 0 10%;
@@ -901,6 +1106,7 @@ footer {
             filter: $filter-face-no-focus;
             pointer-events: none;
             transform-style: flat;
+
             @extend %transition-shadow;
 
             .title-section > h2 {
@@ -917,12 +1123,11 @@ footer {
                     display: block;
 
                     li {
-                        padding: 8px 0 0 0;
+                        padding: 8px 0 0;
                         width: 100%;
                         text-align: left;
                         display: flex;
-                        flex-wrap: wrap;
-                        flex-direction: column;
+                        flex-flow: column wrap;
                         overflow-wrap: break-word;
 
                         p {
@@ -935,6 +1140,7 @@ footer {
 
                             &::before {
                                 @extend %macula;
+
                                 content: '>';
                                 padding: 0 8px 0 0;
                                 font-size: 32px;
@@ -946,7 +1152,7 @@ footer {
                             max-width: 100%;
 
                             > li {
-                                padding: 0 0 8px 0;
+                                padding: 0 0 8px;
 
                                 p::before {
                                     font-size: 32px;
@@ -969,6 +1175,7 @@ footer {
                 transform: translateZ(0);
                 filter: none;
                 pointer-events: auto;
+
                 @extend %scrollable;
             }
         }
@@ -1005,19 +1212,22 @@ button.threed-top {
 
     .content-cube {
         $cube-margin: 64px;
+
         width: $size;
         height: $size;
+
         $top-angle-radians: calc(90deg * (pi / 180));
+
         margin: calc(
-                $cube-margin + $size * $perspective-multiplier *
+                $cube-margin + ($size * $perspective-multiplier) *
                     (sin($top-angle-radians))
             )
-            0 $cube-margin 0;
+            0 $cube-margin;
 
         &.webkit-old {
             /* 
-            fixes https://bugs.webkit.org/show_bug.cgi?id=88587 for devices running older versions of Safari/Webkit.
-            Thanks @Apple for taking 10 years to fix this and not including this fix in older versions of Webkit.
+            fixes https://bugs.webkit.org/show_bug.cgi?id=88587 for devices running older versions of Safari/AppleWebkit.
+            Thanks @Apple for taking 10 years to fix this and not including this fix in older versions of AppleWebkit.
             */
             translate: 0 0 calc(-1 * ($size / 2));
         }
@@ -1031,11 +1241,11 @@ button.threed-top {
 @include content-cube(80vmin);
 
 /* Max out the cube size after 1000px */
-@media only screen and (min-width: 1000px) and (min-height: 1000px) {
+@media only screen and (width >=1000px) and (height >=1000px) {
     @include content-cube(936px);
 }
 
-@mixin elasticNav() {
+@mixin elastic-nav() {
     nav > ul.full-width,
     .social.social.full-width {
         @for $i from 1 through 10 {
@@ -1051,208 +1261,13 @@ button.threed-top {
     }
 }
 
-@media only screen and (max-width: 806px) {
-    @include elasticNav();
+@media only screen and (width <=806px) {
+    @include elastic-nav;
 
     .scrollable,
     .face-content {
         &::-webkit-scrollbar {
             width: 8px;
-        }
-    }
-}
-
-.field {
-    background-color: $color-content-secondary;
-    @extend %outline-dashed;
-    margin-bottom: 48px; /* TODO: make this dynamic, based on 3d header height */
-
-    &.hover:hover {
-        outline-color: $content-highlight;
-        background-color: $color-content-secondary-highlight;
-
-        .title {
-            background-color: $content-highlight;
-            outline-color: $content-highlight;
-        }
-    }
-
-    &.text-area {
-        background-color: transparent;
-        outline: none;
-
-        > textarea {
-            margin-top: calc(
-                -1 * $outline-size
-            ); /* offset the textarea to match outline on other input elements */
-            background-color: $color-content-secondary;
-            width: 100%;
-            min-height: 128px;
-            box-sizing: border-box;
-            resize: vertical;
-            @extend %outline-dashed;
-        }
-
-        &.hover:hover {
-            > textarea {
-                outline-color: $content-highlight;
-                background-color: $color-content-secondary-highlight;
-            }
-        }
-    }
-
-    .title {
-        @extend %field-title-style;
-
-        h1,
-        h2,
-        h3 {
-            color: $color-banner-text;
-            margin: 8px 4px;
-        }
-    }
-
-    label.title {
-        color: $color-banner-text;
-        line-height: 32px;
-    }
-
-    input {
-        height: 32px;
-    }
-
-    > ul {
-        padding: 16px;
-        display: inline-block;
-    }
-}
-
-.field-text {
-    padding-bottom: 8px;
-    margin: 0 16px;
-}
-
-/* Blog and Repositories */
-.feed {
-    box-sizing: border-box;
-
-    > .feed-item {
-        &.hover:hover {
-            .feed-item-title,
-            .feed-item-tag,
-            .feed-item-title,
-            .repo-language,
-            .repo-stars {
-                background-color: $content-highlight;
-            }
-
-            .feed-item-summary,
-            .feed-item-info {
-                color: $color-text;
-            }
-
-            .icon {
-                fill: $content-highlight;
-            }
-        }
-
-        .feed-item-content {
-            padding: 8px 16px 16px 16px;
-        }
-
-        .icon {
-            @extend %hover;
-        }
-    }
-}
-
-.repo-stars {
-    &::after {
-        margin-left: 4px;
-        content: '\2605';
-        font-size: 22px;
-    }
-}
-
-.feed-item-tag,
-.repo-stars,
-.repo-language {
-    color: $color-banner-text;
-    padding: 4px;
-    background-color: $color-banner-background;
-    @extend %outline-dashed;
-}
-
-.feed-item-summary,
-.feed-item-info {
-    color: $color-text;
-    margin: 0;
-}
-
-.feed-item-info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4px 0;
-    font-style: italic;
-    font-size: 12px;
-    text-align: center;
-
-    > .icon {
-        padding: 0 4px 0 0;
-    }
-}
-
-.feed-item-tag {
-    padding: 4px 8px;
-    margin: 0 8px 0 0;
-}
-
-.feed-item-tags {
-    padding: 8px 0 0 0;
-}
-
-.post {
-    max-width: 80ch;
-    overflow: hidden;
-
-    > .post-header {
-        background-color: $color-banner-background;
-        color: $color-banner-text;
-        @extend %outline-dashed;
-
-        .icon {
-            width: 12px;
-            height: 12px;
-        }
-
-        > .post-stats {
-            padding: 0 0 8px 0;
-
-            > .post-stats-item {
-                margin-bottom: 4px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 8px;
-            }
-        }
-    }
-
-    > .post-content {
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        background-color: $color-content;
-        height: calc(100% - $h1-size - $h2-size - 128px);
-        @extend %outline-dashed;
-        top: calc(-1 * $outline-size);
-
-        > .post-text {
-            flex-grow: 1;
-            padding: 8px 16px;
-            text-align: left;
-            @extend %allow-select-text;
         }
     }
 }
