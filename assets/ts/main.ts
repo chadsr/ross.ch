@@ -315,6 +315,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     if (contactFieldset) {
                         contactFieldset.disabled = false;
+                        contactFormBtn.disabled = false;
                     }
                 };
 
@@ -323,6 +324,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     if (contactFieldset) {
                         contactFieldset.disabled = true;
+                        contactFormBtn.disabled = true;
                     }
 
                     if (
