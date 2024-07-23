@@ -60,7 +60,6 @@ $color-error: light-dark(rgb(150 14 14), rgb(165 24 24));
 $font-macula: 'Macula';
 $font-space-grotesk: 'Space Grotesk Variable';
 $font-main: $font-space-grotesk;
-$width-nav-button: 120px;
 $width-icon-button: 48px;
 $h1-size: clamp(1.6rem, -0.875rem + 8.333vmin, 4rem);
 $h2-size: clamp(1.4rem, -0.875rem + 8.333vmin, 2rem);
@@ -463,8 +462,8 @@ nav {
         flex-wrap: nowrap;
 
         > li {
-            width: $width-nav-button;
             height: 32px;
+            padding: 0 16px;
 
             &:hover,
             &.selected {
@@ -1097,7 +1096,7 @@ ul.social {
 
         > .face-content {
             display: flex;
-            overflow: hidden hidden;
+            overflow: hidden;
             width: inherit;
             height: inherit;
             padding: 0 10%;
