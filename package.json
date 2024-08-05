@@ -42,7 +42,7 @@
     "stylelint-prettier": "^5.0.2",
     "stylelint-scss": "^6.3.2",
     "typescript": "^5.5.3",
-    "typescript-eslint": "^7.18.0",
+    "typescript-eslint": "^8.0.1",
     "vitest": "^1.5.3",
     "wrangler": "^3.63.1"
   },
