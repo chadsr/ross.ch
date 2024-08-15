@@ -47,7 +47,7 @@
     "wrangler": "^3.63.1"
   },
   "dependencies": {
-    "axios": "^1.7.2",
+    "axios": "^1.7.4",
     "openpgp": "^5.11.2"
   }
 }
