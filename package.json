@@ -41,7 +41,7 @@
     "stylelint-config-standard-scss": "^13.1.0",
     "stylelint-prettier": "^5.0.2",
     "stylelint-scss": "^6.3.2",
-    "typescript": "^5.5.3",
+    "typescript": "^5.5.4",
     "typescript-eslint": "^8.1.0",
     "vitest": "^1.5.3",
     "wrangler": "^3.63.1"
