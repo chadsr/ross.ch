@@ -623,7 +623,9 @@ footer {
         }
     }
 
-    &.hover:hover {
+    &.hover:hover,
+    &.hover:has(input:focus),
+    &.hover:has(textarea:focus) {
         outline-color: $content-highlight;
         background-color: $color-content-secondary-highlight;
 
@@ -651,7 +653,8 @@ footer {
             @extend %outline-dashed;
         }
 
-        &.hover:hover {
+        &.hover:hover,
+        &.hover:has(textarea:focus) {
             > textarea {
                 outline-color: $content-highlight;
                 background-color: $color-content-secondary-highlight;
