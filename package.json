@@ -5,6 +5,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "hugo --minify",
     "lint": "eslint . && stylelint **/*.scss",
     "lint-fix": "eslint --fix . && stylelint --fix **/*.scss",
     "prepare": "husky",
