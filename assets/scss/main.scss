@@ -66,6 +66,8 @@ $h2-size: clamp(1.4rem, -0.875rem + 8.333vmin, 2rem);
 $threed-height: 100%;
 $threed-angle: 60deg;
 $outline-size: 1px;
+$icon-size: 24px;
+$icon-size-social: 18px;
 
 @font-face {
     font-family: $font-macula;
@@ -385,8 +387,8 @@ ul {
 
 .icon {
     display: inline-block;
-    width: 18px;
-    height: 18px;
+    width: $icon-size;
+    height: $icon-size;
     fill: $color-text;
 
     @extend %macula;
@@ -702,6 +704,9 @@ ul.social {
             height: 100%;
 
             .social-icon {
+                width: $icon-size-social;
+                height: $icon-size-social;
+
                 @extend %hover;
             }
 
@@ -758,21 +763,33 @@ ul.social {
 
 /* Blog and Repositories */
 .repo-stars {
-    &::after {
-        margin-left: 4px;
+    &::before {
         content: '\2605';
-        font-size: 22px;
+        font-size: $icon-size;
+        line-height: $icon-size;
+
+        @extend %transition-ease-in-out;
     }
 }
 
-.feed-item-tag,
-.repo-stars,
-.repo-language {
+.feed-item-tag {
     color: $color-banner-text;
-    padding: 4px;
     background-color: $color-banner-background;
+    padding: 4px 8px;
 
     @extend %outline-dashed;
+}
+
+.feed-item-date,
+.repo-stars {
+    gap: 4px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    > p {
+        margin: 0;
+    }
 }
 
 .feed-item-summary,
@@ -783,25 +800,18 @@ ul.social {
 
 .feed-item-info {
     display: flex;
+    flex-flow: wrap;
     align-items: center;
+    gap: 8px;
     justify-content: center;
-    padding: 4px 0;
-    font-style: italic;
-    font-size: 12px;
     text-align: center;
-
-    > .icon {
-        padding: 0 4px 0 0;
-    }
-}
-
-.feed-item-tag {
-    padding: 4px 8px;
-    margin: 0 8px 0 0;
+    font-size: 14px;
+    line-height: 14px;
+    margin-top: 8px;
 }
 
 .feed-item-tags {
-    padding: 8px 0 0;
+    padding: 8px;
 }
 
 .post {
@@ -863,10 +873,12 @@ ul.social {
 
         &.hover:hover {
             .feed-item-title,
-            .feed-item-tag,
-            .repo-language,
-            .repo-stars {
+            .feed-item-tag {
                 background-color: $content-highlight;
+            }
+
+            .repo-stars::before {
+                color: $content-highlight;
             }
 
             .feed-item-summary,
