@@ -8,7 +8,7 @@ export interface FormMessage {
 
 export const encryptMessage = async (
     pubkeyArmored: string,
-    formMessage: FormMessage
+    formMessage: FormMessage,
 ): Promise<string> => {
     const publicKey = await readKey({ armoredKey: pubkeyArmored });
     const emailText = `Name: ${formMessage.name}

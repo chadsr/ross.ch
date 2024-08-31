@@ -13,7 +13,7 @@ onmessage = async (message) => {
                 response.text().then(async (pubkeyArmored) => {
                     const encMessage = await encryptMessage(
                         pubkeyArmored,
-                        formMessage.data
+                        formMessage.data,
                     );
 
                     postMessage(encMessage);

@@ -86,7 +86,7 @@ const renderBackground = () => {
         isoCubeSize,
         INNER_ANGLE,
         ISO_PADDING,
-        true
+        true,
     );
 };
 
@@ -157,7 +157,7 @@ const showStatusMessage = (
     message: string,
     statusClass: string,
     formButtonElement: HTMLButtonElement,
-    timeoutMs: number
+    timeoutMs: number,
 ) => {
     const buttonText = formButtonText;
 
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (cube) {
         if (navigator.userAgent.indexOf('AppleWebKit') !== -1) {
             const versionMatch = navigator.userAgent.match(
-                /Version\/(\d+(\.\d+)*)/
+                /Version\/(\d+(\.\d+)*)/,
             );
 
             if (versionMatch) {
@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (compareVersions(safariVersion, SAFARI_FIX_VERSION)) {
                     // Enable fix for old AppleWebkit versions, not supporting CSS transforms on 3D elements
                     console.log(
-                        `Applying Safari/WebKit fix for browser version: ${safariVersion}`
+                        `Applying Safari/WebKit fix for browser version: ${safariVersion}`,
                     );
                     cube.classList.add(WEBKIT_FIX_CLASS);
                 }
@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function () {
             currentSide,
             MIN_SIDE,
             MAX_SIDE,
-            rotateTo
+            rotateTo,
         );
     }
 
@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (window.Worker) {
             const formWorkerScript = document.getElementById(
-                FORM_WORKER_ID
+                FORM_WORKER_ID,
             ) as HTMLScriptElement;
             const workerPath = formWorkerScript.getAttribute('src');
             if (workerPath) {
@@ -278,7 +278,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     responseData.message,
                                     CLASS_SUCCESS,
                                     contactFormBtn,
-                                    FORM_RESET_TIMEOUT
+                                    FORM_RESET_TIMEOUT,
                                 );
                                 contactForm.reset();
                             } else {
@@ -297,7 +297,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 const responseData = error.response
                                     .data as ResponseData;
                                 errorMessage = JSON.stringify(
-                                    responseData.message
+                                    responseData.message,
                                 );
                             } else {
                                 errorMessage =
@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 `${ERROR_MESSAGE_PREFIX} ${errorMessage}`,
                                 CLASS_ERROR,
                                 contactFormBtn,
-                                FORM_RESET_TIMEOUT
+                                FORM_RESET_TIMEOUT,
                             );
                             // don't reset the form on error, so the user can try again
                         });

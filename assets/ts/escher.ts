@@ -17,7 +17,7 @@ export default class EscherCubes {
         cubeSize: number,
         innerAngle: number,
         sidePaddingPx: number,
-        renderHiddenSides = false
+        renderHiddenSides = false,
     ): void {
         // Attempt to fetch the svg if it exists already
         const existing = document.getElementById(svgId);
@@ -66,7 +66,7 @@ export default class EscherCubes {
                     yPos,
                     zPos,
                     sidePaddingPx,
-                    renderHiddenSides
+                    renderHiddenSides,
                 );
             }
             odd = !odd;
@@ -82,7 +82,7 @@ export default class EscherCubes {
         yPos: number,
         zPos: number,
         sidePaddingPx: number,
-        renderHiddenSides: boolean
+        renderHiddenSides: boolean,
     ): void {
         const outerAngle = 90 - innerAngle; // Calculate the outer angle by subtracting the inner angle from 90 degrees
         const sineInner = this.sineOf(innerAngle);
@@ -133,7 +133,7 @@ export default class EscherCubes {
                         0 +
                         ' ' +
                         cubeSize * 1.5,
-                ]
+                ],
             );
         }
 
@@ -179,7 +179,7 @@ export default class EscherCubes {
                     this.sineRule(cubeSize, innerAngle) +
                     ' ' +
                     cubeSize,
-            ]
+            ],
         );
 
         const iso = document.createElementNS(SVG_NAMESPACE_URI, 'g');
@@ -190,7 +190,7 @@ export default class EscherCubes {
                 this.calcX(cubeSize, innerAngle, xPos, yPos) +
                 ',' +
                 this.calcY(cubeSize, xPos, yPos, zPos) +
-                ')'
+                ')',
         );
 
         for (const [className, transform] of sides) {
@@ -212,7 +212,7 @@ export default class EscherCubes {
         size: number,
         innerAngle: number,
         x: number,
-        y: number
+        y: number,
     ): number {
         const sineInner = this.sineOf(innerAngle);
         return x * sineInner * size + y * sineInner * size;

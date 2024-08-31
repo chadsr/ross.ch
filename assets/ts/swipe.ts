@@ -32,7 +32,7 @@ export default class SwipeNav {
         currentIndex: number,
         minIndex: number,
         maxIndex: number,
-        swipeFunc: ISwipeFunc
+        swipeFunc: ISwipeFunc,
     ) {
         const swipeElement = document.getElementById(elementId);
         if (swipeElement === null) {
@@ -51,18 +51,18 @@ export default class SwipeNav {
         this.swipeElement.addEventListener(
             'touchstart',
             this.touchStart.bind(this),
-            false
+            false,
         );
 
         this.swipeElement.addEventListener(
             'touchmove',
             this.touchMove.bind(this),
-            false
+            false,
         );
         this.swipeElement.addEventListener(
             'touchend',
             this.touchEnd.bind(this),
-            false
+            false,
         );
     }
 
