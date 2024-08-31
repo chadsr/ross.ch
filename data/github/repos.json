@@ -1,1 +1,508 @@
-[]
+[
+    {
+        "name": "ross.ch",
+        "description": "My personal website",
+        "stargazerCount": 2,
+        "createdAt": "2018-10-07T13:52:10.000Z",
+        "updatedAt": "2024-08-31T21:39:29.000Z",
+        "url": "https://github.com/chadsr/ross.ch",
+        "languages": [
+            "JavaScript",
+            "TypeScript",
+            "SCSS",
+            "HTML"
+        ],
+        "topics": [
+            "css-3d-transitions",
+            "escher",
+            "perspective",
+            "optical-illusion",
+            "cloudflare-pages",
+            "cloudflare-workers",
+            "hugo",
+            "hugo-site",
+            "blog",
+            "css-3d",
+            "css-3d-animation",
+            "css3d",
+            "hugo-blog",
+            "typescript"
+        ]
+    },
+    {
+        "name": "action-user-repos-json",
+        "description": "A Github action to output a user's repositories as a JSON file.",
+        "stargazerCount": 1,
+        "createdAt": "2024-08-31T10:15:08.000Z",
+        "updatedAt": "2024-08-31T20:44:35.000Z",
+        "url": "https://github.com/chadsr/action-user-repos-json",
+        "languages": [
+            "JavaScript",
+            "TypeScript"
+        ],
+        "topics": [
+            "actions",
+            "github-actions"
+        ]
+    },
+    {
+        "name": "waybar-crypto",
+        "description": "A Waybar module for displaying cryptocurrency market information",
+        "stargazerCount": 31,
+        "createdAt": "2019-04-30T11:22:23.000Z",
+        "updatedAt": "2024-08-30T04:35:35.000Z",
+        "url": "https://github.com/chadsr/waybar-crypto",
+        "languages": [
+            "Python"
+        ],
+        "topics": [
+            "waybar",
+            "cryptocurrency-prices",
+            "cryptocurrency",
+            "cryptocurrencies",
+            "wayland",
+            "crypto",
+            "crypto-prices",
+            "waybar-crypto",
+            "bitcoin",
+            "ethereum",
+            "coinmarketcap",
+            "coinmarketcap-api",
+            "crypto-ticker",
+            "crypto-trading",
+            "cryptocurrency-price-ticker",
+            "swaywm",
+            "price-change",
+            "crypto-ticker-widget",
+            "waybar-module",
+            "sway-config"
+        ]
+    },
+    {
+        "name": "marktplaats-scraper",
+        "description": "Marktplaats.nl (Dutch Classifieds) Listing Scraper",
+        "stargazerCount": 2,
+        "createdAt": "2024-05-30T11:39:37.000Z",
+        "updatedAt": "2024-08-26T09:42:23.000Z",
+        "url": "https://github.com/chadsr/marktplaats-scraper",
+        "languages": [
+            "Dockerfile",
+            "Python"
+        ],
+        "topics": [
+            "chromedriver",
+            "dataset-generation",
+            "dutch-language",
+            "machine-learning",
+            "machine-learning-dataset",
+            "marktplaats",
+            "scraper",
+            "selenium",
+            "web-scraper",
+            "web-scraping",
+            "dataset-creation"
+        ]
+    },
+    {
+        "name": "dotfiles",
+        "description": "My dotfiles, managed with stow.",
+        "stargazerCount": 5,
+        "createdAt": "2018-12-03T17:08:23.000Z",
+        "updatedAt": "2024-08-26T09:06:04.000Z",
+        "url": "https://github.com/chadsr/dotfiles",
+        "languages": [
+            "Shell",
+            "CSS",
+            "GLSL",
+            "Python"
+        ],
+        "topics": [
+            "swaywm",
+            "sway",
+            "waybar",
+            "stow",
+            "alacritty-config",
+            "dotfiles",
+            "zsh",
+            "gnupg",
+            "wayland",
+            "liquidctl",
+            "dotfiles-automation",
+            "dotfiles-install",
+            "dotfiles-installer",
+            "dotfiles-setup",
+            "mpv-config",
+            "wayland-system",
+            "gpg-encryption",
+            "sway-config",
+            "swaync",
+            "pipewire"
+        ]
+    },
+    {
+        "name": "ovsc-server",
+        "description": "Custom openvscode-server image",
+        "stargazerCount": 1,
+        "createdAt": "2024-06-14T13:02:08.000Z",
+        "updatedAt": "2024-08-19T10:28:39.000Z",
+        "url": "https://github.com/chadsr/ovsc-server",
+        "languages": [
+            "Dockerfile",
+            "Shell"
+        ],
+        "topics": [
+            "docker",
+            "docker-images",
+            "openvscode-server"
+        ]
+    },
+    {
+        "name": "MesaFireEvacuation",
+        "description": " Agent Based Fire Evacuation Model built using Project Mesa",
+        "stargazerCount": 35,
+        "createdAt": "2018-02-08T08:47:37.000Z",
+        "updatedAt": "2024-07-17T07:11:42.000Z",
+        "url": "https://github.com/chadsr/MesaFireEvacuation",
+        "languages": [
+            "Python"
+        ],
+        "topics": [
+            "project-mesa",
+            "mesa",
+            "abm",
+            "python3",
+            "fire-simulation",
+            "fire-evacutation",
+            "agent-based-modeling",
+            "agent-based-simulation"
+        ]
+    },
+    {
+        "name": "ionic-vue-ts-starter",
+        "description": "A (slightly opinionated) starter setup for Ionic/Vue3/Tailwind/Typescript projects",
+        "stargazerCount": 6,
+        "createdAt": "2022-04-30T18:23:55.000Z",
+        "updatedAt": "2024-06-18T10:01:58.000Z",
+        "url": "https://github.com/chadsr/ionic-vue-ts-starter",
+        "languages": [
+            "JavaScript",
+            "HTML",
+            "Vue",
+            "TypeScript",
+            "CSS",
+            "Java",
+            "Swift",
+            "Ruby",
+            "Shell"
+        ],
+        "topics": [
+            "ionic",
+            "ionic-framework",
+            "tailwind",
+            "tailwindcss",
+            "typescript",
+            "vue",
+            "vue3",
+            "capacitor",
+            "capacitorjs"
+        ]
+    },
+    {
+        "name": "NordVPN-NetworkManager",
+        "description": "A CLI tool for automating the importing, securing and usage of NordVPN (and in the future, more) OpenVPN servers through NetworkManager.",
+        "stargazerCount": 123,
+        "createdAt": "2017-05-18T11:40:33.000Z",
+        "updatedAt": "2024-02-29T03:23:32.000Z",
+        "url": "https://github.com/chadsr/NordVPN-NetworkManager",
+        "languages": [
+            "Python"
+        ],
+        "topics": [
+            "vpn-connections",
+            "openvpn",
+            "networkmanager",
+            "nordvpn",
+            "vpn-manager",
+            "network-manager",
+            "vpn-client",
+            "openvpn-client",
+            "vpn",
+            "networkmanager-openvpn",
+            "python3",
+            "python-3",
+            "ovpn",
+            "openvpn-configuration",
+            "nord",
+            "linux",
+            "nord-vpn",
+            "nordnm",
+            "mac-address",
+            "security-tools"
+        ]
+    },
+    {
+        "name": "ethereum-node",
+        "description": "A dockerized Ethereum related node setup (Geth + Swarm + InfluxDB + Grafana)",
+        "stargazerCount": 3,
+        "createdAt": "2020-02-07T16:01:04.000Z",
+        "updatedAt": "2023-06-26T09:05:00.000Z",
+        "url": "https://github.com/chadsr/ethereum-node",
+        "languages": [],
+        "topics": [
+            "ethereum",
+            "ethereum-node",
+            "ethereum-swarm",
+            "docker-compose",
+            "armv8",
+            "armv7",
+            "geth-node",
+            "go-ethereum",
+            "ethersphere",
+            "ens",
+            "ethereum-blockchain",
+            "grafana-influxdb",
+            "geth",
+            "swarm",
+            "grafana",
+            "systemd-service"
+        ]
+    },
+    {
+        "name": "Aurora-Server",
+        "description": "A wireless, ESP32 controlled, addressable RGB LED strip server (UDP streaming & JSON API)",
+        "stargazerCount": 6,
+        "createdAt": "2018-09-28T12:49:40.000Z",
+        "updatedAt": "2023-05-12T19:16:12.000Z",
+        "url": "https://github.com/chadsr/Aurora-Server",
+        "languages": [
+            "C",
+            "C++"
+        ],
+        "topics": [
+            "esp32",
+            "esp32-arduino",
+            "rgb-led",
+            "fastled",
+            "wireless-led-controller",
+            "wifi-led-controller",
+            "udp-stream",
+            "json-api",
+            "wireless",
+            "addressable-leds",
+            "platformio"
+        ]
+    },
+    {
+        "name": "WaterBot",
+        "description": "ESP32 Controlled Plant Watering System",
+        "stargazerCount": 5,
+        "createdAt": "2019-03-30T14:07:03.000Z",
+        "updatedAt": "2023-04-18T20:26:37.000Z",
+        "url": "https://github.com/chadsr/WaterBot",
+        "languages": [
+            "C++",
+            "C"
+        ],
+        "topics": [
+            "plant-watering",
+            "plant-wateringsystem",
+            "plant-monitoring",
+            "ardunio",
+            "esp32-arduino",
+            "watering-plants",
+            "growing-plants",
+            "growing-vegetables"
+        ]
+    },
+    {
+        "name": "logrus-sentry",
+        "description": "Sentry hook for Logrus",
+        "stargazerCount": 2,
+        "createdAt": "2022-05-05T19:42:49.000Z",
+        "updatedAt": "2022-08-18T18:19:47.000Z",
+        "url": "https://github.com/chadsr/logrus-sentry",
+        "languages": [
+            "Go"
+        ],
+        "topics": []
+    },
+    {
+        "name": "action-pytest",
+        "description": "(WIP) Run pytest with Reviewdog :dog:",
+        "stargazerCount": 1,
+        "createdAt": "2022-02-02T12:22:32.000Z",
+        "updatedAt": "2022-02-03T19:40:27.000Z",
+        "url": "https://github.com/reviewdog/action-pytest",
+        "languages": [
+            "Dockerfile",
+            "Shell"
+        ],
+        "topics": [
+            "reviewdog",
+            "reviewdog-action",
+            "pytest",
+            "pytest-cov",
+            "pytest-profiling",
+            "python3",
+            "github-actions",
+            "github-actions-ci",
+            "github-actions-docker",
+            "unit-testing",
+            "ci"
+        ]
+    },
+    {
+        "name": "action-pyright",
+        "description": "A GitHub Action to run pyright",
+        "stargazerCount": 1,
+        "createdAt": "2021-12-10T13:29:47.000Z",
+        "updatedAt": "2022-02-02T09:30:30.000Z",
+        "url": "https://github.com/chadsr/action-pyright",
+        "languages": [
+            "Python",
+            "Shell"
+        ],
+        "topics": []
+    },
+    {
+        "name": "action-black",
+        "description": "Run black with Reviewdog :dog:",
+        "stargazerCount": 1,
+        "createdAt": "2021-12-09T16:23:57.000Z",
+        "updatedAt": "2021-12-10T15:03:30.000Z",
+        "url": "https://github.com/chadsr/action-black",
+        "languages": [
+            "Shell"
+        ],
+        "topics": []
+    },
+    {
+        "name": "MAD-EUParl",
+        "description": "European Parliament data mining/analytics, utilising linked data.",
+        "stargazerCount": 1,
+        "createdAt": "2017-02-21T12:45:25.000Z",
+        "updatedAt": "2021-11-19T15:41:36.000Z",
+        "url": "https://github.com/chadsr/MAD-EUParl",
+        "languages": [
+            "Python",
+            "Shell"
+        ],
+        "topics": [
+            "voting",
+            "politics",
+            "semantic-web",
+            "machine-learning",
+            "analytics",
+            "visualization",
+            "european-parliament",
+            "vote",
+            "parltrack",
+            "euparl",
+            "votes",
+            "linked-data",
+            "semantic-web-language",
+            "semanticweb",
+            "political-science",
+            "european-union",
+            "europe",
+            "rdf",
+            "turtle-rdf"
+        ]
+    },
+    {
+        "name": "Aurora-Client",
+        "stargazerCount": 1,
+        "createdAt": "2018-09-30T18:42:51.000Z",
+        "updatedAt": "2020-11-30T11:13:54.000Z",
+        "url": "https://github.com/chadsr/Aurora-Client",
+        "languages": [],
+        "topics": []
+    },
+    {
+        "name": "donation_box_arduino",
+        "description": "Arduino controlled, coin accepting, money box",
+        "stargazerCount": 2,
+        "createdAt": "2016-11-27T12:49:00.000Z",
+        "updatedAt": "2020-03-11T13:34:38.000Z",
+        "url": "https://github.com/chadsr/donation_box_arduino",
+        "languages": [
+            "C",
+            "C++"
+        ],
+        "topics": [
+            "arduino",
+            "donations",
+            "donate",
+            "moneytracker",
+            "coins",
+            "coin-acceptor",
+            "ch-926",
+            "lcd-display",
+            "eeprom",
+            "iot",
+            "coin-counter",
+            "ch926",
+            "donation-machine",
+            "donation-box"
+        ]
+    },
+    {
+        "name": "swarm",
+        "description": "Swarm: Censorship resistant storage and communication infrastructure for a truly sovereign digital society",
+        "stargazerCount": 1,
+        "createdAt": "2019-08-13T13:24:02.000Z",
+        "updatedAt": "2020-03-10T18:32:36.000Z",
+        "url": "https://github.com/chadsr/swarm",
+        "languages": [
+            "Go",
+            "Shell",
+            "Makefile",
+            "Solidity",
+            "Dockerfile"
+        ],
+        "topics": []
+    },
+    {
+        "name": "go-ethereum",
+        "description": "Official Go implementation of the Ethereum protocol",
+        "stargazerCount": 1,
+        "createdAt": "2019-09-11T15:53:51.000Z",
+        "updatedAt": "2020-02-06T13:27:08.000Z",
+        "url": "https://github.com/chadsr/go-ethereum",
+        "languages": [
+            "Go",
+            "Java",
+            "Ruby",
+            "Shell",
+            "C++",
+            "C",
+            "Makefile",
+            "M4",
+            "JavaScript",
+            "Assembly",
+            "NSIS",
+            "HTML",
+            "Python",
+            "Dockerfile",
+            "Solidity"
+        ],
+        "topics": []
+    },
+    {
+        "name": "rpi-network-bridge",
+        "description": "For bridging/forwarding from an internet interface to another (local) interface on the Raspberry Pi",
+        "stargazerCount": 1,
+        "createdAt": "2016-11-22T13:10:19.000Z",
+        "updatedAt": "2017-07-23T04:26:58.000Z",
+        "url": "https://github.com/chadsr/rpi-network-bridge",
+        "languages": [
+            "Shell"
+        ],
+        "topics": [
+            "bridge",
+            "rpi-network-bridge",
+            "raspberry-pi",
+            "networking"
+        ]
+    }
+]
