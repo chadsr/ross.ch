@@ -9,4 +9,3 @@ hugo_stats.json
 *.log
 content/blog/posts/test.md
 content/project/posts/test.md
-data/github/repos.json
