@@ -4,9 +4,11 @@
         <p class="title-wordmark"><em>A non-definitive collection of my work and projects.</em></p>
     </div>
     <ul class="feed">
+        {{ $hasContent := false }}
         {{ $feedTypes := slice "project" }}
         {{ range ( where .Site.RegularPages "Type" "in" $feedTypes ).ByDate.Reverse }}
         {{ .Render "li" }}
+        {{ $hasContent = true }}
         {{ end }}
         {{ range $repo := .Site.Data.repos }}
         <li class="feed-item repo field hover perspective">
@@ -38,6 +40,13 @@
                     <p class="repo-summary feed-item-summary">{{ $repo.description }}</p>
                 </div>
             </a>
+        </li>
+        {{ $hasContent = true }}
+        {{ end }}
+
+        {{ if not $hasContent }}
+        <li>
+            <h3 class="no-content"><em>Nothing here... Check back later</em></h3>
         </li>
         {{ end }}
     </ul>
