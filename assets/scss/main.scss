@@ -782,14 +782,14 @@ ul.social {
 
 .feed-item-date,
 .repo-stars {
-    > p {
-        margin: 0;
-    }
-
     gap: 4px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
+
+    > p {
+        margin: 0;
+    }
 }
 
 .feed-item-summary,
