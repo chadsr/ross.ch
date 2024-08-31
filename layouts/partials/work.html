@@ -4,11 +4,41 @@
         <p class="title-wordmark"><em>A non-definitive collection of my work and projects.</em></p>
     </div>
     <ul class="feed">
-        {{ $feedTypes := slice "project" "repo" }}
+        {{ $feedTypes := slice "project" }}
         {{ range ( where .Site.RegularPages "Type" "in" $feedTypes ).ByDate.Reverse }}
         {{ .Render "li" }}
-        {{ else }}
-        <li><h3 class="no-content"><em>Nothing here... Check back later</em></h3></li>
+        {{ end }}
+        {{ range $repo := .Site.Data.repos }}
+        <li class="feed-item repo field hover perspective">
+            <a href="{{ $repo.url }}" rel="noopener" target="_blank">
+                <div class="title repo-title feed-item-title hover threed-top perspective">
+                    <h3>{{ $repo.name }}</h3>
+                </div>
+
+                <div class="feed-item-info ">
+                    <span class="repo-updated-date feed-item-date hover">
+                        {{- partial "icons/calendar_repeat.html" . -}}
+                        {{ $updatedTime := time.AsTime $repo.updatedAt }}
+                        <p>{{ time.Format $.Site.Params.dateFormat $updatedTime }}</p>
+                    </span>
+                    <span class="repo-stars">
+                        <p>{{ $repo.stargazerCount }}</p>
+                    </span>
+                </div>
+
+                <div class="feed-item-info feed-item-tags">
+                    {{ range first 2 $repo.languages }}
+                    <span class="repo-language feed-item-tag hover">{{ . }}</span>
+                    {{ end }}
+                    {{ range first 3 $repo.topics }}
+                    <span class="repo-tag feed-item-tag hover">{{ . }}</span>
+                    {{ end}}
+                </div>
+                <div class="feed-item-content repo-content">
+                    <p class="repo-summary feed-item-summary">{{ $repo.description }}</p>
+                </div>
+            </a>
+        </li>
         {{ end }}
     </ul>
 </section>
