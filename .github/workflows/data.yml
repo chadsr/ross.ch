@@ -1,0 +1,27 @@
+name: Update data
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 0'
+jobs:
+  data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get Github Repositories
+        uses: chadsr/action-user-repos-json@v0.1.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          username: 'chadsr'
+          minimumStargazers: 1
+          outputPath: ./data/github/repos.json
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          title: 'Update Page Data'
+          commit-message: "update page data"
+          branch: 'update-page-data-${{ github.run_id }}'
+          assignees: 'chadsr'
+          labels: |
+            data
