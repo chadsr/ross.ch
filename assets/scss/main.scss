@@ -1191,6 +1191,7 @@ ul.social {
 
         &.focus {
             filter: none;
+            z-index: 3;
 
             > .face-content {
                 transform: translateZ(0);
