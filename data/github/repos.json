@@ -1,10 +1,26 @@
 [
     {
+        "name": "action-user-repos-json",
+        "description": "A Github Action to output a user's repositories as a JSON file.",
+        "stargazerCount": 1,
+        "createdAt": "2024-08-31T10:15:08.000Z",
+        "updatedAt": "2024-08-31T22:09:02.000Z",
+        "url": "https://github.com/chadsr/action-user-repos-json",
+        "languages": [
+            "JavaScript",
+            "TypeScript"
+        ],
+        "topics": [
+            "actions",
+            "github-actions"
+        ]
+    },
+    {
         "name": "ross.ch",
         "description": "My personal website",
         "stargazerCount": 2,
         "createdAt": "2018-10-07T13:52:10.000Z",
-        "updatedAt": "2024-08-31T21:43:22.000Z",
+        "updatedAt": "2024-08-31T21:47:23.000Z",
         "url": "https://github.com/chadsr/ross.ch",
         "languages": [
             "JavaScript",
@@ -27,22 +43,6 @@
             "css3d",
             "hugo-blog",
             "typescript"
-        ]
-    },
-    {
-        "name": "action-user-repos-json",
-        "description": "A Github action to output a user's repositories as a JSON file.",
-        "stargazerCount": 1,
-        "createdAt": "2024-08-31T10:15:08.000Z",
-        "updatedAt": "2024-08-31T20:44:35.000Z",
-        "url": "https://github.com/chadsr/action-user-repos-json",
-        "languages": [
-            "JavaScript",
-            "TypeScript"
-        ],
-        "topics": [
-            "actions",
-            "github-actions"
         ]
     },
     {
@@ -137,23 +137,6 @@
             "sway-config",
             "swaync",
             "pipewire"
-        ]
-    },
-    {
-        "name": "ovsc-server",
-        "description": "Custom openvscode-server image",
-        "stargazerCount": 1,
-        "createdAt": "2024-06-14T13:02:08.000Z",
-        "updatedAt": "2024-08-19T10:28:39.000Z",
-        "url": "https://github.com/chadsr/ovsc-server",
-        "languages": [
-            "Dockerfile",
-            "Shell"
-        ],
-        "topics": [
-            "docker",
-            "docker-images",
-            "openvscode-server"
         ]
     },
     {
