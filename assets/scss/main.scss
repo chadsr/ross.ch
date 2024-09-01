@@ -502,10 +502,6 @@ nav {
     @extend %full-screen;
 }
 
-.content-section {
-    padding: 16px;
-}
-
 .link {
     font-weight: 700;
     border-bottom: $outline-size dashed $color-text;
@@ -545,12 +541,6 @@ nav {
             @extend %gradient-background;
             @extend %gradient-animation;
         }
-    }
-}
-
-.title-section {
-    > .title-wordmark {
-        padding: 0 0 32px;
     }
 }
 
@@ -609,10 +599,9 @@ footer {
     width: 100%;
     background-color: $color-content-secondary;
 
-    @extend %outline-dashed;
+    // TODO: get pseudo element height included in the height of this element
 
-    /* TODO: make this dynamic, based on 3d header height */
-    margin-bottom: 32px;
+    @extend %outline-dashed;
 
     .title {
         @extend %field-title-style;
@@ -864,7 +853,9 @@ ul.social {
 }
 
 .feed {
-    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
 
     > .feed-item {
         .icon {
@@ -1116,7 +1107,7 @@ ul.social {
             display: flex;
             width: inherit;
             height: inherit;
-            padding: 0 10%;
+            padding: 10%;
             box-sizing: border-box;
             pointer-events: none;
             background-color: $color-content;
@@ -1138,10 +1129,20 @@ ul.social {
             }
 
             > .content-section {
-                flex: auto;
-                max-width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                gap: 48px;
+                width: 100%;
                 word-wrap: break-word;
                 overflow-wrap: break-word;
+
+                .feed {
+                    flex-grow: 1;
+                    display: flex;
+                    justify-content: start;
+                }
 
                 ul.list {
                     display: block;
@@ -1286,7 +1287,7 @@ button.threed-top {
     }
 
     .content-cube > .face > .face-content {
-        padding: 8px;
+        padding: 16px;
     }
 }
 
