@@ -20,6 +20,7 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           title: 'Update Page Data'
+          body: ''
           commit-message: "update page data"
           branch: 'update-page-data-${{ github.run_id }}'
           assignees: 'chadsr'
