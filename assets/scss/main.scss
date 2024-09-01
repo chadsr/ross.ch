@@ -181,7 +181,7 @@ $icon-size-social: 18px;
 
 %threed-side {
     content: '';
-    display: inline-block;
+    display: block;
     position: absolute;
     height: var(--threed-height);
     transform-style: preserve-3d;
@@ -190,7 +190,7 @@ $icon-size-social: 18px;
     background-color: inherit;
     width: 100%;
     left: 0;
-    content-visibility: visible;
+    box-sizing: content-box;
 
     @extend %outline-dashed;
 }
@@ -314,7 +314,7 @@ h2 {
 h3 {
     display: inline-block;
     font-weight: 700;
-    padding: 8px;
+    padding: 0;
     margin: 0;
 }
 
@@ -605,12 +605,14 @@ footer {
 }
 
 .field {
+    display: inline-block;
+    width: 100%;
     background-color: $color-content-secondary;
 
     @extend %outline-dashed;
 
     /* TODO: make this dynamic, based on 3d header height */
-    margin-bottom: 48px;
+    margin-bottom: 32px;
 
     .title {
         @extend %field-title-style;
@@ -933,10 +935,9 @@ ul.social {
 }
 
 %scrollable {
-    overflow-y: auto;
+    overflow: hidden auto;
     scroll-behavior: smooth;
     scrollbar-width: auto;
-    scroll-margin: 0;
 
     &::-webkit-scrollbar-track {
         background: $color-scrollbar-track;
@@ -1102,8 +1103,8 @@ ul.social {
         transition-timing-function: ease-in-out;
         transition-duration: 500ms;
         outline-offset: 0;
-        background-color: $color-content;
         filter: $filter-face-no-focus;
+        background-color: $color-content;
 
         @extend %outline-dashed;
 
@@ -1113,18 +1114,20 @@ ul.social {
 
         > .face-content {
             display: flex;
-            overflow: hidden;
             width: inherit;
             height: inherit;
             padding: 0 10%;
             box-sizing: border-box;
             pointer-events: none;
+            background-color: $color-content;
             visibility: hidden;
             transition: visibility 1s;
             transition-behavior: allow-discrete;
             will-change: visibility;
             contain-intrinsic-size: none;
             content-visibility: visible;
+
+            @extend %scrollable;
 
             .title-section > h1 {
                 @extend %gradient-background;
@@ -1191,14 +1194,13 @@ ul.social {
 
         &.focus {
             filter: none;
-            z-index: 3;
+            background-color: transparent;
+            z-index: 4;
 
             > .face-content {
                 transform: translateZ(0);
                 pointer-events: auto;
                 visibility: visible;
-
-                @extend %scrollable;
 
                 .title-section > h1 {
                     // Only enable animation when in focus
