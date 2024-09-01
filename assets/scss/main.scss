@@ -24,7 +24,7 @@ $color-banner-background: light-dark(rgb(90 90 90), rgb(25 25 25));
 $color-scrollbar-track: $color-content;
 $color-scrollbar-thumb: $color-banner-background;
 $color-outline: light-dark(rgb(100 100 100 / 40%), rgb(200 200 200 / 20%));
-$filter-face-no-focus: brightness(80%);
+$filter-face-no-focus: brightness(50%);
 $color-shadow: rgb(51 51 51 / 50%);
 $color-iso: $color-background;
 $color-iso-top: $color-iso;
@@ -179,17 +179,9 @@ $icon-size-social: 18px;
     transition: all 200ms ease-in-out;
 }
 
-%transition-shadow {
-    transition: filter 500ms ease-in-out;
-}
-
-%transition-cube {
-    transition: transform 500ms linear;
-}
-
 %threed-side {
     content: '';
-    display: inline-block;
+    display: block;
     position: absolute;
     height: var(--threed-height);
     transform-style: preserve-3d;
@@ -198,7 +190,7 @@ $icon-size-social: 18px;
     background-color: inherit;
     width: 100%;
     left: 0;
-    content-visibility: visible;
+    box-sizing: content-box;
 
     @extend %outline-dashed;
 }
@@ -289,12 +281,17 @@ main {
     background-clip: text;
     color: transparent;
     background-size: 300% 100%;
+}
+
+%gradient-animation {
     animation: heading-gradient-animation 15s linear infinite;
     animation-direction: alternate;
+    animation-delay: 0s;
 }
 
 .text-gradient {
     @extend %gradient-background;
+    @extend %gradient-animation;
 }
 
 h1 {
@@ -317,7 +314,7 @@ h2 {
 h3 {
     display: inline-block;
     font-weight: 700;
-    padding: 8px;
+    padding: 0;
     margin: 0;
 }
 
@@ -505,10 +502,6 @@ nav {
     @extend %full-screen;
 }
 
-.content-section {
-    margin: 32px 0;
-}
-
 .link {
     font-weight: 700;
     border-bottom: $outline-size dashed $color-text;
@@ -546,13 +539,8 @@ nav {
     &.hover:focus {
         > .site-title {
             @extend %gradient-background;
+            @extend %gradient-animation;
         }
-    }
-}
-
-.title-section {
-    > .title-wordmark {
-        padding: 0 0 32px;
     }
 }
 
@@ -607,12 +595,13 @@ footer {
 }
 
 .field {
+    display: inline-block;
+    width: 100%;
     background-color: $color-content-secondary;
 
-    @extend %outline-dashed;
+    // TODO: get pseudo element height included in the height of this element
 
-    /* TODO: make this dynamic, based on 3d header height */
-    margin-bottom: 48px;
+    @extend %outline-dashed;
 
     .title {
         @extend %field-title-style;
@@ -864,7 +853,9 @@ ul.social {
 }
 
 .feed {
-    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
 
     > .feed-item {
         .icon {
@@ -935,7 +926,7 @@ ul.social {
 }
 
 %scrollable {
-    overflow-y: auto;
+    overflow: hidden auto;
     scroll-behavior: smooth;
     scrollbar-width: auto;
 
@@ -1073,6 +1064,7 @@ ul.social {
 .content-cube {
     position: relative;
     transform-style: preserve-3d;
+    backface-visibility: hidden;
 
     &.rotate {
         &-0 {
@@ -1093,16 +1085,18 @@ ul.social {
     }
 
     > .face {
-        z-index: 1;
         width: 100%;
         height: 100%;
         position: absolute;
         transform-style: preserve-3d;
-        will-change: transform;
-        transition-property: transform;
+        will-change: transform, filter;
+        transition-property: transform, filter;
+        transition-timing-function: ease-in-out;
+        transition-duration: 500ms;
         outline-offset: 0;
+        filter: $filter-face-no-focus;
+        background-color: $color-content;
 
-        @extend %transition-cube;
         @extend %outline-dashed;
 
         &.face-top {
@@ -1111,27 +1105,44 @@ ul.social {
 
         > .face-content {
             display: flex;
-            overflow: hidden;
             width: inherit;
             height: inherit;
-            padding: 0 10%;
+            padding: 10%;
             box-sizing: border-box;
-            background-color: $color-content;
-            filter: $filter-face-no-focus;
             pointer-events: none;
-            transform-style: flat;
+            background-color: $color-content;
+            visibility: hidden;
+            transition: visibility 1s;
+            transition-behavior: allow-discrete;
+            will-change: visibility;
+            contain-intrinsic-size: none;
+            content-visibility: visible;
 
-            @extend %transition-shadow;
+            @extend %scrollable;
+
+            .title-section > h1 {
+                @extend %gradient-background;
+            }
 
             .title-section > h2 {
                 font-size: $h1-size;
             }
 
             > .content-section {
-                flex: auto;
-                max-width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                gap: 48px;
+                width: 100%;
                 word-wrap: break-word;
                 overflow-wrap: break-word;
+
+                .feed {
+                    flex-grow: 1;
+                    display: flex;
+                    justify-content: start;
+                }
 
                 ul.list {
                     display: block;
@@ -1183,14 +1194,19 @@ ul.social {
         }
 
         &.focus {
-            z-index: 99;
+            filter: none;
+            background-color: transparent;
+            z-index: 4;
 
             > .face-content {
                 transform: translateZ(0);
-                filter: none;
                 pointer-events: auto;
+                visibility: visible;
 
-                @extend %scrollable;
+                .title-section > h1 {
+                    // Only enable animation when in focus
+                    @extend %gradient-animation;
+                }
             }
         }
     }
@@ -1271,7 +1287,7 @@ button.threed-top {
     }
 
     .content-cube > .face > .face-content {
-        padding: 8px;
+        padding: 16px;
     }
 }
 
