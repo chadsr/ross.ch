@@ -47,6 +47,7 @@ $brightness-hover-iso-left: 100%;
 $brightness-hover-iso-right: 90%;
 $brightness-hover-iso-back: 60%;
 $brightness-hover-iso-bottom: 60%;
+$color-youtube: rgb(255 0 0);
 $color-linkedin: rgb(72 117 180);
 $color-github: rgb(71 139 230);
 $color-gitlab: rgb(252 109 38);
@@ -167,8 +168,8 @@ $icon-size-social: 18px;
 }
 
 %full-screen {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
     position: absolute;
     top: 0;
@@ -697,6 +698,14 @@ ul.social {
                 height: $icon-size-social;
 
                 @extend %hover;
+            }
+
+            &.youtube {
+                &:hover {
+                    > .social-icon {
+                        fill: $color-youtube;
+                    }
+                }
             }
 
             &.linkedin {
