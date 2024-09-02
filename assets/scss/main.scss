@@ -42,7 +42,11 @@ $color-hover-iso-back: rgb(138 65 241 / 20%);
 $color-hover-iso-bottom: $color-hover-iso-back;
 $color-hover-iso-back-left: $color-hover-iso-back;
 $color-hover-iso-back-right: $color-hover-iso-back;
-$brightness-hover-iso-top: 120%;
+$brightness-threed-top-light: 110%;
+$brightness-threed-top-dark: 120%;
+$brightness-threed-bottom-light: 90%;
+$brightness-threed-bottom-dark: 80%;
+$brightness-hover-iso-top: $brightness-threed-top-dark;
 $brightness-hover-iso-left: 100%;
 $brightness-hover-iso-right: 90%;
 $brightness-hover-iso-back: 60%;
@@ -202,7 +206,10 @@ $icon-size-social: 18px;
     &::before {
         @extend %threed-side;
 
-        filter: light-dark(brightness(110%), brightness(120%));
+        filter: light-dark(
+            brightness($brightness-threed-top-light),
+            brightness($brightness-threed-top-dark)
+        );
         transform: rotateX(calc($threed-angle))
             translate3d(0, -50%, calc(-1 * $outline-size / 2));
         top: calc(-1 * var(--threed-height) * cos($threed-angle));
@@ -215,7 +222,10 @@ $icon-size-social: 18px;
     &::after {
         @extend %threed-side;
 
-        filter: light-dark(brightness(90%), brightness(80%));
+        filter: light-dark(
+            brightness($brightness-threed-bottom-light),
+            brightness($brightness-threed-bottom-dark)
+        );
         transform: rotateX(calc(-1 * $threed-angle))
             translate3d(0, 50%, calc(-1 * $outline-size / 2));
         top: calc(var(--threed-height) * (cos($threed-angle)));
@@ -1109,7 +1119,7 @@ ul.social {
         @extend %outline-dashed;
 
         &.face-top {
-            filter: brightness(160%);
+            filter: brightness($brightness-hover-iso-top);
         }
 
         > .face-content {
