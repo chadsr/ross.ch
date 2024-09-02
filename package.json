@@ -7,9 +7,10 @@
   "scripts": {
     "build": "hugo --minify",
     "lint": "eslint . && stylelint **/*.scss",
-    "lint-fix": "eslint --fix . && stylelint --fix **/*.scss",
+    "format": "eslint --fix . && stylelint --fix **/*.scss",
     "prepare": "husky",
     "dev": "hugo --logLevel debug server",
+    "dev-host": "hugo --logLevel debug server --bind 0.0.0.0",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "cf-deploy": "wrangler deploy",
