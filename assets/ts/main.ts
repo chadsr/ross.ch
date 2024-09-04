@@ -59,7 +59,7 @@ let currentSide = MIN_SIDE;
 
 let windowHeight = window.innerHeight;
 
-let formButtonText = '';
+const CONTACT_BUTTON_TEXT = 'Submit';
 let formWorker: Worker | undefined = undefined;
 
 /**
@@ -159,14 +159,12 @@ const showStatusMessage = (
     formButtonElement: HTMLButtonElement,
     timeoutMs: number,
 ) => {
-    const buttonText = formButtonText;
-
     formButtonElement.classList.add(statusClass);
     formButtonElement.innerText = message;
 
     setTimeout(() => {
         formButtonElement.classList.remove(statusClass);
-        formButtonElement.innerText = buttonText;
+        formButtonElement.innerText = CONTACT_BUTTON_TEXT;
     }, timeoutMs);
 };
 
@@ -249,7 +247,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const contactFormBtn = <HTMLButtonElement>(
             document.getElementById(CONTACT_FORM_BUTTON)
         );
-        formButtonText = contactFormBtn.innerText;
 
         if (window.Worker) {
             const formWorkerScript = document.getElementById(
