@@ -60,7 +60,6 @@ $color-bluesky: rgb(0 77 170);
 $color-gpg: rgb(0 147 221);
 $color-success: light-dark(rgb(60 150 60), rgb(64 173 64));
 $color-error: light-dark(rgb(150 14 14), rgb(165 24 24));
-$face-content-padding-large: calc(4vmin + 4px);
 
 /* Fonts */
 $font-macula: 'Macula';
@@ -69,7 +68,11 @@ $font-main: $font-space-grotesk;
 $width-icon-button: 48px;
 $h1-size: clamp(1.6rem, -0.875rem + 8.333vmin, 4rem);
 $h2-size: clamp(1.4rem, -0.875rem + 8.333vmin, 2rem);
+
+/* Other */
+$face-content-padding-large: calc(4vmin + 4px);
 $threed-height: 100%;
+$threed-gap: 48px; // TODO: make this dynamic with threed height
 $threed-angle: 60deg;
 $outline-size: 1px;
 $icon-size: 24px;
@@ -458,6 +461,13 @@ fieldset {
 
         color: $color-banner-text;
     }
+}
+
+.form-inputs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: $threed-gap;
 }
 
 input {
@@ -1155,7 +1165,7 @@ ul.social {
                 flex-direction: column;
                 align-items: center;
                 justify-content: space-between;
-                gap: 48px;
+                gap: $threed-gap;
                 width: 100%;
                 word-wrap: break-word;
                 overflow-wrap: break-word;

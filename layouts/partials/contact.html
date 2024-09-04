@@ -13,20 +13,22 @@
     </div>
     <form id="contact-form">
         <fieldset>
-            <div class="field hover">
-                <label class="title threed-top perspective hover" for="i-name">Name</label>
-                <input id="i-name" name="fullName" type="text" autocomplete="name" placeholder="Your name"
-                    required="required">
-            </div>
-            <div class="field hover">
-                <label class="title threed-top perspective hover" for="i-email">Email</label>
-                <input id="i-email" name="email" type="email" autocomplete="email"
-                    pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" placeholder="Your email" required="required">
-            </div>
-            <div class="field text-area hover">
-                <label class="title threed-top perspective hover" for="i-message">Message</label>
-                <textarea id="i-message" class="hover" name="message" placeholder="Enter your message here" rows="3"
-                    required="required"></textarea>
+            <div class="form-inputs">
+                <div class="field hover">
+                    <label class="title threed-top perspective hover" for="i-name">Name</label>
+                    <input id="i-name" name="fullName" type="text" autocomplete="name" placeholder="Your name"
+                        required="required">
+                </div>
+                <div class="field hover">
+                    <label class="title threed-top perspective hover" for="i-email">Email</label>
+                    <input id="i-email" name="email" type="email" autocomplete="email"
+                        pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" placeholder="Your email" required="required">
+                </div>
+                <div class="field text-area hover">
+                    <label class="title threed-top perspective hover" for="i-message">Message</label>
+                    <textarea id="i-message" class="hover" name="message" placeholder="Enter your message here" rows="3"
+                        required="required"></textarea>
+                </div>
             </div>
             <button id="contact-submit" class="perspective threed-top hover" name="submit" type="submit">Submit</button>
         </fieldset>
