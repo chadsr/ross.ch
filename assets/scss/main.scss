@@ -883,9 +883,12 @@ ul.social {
 }
 
 .feed {
+    width: inherit;
     display: flex;
+    flex-grow: 1;
+    justify-content: start;
     flex-direction: column;
-    gap: 32px;
+    gap: 48px 32px;
 
     > .feed-item {
         .icon {
@@ -1170,12 +1173,6 @@ ul.social {
                 word-wrap: break-word;
                 overflow-wrap: break-word;
 
-                .feed {
-                    flex-grow: 1;
-                    display: flex;
-                    justify-content: start;
-                }
-
                 ul.list {
                     display: block;
 
@@ -1305,6 +1302,12 @@ button.threed-top {
 /* Max out the cube size after 1000px */
 @media only screen and (width >=1000px) and (height >=1000px) {
     @include content-cube(936px);
+
+    .work-feed {
+        display: grid;
+        grid-auto-rows: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @mixin elastic-nav() {
