@@ -10,6 +10,10 @@ description = "Hacker, explorer, maker of strange things that are sometimes usef
 logo = "favicon.svg"
 copyright = "Copyright (c)"
 license = "https://raw.githubusercontent.com/chadsr/ross.ch/master/LICENSE"
+reposExclude = [
+    "https://github.com/chadsr/ross.ch",
+    "https://github.com/chadsr/rpi-network-bridge",
+]
 [params.author]
 name = 'Ross Chadwick'
 

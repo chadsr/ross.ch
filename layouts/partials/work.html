@@ -11,6 +11,7 @@
         {{ $hasContent = true }}
         {{ end }}
         {{ range $repo := .Site.Data.github.repos }}
+        {{ if not (in $.Site.Params.reposExclude $repo.url) }}
         <li class="feed-item repo field hover perspective">
             <a href="{{ $repo.url }}" rel="noopener" target="_blank">
                 <div class="title repo-title feed-item-title hover threed-top perspective">
@@ -42,6 +43,7 @@
             </a>
         </li>
         {{ $hasContent = true }}
+        {{ end }}
         {{ end }}
 
         {{ if not $hasContent }}
