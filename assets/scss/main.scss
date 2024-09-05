@@ -1299,9 +1299,9 @@ button.threed-top {
 
 @include content-cube(80vmin);
 
-/* Max out the cube size after 1000px */
-@media only screen and (width >=1000px) and (height >=1000px) {
-    @include content-cube(936px);
+/* Max out the cube size after 1080px */
+@media only screen and (width >=1080px) and (height >=1080px) {
+    @include content-cube(1000px);
 
     .work-feed {
         display: grid;
