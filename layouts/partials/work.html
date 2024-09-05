@@ -3,7 +3,7 @@
         <h2>Work</h2>
         <p class="title-wordmark"><em>A non-definitive collection of my work and projects.</em></p>
     </div>
-    <ul class="feed">
+    <ul class="feed work-feed">
         {{ $hasContent := false }}
         {{ $feedTypes := slice "project" }}
         {{ range ( where .Site.RegularPages "Type" "in" $feedTypes ).ByDate.Reverse }}
