@@ -1,10 +1,23 @@
 [
     {
+        "name": "eventsource",
+        "description": "EventSource implementation that is fully compliant with the WHATWG Server-Sent Events specification but takes more arguments.",
+        "stargazerCount": 1,
+        "createdAt": "2024-09-04T15:59:49.000Z",
+        "updatedAt": "2024-09-05T11:06:29.000Z",
+        "url": "https://github.com/chadsr/eventsource",
+        "languages": [
+            "JavaScript",
+            "TypeScript"
+        ],
+        "topics": []
+    },
+    {
         "name": "ross.ch",
         "description": "My personal website",
         "stargazerCount": 2,
         "createdAt": "2018-10-07T13:52:10.000Z",
-        "updatedAt": "2024-08-31T21:43:22.000Z",
+        "updatedAt": "2024-09-05T10:26:48.000Z",
         "url": "https://github.com/chadsr/ross.ch",
         "languages": [
             "JavaScript",
@@ -31,10 +44,10 @@
     },
     {
         "name": "action-user-repos-json",
-        "description": "A Github action to output a user's repositories as a JSON file.",
-        "stargazerCount": 1,
+        "description": "A Github Action to output a user's repositories as a JSON file.",
+        "stargazerCount": 2,
         "createdAt": "2024-08-31T10:15:08.000Z",
-        "updatedAt": "2024-08-31T20:44:35.000Z",
+        "updatedAt": "2024-09-02T20:02:57.000Z",
         "url": "https://github.com/chadsr/action-user-repos-json",
         "languages": [
             "JavaScript",
@@ -43,6 +56,92 @@
         "topics": [
             "actions",
             "github-actions"
+        ]
+    },
+    {
+        "name": "cryptoshot",
+        "description": "Retrieve cryptocurrency balances and values at a specific point in time",
+        "stargazerCount": 1,
+        "createdAt": "2024-04-18T17:24:17.000Z",
+        "updatedAt": "2024-09-02T18:15:38.000Z",
+        "url": "https://github.com/chadsr/cryptoshot",
+        "languages": [
+            "Python"
+        ],
+        "topics": []
+    },
+    {
+        "name": "todo-to-issue-action",
+        "description": "Action that converts TODO comments to GitHub issues on push.",
+        "stargazerCount": 1,
+        "createdAt": "2024-08-23T11:05:26.000Z",
+        "updatedAt": "2024-09-02T10:08:24.000Z",
+        "url": "https://github.com/chadsr/todo-to-issue-action",
+        "languages": [
+            "Python",
+            "Dockerfile"
+        ],
+        "topics": []
+    },
+    {
+        "name": "marktplaats-scraper",
+        "description": "Marktplaats.nl (Dutch Classifieds) Listing Scraper",
+        "stargazerCount": 2,
+        "createdAt": "2024-05-30T11:39:37.000Z",
+        "updatedAt": "2024-09-02T10:06:50.000Z",
+        "url": "https://github.com/chadsr/marktplaats-scraper",
+        "languages": [
+            "Dockerfile",
+            "Python"
+        ],
+        "topics": [
+            "chromedriver",
+            "dataset-generation",
+            "dutch-language",
+            "machine-learning",
+            "machine-learning-dataset",
+            "marktplaats",
+            "scraper",
+            "selenium",
+            "web-scraper",
+            "web-scraping",
+            "dataset-creation"
+        ]
+    },
+    {
+        "name": "dotfiles",
+        "description": "My dotfiles, managed with stow.",
+        "stargazerCount": 5,
+        "createdAt": "2018-12-03T17:08:23.000Z",
+        "updatedAt": "2024-09-02T10:00:11.000Z",
+        "url": "https://github.com/chadsr/dotfiles",
+        "languages": [
+            "Shell",
+            "CSS",
+            "GLSL",
+            "Python"
+        ],
+        "topics": [
+            "swaywm",
+            "sway",
+            "waybar",
+            "stow",
+            "alacritty-config",
+            "dotfiles",
+            "zsh",
+            "gnupg",
+            "wayland",
+            "liquidctl",
+            "dotfiles-automation",
+            "dotfiles-install",
+            "dotfiles-installer",
+            "dotfiles-setup",
+            "mpv-config",
+            "wayland-system",
+            "gpg-encryption",
+            "sway-config",
+            "swaync",
+            "pipewire"
         ]
     },
     {
@@ -76,84 +175,6 @@
             "crypto-ticker-widget",
             "waybar-module",
             "sway-config"
-        ]
-    },
-    {
-        "name": "marktplaats-scraper",
-        "description": "Marktplaats.nl (Dutch Classifieds) Listing Scraper",
-        "stargazerCount": 2,
-        "createdAt": "2024-05-30T11:39:37.000Z",
-        "updatedAt": "2024-08-26T09:42:23.000Z",
-        "url": "https://github.com/chadsr/marktplaats-scraper",
-        "languages": [
-            "Dockerfile",
-            "Python"
-        ],
-        "topics": [
-            "chromedriver",
-            "dataset-generation",
-            "dutch-language",
-            "machine-learning",
-            "machine-learning-dataset",
-            "marktplaats",
-            "scraper",
-            "selenium",
-            "web-scraper",
-            "web-scraping",
-            "dataset-creation"
-        ]
-    },
-    {
-        "name": "dotfiles",
-        "description": "My dotfiles, managed with stow.",
-        "stargazerCount": 5,
-        "createdAt": "2018-12-03T17:08:23.000Z",
-        "updatedAt": "2024-08-26T09:06:04.000Z",
-        "url": "https://github.com/chadsr/dotfiles",
-        "languages": [
-            "Shell",
-            "CSS",
-            "GLSL",
-            "Python"
-        ],
-        "topics": [
-            "swaywm",
-            "sway",
-            "waybar",
-            "stow",
-            "alacritty-config",
-            "dotfiles",
-            "zsh",
-            "gnupg",
-            "wayland",
-            "liquidctl",
-            "dotfiles-automation",
-            "dotfiles-install",
-            "dotfiles-installer",
-            "dotfiles-setup",
-            "mpv-config",
-            "wayland-system",
-            "gpg-encryption",
-            "sway-config",
-            "swaync",
-            "pipewire"
-        ]
-    },
-    {
-        "name": "ovsc-server",
-        "description": "Custom openvscode-server image",
-        "stargazerCount": 1,
-        "createdAt": "2024-06-14T13:02:08.000Z",
-        "updatedAt": "2024-08-19T10:28:39.000Z",
-        "url": "https://github.com/chadsr/ovsc-server",
-        "languages": [
-            "Dockerfile",
-            "Shell"
-        ],
-        "topics": [
-            "docker",
-            "docker-images",
-            "openvscode-server"
         ]
     },
     {
@@ -408,15 +429,6 @@
             "rdf",
             "turtle-rdf"
         ]
-    },
-    {
-        "name": "Aurora-Client",
-        "stargazerCount": 1,
-        "createdAt": "2018-09-30T18:42:51.000Z",
-        "updatedAt": "2020-11-30T11:13:54.000Z",
-        "url": "https://github.com/chadsr/Aurora-Client",
-        "languages": [],
-        "topics": []
     },
     {
         "name": "donation_box_arduino",
