@@ -21,7 +21,7 @@
   "author": "Ross Chadwick",
   "license": "GPL-3.0-only",
   "devDependencies": {
-    "@cloudflare/vitest-pool-workers": "^0.5.18",
+    "@cloudflare/vitest-pool-workers": "^0.5.20",
     "@cloudflare/workers-types": "^4.20241011.0",
     "@eslint/js": "^9.13.0",
     "@fontsource-variable/space-grotesk": "^5.1.0",
