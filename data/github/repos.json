@@ -1,10 +1,35 @@
 [
     {
+        "name": "Aurora-Server",
+        "description": "A wireless, ESP32 controlled, addressable RGB LED strip server (UDP streaming & JSON API)",
+        "stargazerCount": 7,
+        "createdAt": "2018-09-28T12:49:40.000Z",
+        "updatedAt": "2024-11-20T23:07:40.000Z",
+        "url": "https://github.com/chadsr/Aurora-Server",
+        "languages": [
+            "C",
+            "C++"
+        ],
+        "topics": [
+            "esp32",
+            "esp32-arduino",
+            "rgb-led",
+            "fastled",
+            "wireless-led-controller",
+            "wifi-led-controller",
+            "udp-stream",
+            "json-api",
+            "wireless",
+            "addressable-leds",
+            "platformio"
+        ]
+    },
+    {
         "name": "waybar-crypto",
         "description": "A Waybar module for displaying cryptocurrency market information",
-        "stargazerCount": 34,
+        "stargazerCount": 37,
         "createdAt": "2019-04-30T11:22:23.000Z",
-        "updatedAt": "2024-11-09T09:41:46.000Z",
+        "updatedAt": "2024-11-15T17:24:58.000Z",
         "url": "https://github.com/chadsr/waybar-crypto",
         "languages": [
             "Python"
@@ -33,11 +58,36 @@
         ]
     },
     {
+        "name": "marktplaats-scraper",
+        "description": "Marktplaats.nl (Dutch Classifieds) Listing Scraper",
+        "stargazerCount": 3,
+        "createdAt": "2024-05-30T11:39:37.000Z",
+        "updatedAt": "2024-11-14T15:10:50.000Z",
+        "url": "https://github.com/chadsr/marktplaats-scraper",
+        "languages": [
+            "Dockerfile",
+            "Python"
+        ],
+        "topics": [
+            "chromedriver",
+            "dataset-generation",
+            "dutch-language",
+            "machine-learning",
+            "machine-learning-dataset",
+            "marktplaats",
+            "scraper",
+            "selenium",
+            "web-scraper",
+            "web-scraping",
+            "dataset-creation"
+        ]
+    },
+    {
         "name": "dotfiles",
         "description": "My dotfiles, managed with stow.",
         "stargazerCount": 6,
         "createdAt": "2018-12-03T17:08:23.000Z",
-        "updatedAt": "2024-11-06T13:23:26.000Z",
+        "updatedAt": "2024-11-14T15:06:12.000Z",
         "url": "https://github.com/chadsr/dotfiles",
         "languages": [
             "Shell",
@@ -73,7 +123,7 @@
         "description": "My personal website",
         "stargazerCount": 2,
         "createdAt": "2018-10-07T13:52:10.000Z",
-        "updatedAt": "2024-11-04T19:28:10.000Z",
+        "updatedAt": "2024-11-13T03:39:10.000Z",
         "url": "https://github.com/chadsr/ross.ch",
         "languages": [
             "JavaScript",
@@ -99,23 +149,11 @@
         ]
     },
     {
-        "name": "invoice",
-        "description": "Command line invoice generator",
-        "stargazerCount": 1,
-        "createdAt": "2024-09-17T14:27:14.000Z",
-        "updatedAt": "2024-11-04T17:33:38.000Z",
-        "url": "https://github.com/chadsr/invoice",
-        "languages": [
-            "Go"
-        ],
-        "topics": []
-    },
-    {
         "name": "action-user-repos-json",
         "description": "A Github Action to output a user's repositories as a JSON file.",
         "stargazerCount": 2,
         "createdAt": "2024-08-31T10:15:08.000Z",
-        "updatedAt": "2024-11-04T16:08:53.000Z",
+        "updatedAt": "2024-11-13T03:37:32.000Z",
         "url": "https://github.com/chadsr/action-user-repos-json",
         "languages": [
             "JavaScript",
@@ -127,29 +165,16 @@
         ]
     },
     {
-        "name": "marktplaats-scraper",
-        "description": "Marktplaats.nl (Dutch Classifieds) Listing Scraper",
-        "stargazerCount": 3,
-        "createdAt": "2024-05-30T11:39:37.000Z",
-        "updatedAt": "2024-11-04T16:04:28.000Z",
-        "url": "https://github.com/chadsr/marktplaats-scraper",
+        "name": "invoice",
+        "description": "Command line invoice generator",
+        "stargazerCount": 1,
+        "createdAt": "2024-09-17T14:27:14.000Z",
+        "updatedAt": "2024-11-04T17:33:38.000Z",
+        "url": "https://github.com/chadsr/invoice",
         "languages": [
-            "Dockerfile",
-            "Python"
+            "Go"
         ],
-        "topics": [
-            "chromedriver",
-            "dataset-generation",
-            "dutch-language",
-            "machine-learning",
-            "machine-learning-dataset",
-            "marktplaats",
-            "scraper",
-            "selenium",
-            "web-scraper",
-            "web-scraping",
-            "dataset-creation"
-        ]
+        "topics": []
     },
     {
         "name": "cryptoshot",
@@ -300,31 +325,6 @@
             "swarm",
             "grafana",
             "systemd-service"
-        ]
-    },
-    {
-        "name": "Aurora-Server",
-        "description": "A wireless, ESP32 controlled, addressable RGB LED strip server (UDP streaming & JSON API)",
-        "stargazerCount": 6,
-        "createdAt": "2018-09-28T12:49:40.000Z",
-        "updatedAt": "2023-05-12T19:16:12.000Z",
-        "url": "https://github.com/chadsr/Aurora-Server",
-        "languages": [
-            "C",
-            "C++"
-        ],
-        "topics": [
-            "esp32",
-            "esp32-arduino",
-            "rgb-led",
-            "fastled",
-            "wireless-led-controller",
-            "wifi-led-controller",
-            "udp-stream",
-            "json-api",
-            "wireless",
-            "addressable-leds",
-            "platformio"
         ]
     },
     {
