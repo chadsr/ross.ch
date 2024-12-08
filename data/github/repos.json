@@ -1,5 +1,56 @@
 [
     {
+        "name": "MesaFireEvacuation",
+        "description": " Agent Based Fire Evacuation Model built using Project Mesa",
+        "stargazerCount": 38,
+        "createdAt": "2018-02-08T08:47:37.000Z",
+        "updatedAt": "2024-12-06T13:21:25.000Z",
+        "url": "https://github.com/chadsr/MesaFireEvacuation",
+        "languages": [
+            "Python"
+        ],
+        "topics": [
+            "project-mesa",
+            "mesa",
+            "abm",
+            "python3",
+            "fire-simulation",
+            "fire-evacutation",
+            "agent-based-modeling",
+            "agent-based-simulation"
+        ]
+    },
+    {
+        "name": "ross.ch",
+        "description": "My personal website",
+        "stargazerCount": 2,
+        "createdAt": "2018-10-07T13:52:10.000Z",
+        "updatedAt": "2024-12-01T02:06:54.000Z",
+        "url": "https://github.com/chadsr/ross.ch",
+        "languages": [
+            "JavaScript",
+            "TypeScript",
+            "SCSS",
+            "HTML"
+        ],
+        "topics": [
+            "css-3d-transitions",
+            "escher",
+            "perspective",
+            "optical-illusion",
+            "cloudflare-pages",
+            "cloudflare-workers",
+            "hugo",
+            "hugo-site",
+            "blog",
+            "css-3d",
+            "css-3d-animation",
+            "css3d",
+            "hugo-blog",
+            "typescript"
+        ]
+    },
+    {
         "name": "waybar-crypto",
         "description": "A Waybar module for displaying cryptocurrency market information",
         "stargazerCount": 37,
@@ -30,36 +81,6 @@
             "crypto-ticker-widget",
             "waybar-module",
             "sway-config"
-        ]
-    },
-    {
-        "name": "ross.ch",
-        "description": "My personal website",
-        "stargazerCount": 2,
-        "createdAt": "2018-10-07T13:52:10.000Z",
-        "updatedAt": "2024-11-28T02:32:24.000Z",
-        "url": "https://github.com/chadsr/ross.ch",
-        "languages": [
-            "JavaScript",
-            "TypeScript",
-            "SCSS",
-            "HTML"
-        ],
-        "topics": [
-            "css-3d-transitions",
-            "escher",
-            "perspective",
-            "optical-illusion",
-            "cloudflare-pages",
-            "cloudflare-workers",
-            "hugo",
-            "hugo-site",
-            "blog",
-            "css-3d",
-            "css-3d-animation",
-            "css3d",
-            "hugo-blog",
-            "typescript"
         ]
     },
     {
@@ -188,27 +209,6 @@
         ],
         "topics": [
             "work-in-progress"
-        ]
-    },
-    {
-        "name": "MesaFireEvacuation",
-        "description": " Agent Based Fire Evacuation Model built using Project Mesa",
-        "stargazerCount": 37,
-        "createdAt": "2018-02-08T08:47:37.000Z",
-        "updatedAt": "2024-10-27T14:47:01.000Z",
-        "url": "https://github.com/chadsr/MesaFireEvacuation",
-        "languages": [
-            "Python"
-        ],
-        "topics": [
-            "project-mesa",
-            "mesa",
-            "abm",
-            "python3",
-            "fire-simulation",
-            "fire-evacutation",
-            "agent-based-modeling",
-            "agent-based-simulation"
         ]
     },
     {
