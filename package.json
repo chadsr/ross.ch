@@ -22,7 +22,7 @@
   "license": "GPL-3.0-only",
   "devDependencies": {
     "@cloudflare/vitest-pool-workers": "^0.5.40",
-    "@cloudflare/workers-types": "^4.20241205.0",
+    "@cloudflare/workers-types": "^4.20241224.0",
     "@eslint/js": "^9.14.0",
     "@fontsource-variable/space-grotesk": "^5.1.0",
     "@fullhuman/postcss-purgecss": "^6.0.0",
