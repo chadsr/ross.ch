@@ -1,27 +1,81 @@
 [
     {
-        "name": "action-pytest",
-        "description": "(WIP) Run pytest with Reviewdog :dog:",
-        "stargazerCount": 2,
-        "createdAt": "2022-02-02T12:22:32.000Z",
-        "updatedAt": "2024-12-28T16:33:35.000Z",
-        "url": "https://github.com/reviewdog/action-pytest",
+        "name": "waybar-crypto",
+        "description": "A Waybar module for displaying cryptocurrency market information",
+        "stargazerCount": 36,
+        "createdAt": "2019-04-30T11:22:23.000Z",
+        "updatedAt": "2025-01-03T19:42:21.000Z",
+        "url": "https://github.com/chadsr/waybar-crypto",
         "languages": [
-            "Dockerfile",
-            "Shell"
+            "Python"
         ],
         "topics": [
-            "reviewdog",
-            "reviewdog-action",
-            "pytest",
-            "pytest-cov",
-            "pytest-profiling",
-            "python3",
-            "github-actions",
-            "github-actions-ci",
-            "github-actions-docker",
-            "unit-testing",
-            "ci"
+            "waybar",
+            "cryptocurrency-prices",
+            "cryptocurrency",
+            "cryptocurrencies",
+            "wayland",
+            "crypto",
+            "crypto-prices",
+            "waybar-crypto",
+            "bitcoin",
+            "ethereum",
+            "coinmarketcap",
+            "coinmarketcap-api",
+            "crypto-ticker",
+            "crypto-trading",
+            "cryptocurrency-price-ticker",
+            "swaywm",
+            "price-change",
+            "crypto-ticker-widget",
+            "waybar-module",
+            "sway-config"
+        ]
+    },
+    {
+        "name": "ross.ch",
+        "description": "My personal website",
+        "stargazerCount": 2,
+        "createdAt": "2018-10-07T13:52:10.000Z",
+        "updatedAt": "2024-12-31T14:17:57.000Z",
+        "url": "https://github.com/chadsr/ross.ch",
+        "languages": [
+            "JavaScript",
+            "TypeScript",
+            "SCSS",
+            "HTML"
+        ],
+        "topics": [
+            "css-3d-transitions",
+            "escher",
+            "perspective",
+            "optical-illusion",
+            "cloudflare-pages",
+            "cloudflare-workers",
+            "hugo",
+            "hugo-site",
+            "blog",
+            "css-3d",
+            "css-3d-animation",
+            "css3d",
+            "hugo-blog",
+            "typescript"
+        ]
+    },
+    {
+        "name": "action-user-repos-json",
+        "description": "A Github Action to output a user's repositories as a JSON file.",
+        "stargazerCount": 2,
+        "createdAt": "2024-08-31T10:15:08.000Z",
+        "updatedAt": "2024-12-30T11:19:12.000Z",
+        "url": "https://github.com/chadsr/action-user-repos-json",
+        "languages": [
+            "JavaScript",
+            "TypeScript"
+        ],
+        "topics": [
+            "actions",
+            "github-actions"
         ]
     },
     {
@@ -29,7 +83,7 @@
         "description": "My dotfiles, managed with stow.",
         "stargazerCount": 6,
         "createdAt": "2018-12-03T17:08:23.000Z",
-        "updatedAt": "2024-12-27T20:54:26.000Z",
+        "updatedAt": "2024-12-30T11:16:49.000Z",
         "url": "https://github.com/chadsr/dotfiles",
         "languages": [
             "Shell",
@@ -61,19 +115,28 @@
         ]
     },
     {
-        "name": "action-user-repos-json",
-        "description": "A Github Action to output a user's repositories as a JSON file.",
+        "name": "action-pytest",
+        "description": "(WIP) Run pytest with Reviewdog :dog:",
         "stargazerCount": 2,
-        "createdAt": "2024-08-31T10:15:08.000Z",
-        "updatedAt": "2024-12-24T13:32:33.000Z",
-        "url": "https://github.com/chadsr/action-user-repos-json",
+        "createdAt": "2022-02-02T12:22:32.000Z",
+        "updatedAt": "2024-12-28T16:33:35.000Z",
+        "url": "https://github.com/reviewdog/action-pytest",
         "languages": [
-            "JavaScript",
-            "TypeScript"
+            "Dockerfile",
+            "Shell"
         ],
         "topics": [
-            "actions",
-            "github-actions"
+            "reviewdog",
+            "reviewdog-action",
+            "pytest",
+            "pytest-cov",
+            "pytest-profiling",
+            "python3",
+            "github-actions",
+            "github-actions-ci",
+            "github-actions-docker",
+            "unit-testing",
+            "ci"
         ]
     },
     {
@@ -99,69 +162,6 @@
             "web-scraper",
             "web-scraping",
             "dataset-creation"
-        ]
-    },
-    {
-        "name": "ross.ch",
-        "description": "My personal website",
-        "stargazerCount": 2,
-        "createdAt": "2018-10-07T13:52:10.000Z",
-        "updatedAt": "2024-12-24T13:22:37.000Z",
-        "url": "https://github.com/chadsr/ross.ch",
-        "languages": [
-            "JavaScript",
-            "TypeScript",
-            "SCSS",
-            "HTML"
-        ],
-        "topics": [
-            "css-3d-transitions",
-            "escher",
-            "perspective",
-            "optical-illusion",
-            "cloudflare-pages",
-            "cloudflare-workers",
-            "hugo",
-            "hugo-site",
-            "blog",
-            "css-3d",
-            "css-3d-animation",
-            "css3d",
-            "hugo-blog",
-            "typescript"
-        ]
-    },
-    {
-        "name": "waybar-crypto",
-        "description": "A Waybar module for displaying cryptocurrency market information",
-        "stargazerCount": 35,
-        "createdAt": "2019-04-30T11:22:23.000Z",
-        "updatedAt": "2024-12-22T01:39:27.000Z",
-        "url": "https://github.com/chadsr/waybar-crypto",
-        "languages": [
-            "Python"
-        ],
-        "topics": [
-            "waybar",
-            "cryptocurrency-prices",
-            "cryptocurrency",
-            "cryptocurrencies",
-            "wayland",
-            "crypto",
-            "crypto-prices",
-            "waybar-crypto",
-            "bitcoin",
-            "ethereum",
-            "coinmarketcap",
-            "coinmarketcap-api",
-            "crypto-ticker",
-            "crypto-trading",
-            "cryptocurrency-price-ticker",
-            "swaywm",
-            "price-change",
-            "crypto-ticker-widget",
-            "waybar-module",
-            "sway-config"
         ]
     },
     {
