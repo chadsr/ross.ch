@@ -1,5 +1,5 @@
 import postcssPresetEnv from 'postcss-preset-env';
-import purgeCSSPlugin from '@fullhuman/postcss-purgecss';
+import { purgeCSSPlugin } from '@fullhuman/postcss-purgecss';
 import calcPlugin from 'postcss-calc';
 
 export default {
