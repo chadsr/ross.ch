@@ -33,9 +33,6 @@ const CLASS_SUCCESS = 'success';
 const CLASS_ERROR = 'error';
 const ERROR_MESSAGE_PREFIX = 'Error!';
 
-const SAFARI_FIX_VERSION = '17.5.1'; // TODO: Find exact version where this is fixed
-const WEBKIT_FIX_CLASS = 'webkit-old';
-
 // Freaky Escher stuff
 const BG_Y_OFFSET = -0.5; // Offset from y origin for the background rendering (so cube starts halfway offscreen)
 const BG_CONTAINER_Id = 'background';
@@ -168,56 +165,9 @@ const showStatusMessage = (
     }, timeoutMs);
 };
 
-/**
- * Compares two version strings.
- *
- * This function compares the given version1 and version2, returning -1 if
- * version1 is older, 1 if version1 is newer, or 0 if they are equal.
- *
- * @param {string} version1 The first version string to compare (e.g. '1.2.3')
- * @param {string} version2 The second version string to compare (e.g. '1.2.4')
- * @return {-1 | 0 | 1} A value indicating the result of the comparison
- */
-const compareVersions = (version1: string, version2: string) => {
-    const version1Values = version1.split('.').map(Number);
-    const version2Values = version2.split('.').map(Number);
-
-    if (version1Values[0] < version2Values[0]) return -1; // version1 is older
-    if (version1Values[0] > version2Values[0]) return 1; // version1 is newer
-
-    if (version1Values.length > 1 && version2Values.length > 1) {
-        if (version1Values[1] < version2Values[1]) return -1; // version1 is older
-        if (version1Values[1] > version2Values[1]) return 1; // version1 is newer
-
-        if (version1Values.length > 2 && version2Values.length > 2) {
-            if (version1Values[2] < version2Values[2]) return -1; // version1 is older
-            if (version1Values[2] > version2Values[2]) return 1; // version1 is newer
-        }
-    }
-
-    return 0;
-};
-
 document.addEventListener('DOMContentLoaded', function () {
     const cube = document.getElementById(CUBE_ID);
     if (cube) {
-        if (navigator.userAgent.indexOf('AppleWebKit') !== -1) {
-            const versionMatch = navigator.userAgent.match(
-                /Version\/(\d+(\.\d+)*)/,
-            );
-
-            if (versionMatch) {
-                const safariVersion = versionMatch[1];
-                if (compareVersions(safariVersion, SAFARI_FIX_VERSION)) {
-                    // Enable fix for old AppleWebkit versions, not supporting CSS transforms on 3D elements
-                    console.log(
-                        `Applying Safari/WebKit fix for browser version: ${safariVersion}`,
-                    );
-                    cube.classList.add(WEBKIT_FIX_CLASS);
-                }
-            }
-        }
-
         new SwipeNav(
             CUBE_ID,
             SWIPE_NAVIGATION_THRESHOLD,

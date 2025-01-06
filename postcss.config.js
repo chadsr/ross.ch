@@ -24,7 +24,6 @@ export default {
                 'iso-bottom',
                 'iso-back-left',
                 'iso-back-right',
-                'webkit-old',
             ],
             defaultExtractor: (content) => {
                 const els = JSON.parse(content).htmlElements;
