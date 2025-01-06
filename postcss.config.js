@@ -27,8 +27,12 @@ export default {
                 'webkit-old',
             ],
             defaultExtractor: (content) => {
-                let els = JSON.parse(content).htmlElements;
-                return els.tags.concat(els.classes, els.ids);
+                const els = JSON.parse(content).htmlElements;
+                return [
+                    ...(els.tags || []),
+                    ...(els.classes || []),
+                    ...(els.ids || []),
+                ];
             },
         }),
     ],
