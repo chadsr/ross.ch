@@ -1,5 +1,5 @@
 import postcssPresetEnv from 'postcss-preset-env';
-import purgeCSSPlugin from '@fullhuman/postcss-purgecss';
+import { purgeCSSPlugin } from '@fullhuman/postcss-purgecss';
 import calcPlugin from 'postcss-calc';
 
 export default {
@@ -27,8 +27,12 @@ export default {
                 'webkit-old',
             ],
             defaultExtractor: (content) => {
-                let els = JSON.parse(content).htmlElements;
-                return els.tags.concat(els.classes, els.ids);
+                const els = JSON.parse(content).htmlElements;
+                return [
+                    ...(els.tags || []),
+                    ...(els.classes || []),
+                    ...(els.ids || []),
+                ];
             },
         }),
     ],
