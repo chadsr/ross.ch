@@ -1,10 +1,11 @@
 import postcssPresetEnv from 'postcss-preset-env';
 import { purgeCSSPlugin } from '@fullhuman/postcss-purgecss';
 import calcPlugin from 'postcss-calc';
+import autoprefixer from 'autoprefixer';
 
 export default {
     plugins: [
-        postcssPresetEnv({ browsers: 'last 2 versions' }),
+        postcssPresetEnv(),
         calcPlugin(),
         purgeCSSPlugin({
             content: ['./hugo_stats.json'],
@@ -34,5 +35,6 @@ export default {
                 ];
             },
         }),
+        autoprefixer(),
     ],
 };
