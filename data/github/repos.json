@@ -1,10 +1,87 @@
 [
     {
+        "name": "action-pytest",
+        "description": "(WIP) Run pytest with Reviewdog :dog:",
+        "stargazerCount": 2,
+        "createdAt": "2022-02-02T12:22:32.000Z",
+        "updatedAt": "2025-03-18T18:25:58.000Z",
+        "url": "https://github.com/reviewdog/action-pytest",
+        "languages": [
+            "Dockerfile",
+            "Shell"
+        ],
+        "topics": [
+            "reviewdog",
+            "reviewdog-action",
+            "pytest",
+            "pytest-cov",
+            "pytest-profiling",
+            "python3",
+            "github-actions",
+            "github-actions-ci",
+            "github-actions-docker",
+            "unit-testing",
+            "ci"
+        ]
+    },
+    {
+        "name": "dotfiles",
+        "description": "My dotfiles, managed with stow.",
+        "stargazerCount": 7,
+        "createdAt": "2018-12-03T17:08:23.000Z",
+        "updatedAt": "2025-03-18T10:24:27.000Z",
+        "url": "https://github.com/chadsr/dotfiles",
+        "languages": [
+            "Shell",
+            "CSS",
+            "GLSL",
+            "Python"
+        ],
+        "topics": [
+            "swaywm",
+            "sway",
+            "waybar",
+            "stow",
+            "alacritty-config",
+            "dotfiles",
+            "zsh",
+            "gnupg",
+            "wayland",
+            "liquidctl",
+            "dotfiles-automation",
+            "dotfiles-installer",
+            "dotfiles-setup",
+            "mpv-config",
+            "wayland-system",
+            "gpg-encryption",
+            "sway-config",
+            "swaync",
+            "pipewire",
+            "hyprland-config"
+        ]
+    },
+    {
+        "name": "action-user-repos-json",
+        "description": "A Github Action to output a user's repositories as a JSON file.",
+        "stargazerCount": 2,
+        "createdAt": "2024-08-31T10:15:08.000Z",
+        "updatedAt": "2025-03-17T09:20:23.000Z",
+        "url": "https://github.com/chadsr/action-user-repos-json",
+        "languages": [
+            "JavaScript",
+            "TypeScript"
+        ],
+        "topics": [
+            "actions",
+            "github-actions"
+        ]
+    },
+    {
         "name": "ross.ch",
         "description": "My personal website",
         "stargazerCount": 2,
         "createdAt": "2018-10-07T13:52:10.000Z",
-        "updatedAt": "2025-03-11T08:10:38.000Z",
+        "updatedAt": "2025-03-16T09:57:25.000Z",
         "url": "https://github.com/chadsr/ross.ch",
         "languages": [
             "JavaScript",
@@ -52,58 +129,6 @@
             "web-scraper",
             "web-scraping",
             "dataset-creation"
-        ]
-    },
-    {
-        "name": "action-user-repos-json",
-        "description": "A Github Action to output a user's repositories as a JSON file.",
-        "stargazerCount": 2,
-        "createdAt": "2024-08-31T10:15:08.000Z",
-        "updatedAt": "2025-03-10T09:44:30.000Z",
-        "url": "https://github.com/chadsr/action-user-repos-json",
-        "languages": [
-            "JavaScript",
-            "TypeScript"
-        ],
-        "topics": [
-            "actions",
-            "github-actions"
-        ]
-    },
-    {
-        "name": "dotfiles",
-        "description": "My dotfiles, managed with stow.",
-        "stargazerCount": 6,
-        "createdAt": "2018-12-03T17:08:23.000Z",
-        "updatedAt": "2025-03-10T09:36:44.000Z",
-        "url": "https://github.com/chadsr/dotfiles",
-        "languages": [
-            "Shell",
-            "CSS",
-            "GLSL",
-            "Python"
-        ],
-        "topics": [
-            "swaywm",
-            "sway",
-            "waybar",
-            "stow",
-            "alacritty-config",
-            "dotfiles",
-            "zsh",
-            "gnupg",
-            "wayland",
-            "liquidctl",
-            "dotfiles-automation",
-            "dotfiles-installer",
-            "dotfiles-setup",
-            "mpv-config",
-            "wayland-system",
-            "gpg-encryption",
-            "sway-config",
-            "swaync",
-            "pipewire",
-            "hyprland-config"
         ]
     },
     {
@@ -181,31 +206,6 @@
             "crypto-ticker-widget",
             "waybar-module",
             "sway-config"
-        ]
-    },
-    {
-        "name": "action-pytest",
-        "description": "(WIP) Run pytest with Reviewdog :dog:",
-        "stargazerCount": 2,
-        "createdAt": "2022-02-02T12:22:32.000Z",
-        "updatedAt": "2024-12-28T16:33:35.000Z",
-        "url": "https://github.com/reviewdog/action-pytest",
-        "languages": [
-            "Dockerfile",
-            "Shell"
-        ],
-        "topics": [
-            "reviewdog",
-            "reviewdog-action",
-            "pytest",
-            "pytest-cov",
-            "pytest-profiling",
-            "python3",
-            "github-actions",
-            "github-actions-ci",
-            "github-actions-docker",
-            "unit-testing",
-            "ci"
         ]
     },
     {
