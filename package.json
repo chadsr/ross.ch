@@ -43,7 +43,7 @@
         "postcss-preset-env": "^10.1.5",
         "postcss-scss": "^4.0.9",
         "prettier": "^3.5.3",
-        "resend": "^4.2.0",
+        "resend": "^4.3.0",
         "stylelint": "^16.16.0",
         "stylelint-config-standard-scss": "^14.0.0",
         "stylelint-prettier": "^5.0.3",
