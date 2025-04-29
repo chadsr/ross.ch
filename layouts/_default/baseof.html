@@ -3,8 +3,13 @@
 {{- partial "head.html" . -}}
 
 <body>
-    <div class="center-container{{ if .IsHome }} center-vertical{{ end }}">
+    {{ if .IsHome }}
+    {{- partial "header.html" . -}}
+    {{ end }}
+
+    <div class="center-container">
         {{- partial "background.html" . -}}
+
         {{- block "main" . }}{{- end }}
     </div>
     {{- partial "footer.html" . -}}
