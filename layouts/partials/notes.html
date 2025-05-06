@@ -1,0 +1,53 @@
+<section class="content-section content-blog">
+    <div class="title-section">
+        <h2>Notes</h2>
+        <p class="title-wordmark"><em>An attempt at publicly organising my notes and research.</em></p>
+        <p>
+            <em>
+                They are also viewable as an <a class="link" href="https://notes.ross.ch/#/graph"
+                    target="_blank">interactive
+                    graph</a> or as <a class="link"
+                    href="https://raw.githubusercontent.com/chadsr/notes/refs/heads/main/notes.nq"
+                    target="_blank">linked-data</a>.
+            </em>
+        </p>
+    </div>
+
+    {{ $notes := dict }}
+    {{ $url := "https://raw.githubusercontent.com/chadsr/notes/refs/heads/main/notes.jsonld" }}
+    {{ $opts := dict
+    "headers" (dict "Content-Type" "application/json")
+    }}
+    {{ with try (resources.GetRemote $url $opts) }}
+    {{ with .Err }}
+    {{ errorf "%s" . }}
+    {{ else with .Value }}
+    {{ $notes = .Content | transform.Unmarshal }}
+    {{ else }}
+    {{ errorf "Unable to get remote resource %q" $url }}
+    {{ end }}
+    {{ end }}
+    <ul class="notes-feed feed">
+        {{ range $notes }}
+        {{ $types := index . "@type" }}
+        {{ if (in $types "https://notes.ross.ch/#/page/Note") }}
+        <li class="feed-item blog-post field hover">
+            <a href="{{ index . "@id" }}" rel="noopener" target="_blank">
+                <div class="title feed-item-title hover threed-top perspective">
+                    {{ $nameSlice := (index . "https://schema.org/name") }}
+                    {{ $titleMap := (index $nameSlice 0) }}
+                    {{ $title := (index $titleMap "@value") }}
+                    <h3>{{ $title }}</h3>
+                </div>
+                <div class="feed-item-content">
+                    {{ $descSlice := (index . "https://schema.org/description") }}
+                    {{ $descMap := (index $descSlice 0) }}
+                    {{ $description := (index $descMap "@value") }}
+                    <p class="feed-item-summary">{{ $description }}</p>
+                </div>
+            </a>
+        </li>
+        {{ end }}
+        {{ end }}
+    </ul>
+</section>

@@ -44,7 +44,7 @@ const ISO_PADDING = 1;
 const NAV_MAPPING = {
     'nav-about': 0,
     'nav-work': 1,
-    'nav-thoughts': 2,
+    'nav-notes': 2,
     'nav-contact': 3,
 };
 
