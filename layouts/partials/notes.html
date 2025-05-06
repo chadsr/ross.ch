@@ -27,11 +27,15 @@
     {{ errorf "Unable to get remote resource %q" $url }}
     {{ end }}
     {{ end }}
+
     <ul class="notes-feed feed">
         {{ range $notes }}
         {{ $types := index . "@type" }}
         {{ if (in $types "https://notes.ross.ch/#/page/Note") }}
         <li class="feed-item blog-post field hover">
+            <script type="application/ld+json">
+                {{ . | transform.Remarshal "json" | safeJS }}
+            </script>
             <a href="{{ index . "@id" }}" rel="noopener" target="_blank">
                 <div class="title feed-item-title hover threed-top perspective">
                     {{ $nameSlice := (index . "https://schema.org/name") }}
