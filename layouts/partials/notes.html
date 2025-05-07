@@ -28,23 +28,50 @@
     {{ end }}
     {{ end }}
 
+    {{ $scratch := newScratch }}
+
     <ul class="notes-feed feed">
-        {{ range $notes }}
-        {{ $types := index . "@type" }}
-        {{ if (in $types "https://notes.ross.ch/#/page/Note") }}
+        {{ range $k, $note := $notes }}
+        {{ if (index $note "https://schema.org/dateCreated") }}
+        {{ $dateCreatedSlice := (index $note "https://schema.org/dateCreated") }}
+        {{ $dateCreatedMap := (index $dateCreatedSlice 0) }}
+        {{ $dateCreated := (index $dateCreatedMap "@value") }}
+        {{ $dateParts := split $dateCreated "-" }}
+        {{ $time := (time.AsTime (printf "%s-%s-%s" (index $dateParts 2) (index $dateParts 1) (index $dateParts 0))) }}
+        {{ $noteWithTime := dict "note" $note "time" $time }}
+        {{ $scratch.SetInMap "notes" (string $k) $noteWithTime }}
+        {{ end }}
+        {{ end }}
+
+        {{ $notesWithTime := sort ($scratch.Get "notes") "time" "desc" }}
+
+        {{ range $notesWithTime }}
+        {{ $note := (index . "note") }}
+        {{ $time := (index . "time") }}
+        {{ $types := index $note "@type" }}
+        {{ if or (in $types "https://notes.ross.ch/#/page/Note") (in $types "https://notes.ross.ch/#/page/Journal") }}
         <li class="feed-item blog-post field hover">
             <script type="application/ld+json">
-                {{ . | transform.Remarshal "json" | safeJS }}
+                {{ $note | transform.Remarshal "json" | safeJS }}
             </script>
-            <a href="{{ index . "@id" }}" rel="noopener" target="_blank">
+            <a href="{{ index $note "@id" }}" rel="noopener" target="_blank">
                 <div class="title feed-item-title hover threed-top perspective">
-                    {{ $nameSlice := (index . "https://schema.org/name") }}
+                    {{ if (in $types "https://notes.ross.ch/#/page/Journal") }}
+                    <h3>Journal</h3>
+                    {{ else }}
+                    {{ $nameSlice := (index $note "https://schema.org/name") }}
                     {{ $titleMap := (index $nameSlice 0) }}
-                    {{ $title := (index $titleMap "@value") }}
-                    <h3>{{ $title }}</h3>
+                    <h3>{{ (index $titleMap "@value") }}</h3>
+                    {{ end }}
+                </div>
+                <div class="post-stats">
+                    <div class="post-stats-item post-date feed-item-info">
+                        {{- partial "icons/calendar.html" . -}}
+                        {{ time.Format "02 Jan 2006" $time }}
+                    </div>
                 </div>
                 <div class="feed-item-content">
-                    {{ $descSlice := (index . "https://schema.org/description") }}
+                    {{ $descSlice := (index $note "https://schema.org/description") }}
                     {{ $descMap := (index $descSlice 0) }}
                     {{ $description := (index $descMap "@value") }}
                     <p class="feed-item-summary">{{ $description }}</p>
