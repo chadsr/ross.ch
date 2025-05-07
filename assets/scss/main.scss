@@ -215,8 +215,7 @@ $icon-size-social: 18px;
             brightness($brightness-threed-top-light),
             brightness($brightness-threed-top-dark)
         );
-        transform: rotateX(calc($threed-angle))
-            translate3d(0, -50%, calc(-1 * $outline-size / 2));
+        transform: rotateX(calc($threed-angle)) translate3d(0, -50%, 0);
         top: calc(-1 * var(--threed-height) * cos($threed-angle));
     }
 }
@@ -231,8 +230,7 @@ $icon-size-social: 18px;
             brightness($brightness-threed-bottom-light),
             brightness($brightness-threed-bottom-dark)
         );
-        transform: rotateX(calc(-1 * $threed-angle))
-            translate3d(0, 50%, calc(-1 * $outline-size / 2));
+        transform: rotateX(calc(-1 * $threed-angle)) translate3d(0, 50%, 0);
         top: calc(var(--threed-height) * (cos($threed-angle)));
     }
 }
