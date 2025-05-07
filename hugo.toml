@@ -3,6 +3,7 @@ languageCode = 'en-GB'
 title = 'Ross Chadwick'
 enableRobotsTXT = true
 summaryLength = 10
+timeZone = 'Europe/Amsterdam'
 
 [params]
 dateFormat = "02 Jan 2006"
