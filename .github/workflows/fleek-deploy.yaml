@@ -2,6 +2,8 @@ name: Deploy site via Fleek
 on: 
   push:
     branches: [master]
+permissions:
+  contents: read
 jobs:
   deploy-to-fleek:
     runs-on: ubuntu-latest
