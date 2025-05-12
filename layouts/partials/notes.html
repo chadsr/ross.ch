@@ -70,6 +70,18 @@
                         {{ time.Format "02 Jan 2006" $time }}
                     </div>
                 </div>
+
+                {{ if (index $note "https://notes.ross.ch/#/page/topic") }}
+                {{ $topicsSlice := (index $note "https://notes.ross.ch/#/page/topic") }}
+                <div class="feed-item-info feed-item-tags">
+                    {{ range $topic := $topicsSlice }}
+                    {{ $topicString := (replace (index $topic "@id") "https://notes.ross.ch/#/page/" "") }}
+                    {{ $topicId := (replace $topicString "%20" " ") }}
+                    <span class="feed-item-tag hover">{{ $topicId }}</span>
+                    {{ end}}
+                </div>
+                {{ end }}
+
                 <div class="feed-item-content">
                     {{ $descSlice := (index $note "https://schema.org/description") }}
                     {{ $descMap := (index $descSlice 0) }}
