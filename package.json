@@ -15,7 +15,8 @@
         "coverage": "vitest run --coverage",
         "cf-deploy": "wrangler deploy",
         "cf-dev": "wrangler pages dev",
-        "cf-typegen": "wrangler types functions/worker-configuration.d.ts"
+        "cf-typegen": "wrangler types functions/worker-configuration.d.ts",
+        "deploy-fleek": "fleek sites deploy"
     },
     "keywords": [],
     "author": "Ross Chadwick",
@@ -29,6 +30,7 @@
         "@cloudflare/vitest-pool-workers": "^0.8.22",
         "@cloudflare/workers-types": "^4.20250429.0",
         "@eslint/js": "^9.24.0",
+        "@fleek-platform/cli": "^3.8.3",
         "@fontsource-variable/space-grotesk": "^5.2.7",
         "@fullhuman/postcss-purgecss": "^7.0.2",
         "@openpgp/web-stream-tools": "^0.1.3",

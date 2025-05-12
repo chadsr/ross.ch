@@ -1,0 +1,21 @@
+name: Deploy site via Fleek
+on: 
+  push:
+    branches: [master]
+permissions:
+  contents: read
+jobs:
+  deploy-to-fleek:
+    runs-on: ubuntu-latest
+    env:
+      FLEEK_TOKEN: ${{ secrets.FLEEK_TOKEN }}
+      FLEEK_PROJECT_ID: ${{ secrets.FLEEK_PROJECT_ID }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+      - name: Install Packages
+        run: npm ci
+      - name: Build & deploy sites
+        run: npm run deploy-fleek
