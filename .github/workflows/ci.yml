@@ -72,4 +72,4 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
       - name: Build
-        run: hugo --minify
+        run: npm run build
