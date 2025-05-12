@@ -51,10 +51,10 @@
         {{ $types := index $note "@type" }}
         {{ if or (in $types "https://notes.ross.ch/#/page/Note") (in $types "https://notes.ross.ch/#/page/Journal") }}
         <li class="feed-item blog-post field hover">
-            <script type="application/ld+json">
-                {{ $note | transform.Remarshal "json" | safeJS }}
-            </script>
             <a href="{{ index $note "@id" }}" rel="noopener" target="_blank">
+                <script type="application/ld+json">
+                    {{ $note | transform.Remarshal "json" | safeJS }}
+                </script>
                 <div class="title feed-item-title hover threed-top perspective">
                     {{ if (in $types "https://notes.ross.ch/#/page/Journal") }}
                     <h3>Journal</h3>
