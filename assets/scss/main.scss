@@ -23,7 +23,8 @@ $color-banner-text: white;
 $color-banner-background: light-dark(rgb(90 90 90), rgb(25 25 25));
 $color-scrollbar-track: $color-content;
 $color-scrollbar-thumb: $color-banner-background;
-$color-outline: light-dark(rgb(100 100 100 / 40%), rgb(200 200 200 / 20%));
+$color-outline: light-dark(rgb(68 68 68 / 75%), rgb(102 102 102 / 75%));
+$color-outline-highlight: light-dark(rgb(152 83 249), rgb(185 137 252));
 $filter-face-no-focus: brightness(50%);
 $color-shadow: rgb(51 51 51 / 50%);
 $color-iso: $color-background;
@@ -215,7 +216,8 @@ $icon-size-social: 18px;
             brightness($brightness-threed-top-light),
             brightness($brightness-threed-top-dark)
         );
-        transform: rotateX(calc($threed-angle)) translate3d(0, -50%, 0);
+        transform: rotateX(calc($threed-angle))
+            translate3d(0, -50%, calc(-1 * $outline-size / 2));
         top: calc(-1 * var(--threed-height) * cos($threed-angle));
     }
 }
@@ -230,7 +232,8 @@ $icon-size-social: 18px;
             brightness($brightness-threed-bottom-light),
             brightness($brightness-threed-bottom-dark)
         );
-        transform: rotateX(calc(-1 * $threed-angle)) translate3d(0, 50%, 0);
+        transform: rotateX(calc(-1 * $threed-angle))
+            translate3d(0, 50%, calc(-1 * $outline-size / 2));
         top: calc(var(--threed-height) * (cos($threed-angle)));
     }
 }
@@ -643,7 +646,11 @@ footer {
 
         .title {
             background-color: $content-highlight;
-            outline-color: $content-highlight;
+            outline-color: $color-outline-highlight;
+
+            &::before {
+                outline-color: $color-outline-highlight;
+            }
         }
     }
 
@@ -898,6 +905,7 @@ ul.social {
             .feed-item-title,
             .feed-item-tag {
                 background-color: $content-highlight;
+                outline-color: $color-outline-highlight;
             }
 
             .repo-stars::before {
