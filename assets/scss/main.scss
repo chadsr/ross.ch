@@ -431,7 +431,11 @@ button {
 
     &.hover:hover {
         background-color: $content-highlight;
-        outline-color: $content-highlight;
+        outline-color: $color-outline-highlight;
+
+        &::before {
+            outline-color: $color-outline-highlight;
+        }
     }
 
     &.error,
