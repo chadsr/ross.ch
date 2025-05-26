@@ -27,7 +27,7 @@
         "ChromeAndroid >= 119"
     ],
     "devDependencies": {
-        "@cloudflare/vitest-pool-workers": "^0.8.27",
+        "@cloudflare/vitest-pool-workers": "^0.8.32",
         "@cloudflare/workers-types": "^4.20250525.0",
         "@eslint/js": "^9.24.0",
         "@fontsource-variable/space-grotesk": "^5.2.7",
