@@ -38,7 +38,7 @@
         "eslint-config-prettier": "^10.1.5",
         "eslint-plugin-prettier": "^5.4.0",
         "husky": "^9.1.7",
-        "postcss": "^8.5.3",
+        "postcss": "^8.5.4",
         "postcss-calc": "^10.1.1",
         "postcss-cli": "^11.0.1",
         "postcss-preset-env": "^10.1.6",
