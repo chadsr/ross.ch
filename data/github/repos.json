@@ -1,10 +1,43 @@
 [
     {
+        "name": "waybar-crypto",
+        "description": "A Waybar module for displaying cryptocurrency market information",
+        "stargazerCount": 37,
+        "createdAt": "2019-04-30T11:22:23.000Z",
+        "updatedAt": "2025-06-13T13:03:15.000Z",
+        "url": "https://github.com/chadsr/waybar-crypto",
+        "languages": [
+            "Python"
+        ],
+        "topics": [
+            "waybar",
+            "cryptocurrency-prices",
+            "cryptocurrency",
+            "cryptocurrencies",
+            "wayland",
+            "crypto",
+            "crypto-prices",
+            "waybar-crypto",
+            "bitcoin",
+            "ethereum",
+            "coinmarketcap",
+            "coinmarketcap-api",
+            "crypto-ticker",
+            "crypto-trading",
+            "cryptocurrency-price-ticker",
+            "swaywm",
+            "price-change",
+            "crypto-ticker-widget",
+            "waybar-module",
+            "sway-config"
+        ]
+    },
+    {
         "name": "dotfiles",
         "description": "My dotfiles, managed with stow.",
         "stargazerCount": 9,
         "createdAt": "2018-12-03T17:08:23.000Z",
-        "updatedAt": "2025-06-05T15:31:43.000Z",
+        "updatedAt": "2025-06-10T21:12:51.000Z",
         "url": "https://github.com/chadsr/dotfiles",
         "languages": [
             "Shell",
@@ -36,23 +69,11 @@
         ]
     },
     {
-        "name": "invoice",
-        "description": "Command line invoice generator",
-        "stargazerCount": 1,
-        "createdAt": "2024-09-17T14:27:14.000Z",
-        "updatedAt": "2025-06-03T13:53:14.000Z",
-        "url": "https://github.com/chadsr/invoice",
-        "languages": [
-            "Go"
-        ],
-        "topics": []
-    },
-    {
         "name": "ross.ch",
         "description": "My personal website",
         "stargazerCount": 2,
         "createdAt": "2018-10-07T13:52:10.000Z",
-        "updatedAt": "2025-06-03T08:51:08.000Z",
+        "updatedAt": "2025-06-10T10:09:35.000Z",
         "url": "https://github.com/chadsr/ross.ch",
         "languages": [
             "JavaScript",
@@ -78,11 +99,48 @@
         ]
     },
     {
+        "name": "cryptoshot",
+        "description": "Retrieve cryptocurrency balances and prices at a specific point in time",
+        "stargazerCount": 1,
+        "createdAt": "2024-04-18T17:24:17.000Z",
+        "updatedAt": "2025-06-10T10:08:53.000Z",
+        "url": "https://github.com/chadsr/cryptoshot",
+        "languages": [
+            "Python"
+        ],
+        "topics": [
+            "work-in-progress",
+            "cryptocurrency",
+            "cryptocurrency-exchanges",
+            "cryptocurrency-ba",
+            "cryptocurrency-pr",
+            "crypto-currency",
+            "crypto-market",
+            "cryptocurrency-tool"
+        ]
+    },
+    {
+        "name": "action-user-repos-json",
+        "description": "A Github Action to output a user's repositories as a JSON file.",
+        "stargazerCount": 2,
+        "createdAt": "2024-08-31T10:15:08.000Z",
+        "updatedAt": "2025-06-09T14:58:53.000Z",
+        "url": "https://github.com/chadsr/action-user-repos-json",
+        "languages": [
+            "JavaScript",
+            "TypeScript"
+        ],
+        "topics": [
+            "actions",
+            "github-actions"
+        ]
+    },
+    {
         "name": "marktplaats-scraper",
         "description": "Marktplaats.nl (Dutch Classifieds) Listing Scraper",
         "stargazerCount": 4,
         "createdAt": "2024-05-30T11:39:37.000Z",
-        "updatedAt": "2025-06-02T10:58:57.000Z",
+        "updatedAt": "2025-06-09T14:27:33.000Z",
         "url": "https://github.com/chadsr/marktplaats-scraper",
         "languages": [
             "Dockerfile",
@@ -103,41 +161,16 @@
         ]
     },
     {
-        "name": "action-user-repos-json",
-        "description": "A Github Action to output a user's repositories as a JSON file.",
-        "stargazerCount": 2,
-        "createdAt": "2024-08-31T10:15:08.000Z",
-        "updatedAt": "2025-06-02T08:32:55.000Z",
-        "url": "https://github.com/chadsr/action-user-repos-json",
-        "languages": [
-            "JavaScript",
-            "TypeScript"
-        ],
-        "topics": [
-            "actions",
-            "github-actions"
-        ]
-    },
-    {
-        "name": "cryptoshot",
-        "description": "Retrieve cryptocurrency balances and prices at a specific point in time",
+        "name": "invoice",
+        "description": "Command line invoice generator",
         "stargazerCount": 1,
-        "createdAt": "2024-04-18T17:24:17.000Z",
-        "updatedAt": "2025-06-02T08:29:57.000Z",
-        "url": "https://github.com/chadsr/cryptoshot",
+        "createdAt": "2024-09-17T14:27:14.000Z",
+        "updatedAt": "2025-06-03T13:53:14.000Z",
+        "url": "https://github.com/chadsr/invoice",
         "languages": [
-            "Python"
+            "Go"
         ],
-        "topics": [
-            "work-in-progress",
-            "cryptocurrency",
-            "cryptocurrency-exchanges",
-            "cryptocurrency-ba",
-            "cryptocurrency-pr",
-            "crypto-currency",
-            "crypto-market",
-            "cryptocurrency-tool"
-        ]
+        "topics": []
     },
     {
         "name": "NordVPN-NetworkManager",
@@ -225,39 +258,6 @@
             "vue3",
             "capacitor",
             "capacitorjs"
-        ]
-    },
-    {
-        "name": "waybar-crypto",
-        "description": "A Waybar module for displaying cryptocurrency market information",
-        "stargazerCount": 36,
-        "createdAt": "2019-04-30T11:22:23.000Z",
-        "updatedAt": "2025-01-03T19:42:21.000Z",
-        "url": "https://github.com/chadsr/waybar-crypto",
-        "languages": [
-            "Python"
-        ],
-        "topics": [
-            "waybar",
-            "cryptocurrency-prices",
-            "cryptocurrency",
-            "cryptocurrencies",
-            "wayland",
-            "crypto",
-            "crypto-prices",
-            "waybar-crypto",
-            "bitcoin",
-            "ethereum",
-            "coinmarketcap",
-            "coinmarketcap-api",
-            "crypto-ticker",
-            "crypto-trading",
-            "cryptocurrency-price-ticker",
-            "swaywm",
-            "price-change",
-            "crypto-ticker-widget",
-            "waybar-module",
-            "sway-config"
         ]
     },
     {
