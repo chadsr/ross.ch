@@ -1,10 +1,43 @@
 [
     {
+        "name": "NordVPN-NetworkManager",
+        "description": "A CLI tool for automating the importing, securing and usage of NordVPN (and in the future, more) OpenVPN servers through NetworkManager.",
+        "stargazerCount": 121,
+        "createdAt": "2017-05-18T11:40:33.000Z",
+        "updatedAt": "2025-06-25T22:07:32.000Z",
+        "url": "https://github.com/chadsr/NordVPN-NetworkManager",
+        "languages": [
+            "Python"
+        ],
+        "topics": [
+            "vpn-connections",
+            "openvpn",
+            "networkmanager",
+            "nordvpn",
+            "vpn-manager",
+            "network-manager",
+            "vpn-client",
+            "openvpn-client",
+            "vpn",
+            "networkmanager-openvpn",
+            "python3",
+            "python-3",
+            "ovpn",
+            "openvpn-configuration",
+            "nord",
+            "linux",
+            "nord-vpn",
+            "nordnm",
+            "mac-address",
+            "security-tools"
+        ]
+    },
+    {
         "name": "dotfiles",
         "description": "My dotfiles, managed with stow.",
         "stargazerCount": 9,
         "createdAt": "2018-12-03T17:08:23.000Z",
-        "updatedAt": "2025-06-20T08:48:38.000Z",
+        "updatedAt": "2025-06-25T09:01:26.000Z",
         "url": "https://github.com/chadsr/dotfiles",
         "languages": [
             "Shell",
@@ -36,106 +69,11 @@
         ]
     },
     {
-        "name": "NordVPN-NetworkManager",
-        "description": "A CLI tool for automating the importing, securing and usage of NordVPN (and in the future, more) OpenVPN servers through NetworkManager.",
-        "stargazerCount": 121,
-        "createdAt": "2017-05-18T11:40:33.000Z",
-        "updatedAt": "2025-06-20T02:27:27.000Z",
-        "url": "https://github.com/chadsr/NordVPN-NetworkManager",
-        "languages": [
-            "Python"
-        ],
-        "topics": [
-            "vpn-connections",
-            "openvpn",
-            "networkmanager",
-            "nordvpn",
-            "vpn-manager",
-            "network-manager",
-            "vpn-client",
-            "openvpn-client",
-            "vpn",
-            "networkmanager-openvpn",
-            "python3",
-            "python-3",
-            "ovpn",
-            "openvpn-configuration",
-            "nord",
-            "linux",
-            "nord-vpn",
-            "nordnm",
-            "mac-address",
-            "security-tools"
-        ]
-    },
-    {
-        "name": "cryptoshot",
-        "description": "Retrieve cryptocurrency balances and prices at a specific point in time",
-        "stargazerCount": 1,
-        "createdAt": "2024-04-18T17:24:17.000Z",
-        "updatedAt": "2025-06-18T19:56:33.000Z",
-        "url": "https://github.com/chadsr/cryptoshot",
-        "languages": [
-            "Python"
-        ],
-        "topics": [
-            "work-in-progress",
-            "cryptocurrency",
-            "cryptocurrency-exchanges",
-            "cryptocurrency-ba",
-            "cryptocurrency-pr",
-            "crypto-currency",
-            "crypto-market",
-            "cryptocurrency-tool"
-        ]
-    },
-    {
-        "name": "marktplaats-scraper",
-        "description": "Marktplaats.nl (Dutch Classifieds) Listing Scraper",
-        "stargazerCount": 4,
-        "createdAt": "2024-05-30T11:39:37.000Z",
-        "updatedAt": "2025-06-18T19:54:19.000Z",
-        "url": "https://github.com/chadsr/marktplaats-scraper",
-        "languages": [
-            "Dockerfile",
-            "Python"
-        ],
-        "topics": [
-            "chromedriver",
-            "dataset-generation",
-            "dutch-language",
-            "machine-learning",
-            "machine-learning-dataset",
-            "marktplaats",
-            "scraper",
-            "selenium",
-            "web-scraper",
-            "web-scraping",
-            "dataset-creation"
-        ]
-    },
-    {
-        "name": "action-user-repos-json",
-        "description": "A Github Action to output a user's repositories as a JSON file.",
-        "stargazerCount": 2,
-        "createdAt": "2024-08-31T10:15:08.000Z",
-        "updatedAt": "2025-06-18T19:54:13.000Z",
-        "url": "https://github.com/chadsr/action-user-repos-json",
-        "languages": [
-            "JavaScript",
-            "TypeScript"
-        ],
-        "topics": [
-            "actions",
-            "github-actions"
-        ]
-    },
-    {
         "name": "ross.ch",
         "description": "My personal website",
         "stargazerCount": 2,
         "createdAt": "2018-10-07T13:52:10.000Z",
-        "updatedAt": "2025-06-18T19:53:06.000Z",
+        "updatedAt": "2025-06-24T07:38:37.000Z",
         "url": "https://github.com/chadsr/ross.ch",
         "languages": [
             "JavaScript",
@@ -158,6 +96,68 @@
             "css3d",
             "hugo-blog",
             "typescript"
+        ]
+    },
+    {
+        "name": "marktplaats-scraper",
+        "description": "Marktplaats.nl (Dutch Classifieds) Listing Scraper",
+        "stargazerCount": 4,
+        "createdAt": "2024-05-30T11:39:37.000Z",
+        "updatedAt": "2025-06-23T14:23:58.000Z",
+        "url": "https://github.com/chadsr/marktplaats-scraper",
+        "languages": [
+            "Dockerfile",
+            "Python"
+        ],
+        "topics": [
+            "chromedriver",
+            "dataset-generation",
+            "dutch-language",
+            "machine-learning",
+            "machine-learning-dataset",
+            "marktplaats",
+            "scraper",
+            "selenium",
+            "web-scraper",
+            "web-scraping",
+            "dataset-creation"
+        ]
+    },
+    {
+        "name": "cryptoshot",
+        "description": "Retrieve cryptocurrency balances and prices at a specific point in time",
+        "stargazerCount": 1,
+        "createdAt": "2024-04-18T17:24:17.000Z",
+        "updatedAt": "2025-06-23T08:19:44.000Z",
+        "url": "https://github.com/chadsr/cryptoshot",
+        "languages": [
+            "Python"
+        ],
+        "topics": [
+            "work-in-progress",
+            "cryptocurrency",
+            "cryptocurrency-exchanges",
+            "cryptocurrency-ba",
+            "cryptocurrency-pr",
+            "crypto-currency",
+            "crypto-market",
+            "cryptocurrency-tool"
+        ]
+    },
+    {
+        "name": "action-user-repos-json",
+        "description": "A Github Action to output a user's repositories as a JSON file.",
+        "stargazerCount": 2,
+        "createdAt": "2024-08-31T10:15:08.000Z",
+        "updatedAt": "2025-06-23T08:19:36.000Z",
+        "url": "https://github.com/chadsr/action-user-repos-json",
+        "languages": [
+            "JavaScript",
+            "TypeScript"
+        ],
+        "topics": [
+            "actions",
+            "github-actions"
         ]
     },
     {
