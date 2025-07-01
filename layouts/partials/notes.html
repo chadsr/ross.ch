@@ -49,7 +49,15 @@
         {{ $note := (index . "note") }}
         {{ $time := (index . "time") }}
         {{ $types := index $note "@type" }}
+
         {{ if or (in $types "https://notes.ross.ch/#/page/Note") (in $types "https://notes.ross.ch/#/page/Journal") }}
+
+        {{ if (index $note "https://notes.ross.ch/#/page/published") }}
+        {{ $isPublishedSlice := (index $note "https://notes.ross.ch/#/page/published") }}
+        {{ $isPublishedMap := (index $isPublishedSlice 0) }}
+        {{ $isPublished := (index $isPublishedMap "@value") }}
+
+        {{ if eq $isPublished "true" }}
         <li class="feed-item blog-post field hover">
             <a href="{{ index $note "@id" }}" rel="noopener" target="_blank">
                 <script type="application/ld+json">
@@ -90,6 +98,8 @@
                 </div>
             </a>
         </li>
+        {{ end }}
+        {{ end }}
         {{ end }}
         {{ end }}
     </ul>
