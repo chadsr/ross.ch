@@ -10,7 +10,7 @@ jobs:
   data:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Get Github Repositories
         uses: chadsr/action-user-repos-json@v0.1.8
         env:
