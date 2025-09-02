@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Get Github Repositories
-        uses: chadsr/action-user-repos-json@v0.1.8
+        uses: chadsr/action-user-repos-json@v0.1.9
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
