@@ -5,11 +5,13 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "hugo --minify",
+        "build": "hugo --minify && npm run build:functions",
+        "build:functions": "wrangler pages functions build --minify --external '@react-email/render' --outdir=./public/worker/",
         "lint": "eslint . && stylelint **/*.scss",
         "format": "eslint --fix . && stylelint --fix **/*.scss",
         "prepare": "husky",
         "dev": "hugo --logLevel debug server --ignoreCache --disableFastRender",
+        "dev:wrangler": "wrangler dev",
         "dev-host": "hugo --logLevel debug server --ignoreCache --disableFastRender --bind 0.0.0.0",
         "test": "vitest",
         "coverage": "vitest run --coverage",
@@ -44,7 +46,6 @@
         "postcss-preset-env": "^10.3.1",
         "postcss-scss": "^4.0.9",
         "prettier": "^3.6.2",
-        "resend": "^6.0.2",
         "stylelint": "^16.23.1",
         "stylelint-config-standard-scss": "^15.0.1",
         "stylelint-prettier": "^5.0.3",
@@ -56,6 +57,7 @@
     },
     "dependencies": {
         "axios": "^1.11.0",
-        "openpgp": "^6.2.2"
+        "openpgp": "^6.2.2",
+        "resend": "^6.0.2"
     }
 }
