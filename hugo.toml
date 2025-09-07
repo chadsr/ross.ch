@@ -14,8 +14,10 @@ license = "https://raw.githubusercontent.com/chadsr/ross.ch/master/LICENSE"
 reposExclude = [
     "https://github.com/chadsr/ross.ch",
     "https://github.com/chadsr/stars",
-    "https://github.com/chadsr/rpi-network-bridge"
+    "https://github.com/chadsr/rpi-network-bridge",
 ]
+externalDeps = ["@react-email/render"]
+
 [params.author]
 name = 'Ross Chadwick'
 

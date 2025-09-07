@@ -48,6 +48,7 @@
     "targetPath" "js/main.js"
     "minify" (not hugo.IsDevelopment)
     "sourceMap" (cond hugo.IsDevelopment "external" "")
+    "externals" $.Site.Params.externalDeps
     }}
     {{ with . | js.Build $opts }}
     {{ if hugo.IsDevelopment }}
@@ -66,6 +67,7 @@
     "minify" (not hugo.IsDevelopment)
     "sourceMap" (cond hugo.IsDevelopment "external" "")
     "targetPath" "js/formWorker.js"
+    "externals" $.Site.Params.externalDeps
     }}
     {{ with . | js.Build $opts }}
     {{ if hugo.IsDevelopment }}
