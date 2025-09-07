@@ -16,7 +16,7 @@ reposExclude = [
     "https://github.com/chadsr/stars",
     "https://github.com/chadsr/rpi-network-bridge",
 ]
-externalDeps = ["@react-email/render"]
+externalDeps = []
 
 [params.author]
 name = 'Ross Chadwick'

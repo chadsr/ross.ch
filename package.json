@@ -6,7 +6,7 @@
     "type": "module",
     "scripts": {
         "build": "hugo --minify && npm run build:functions",
-        "build:functions": "wrangler pages functions build --minify --external='@react-email/render' --outdir=./dist/worker/",
+        "build:functions": "wrangler pages functions build --minify --outdir=./dist/worker/",
         "lint": "eslint . && stylelint **/*.scss",
         "format": "eslint --fix . && stylelint --fix **/*.scss",
         "prepare": "husky",
@@ -59,5 +59,8 @@
         "axios": "^1.11.0",
         "openpgp": "^6.2.2",
         "resend": "^6.0.2"
+    },
+    "peerDependencies": {
+        "@react-email/render": "^1.2.2"
     }
 }
