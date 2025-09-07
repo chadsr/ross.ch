@@ -6,7 +6,7 @@
     "type": "module",
     "scripts": {
         "build": "hugo --minify && npm run build:functions",
-        "build:functions": "wrangler pages functions build --minify --external '@react-email/render' --outdir=./public/worker/",
+        "build:functions": "wrangler pages functions build --minify --external='@react-email/render' --outdir=./dist/worker/",
         "lint": "eslint . && stylelint **/*.scss",
         "format": "eslint --fix . && stylelint --fix **/*.scss",
         "prepare": "husky",

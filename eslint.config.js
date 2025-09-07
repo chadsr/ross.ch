@@ -9,6 +9,7 @@ export default tseslint.config(
             'resources/**/*',
             'public/**/*',
             'static/**/*',
+            'dist/**/*',
             '.wrangler/**/*',
         ],
     },

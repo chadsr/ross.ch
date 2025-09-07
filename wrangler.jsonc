@@ -9,6 +9,7 @@
 	"build": {
 		"command": "chmod a+x build.sh && ./build.sh"
 	},
+	"main": "./dist/worker/index.js",
 	"assets": {
 		// The path to the directory containing the `index.html` file to be served at `/`
 		"directory": "./public",
