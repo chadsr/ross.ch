@@ -6,6 +6,8 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "ross-ch",
 	"compatibility_date": "2025-09-06",
+	"workers_dev": true,
+	"preview_urls": true,
 	"build": {
 		"command": "chmod a+x build.sh && ./build.sh"
 	},
