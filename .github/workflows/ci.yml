@@ -46,6 +46,11 @@ jobs:
       - name: Install Dependencies
         run: |
           npm ci
+      - name: Build CF Functions
+        run: |
+          npm run build:functions
+      - name: Create Assets Directory
+        run: mkdir public
       - name: Run Tests
         run: |
           npm test
