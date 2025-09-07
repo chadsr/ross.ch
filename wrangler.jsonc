@@ -25,7 +25,7 @@
 			"id": "475f2f5b9c4545ceb235d37e282383cd",
 			"binding": "MAIN",
 		}
-	]
+	],
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
@@ -55,5 +55,10 @@
 	 * Service Bindings (communicate between multiple Workers)
 	 * https://developers.cloudflare.com/workers/wrangler/configuration/#service-bindings
 	 */
-	// "services": [{ "binding": "MY_SERVICE", "service": "my-service" }]
+	"services": [
+		{
+			"binding": "ASSETS",
+			"service": "ross-ch"
+		}
+	]
 }
