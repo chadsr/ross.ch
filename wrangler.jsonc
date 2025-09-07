@@ -6,6 +6,9 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "ross-ch",
 	"compatibility_date": "2025-09-06",
+	"build": {
+		"command": "chmod a+x build.sh && ./build.sh"
+	},
 	"assets": {
 		// The path to the directory containing the `index.html` file to be served at `/`
 		"directory": "./public",
