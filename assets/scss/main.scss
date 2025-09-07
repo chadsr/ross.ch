@@ -1133,7 +1133,6 @@ ul.social {
         height: 100%;
         position: absolute;
         transform-style: preserve-3d;
-        will-change: transform, filter;
         transition-property: transform, filter;
         transition-timing-function: ease-in-out;
         transition-duration: 500ms;
@@ -1159,7 +1158,6 @@ ul.social {
             visibility: hidden;
             transition: visibility 1s;
             transition-behavior: allow-discrete;
-            will-change: visibility;
             contain-intrinsic-size: none;
             content-visibility: visible;
 
