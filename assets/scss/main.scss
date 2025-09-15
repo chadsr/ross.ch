@@ -1179,7 +1179,6 @@ ul.social {
                 justify-content: space-between;
                 gap: $threed-gap;
                 width: 100%;
-                word-wrap: break-word;
                 overflow-wrap: break-word;
 
                 ul.list {
@@ -1198,7 +1197,7 @@ ul.social {
                             align-items: center;
                             justify-content: left;
                             margin: 0;
-                            word-wrap: auto;
+                            overflow-wrap: auto;
                             width: 100%;
 
                             &::before {
