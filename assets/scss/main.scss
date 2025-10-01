@@ -495,12 +495,20 @@ nav {
 
             &:hover,
             &.selected {
-                > a {
+                > label {
                     color: $color-text-highlight;
                 }
             }
         }
     }
+}
+
+.nav-radio {
+    display: none;
+}
+
+.nav-label {
+    @extend %hover;
 }
 
 .nav-button {

@@ -41,13 +41,6 @@ const INNER_ANGLE = 60;
 const NUM_CUBES_Y = 12; // The number of cubes that will be rendered on the y axis (This dictates their size)
 const ISO_PADDING = 1;
 
-const NAV_MAPPING = {
-    'nav-about': 0,
-    'nav-work': 1,
-    'nav-notes': 2,
-    'nav-contact': 3,
-};
-
 const CLASS_ROTATE_PREFIX = 'rotate-';
 const MIN_SIDE = 0;
 const MAX_SIDE = 3;
@@ -177,16 +170,6 @@ document.addEventListener('DOMContentLoaded', function () {
             MAX_SIDE,
             rotateTo,
         );
-    }
-
-    // Menu cube rotate events
-    for (const [navId, rotateValue] of Object.entries(NAV_MAPPING)) {
-        const navButton = document.getElementById(navId);
-        if (navButton) {
-            navButton.addEventListener('mousedown', function () {
-                rotateTo(rotateValue);
-            });
-        }
     }
 
     renderBackground();
