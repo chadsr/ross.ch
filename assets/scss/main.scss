@@ -282,6 +282,7 @@ $index-rotation-map: (
             > .face-content {
                 transform: translateZ(0);
                 pointer-events: auto;
+                content-visibility: visible;
 
                 .title-section > h1 {
                     // Only enable animation when in focus
@@ -1233,7 +1234,8 @@ ul.social {
             pointer-events: none;
             background-color: $color-content;
             contain-intrinsic-size: none;
-            content-visibility: visible;
+            content-visibility: hidden;
+            transition: content-visibility 500ms allow-discrete;
 
             @extend %scrollable;
 
