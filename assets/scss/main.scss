@@ -144,12 +144,7 @@ $icon-size-social: 18px;
 
     &:hover,
     &:focus {
-        background-color: $color-content-secondary-highlight;
         outline: none;
-
-        &::placeholder {
-            opacity: 0.5;
-        }
     }
 
     &::placeholder {
@@ -488,29 +483,6 @@ button {
 
     @extend %outline-dashed;
     @extend %grotesk;
-
-    &.hover:hover {
-        background-color: $content-highlight;
-        outline-color: $color-outline-highlight;
-
-        &::before {
-            outline-color: $color-outline-highlight;
-        }
-    }
-
-    &.error,
-    &.error::before,
-    &.error::after,
-    &.error:hover {
-        background-color: $color-error;
-    }
-
-    &.success,
-    &.success::before,
-    &.success::after,
-    &.success:hover {
-        background-color: $color-success;
-    }
 }
 
 form {
@@ -707,6 +679,10 @@ footer {
     @extend %threed-side-top;
 }
 
+button.threed-top {
+    margin-top: 16px;
+}
+
 .field {
     display: inline-block;
     width: 100%;
@@ -727,22 +703,6 @@ footer {
         }
     }
 
-    &.hover:hover,
-    &.hover:has(input:focus),
-    &.hover:has(textarea:focus) {
-        outline-color: $content-highlight;
-        background-color: $color-content-secondary-highlight;
-
-        .title {
-            background-color: $content-highlight;
-            outline-color: $color-outline-highlight;
-
-            &::before {
-                outline-color: $color-outline-highlight;
-            }
-        }
-    }
-
     &.text-area {
         background-color: transparent;
         outline: none;
@@ -759,14 +719,6 @@ footer {
             resize: vertical;
 
             @extend %outline-dashed;
-        }
-
-        &.hover:hover,
-        &.hover:has(textarea:focus) {
-            > textarea {
-                outline-color: $content-highlight;
-                background-color: $color-content-secondary-highlight;
-            }
         }
     }
 
@@ -788,6 +740,90 @@ footer {
 .field-text {
     padding-bottom: 8px;
     margin: 0 16px;
+}
+
+fieldset:disabled {
+    .field,
+    button {
+        filter: opacity(0.3);
+    }
+
+    .field {
+        input,
+        textarea {
+            resize: none;
+        }
+    }
+
+    .hover {
+        cursor: default;
+    }
+}
+
+fieldset:not(:disabled) {
+    .field {
+        &.hover:hover,
+        &.hover:has(input:focus),
+        &.hover:has(textarea:focus) {
+            outline-color: $content-highlight;
+            background-color: $color-content-secondary-highlight;
+
+            .title {
+                background-color: $content-highlight;
+                outline-color: $color-outline-highlight;
+
+                &::before {
+                    outline-color: $color-outline-highlight;
+                }
+            }
+
+            > textarea,
+            input {
+                &::placeholder {
+                    opacity: 0.5;
+                }
+            }
+
+            > textarea {
+                outline-color: $content-highlight;
+                background-color: $color-content-secondary-highlight;
+            }
+        }
+    }
+
+    button {
+        &.hover:hover {
+            background-color: $content-highlight;
+            outline-color: $color-outline-highlight;
+
+            &::before {
+                outline-color: $color-outline-highlight;
+            }
+        }
+
+        &.error,
+        &.error::before,
+        &.error::after,
+        &.error:hover {
+            background-color: $color-error;
+        }
+
+        &.success,
+        &.success::before,
+        &.success::after,
+        &.success:hover {
+            background-color: $color-success;
+        }
+
+        &.threed-top:active {
+            transform: scale3d(0.95, 0.95, 1);
+        }
+    }
+}
+
+.warning-nojs {
+    font-weight: bold;
+    color: $color-error;
 }
 
 ul.social {
@@ -1279,14 +1315,6 @@ ul.social {
 
     &.threed-bottom {
         @extend %threed-side-bottom;
-    }
-}
-
-button.threed-top {
-    margin-top: 16px;
-
-    &:active {
-        transform: scale3d(0.95, 0.95, 1);
     }
 }
 
