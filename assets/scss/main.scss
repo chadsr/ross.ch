@@ -1327,18 +1327,12 @@ ul.social {
     }
 
     .content-cube {
-        $cube-margin: 64px;
-
         width: $size;
         height: $size;
 
-        $top-angle-radians: calc(90deg * (pi / 180));
+        $cube-margin: 64px;
 
-        margin: calc(
-                $cube-margin + ($size * $perspective-multiplier) *
-                    (sin($top-angle-radians))
-            )
-            0 $cube-margin;
+        margin: $cube-margin 0 $cube-margin;
 
         .face {
             transform-origin: center center calc(-1 * ($size / 2));
