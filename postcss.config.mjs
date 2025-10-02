@@ -10,6 +10,7 @@ export default {
         purgeCSSPlugin({
             content: ['./hugo_stats.json'],
             safelist: [
+                'hidden',
                 'success',
                 'error',
                 'rotate-0',

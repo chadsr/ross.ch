@@ -1,24 +1,32 @@
 <nav id="nav" role="navigation" aria-label="Navigation">
     <ul class="full-width">
-        <li id="nav-about" class="selected nav-button" aria-label="About">
-            <a title="About" href="#about">
+        <li id="nav-about" class="nav-button" aria-label="About">
+            <input id="nav-radio-about" type="radio" name="nav-radio" value="about" class="nav-radio" checked />
+
+            <label class="nav-label" title="About" for="nav-radio-about">
                 <h4>About</h4>
-            </a>
+            </label>
         </li>
         <li id="nav-work" class="nav-button" aria-label="Work">
-            <a title="Work" href="#work">
+            <input id="nav-radio-work" type="radio" name="nav-radio" value="work" class="nav-radio" />
+
+            <label class="nav-label" title="Work" for="nav-radio-work">
                 <h4>Work</h4>
-            </a>
+            </label>
         </li>
         <li id="nav-notes" class="nav-button" aria-label="Notes">
-            <a title="Notes" href="#notes">
+            <input id="nav-radio-notes" type="radio" name="nav-radio" value="notes" class="nav-radio" />
+
+            <label class="nav-label" title="Notes" for="nav-radio-notes">
                 <h4>Notes</h4>
-            </a>
+            </label>
         </li>
         <li id="nav-contact" class="nav-button" aria-label="Contact">
-            <a title="Contact" href="#contact">
+            <input id="nav-radio-contact" type="radio" name="nav-radio" value="contact" class="nav-radio" />
+
+            <label class="nav-label" title="Contact" for="nav-radio-contact">
                 <h4>Contact</h4>
-            </a>
+            </label>
         </li>
     </ul>
 </nav>

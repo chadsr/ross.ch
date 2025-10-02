@@ -29,6 +29,7 @@ const FORM_WORKER_ID = 'form-worker';
 const FORM_RESET_TIMEOUT = 4000;
 const SWIPE_NAVIGATION_THRESHOLD = 100;
 
+const CLASS_NOJS = 'nojs';
 const CLASS_SUCCESS = 'success';
 const CLASS_ERROR = 'error';
 const ERROR_MESSAGE_PREFIX = 'Error!';
@@ -41,14 +42,6 @@ const INNER_ANGLE = 60;
 const NUM_CUBES_Y = 12; // The number of cubes that will be rendered on the y axis (This dictates their size)
 const ISO_PADDING = 1;
 
-const NAV_MAPPING = {
-    'nav-about': 0,
-    'nav-work': 1,
-    'nav-notes': 2,
-    'nav-contact': 3,
-};
-
-const CLASS_ROTATE_PREFIX = 'rotate-';
 const MIN_SIDE = 0;
 const MAX_SIDE = 3;
 // The currently facing side of the content-cube
@@ -102,43 +95,37 @@ const rotateTo: ISwipeFunc = (side: number) => {
     if (side !== currentSide && side >= MIN_SIDE && side <= MAX_SIDE) {
         const nav = document.getElementById('nav');
         if (nav) {
-            const navList = nav.getElementsByTagName('ul')[0];
-            const navListElements = navList.getElementsByTagName('li');
+            const navLists = nav.getElementsByTagName('ul');
+            if (navLists.length !== 1)
+                throw new Error('Expected only 1 navigation list');
 
-            // Remove the 'selected' class from the currently selected list element
-            const selected = nav.querySelector('.selected');
-            if (selected) {
-                selected.classList.remove('selected');
+            const navListElements = navLists[0].getElementsByTagName('li');
+
+            // get the radio input element for the given side index
+            const menuRadioArr =
+                navListElements[side].getElementsByClassName('nav-radio');
+
+            if (menuRadioArr.length !== 1) {
+                throw new Error(
+                    `Expected 1 menu radio element, but got ${menuRadioArr.length}`,
+                );
             }
 
-            // Add the 'selected' class to the newly selected list element
-            navListElements[side].classList.add('selected');
-        }
-
-        const cube = document.getElementById(CUBE_ID);
-        if (cube) {
-            // Remove the focus class from the old focused cube face
-            const oldFocusFace = cube.querySelector('.focus');
-            if (oldFocusFace) {
-                oldFocusFace.classList.remove('focus');
+            const menuRadioElement = menuRadioArr[0];
+            if (menuRadioElement instanceof HTMLInputElement) {
+                menuRadioElement.checked = true;
+            } else {
+                throw new Error(
+                    'Expected nav-radio element to be HTMLInputElement',
+                );
             }
 
-            // Add classes to cube face to indicate focus
-            const focusFace = cube.querySelector(`.face-${side}`);
-            if (focusFace) {
-                focusFace.classList.add('focus');
-            }
+            currentSide = side;
 
             // remove any active focused element
             if (document.activeElement instanceof HTMLElement)
                 document.activeElement.blur();
-
-            // Remove the old focus class and add the focus class to the new focused cube face
-            cube.classList.remove(`${CLASS_ROTATE_PREFIX}${currentSide}`);
-            cube.classList.add(`${CLASS_ROTATE_PREFIX}${side}`);
         }
-
-        currentSide = side;
     }
 };
 
@@ -166,6 +153,10 @@ const showStatusMessage = (
 };
 
 document.addEventListener('DOMContentLoaded', function () {
+    Array.from(document.getElementsByClassName(CLASS_NOJS)).forEach(
+        (nojsElement) => nojsElement.classList.add('hidden'),
+    );
+
     const cube = document.getElementById(CUBE_ID);
     if (cube) {
         new SwipeNav(
@@ -179,126 +170,124 @@ document.addEventListener('DOMContentLoaded', function () {
         );
     }
 
-    // Menu cube rotate events
-    for (const [navId, rotateValue] of Object.entries(NAV_MAPPING)) {
-        const navButton = document.getElementById(navId);
-        if (navButton) {
-            navButton.addEventListener('mousedown', function () {
-                rotateTo(rotateValue);
-            });
-        }
-    }
-
     renderBackground();
 
     const contactForm = <ContactForm>document.getElementById(CONTACT_FORM_ID);
     if (contactForm) {
         const contactFieldset = contactForm.querySelector('fieldset');
-        const contactFormBtn = <HTMLButtonElement>(
-            document.getElementById(CONTACT_FORM_BUTTON)
-        );
+        const contactFormBtn = document.getElementById(CONTACT_FORM_BUTTON);
 
-        if (window.Worker) {
-            const formWorkerScript = document.getElementById(
-                FORM_WORKER_ID,
-            ) as HTMLScriptElement;
-            const workerPath = formWorkerScript.getAttribute('src');
-            if (workerPath) {
-                formWorker = new Worker(workerPath);
+        if (
+            contactFormBtn &&
+            contactFormBtn instanceof HTMLButtonElement &&
+            contactFieldset
+        ) {
+            if (window.Worker) {
+                const formWorkerScript = document.getElementById(
+                    FORM_WORKER_ID,
+                ) as HTMLScriptElement;
 
-                // Listen for the worker to send an encrypted message back
-                formWorker.onmessage = (event: MessageEvent) => {
-                    const encryptedMessage = event.data as string;
-                    const contactData: RequestContact = {
-                        message: encryptedMessage,
-                    };
+                const workerPath = formWorkerScript.getAttribute('src');
+                if (workerPath) {
+                    formWorker = new Worker(workerPath);
 
-                    axios
-                        .post(API_CONTACT, contactData)
-                        .then((response) => {
-                            if (response.status === 200) {
-                                const responseData =
-                                    response.data as ResponseData;
+                    // If we have a functional worker, enable the form fieldset
+                    contactFieldset.disabled = false;
 
-                                // Give the user a success message and reset the form after a timeout
+                    // Listen for the worker to send an encrypted message back
+                    formWorker.onmessage = (event: MessageEvent) => {
+                        const encryptedMessage = event.data as string;
+                        const contactData: RequestContact = {
+                            message: encryptedMessage,
+                        };
+
+                        axios
+                            .post(API_CONTACT, contactData)
+                            .then((response) => {
+                                if (response.status === 200) {
+                                    const responseData =
+                                        response.data as ResponseData;
+
+                                    // Give the user a success message and reset the form after a timeout
+                                    showStatusMessage(
+                                        responseData.message,
+                                        CLASS_SUCCESS,
+                                        contactFormBtn,
+                                        FORM_RESET_TIMEOUT,
+                                    );
+                                    contactForm.reset();
+                                } else {
+                                    throw new Error(response.data);
+                                }
+                            })
+                            .catch((error: AxiosError) => {
+                                let errorMessage: string = '';
+
+                                if (
+                                    error.response &&
+                                    error.response.data &&
+                                    error.response.status < 500 &&
+                                    error.response.status != 404
+                                ) {
+                                    const responseData = error.response
+                                        .data as ResponseData;
+                                    errorMessage = JSON.stringify(
+                                        responseData.message,
+                                    );
+                                } else {
+                                    errorMessage =
+                                        'Server issue. Please try again later.';
+                                }
+
                                 showStatusMessage(
-                                    responseData.message,
-                                    CLASS_SUCCESS,
+                                    `${ERROR_MESSAGE_PREFIX} ${errorMessage}`,
+                                    CLASS_ERROR,
                                     contactFormBtn,
                                     FORM_RESET_TIMEOUT,
                                 );
-                                contactForm.reset();
-                            } else {
-                                throw new Error(response.data);
-                            }
-                        })
-                        .catch((error: AxiosError) => {
-                            let errorMessage: string = '';
+                                // don't reset the form on error, so the user can try again
+                            });
 
-                            if (
-                                error.response &&
-                                error.response.data &&
-                                error.response.status < 500 &&
-                                error.response.status != 404
-                            ) {
-                                const responseData = error.response
-                                    .data as ResponseData;
-                                errorMessage = JSON.stringify(
-                                    responseData.message,
-                                );
-                            } else {
-                                errorMessage =
-                                    'Server issue. Please try again later.';
-                            }
-
-                            showStatusMessage(
-                                `${ERROR_MESSAGE_PREFIX} ${errorMessage}`,
-                                CLASS_ERROR,
-                                contactFormBtn,
-                                FORM_RESET_TIMEOUT,
-                            );
-                            // don't reset the form on error, so the user can try again
-                        });
-
-                    if (contactFieldset) {
-                        contactFieldset.disabled = false;
-                        contactFormBtn.disabled = false;
-                    }
-                };
-
-                contactForm.addEventListener('submit', (submitEvent) => {
-                    submitEvent.preventDefault();
-
-                    if (contactFieldset) {
-                        contactFieldset.disabled = true;
-                        contactFormBtn.disabled = true;
-                    }
-
-                    if (
-                        contactForm.fullName.value &&
-                        contactForm.email.value &&
-                        contactForm.message.value
-                    ) {
-                        if (formWorker) {
-                            const formMessage: FormMessage = {
-                                name: contactForm.fullName.value,
-                                email: contactForm.email.value,
-                                message: contactForm.message.value,
-                            };
-
-                            const formWorkerData: FormWorkerData = {
-                                data: formMessage,
-                                target: FORM_WORKER_TARGET,
-                            };
-
-                            formWorker.postMessage(formWorkerData);
+                        if (contactFieldset) {
+                            contactFieldset.disabled = false;
+                            contactFormBtn.disabled = false;
                         }
-                    }
+                    };
 
-                    return false;
-                });
-            } else {
-                // TODO: form handling without web worker
+                    contactForm.addEventListener('submit', (submitEvent) => {
+                        submitEvent.preventDefault();
+
+                        if (contactFieldset) {
+                            contactFieldset.disabled = true;
+                            contactFormBtn.disabled = true;
+                        }
+
+                        if (
+                            contactForm.fullName.value &&
+                            contactForm.email.value &&
+                            contactForm.message.value
+                        ) {
+                            if (formWorker) {
+                                const formMessage: FormMessage = {
+                                    name: contactForm.fullName.value,
+                                    email: contactForm.email.value,
+                                    message: contactForm.message.value,
+                                };
+
+                                const formWorkerData: FormWorkerData = {
+                                    data: formMessage,
+                                    target: FORM_WORKER_TARGET,
+                                };
+
+                                formWorker.postMessage(formWorkerData);
+                            }
+                        }
+
+                        return false;
+                    });
+                } else {
+                    // TODO: form handling without web worker
+                }
             }
         }
     }
