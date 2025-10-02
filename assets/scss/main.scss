@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 /* Colours */
 $color-background: light-dark(rgb(230 230 230), rgb(8 8 8));
 $color-background-transparent: light-dark(
@@ -235,6 +237,63 @@ $icon-size-social: 18px;
         transform: rotateX(calc(-1 * $threed-angle))
             translate3d(0, 50%, calc(-1 * $outline-size / 2));
         top: calc(var(--threed-height) * (cos($threed-angle)));
+    }
+}
+
+@mixin rotate-faces($deg) {
+    .face-front {
+        transform: rotateY($deg);
+    }
+
+    .face-left {
+        transform: rotateY(-90deg + $deg);
+    }
+
+    .face-right {
+        transform: rotateY(90deg + $deg);
+    }
+
+    .face-back {
+        transform: rotateY(180deg + $deg);
+    }
+
+    .face-top {
+        transform: rotateX(90deg) rotateZ(-$deg);
+    }
+
+    .face-bottom {
+        transform: rotateX(-90deg) rotateZ($deg);
+    }
+}
+
+$index-rotation-map: (
+    'about': 0deg,
+    'work': -90deg,
+    'notes': -180deg,
+    'contact': -270deg,
+);
+
+@mixin navigate($face-name) {
+    $deg: map.get($index-rotation-map, $face-name);
+
+    #content-cube {
+        @include rotate-faces($deg);
+
+        ##{$face-name} {
+            filter: none;
+            background-color: transparent;
+            z-index: 4;
+
+            > .face-content {
+                transform: translateZ(0);
+                pointer-events: auto;
+
+                .title-section > h1 {
+                    // Only enable animation when in focus
+                    @extend %gradient-animation;
+                }
+            }
+        }
     }
 }
 
@@ -481,6 +540,22 @@ input {
     @extend %form-input-style;
 }
 
+body:has(#nav-radio-about:checked) {
+    @include navigate('about');
+}
+
+body:has(#nav-radio-work:checked) {
+    @include navigate('work');
+}
+
+body:has(#nav-radio-notes:checked) {
+    @include navigate('notes');
+}
+
+body:has(#nav-radio-contact:checked) {
+    @include navigate('contact');
+}
+
 nav {
     > ul {
         width: inherit;
@@ -488,18 +563,6 @@ nav {
         justify-content: left;
         align-items: flex-start;
         flex-wrap: nowrap;
-
-        > li {
-            height: 32px;
-            padding: 0 16px;
-
-            &:hover,
-            &.selected {
-                > label {
-                    color: $color-text-highlight;
-                }
-            }
-        }
     }
 }
 
@@ -508,7 +571,20 @@ nav {
 }
 
 .nav-label {
+    height: 32px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+
     @extend %hover;
+}
+
+.nav-label:hover {
+    color: $color-text-highlight;
+}
+
+.nav-radio:checked ~ .nav-label {
+    color: $color-text-highlight;
 }
 
 .nav-button {
@@ -1088,63 +1164,19 @@ ul.social {
     }
 }
 
-@mixin rotate-faces($deg) {
-    .face-front {
-        transform: rotateY($deg);
-    }
-
-    .face-left {
-        transform: rotateY(-90deg + $deg);
-    }
-
-    .face-right {
-        transform: rotateY(90deg + $deg);
-    }
-
-    .face-back {
-        transform: rotateY(180deg + $deg);
-    }
-
-    .face-top {
-        transform: rotateX(90deg) rotateZ(-$deg);
-    }
-
-    .face-bottom {
-        transform: rotateX(-90deg) rotateZ($deg);
-    }
-}
-
 .content-cube {
     position: relative;
     transform-style: preserve-3d;
     backface-visibility: hidden;
-
-    &.rotate {
-        &-0 {
-            @include rotate-faces(0deg);
-        }
-
-        &-1 {
-            @include rotate-faces(-90deg);
-        }
-
-        &-2 {
-            @include rotate-faces(-180deg);
-        }
-
-        &-3 {
-            @include rotate-faces(-270deg);
-        }
-    }
 
     > .face {
         width: 100%;
         height: 100%;
         position: absolute;
         transform-style: preserve-3d;
-        transition-property: transform, filter;
-        transition-timing-function: ease-in-out;
-        transition-duration: 500ms;
+        transition:
+            transform 500ms ease-in-out,
+            filter 1s ease-in-out;
         outline-offset: 0;
         filter: $filter-face-no-focus;
         background-color: $color-content;
@@ -1164,9 +1196,6 @@ ul.social {
             box-sizing: border-box;
             pointer-events: none;
             background-color: $color-content;
-            visibility: hidden;
-            transition: visibility 1s;
-            transition-behavior: allow-discrete;
             contain-intrinsic-size: none;
             content-visibility: visible;
 
@@ -1235,23 +1264,6 @@ ul.social {
 
                 > .description {
                     margin-bottom: 32px;
-                }
-            }
-        }
-
-        &.focus {
-            filter: none;
-            background-color: transparent;
-            z-index: 4;
-
-            > .face-content {
-                transform: translateZ(0);
-                pointer-events: auto;
-                visibility: visible;
-
-                .title-section > h1 {
-                    // Only enable animation when in focus
-                    @extend %gradient-animation;
                 }
             }
         }

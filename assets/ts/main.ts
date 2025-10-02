@@ -41,7 +41,6 @@ const INNER_ANGLE = 60;
 const NUM_CUBES_Y = 12; // The number of cubes that will be rendered on the y axis (This dictates their size)
 const ISO_PADDING = 1;
 
-const CLASS_ROTATE_PREFIX = 'rotate-';
 const MIN_SIDE = 0;
 const MAX_SIDE = 3;
 // The currently facing side of the content-cube
@@ -95,43 +94,37 @@ const rotateTo: ISwipeFunc = (side: number) => {
     if (side !== currentSide && side >= MIN_SIDE && side <= MAX_SIDE) {
         const nav = document.getElementById('nav');
         if (nav) {
-            const navList = nav.getElementsByTagName('ul')[0];
-            const navListElements = navList.getElementsByTagName('li');
+            const navLists = nav.getElementsByTagName('ul');
+            if (navLists.length !== 1)
+                throw new Error('Expected only 1 navigation list');
 
-            // Remove the 'selected' class from the currently selected list element
-            const selected = nav.querySelector('.selected');
-            if (selected) {
-                selected.classList.remove('selected');
+            const navListElements = navLists[0].getElementsByTagName('li');
+
+            // get the radio input element for the given side index
+            const menuRadioArr =
+                navListElements[side].getElementsByClassName('nav-radio');
+
+            if (menuRadioArr.length !== 1) {
+                throw new Error(
+                    `Expected 1 menu radio element, but got ${menuRadioArr.length}`,
+                );
             }
 
-            // Add the 'selected' class to the newly selected list element
-            navListElements[side].classList.add('selected');
-        }
-
-        const cube = document.getElementById(CUBE_ID);
-        if (cube) {
-            // Remove the focus class from the old focused cube face
-            const oldFocusFace = cube.querySelector('.focus');
-            if (oldFocusFace) {
-                oldFocusFace.classList.remove('focus');
+            const menuRadioElement = menuRadioArr[0];
+            if (menuRadioElement instanceof HTMLInputElement) {
+                menuRadioElement.checked = true;
+            } else {
+                throw new Error(
+                    'Expected nav-radio element to be HTMLInputElement',
+                );
             }
 
-            // Add classes to cube face to indicate focus
-            const focusFace = cube.querySelector(`.face-${side}`);
-            if (focusFace) {
-                focusFace.classList.add('focus');
-            }
+            currentSide = side;
 
             // remove any active focused element
             if (document.activeElement instanceof HTMLElement)
                 document.activeElement.blur();
-
-            // Remove the old focus class and add the focus class to the new focused cube face
-            cube.classList.remove(`${CLASS_ROTATE_PREFIX}${currentSide}`);
-            cube.classList.add(`${CLASS_ROTATE_PREFIX}${side}`);
         }
-
-        currentSide = side;
     }
 };
 
