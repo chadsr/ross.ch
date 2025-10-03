@@ -305,7 +305,6 @@ $face-backface-map: (
             > .face-content {
                 // make sure the back face's content is always hidden so it doesn't interfere with the current face's content
                 content-visibility: hidden;
-                pointer-events: none;
             }
         }
     }
@@ -1252,7 +1251,7 @@ ul.social {
             pointer-events: none;
             background-color: $color-content;
             contain-intrinsic-size: none;
-            content-visibility: auto;
+            content-visibility: visible;
             transition: content-visibility $cube-transition-duration
                 allow-discrete;
 
