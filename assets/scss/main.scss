@@ -262,15 +262,24 @@ $cube-transition-duration: 500ms;
     }
 }
 
-$index-rotation-map: (
+$face-rotation-map: (
     'about': 0deg,
     'work': -90deg,
     'notes': -180deg,
     'contact': -270deg,
 );
 
+// maps the current cube face to the back-face, for hiding content
+$face-backface-map: (
+    'about': 'notes',
+    'work': 'contact',
+    'notes': 'about',
+    'contact': 'work',
+);
+
 @mixin navigate($face-name) {
-    $deg: map.get($index-rotation-map, $face-name);
+    $deg: map.get($face-rotation-map, $face-name);
+    $backface-name: map.get($face-backface-map, $face-name);
 
     #content-cube {
         @include rotate-faces($deg);
@@ -289,6 +298,14 @@ $index-rotation-map: (
                     // Only enable animation when in focus
                     @extend %gradient-animation;
                 }
+            }
+        }
+
+        ##{$backface-name} {
+            > .face-content {
+                // make sure the back face's content is always hidden so it doesn't interfere with the current face's content
+                content-visibility: hidden;
+                pointer-events: none;
             }
         }
     }
@@ -1235,7 +1252,7 @@ ul.social {
             pointer-events: none;
             background-color: $color-content;
             contain-intrinsic-size: none;
-            content-visibility: hidden;
+            content-visibility: auto;
             transition: content-visibility $cube-transition-duration
                 allow-discrete;
 
