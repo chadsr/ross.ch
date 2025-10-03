@@ -80,6 +80,7 @@ $threed-angle: 60deg;
 $outline-size: 1px;
 $icon-size: 24px;
 $icon-size-social: 18px;
+$cube-transition-duration: 500ms;
 
 @font-face {
     font-family: $font-macula;
@@ -1212,8 +1213,8 @@ ul.social {
         position: absolute;
         transform-style: preserve-3d;
         transition:
-            transform 500ms ease-in-out,
-            filter 1s ease-in-out;
+            transform $cube-transition-duration ease-in-out,
+            filter $cube-transition-duration ease-in-out;
         outline-offset: 0;
         filter: $filter-face-no-focus;
         background-color: $color-content;
@@ -1235,7 +1236,8 @@ ul.social {
             background-color: $color-content;
             contain-intrinsic-size: none;
             content-visibility: hidden;
-            transition: content-visibility 500ms allow-discrete;
+            transition: content-visibility $cube-transition-duration
+                allow-discrete;
 
             @extend %scrollable;
 
