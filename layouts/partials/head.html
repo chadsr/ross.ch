@@ -28,6 +28,9 @@
 
     {{- partial "schema.html" . -}}
 
+    <link rel="preload" as="font" href="/fonts/space-grotesk-latin-wght-normal.woff2" crossorigin>
+    <link rel="preload" as="font" href="/fonts/Macula-Solid.woff2" crossorigin>
+
     {{ $css := resources.Get "scss/main.scss" }}
     {{ $opts := dict
     "transpiler" "dartsass"
