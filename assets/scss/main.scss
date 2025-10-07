@@ -1251,7 +1251,7 @@ ul.social {
             pointer-events: none;
             background-color: $color-content;
             contain-intrinsic-size: none;
-            content-visibility: visible;
+            content-visibility: hidden;
             transition: content-visibility $cube-transition-duration
                 allow-discrete;
 
