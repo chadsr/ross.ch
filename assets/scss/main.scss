@@ -1090,8 +1090,8 @@ ul.social {
 
 %stroke-network {
     stroke: $color-iso-stroke;
-    stroke-dasharray: 4pt, 0, 0, 100px;
-    stroke-width: 2pt;
+    stroke-dasharray: 2px, 0, 0, 32px;
+    stroke-width: 2px;
     stroke-linejoin: round;
     stroke-linecap: round;
     will-change: stroke-dashoffset;
