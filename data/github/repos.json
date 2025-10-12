@@ -1,10 +1,23 @@
 [
     {
+        "name": "stars",
+        "description": "Starred  Repositories",
+        "stargazerCount": 2,
+        "createdAt": "2024-04-17T23:35:11.000Z",
+        "updatedAt": "2025-10-11T07:56:42.000Z",
+        "url": "https://github.com/chadsr/stars",
+        "languages": [],
+        "topics": [
+            "starred",
+            "starred-repositories"
+        ]
+    },
+    {
         "name": "dotfiles",
         "description": "My dotfiles, managed with stow.",
         "stargazerCount": 10,
         "createdAt": "2018-12-03T17:08:23.000Z",
-        "updatedAt": "2025-10-03T14:39:33.000Z",
+        "updatedAt": "2025-10-10T15:31:09.000Z",
         "url": "https://github.com/chadsr/dotfiles",
         "languages": [
             "Shell",
@@ -36,11 +49,44 @@
         ]
     },
     {
+        "name": "waybar-crypto",
+        "description": "A Waybar module for displaying cryptocurrency market information",
+        "stargazerCount": 38,
+        "createdAt": "2019-04-30T11:22:23.000Z",
+        "updatedAt": "2025-10-09T12:47:11.000Z",
+        "url": "https://github.com/chadsr/waybar-crypto",
+        "languages": [
+            "Python"
+        ],
+        "topics": [
+            "waybar",
+            "cryptocurrency-prices",
+            "cryptocurrency",
+            "cryptocurrencies",
+            "wayland",
+            "crypto",
+            "crypto-prices",
+            "waybar-crypto",
+            "bitcoin",
+            "ethereum",
+            "coinmarketcap",
+            "coinmarketcap-api",
+            "crypto-ticker",
+            "crypto-trading",
+            "cryptocurrency-price-ticker",
+            "swaywm",
+            "price-change",
+            "crypto-ticker-widget",
+            "waybar-module",
+            "sway-config"
+        ]
+    },
+    {
         "name": "ross.ch",
         "description": "My personal website",
         "stargazerCount": 2,
         "createdAt": "2018-10-07T13:52:10.000Z",
-        "updatedAt": "2025-10-03T11:45:59.000Z",
+        "updatedAt": "2025-10-07T13:33:45.000Z",
         "url": "https://github.com/chadsr/ross.ch",
         "languages": [
             "JavaScript",
@@ -64,19 +110,6 @@
             "css3d",
             "hugo-blog",
             "typescript"
-        ]
-    },
-    {
-        "name": "stars",
-        "description": "Starred  Repositories",
-        "stargazerCount": 1,
-        "createdAt": "2024-04-17T23:35:11.000Z",
-        "updatedAt": "2025-10-03T02:07:54.000Z",
-        "url": "https://github.com/chadsr/stars",
-        "languages": [],
-        "topics": [
-            "starred",
-            "starred-repositories"
         ]
     },
     {
@@ -311,39 +344,6 @@
             "nordnm",
             "mac-address",
             "security-tools"
-        ]
-    },
-    {
-        "name": "waybar-crypto",
-        "description": "A Waybar module for displaying cryptocurrency market information",
-        "stargazerCount": 38,
-        "createdAt": "2019-04-30T11:22:23.000Z",
-        "updatedAt": "2025-09-04T16:03:01.000Z",
-        "url": "https://github.com/chadsr/waybar-crypto",
-        "languages": [
-            "Python"
-        ],
-        "topics": [
-            "waybar",
-            "cryptocurrency-prices",
-            "cryptocurrency",
-            "cryptocurrencies",
-            "wayland",
-            "crypto",
-            "crypto-prices",
-            "waybar-crypto",
-            "bitcoin",
-            "ethereum",
-            "coinmarketcap",
-            "coinmarketcap-api",
-            "crypto-ticker",
-            "crypto-trading",
-            "cryptocurrency-price-ticker",
-            "swaywm",
-            "price-change",
-            "crypto-ticker-widget",
-            "waybar-module",
-            "sway-config"
         ]
     },
     {
