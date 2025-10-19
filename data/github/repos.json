@@ -1,10 +1,74 @@
 [
     {
+        "name": "ross.ch",
+        "description": "My personal website",
+        "stargazerCount": 2,
+        "createdAt": "2018-10-07T13:52:10.000Z",
+        "updatedAt": "2025-10-19T13:09:25.000Z",
+        "url": "https://github.com/chadsr/ross.ch",
+        "languages": [
+            "JavaScript",
+            "TypeScript",
+            "SCSS",
+            "HTML",
+            "Shell"
+        ],
+        "topics": [
+            "css-3d-transitions",
+            "escher",
+            "perspective",
+            "optical-illusion",
+            "cloudflare-pages",
+            "cloudflare-workers",
+            "hugo",
+            "hugo-site",
+            "blog",
+            "css-3d",
+            "css-3d-animation",
+            "css3d",
+            "hugo-blog",
+            "typescript"
+        ]
+    },
+    {
+        "name": "waybar-crypto",
+        "description": "A Waybar module for displaying cryptocurrency market information",
+        "stargazerCount": 40,
+        "createdAt": "2019-04-30T11:22:23.000Z",
+        "updatedAt": "2025-10-19T06:06:01.000Z",
+        "url": "https://github.com/chadsr/waybar-crypto",
+        "languages": [
+            "Python"
+        ],
+        "topics": [
+            "waybar",
+            "cryptocurrency-prices",
+            "cryptocurrency",
+            "cryptocurrencies",
+            "wayland",
+            "crypto",
+            "crypto-prices",
+            "waybar-crypto",
+            "bitcoin",
+            "ethereum",
+            "coinmarketcap",
+            "coinmarketcap-api",
+            "crypto-ticker",
+            "crypto-trading",
+            "cryptocurrency-price-ticker",
+            "swaywm",
+            "price-change",
+            "crypto-ticker-widget",
+            "waybar-module",
+            "sway-config"
+        ]
+    },
+    {
         "name": "stars",
         "description": "Starred  Repositories",
         "stargazerCount": 2,
         "createdAt": "2024-04-17T23:35:11.000Z",
-        "updatedAt": "2025-10-18T02:01:26.000Z",
+        "updatedAt": "2025-10-19T02:26:31.000Z",
         "url": "https://github.com/chadsr/stars",
         "languages": [],
         "topics": [
@@ -49,39 +113,6 @@
         ]
     },
     {
-        "name": "waybar-crypto",
-        "description": "A Waybar module for displaying cryptocurrency market information",
-        "stargazerCount": 39,
-        "createdAt": "2019-04-30T11:22:23.000Z",
-        "updatedAt": "2025-10-15T17:36:14.000Z",
-        "url": "https://github.com/chadsr/waybar-crypto",
-        "languages": [
-            "Python"
-        ],
-        "topics": [
-            "waybar",
-            "cryptocurrency-prices",
-            "cryptocurrency",
-            "cryptocurrencies",
-            "wayland",
-            "crypto",
-            "crypto-prices",
-            "waybar-crypto",
-            "bitcoin",
-            "ethereum",
-            "coinmarketcap",
-            "coinmarketcap-api",
-            "crypto-ticker",
-            "crypto-trading",
-            "cryptocurrency-price-ticker",
-            "swaywm",
-            "price-change",
-            "crypto-ticker-widget",
-            "waybar-module",
-            "sway-config"
-        ]
-    },
-    {
         "name": "sveltekit-capacitor-starter",
         "description": "A (slightly opinionated) starter template for SvelteKit/Capacitor/Tailwind/Typescript projects",
         "stargazerCount": 1,
@@ -117,37 +148,6 @@
             "starter-template",
             "capacitor-android",
             "capacitor-ios"
-        ]
-    },
-    {
-        "name": "ross.ch",
-        "description": "My personal website",
-        "stargazerCount": 2,
-        "createdAt": "2018-10-07T13:52:10.000Z",
-        "updatedAt": "2025-10-12T09:37:52.000Z",
-        "url": "https://github.com/chadsr/ross.ch",
-        "languages": [
-            "JavaScript",
-            "TypeScript",
-            "SCSS",
-            "HTML",
-            "Shell"
-        ],
-        "topics": [
-            "css-3d-transitions",
-            "escher",
-            "perspective",
-            "optical-illusion",
-            "cloudflare-pages",
-            "cloudflare-workers",
-            "hugo",
-            "hugo-site",
-            "blog",
-            "css-3d",
-            "css-3d-animation",
-            "css3d",
-            "hugo-blog",
-            "typescript"
         ]
     },
     {
