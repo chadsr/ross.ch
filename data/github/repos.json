@@ -4,7 +4,7 @@
         "description": "Starred  Repositories",
         "stargazerCount": 2,
         "createdAt": "2024-04-17T23:35:11.000Z",
-        "updatedAt": "2025-10-11T07:56:42.000Z",
+        "updatedAt": "2025-10-18T02:01:26.000Z",
         "url": "https://github.com/chadsr/stars",
         "languages": [],
         "topics": [
@@ -17,7 +17,7 @@
         "description": "My dotfiles, managed with stow.",
         "stargazerCount": 10,
         "createdAt": "2018-12-03T17:08:23.000Z",
-        "updatedAt": "2025-10-10T15:31:09.000Z",
+        "updatedAt": "2025-10-17T14:44:15.000Z",
         "url": "https://github.com/chadsr/dotfiles",
         "languages": [
             "Shell",
@@ -51,9 +51,9 @@
     {
         "name": "waybar-crypto",
         "description": "A Waybar module for displaying cryptocurrency market information",
-        "stargazerCount": 38,
+        "stargazerCount": 39,
         "createdAt": "2019-04-30T11:22:23.000Z",
-        "updatedAt": "2025-10-09T12:47:11.000Z",
+        "updatedAt": "2025-10-15T17:36:14.000Z",
         "url": "https://github.com/chadsr/waybar-crypto",
         "languages": [
             "Python"
@@ -82,11 +82,49 @@
         ]
     },
     {
+        "name": "sveltekit-capacitor-starter",
+        "description": "A (slightly opinionated) starter template for SvelteKit/Capacitor/Tailwind/Typescript projects",
+        "stargazerCount": 1,
+        "createdAt": "2025-09-05T08:41:15.000Z",
+        "updatedAt": "2025-10-14T08:51:48.000Z",
+        "url": "https://github.com/chadsr/sveltekit-capacitor-starter",
+        "languages": [
+            "Java",
+            "TypeScript",
+            "JavaScript",
+            "Swift",
+            "Ruby",
+            "CSS",
+            "HTML",
+            "Svelte"
+        ],
+        "topics": [
+            "capacitor",
+            "playwright",
+            "svelte",
+            "sveltekit",
+            "sveltekit-tailwindcss",
+            "sveltekit-template",
+            "tailwind",
+            "tailwind-css",
+            "tailwindcss",
+            "template",
+            "vitest",
+            "capacitor-sveltekit",
+            "sveltekit-capacitor",
+            "starter-kit",
+            "starter-project",
+            "starter-template",
+            "capacitor-android",
+            "capacitor-ios"
+        ]
+    },
+    {
         "name": "ross.ch",
         "description": "My personal website",
         "stargazerCount": 2,
         "createdAt": "2018-10-07T13:52:10.000Z",
-        "updatedAt": "2025-10-07T13:33:45.000Z",
+        "updatedAt": "2025-10-12T09:37:52.000Z",
         "url": "https://github.com/chadsr/ross.ch",
         "languages": [
             "JavaScript",
@@ -252,44 +290,6 @@
             "docker",
             "docker-images",
             "openvscode-server"
-        ]
-    },
-    {
-        "name": "sveltekit-capacitor-starter",
-        "description": "A (slightly opinionated) starter template for SvelteKit/Capacitor/Tailwind/Typescript projects",
-        "stargazerCount": 1,
-        "createdAt": "2025-09-05T08:41:15.000Z",
-        "updatedAt": "2025-09-26T11:10:21.000Z",
-        "url": "https://github.com/chadsr/sveltekit-capacitor-starter",
-        "languages": [
-            "Java",
-            "TypeScript",
-            "JavaScript",
-            "Swift",
-            "Ruby",
-            "CSS",
-            "HTML",
-            "Svelte"
-        ],
-        "topics": [
-            "capacitor",
-            "playwright",
-            "svelte",
-            "sveltekit",
-            "sveltekit-tailwindcss",
-            "sveltekit-template",
-            "tailwind",
-            "tailwind-css",
-            "tailwindcss",
-            "template",
-            "vitest",
-            "capacitor-sveltekit",
-            "sveltekit-capacitor",
-            "starter-kit",
-            "starter-project",
-            "starter-template",
-            "capacitor-android",
-            "capacitor-ios"
         ]
     },
     {
