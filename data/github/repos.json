@@ -1,10 +1,75 @@
 [
     {
+        "name": "stars",
+        "description": "Starred  Repositories",
+        "stargazerCount": 2,
+        "createdAt": "2024-04-17T23:35:11.000Z",
+        "updatedAt": "2025-10-24T02:11:42.000Z",
+        "url": "https://github.com/chadsr/stars",
+        "languages": [],
+        "topics": [
+            "starred",
+            "starred-repositories"
+        ]
+    },
+    {
+        "name": "action-user-repos-json",
+        "description": "A Github Action to output a user's repositories as a JSON file.",
+        "stargazerCount": 2,
+        "createdAt": "2024-08-31T10:15:08.000Z",
+        "updatedAt": "2025-10-20T22:03:22.000Z",
+        "url": "https://github.com/chadsr/action-user-repos-json",
+        "languages": [
+            "JavaScript",
+            "TypeScript"
+        ],
+        "topics": [
+            "actions",
+            "github-actions"
+        ]
+    },
+    {
+        "name": "dotfiles",
+        "description": "My dotfiles, managed with stow.",
+        "stargazerCount": 10,
+        "createdAt": "2018-12-03T17:08:23.000Z",
+        "updatedAt": "2025-10-20T07:49:30.000Z",
+        "url": "https://github.com/chadsr/dotfiles",
+        "languages": [
+            "Shell",
+            "CSS",
+            "GLSL",
+            "Python"
+        ],
+        "topics": [
+            "waybar",
+            "dotfiles",
+            "zsh",
+            "gnupg",
+            "wayland",
+            "liquidctl",
+            "dotfiles-automation",
+            "dotfiles-installer",
+            "dotfiles-setup",
+            "wayland-system",
+            "gpg-encryption",
+            "sway-config",
+            "hyprland-config",
+            "sway",
+            "swaywm",
+            "pipewire",
+            "mpv-config",
+            "hyprland-dotfiles",
+            "hyprland",
+            "sway-dotfiles"
+        ]
+    },
+    {
         "name": "ross.ch",
         "description": "My personal website",
         "stargazerCount": 2,
         "createdAt": "2018-10-07T13:52:10.000Z",
-        "updatedAt": "2025-10-19T13:09:25.000Z",
+        "updatedAt": "2025-10-19T13:14:17.000Z",
         "url": "https://github.com/chadsr/ross.ch",
         "languages": [
             "JavaScript",
@@ -61,55 +126,6 @@
             "crypto-ticker-widget",
             "waybar-module",
             "sway-config"
-        ]
-    },
-    {
-        "name": "stars",
-        "description": "Starred  Repositories",
-        "stargazerCount": 2,
-        "createdAt": "2024-04-17T23:35:11.000Z",
-        "updatedAt": "2025-10-19T02:26:31.000Z",
-        "url": "https://github.com/chadsr/stars",
-        "languages": [],
-        "topics": [
-            "starred",
-            "starred-repositories"
-        ]
-    },
-    {
-        "name": "dotfiles",
-        "description": "My dotfiles, managed with stow.",
-        "stargazerCount": 10,
-        "createdAt": "2018-12-03T17:08:23.000Z",
-        "updatedAt": "2025-10-17T14:44:15.000Z",
-        "url": "https://github.com/chadsr/dotfiles",
-        "languages": [
-            "Shell",
-            "CSS",
-            "GLSL",
-            "Python"
-        ],
-        "topics": [
-            "waybar",
-            "dotfiles",
-            "zsh",
-            "gnupg",
-            "wayland",
-            "liquidctl",
-            "dotfiles-automation",
-            "dotfiles-installer",
-            "dotfiles-setup",
-            "wayland-system",
-            "gpg-encryption",
-            "sway-config",
-            "hyprland-config",
-            "sway",
-            "swaywm",
-            "pipewire",
-            "mpv-config",
-            "hyprland-dotfiles",
-            "hyprland",
-            "sway-dotfiles"
         ]
     },
     {
@@ -206,22 +222,6 @@
             "web-scraping",
             "dataset-creation",
             "marktplaats-nl"
-        ]
-    },
-    {
-        "name": "action-user-repos-json",
-        "description": "A Github Action to output a user's repositories as a JSON file.",
-        "stargazerCount": 2,
-        "createdAt": "2024-08-31T10:15:08.000Z",
-        "updatedAt": "2025-10-01T09:00:07.000Z",
-        "url": "https://github.com/chadsr/action-user-repos-json",
-        "languages": [
-            "JavaScript",
-            "TypeScript"
-        ],
-        "topics": [
-            "actions",
-            "github-actions"
         ]
     },
     {
