@@ -1,10 +1,137 @@
 [
     {
+        "name": "stars",
+        "description": "Starred  Repositories",
+        "stargazerCount": 2,
+        "createdAt": "2024-04-17T23:35:11.000Z",
+        "updatedAt": "2025-11-08T02:11:33.000Z",
+        "url": "https://github.com/chadsr/stars",
+        "languages": [],
+        "topics": [
+            "starred",
+            "starred-repositories"
+        ]
+    },
+    {
+        "name": "ionic-vue-ts-starter",
+        "description": "A (slightly opinionated) starter setup for Ionic/Vue3/Tailwind/Typescript projects",
+        "stargazerCount": 6,
+        "createdAt": "2022-04-30T18:23:55.000Z",
+        "updatedAt": "2025-11-05T05:46:21.000Z",
+        "url": "https://github.com/chadsr/ionic-vue-ts-starter",
+        "languages": [
+            "JavaScript",
+            "HTML",
+            "Vue",
+            "TypeScript",
+            "CSS",
+            "Java",
+            "Swift",
+            "Ruby",
+            "Shell"
+        ],
+        "topics": [
+            "ionic",
+            "ionic-framework",
+            "tailwind",
+            "tailwindcss",
+            "typescript",
+            "vue",
+            "vue3",
+            "capacitor",
+            "capacitorjs"
+        ]
+    },
+    {
+        "name": "cryptoshot",
+        "description": "Retrieve cryptocurrency balances and prices at a specific point in time",
+        "stargazerCount": 1,
+        "createdAt": "2024-04-18T17:24:17.000Z",
+        "updatedAt": "2025-11-03T12:45:56.000Z",
+        "url": "https://github.com/chadsr/cryptoshot",
+        "languages": [
+            "Python"
+        ],
+        "topics": [
+            "work-in-progress",
+            "cryptocurrency",
+            "cryptocurrency-exchanges",
+            "cryptocurrency-ba",
+            "cryptocurrency-pr",
+            "crypto-currency",
+            "crypto-market",
+            "cryptocurrency-tool"
+        ]
+    },
+    {
+        "name": "notes",
+        "description": "Public Notes & Research",
+        "stargazerCount": 1,
+        "createdAt": "2025-05-06T10:20:08.000Z",
+        "updatedAt": "2025-11-03T12:35:36.000Z",
+        "url": "https://github.com/chadsr/notes",
+        "languages": [
+            "Clojure",
+            "JavaScript"
+        ],
+        "topics": [
+            "json-ld",
+            "jsonld",
+            "linked-data",
+            "logseq",
+            "logseq-notes",
+            "n-quads",
+            "notes",
+            "nquads",
+            "research",
+            "graph-schema",
+            "rdf",
+            "schema-validation",
+            "semantic-web",
+            "triples-extraction",
+            "logseq-publish",
+            "logseq-graph",
+            "digital-garden",
+            "networked-thought"
+        ]
+    },
+    {
+        "name": "ross.ch",
+        "description": "My personal website",
+        "stargazerCount": 2,
+        "createdAt": "2018-10-07T13:52:10.000Z",
+        "updatedAt": "2025-11-03T12:34:30.000Z",
+        "url": "https://github.com/chadsr/ross.ch",
+        "languages": [
+            "JavaScript",
+            "TypeScript",
+            "SCSS",
+            "HTML",
+            "Shell"
+        ],
+        "topics": [
+            "css-3d-transitions",
+            "escher",
+            "perspective",
+            "optical-illusion",
+            "cloudflare-pages",
+            "cloudflare-workers",
+            "hugo",
+            "hugo-site",
+            "blog",
+            "css-3d",
+            "css-3d-animation",
+            "css3d",
+            "hugo-blog",
+            "typescript"
+        ]
+    },
+    {
         "name": "action-user-repos-json",
         "description": "A Github Action to output a user's repositories as a JSON file.",
         "stargazerCount": 2,
         "createdAt": "2024-08-31T10:15:08.000Z",
-        "updatedAt": "2025-11-01T15:44:40.000Z",
+        "updatedAt": "2025-11-03T12:30:50.000Z",
         "url": "https://github.com/chadsr/action-user-repos-json",
         "languages": [
             "JavaScript",
@@ -75,80 +202,6 @@
             "hyprland-dotfiles",
             "hyprland",
             "sway-dotfiles"
-        ]
-    },
-    {
-        "name": "stars",
-        "description": "Starred  Repositories",
-        "stargazerCount": 2,
-        "createdAt": "2024-04-17T23:35:11.000Z",
-        "updatedAt": "2025-10-31T02:19:26.000Z",
-        "url": "https://github.com/chadsr/stars",
-        "languages": [],
-        "topics": [
-            "starred",
-            "starred-repositories"
-        ]
-    },
-    {
-        "name": "ross.ch",
-        "description": "My personal website",
-        "stargazerCount": 2,
-        "createdAt": "2018-10-07T13:52:10.000Z",
-        "updatedAt": "2025-10-30T16:36:47.000Z",
-        "url": "https://github.com/chadsr/ross.ch",
-        "languages": [
-            "JavaScript",
-            "TypeScript",
-            "SCSS",
-            "HTML",
-            "Shell"
-        ],
-        "topics": [
-            "css-3d-transitions",
-            "escher",
-            "perspective",
-            "optical-illusion",
-            "cloudflare-pages",
-            "cloudflare-workers",
-            "hugo",
-            "hugo-site",
-            "blog",
-            "css-3d",
-            "css-3d-animation",
-            "css3d",
-            "hugo-blog",
-            "typescript"
-        ]
-    },
-    {
-        "name": "ionic-vue-ts-starter",
-        "description": "A (slightly opinionated) starter setup for Ionic/Vue3/Tailwind/Typescript projects",
-        "stargazerCount": 5,
-        "createdAt": "2022-04-30T18:23:55.000Z",
-        "updatedAt": "2025-10-30T16:36:38.000Z",
-        "url": "https://github.com/chadsr/ionic-vue-ts-starter",
-        "languages": [
-            "JavaScript",
-            "HTML",
-            "Vue",
-            "TypeScript",
-            "CSS",
-            "Java",
-            "Swift",
-            "Ruby",
-            "Shell"
-        ],
-        "topics": [
-            "ionic",
-            "ionic-framework",
-            "tailwind",
-            "tailwindcss",
-            "typescript",
-            "vue",
-            "vue3",
-            "capacitor",
-            "capacitorjs"
         ]
     },
     {
@@ -237,59 +290,6 @@
             "starter-template",
             "capacitor-android",
             "capacitor-ios"
-        ]
-    },
-    {
-        "name": "notes",
-        "description": "Public Notes & Research",
-        "stargazerCount": 1,
-        "createdAt": "2025-05-06T10:20:08.000Z",
-        "updatedAt": "2025-10-02T07:49:55.000Z",
-        "url": "https://github.com/chadsr/notes",
-        "languages": [
-            "Clojure",
-            "JavaScript"
-        ],
-        "topics": [
-            "json-ld",
-            "jsonld",
-            "linked-data",
-            "logseq",
-            "logseq-notes",
-            "n-quads",
-            "notes",
-            "nquads",
-            "research",
-            "graph-schema",
-            "rdf",
-            "schema-validation",
-            "semantic-web",
-            "triples-extraction",
-            "logseq-publish",
-            "logseq-graph",
-            "digital-garden",
-            "networked-thought"
-        ]
-    },
-    {
-        "name": "cryptoshot",
-        "description": "Retrieve cryptocurrency balances and prices at a specific point in time",
-        "stargazerCount": 1,
-        "createdAt": "2024-04-18T17:24:17.000Z",
-        "updatedAt": "2025-10-01T08:57:57.000Z",
-        "url": "https://github.com/chadsr/cryptoshot",
-        "languages": [
-            "Python"
-        ],
-        "topics": [
-            "work-in-progress",
-            "cryptocurrency",
-            "cryptocurrency-exchanges",
-            "cryptocurrency-ba",
-            "cryptocurrency-pr",
-            "crypto-currency",
-            "crypto-market",
-            "cryptocurrency-tool"
         ]
     },
     {
