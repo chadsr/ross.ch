@@ -4,7 +4,7 @@
         "description": "Starred  Repositories",
         "stargazerCount": 2,
         "createdAt": "2024-04-17T23:35:11.000Z",
-        "updatedAt": "2025-11-08T02:11:33.000Z",
+        "updatedAt": "2025-11-14T02:21:01.000Z",
         "url": "https://github.com/chadsr/stars",
         "languages": [],
         "topics": [
@@ -15,9 +15,9 @@
     {
         "name": "ionic-vue-ts-starter",
         "description": "A (slightly opinionated) starter setup for Ionic/Vue3/Tailwind/Typescript projects",
-        "stargazerCount": 6,
+        "stargazerCount": 8,
         "createdAt": "2022-04-30T18:23:55.000Z",
-        "updatedAt": "2025-11-05T05:46:21.000Z",
+        "updatedAt": "2025-11-13T19:38:15.000Z",
         "url": "https://github.com/chadsr/ionic-vue-ts-starter",
         "languages": [
             "JavaScript",
@@ -40,6 +40,123 @@
             "vue3",
             "capacitor",
             "capacitorjs"
+        ]
+    },
+    {
+        "name": "waybar-crypto",
+        "description": "A Waybar module for displaying cryptocurrency market information",
+        "stargazerCount": 42,
+        "createdAt": "2019-04-30T11:22:23.000Z",
+        "updatedAt": "2025-11-13T11:05:18.000Z",
+        "url": "https://github.com/chadsr/waybar-crypto",
+        "languages": [
+            "Python"
+        ],
+        "topics": [
+            "waybar",
+            "cryptocurrency-prices",
+            "cryptocurrency",
+            "cryptocurrencies",
+            "wayland",
+            "crypto",
+            "crypto-prices",
+            "waybar-crypto",
+            "bitcoin",
+            "ethereum",
+            "coinmarketcap",
+            "coinmarketcap-api",
+            "crypto-ticker",
+            "crypto-trading",
+            "cryptocurrency-price-ticker",
+            "swaywm",
+            "price-change",
+            "crypto-ticker-widget",
+            "waybar-module",
+            "sway-config"
+        ]
+    },
+    {
+        "name": "ovsc-server",
+        "description": "Custom openvscode-server image",
+        "stargazerCount": 1,
+        "createdAt": "2024-06-14T13:02:08.000Z",
+        "updatedAt": "2025-11-12T19:19:11.000Z",
+        "url": "https://github.com/chadsr/ovsc-server",
+        "languages": [
+            "Dockerfile",
+            "Shell"
+        ],
+        "topics": [
+            "docker",
+            "docker-images",
+            "openvscode-server"
+        ]
+    },
+    {
+        "name": "dotfiles",
+        "description": "My dotfiles, managed with stow.",
+        "stargazerCount": 10,
+        "createdAt": "2018-12-03T17:08:23.000Z",
+        "updatedAt": "2025-11-10T10:47:41.000Z",
+        "url": "https://github.com/chadsr/dotfiles",
+        "languages": [
+            "Shell",
+            "CSS",
+            "GLSL",
+            "Python"
+        ],
+        "topics": [
+            "waybar",
+            "dotfiles",
+            "zsh",
+            "gnupg",
+            "wayland",
+            "liquidctl",
+            "dotfiles-automation",
+            "dotfiles-installer",
+            "dotfiles-setup",
+            "wayland-system",
+            "gpg-encryption",
+            "sway-config",
+            "hyprland-config",
+            "sway",
+            "swaywm",
+            "pipewire",
+            "mpv-config",
+            "hyprland-dotfiles",
+            "hyprland",
+            "sway-dotfiles"
+        ]
+    },
+    {
+        "name": "ross.ch",
+        "description": "My personal website",
+        "stargazerCount": 2,
+        "createdAt": "2018-10-07T13:52:10.000Z",
+        "updatedAt": "2025-11-09T16:29:28.000Z",
+        "url": "https://github.com/chadsr/ross.ch",
+        "languages": [
+            "JavaScript",
+            "TypeScript",
+            "SCSS",
+            "HTML",
+            "Shell"
+        ],
+        "topics": [
+            "css-3d-transitions",
+            "escher",
+            "perspective",
+            "optical-illusion",
+            "cloudflare-pages",
+            "cloudflare-workers",
+            "hugo",
+            "hugo-site",
+            "blog",
+            "css-3d",
+            "css-3d-animation",
+            "css3d",
+            "hugo-blog",
+            "typescript"
         ]
     },
     {
@@ -96,37 +213,6 @@
         ]
     },
     {
-        "name": "ross.ch",
-        "description": "My personal website",
-        "stargazerCount": 2,
-        "createdAt": "2018-10-07T13:52:10.000Z",
-        "updatedAt": "2025-11-03T12:34:30.000Z",
-        "url": "https://github.com/chadsr/ross.ch",
-        "languages": [
-            "JavaScript",
-            "TypeScript",
-            "SCSS",
-            "HTML",
-            "Shell"
-        ],
-        "topics": [
-            "css-3d-transitions",
-            "escher",
-            "perspective",
-            "optical-illusion",
-            "cloudflare-pages",
-            "cloudflare-workers",
-            "hugo",
-            "hugo-site",
-            "blog",
-            "css-3d",
-            "css-3d-animation",
-            "css3d",
-            "hugo-blog",
-            "typescript"
-        ]
-    },
-    {
         "name": "action-user-repos-json",
         "description": "A Github Action to output a user's repositories as a JSON file.",
         "stargazerCount": 2,
@@ -166,92 +252,6 @@
             "web-scraping",
             "dataset-creation",
             "marktplaats-nl"
-        ]
-    },
-    {
-        "name": "dotfiles",
-        "description": "My dotfiles, managed with stow.",
-        "stargazerCount": 10,
-        "createdAt": "2018-12-03T17:08:23.000Z",
-        "updatedAt": "2025-10-31T09:36:28.000Z",
-        "url": "https://github.com/chadsr/dotfiles",
-        "languages": [
-            "Shell",
-            "CSS",
-            "GLSL",
-            "Python"
-        ],
-        "topics": [
-            "waybar",
-            "dotfiles",
-            "zsh",
-            "gnupg",
-            "wayland",
-            "liquidctl",
-            "dotfiles-automation",
-            "dotfiles-installer",
-            "dotfiles-setup",
-            "wayland-system",
-            "gpg-encryption",
-            "sway-config",
-            "hyprland-config",
-            "sway",
-            "swaywm",
-            "pipewire",
-            "mpv-config",
-            "hyprland-dotfiles",
-            "hyprland",
-            "sway-dotfiles"
-        ]
-    },
-    {
-        "name": "ovsc-server",
-        "description": "Custom openvscode-server image",
-        "stargazerCount": 1,
-        "createdAt": "2024-06-14T13:02:08.000Z",
-        "updatedAt": "2025-10-30T16:35:48.000Z",
-        "url": "https://github.com/chadsr/ovsc-server",
-        "languages": [
-            "Dockerfile",
-            "Shell"
-        ],
-        "topics": [
-            "docker",
-            "docker-images",
-            "openvscode-server"
-        ]
-    },
-    {
-        "name": "waybar-crypto",
-        "description": "A Waybar module for displaying cryptocurrency market information",
-        "stargazerCount": 40,
-        "createdAt": "2019-04-30T11:22:23.000Z",
-        "updatedAt": "2025-10-19T06:06:01.000Z",
-        "url": "https://github.com/chadsr/waybar-crypto",
-        "languages": [
-            "Python"
-        ],
-        "topics": [
-            "waybar",
-            "cryptocurrency-prices",
-            "cryptocurrency",
-            "cryptocurrencies",
-            "wayland",
-            "crypto",
-            "crypto-prices",
-            "waybar-crypto",
-            "bitcoin",
-            "ethereum",
-            "coinmarketcap",
-            "coinmarketcap-api",
-            "crypto-ticker",
-            "crypto-trading",
-            "cryptocurrency-price-ticker",
-            "swaywm",
-            "price-change",
-            "crypto-ticker-widget",
-            "waybar-module",
-            "sway-config"
         ]
     },
     {
