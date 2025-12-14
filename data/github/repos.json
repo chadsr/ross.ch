@@ -1,10 +1,23 @@
 [
     {
+        "name": "stars",
+        "description": "Starred  Repositories",
+        "stargazerCount": 2,
+        "createdAt": "2024-04-17T23:35:11.000Z",
+        "updatedAt": "2025-12-13T02:23:46.000Z",
+        "url": "https://github.com/chadsr/stars",
+        "languages": [],
+        "topics": [
+            "starred",
+            "starred-repositories"
+        ]
+    },
+    {
         "name": "dotfiles",
         "description": "My dotfiles, managed with stow.",
-        "stargazerCount": 11,
+        "stargazerCount": 12,
         "createdAt": "2018-12-03T17:08:23.000Z",
-        "updatedAt": "2025-11-29T09:56:41.000Z",
+        "updatedAt": "2025-12-11T01:51:04.000Z",
         "url": "https://github.com/chadsr/dotfiles",
         "languages": [
             "Shell",
@@ -36,24 +49,11 @@
         ]
     },
     {
-        "name": "stars",
-        "description": "Starred  Repositories",
-        "stargazerCount": 2,
-        "createdAt": "2024-04-17T23:35:11.000Z",
-        "updatedAt": "2025-11-29T02:18:49.000Z",
-        "url": "https://github.com/chadsr/stars",
-        "languages": [],
-        "topics": [
-            "starred",
-            "starred-repositories"
-        ]
-    },
-    {
         "name": "waybar-crypto",
         "description": "A Waybar module for displaying cryptocurrency market information",
-        "stargazerCount": 40,
+        "stargazerCount": 39,
         "createdAt": "2019-04-30T11:22:23.000Z",
-        "updatedAt": "2025-11-24T08:17:58.000Z",
+        "updatedAt": "2025-12-09T13:31:54.000Z",
         "url": "https://github.com/chadsr/waybar-crypto",
         "languages": [
             "Python"
@@ -79,6 +79,37 @@
             "crypto-ticker-widget",
             "waybar-module",
             "sway-config"
+        ]
+    },
+    {
+        "name": "ross.ch",
+        "description": "My personal website",
+        "stargazerCount": 2,
+        "createdAt": "2018-10-07T13:52:10.000Z",
+        "updatedAt": "2025-12-05T03:50:00.000Z",
+        "url": "https://github.com/chadsr/ross.ch",
+        "languages": [
+            "JavaScript",
+            "TypeScript",
+            "SCSS",
+            "HTML",
+            "Shell"
+        ],
+        "topics": [
+            "css-3d-transitions",
+            "escher",
+            "perspective",
+            "optical-illusion",
+            "cloudflare-pages",
+            "cloudflare-workers",
+            "hugo",
+            "hugo-site",
+            "blog",
+            "css-3d",
+            "css-3d-animation",
+            "css3d",
+            "hugo-blog",
+            "typescript"
         ]
     },
     {
@@ -125,37 +156,6 @@
         "topics": [
             "actions",
             "github-actions"
-        ]
-    },
-    {
-        "name": "ross.ch",
-        "description": "My personal website",
-        "stargazerCount": 2,
-        "createdAt": "2018-10-07T13:52:10.000Z",
-        "updatedAt": "2025-11-16T12:11:35.000Z",
-        "url": "https://github.com/chadsr/ross.ch",
-        "languages": [
-            "JavaScript",
-            "TypeScript",
-            "SCSS",
-            "HTML",
-            "Shell"
-        ],
-        "topics": [
-            "css-3d-transitions",
-            "escher",
-            "perspective",
-            "optical-illusion",
-            "cloudflare-pages",
-            "cloudflare-workers",
-            "hugo",
-            "hugo-site",
-            "blog",
-            "css-3d",
-            "css-3d-animation",
-            "css3d",
-            "hugo-blog",
-            "typescript"
         ]
     },
     {
