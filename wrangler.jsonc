@@ -9,6 +9,9 @@
 	"workers_dev": true,
 	"preview_urls": true,
 	"send_metrics": false,
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
 	"build": {
 		"command": "chmod a+x build.sh && ./build.sh"
 	},
