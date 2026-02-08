@@ -5,13 +5,10 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "ross-ch",
-	"compatibility_date": "2025-09-06",
 	"workers_dev": true,
 	"preview_urls": true,
 	"send_metrics": false,
-	"compatibility_flags": [
-		"nodejs_compat"
-	],
+	"compatibility_date": "2025-09-06",
 	"build": {
 		"command": "chmod a+x build.sh && ./build.sh"
 	},
