@@ -18,6 +18,16 @@
 		"directory": "./public",
 		"not_found_handling": "404-page"
 	},
+	"routes": [
+		{
+			"pattern": "ross.ch",
+			"custom_domain": true
+		},
+		{
+			"pattern": "www.ross.ch",
+			"custom_domain": true
+		}
+	],
 	"observability": {
 		"enabled": true
 	},
