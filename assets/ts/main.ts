@@ -33,6 +33,7 @@ const CLASS_NOJS = 'nojs';
 const CLASS_SUCCESS = 'success';
 const CLASS_ERROR = 'error';
 const ERROR_MESSAGE_PREFIX = 'Error!';
+const DEFAULT_ERROR_MESSAGE = 'Server issue. Please try again later.';
 
 // Freaky Escher stuff
 const BG_Y_OFFSET = -0.5; // Offset from y origin for the background rendering (so cube starts halfway offscreen)
@@ -221,7 +222,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                 }
                             })
                             .catch((error: AxiosError) => {
-                                let errorMessage: string = '';
+                                let errorMessage: string =
+                                    DEFAULT_ERROR_MESSAGE;
 
                                 if (
                                     error.response &&
@@ -229,14 +231,20 @@ document.addEventListener('DOMContentLoaded', function () {
                                     error.response.status < 500 &&
                                     error.response.status != 404
                                 ) {
-                                    const responseData = error.response
-                                        .data as ResponseData;
-                                    errorMessage = JSON.stringify(
-                                        responseData.message,
-                                    );
-                                } else {
-                                    errorMessage =
-                                        'Server issue. Please try again later.';
+                                    const data: object | string =
+                                        error.response.data;
+
+                                    if (typeof data === 'object') {
+                                        if (
+                                            Object.hasOwn(data, 'status') &&
+                                            Object.hasOwn(data, 'message')
+                                        ) {
+                                            const responseData: ResponseData =
+                                                data as ResponseData;
+
+                                            errorMessage = responseData.message;
+                                        }
+                                    }
                                 }
 
                                 showStatusMessage(
