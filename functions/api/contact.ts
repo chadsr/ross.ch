@@ -1,5 +1,6 @@
 import { Resend } from 'resend';
 import { readMessage } from 'openpgp/lightweight';
+import { RequestContact, ResponseData } from '../../assets/ts/interfaces';
 
 /**
  * POST /api/contact
@@ -37,37 +38,34 @@ export const onRequestPost: PagesFunction<Env> = async (ctx) => {
         });
     });
 
-    let resend: Resend | null = null;
     try {
-        resend = new Resend(ctx.env.RESEND_API_KEY);
+        const resend = new Resend(ctx.env.RESEND_API_KEY);
+        const { data, error } = await resend.emails.send({
+            headers: {
+                protocol: 'application/pgp-encrypted',
+                contentType: 'multipart/encrypted',
+                'Content-Disposition': 'inline; filename="msg.asc"',
+            },
+            from: ctx.env.EMAIL_SENDER_ADDRESS,
+            to: ctx.env.EMAIL_RECIPIENT_ADDRESS,
+            subject: 'Contact form - New Message!',
+            text: contactData.message,
+        });
+
+        if (error) {
+            console.log('Error sending email', error);
+            throw new Error(`Error sending email`);
+        }
+
+        console.log('Email sent', data);
+
+        const responseData: ResponseData = {
+            status: 'ok',
+            message: 'Your message has been sent!',
+        };
+
+        return new Response(JSON.stringify(responseData), { status: 200 });
     } catch (error) {
-        console.log('Resend error', error);
-        throw new Error('Email provider error');
+        throw new Error('Email provider error', { cause: error });
     }
-
-    const { data, error } = await resend.emails.send({
-        headers: {
-            protocol: 'application/pgp-encrypted',
-            contentType: 'multipart/encrypted',
-            'Content-Disposition': 'inline; filename="msg.asc"',
-        },
-        from: ctx.env.EMAIL_SENDER_ADDRESS,
-        to: ctx.env.EMAIL_RECIPIENT_ADDRESS,
-        subject: 'Contact form - New Message!',
-        text: contactData.message,
-    });
-
-    if (error) {
-        console.log('Error sending email', error);
-        throw new Error(`Error sending email`);
-    }
-
-    console.log('Email sent', data);
-
-    const responseData: ResponseData = {
-        status: 'ok',
-        message: 'Your message has been sent!',
-    };
-
-    return new Response(JSON.stringify(responseData), { status: 200 });
 };
