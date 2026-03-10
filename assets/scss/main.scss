@@ -1338,6 +1338,14 @@ ul.social {
     }
 }
 
+.content-404 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    pointer-events: auto;
+}
+
 @mixin content-cube($size) {
     $perspective-multiplier: 2;
 

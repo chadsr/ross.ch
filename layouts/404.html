@@ -1,14 +1,11 @@
 {{ define "main" }}
-<main class="perspective">
-    <div class="perspective">
-        <div class="title perspective">
-            <h1 class="text-gradient">When you stare into the abyss...</h1>
-        </div>
-        <p>
-            <a class="nav-home link" href="{{ .Site.Home.RelPermalink }}">
-                return home
-            </a>
-        </p>
+<main>
+    <div class="content-404">
+        <h1 class="text-gradient">When you stare into the abyss...</h1>
+
+        <a class="nav-home link button" href="{{ .Site.Home.RelPermalink }}">
+            return home
+        </a>
     </div>
 </main>
 {{ end }}
