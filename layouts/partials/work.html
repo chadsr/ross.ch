@@ -10,7 +10,7 @@
         {{ .Render "li" }}
         {{ $hasContent = true }}
         {{ end }}
-        {{ range $repo := .Site.Data.github.repos }}
+        {{ range $repo := hugo.Data.github.repos }}
         {{ if not (in $.Site.Params.reposExclude $repo.url) }}
         <li class="feed-item repo field hover perspective">
             <a href="{{ $repo.url }}" rel="noopener" target="_blank">
