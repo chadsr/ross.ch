@@ -1,20 +1,19 @@
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
-import eslintConfigPrettier from 'eslint-config-prettier';
+import { defineConfig, globalIgnores } from 'eslint/config';
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
-export default tseslint.config(
-    {
-        ignores: [
+export default defineConfig(
+    [
+        globalIgnores([
             'resources/**/*',
             'public/**/*',
             'static/**/*',
             'dist/**/*',
             '.wrangler/**/*',
-        ],
-    },
+        ]),
+    ],
     eslint.configs.recommended,
-    ...tseslint.configs.recommended,
-    eslintConfigPrettier,
+    tseslint.configs.recommended,
     eslintPluginPrettierRecommended,
 );
