@@ -1,92 +1,10 @@
 [
     {
-        "name": "stars",
-        "description": "Starred  Repositories",
-        "stargazerCount": 2,
-        "createdAt": "2024-04-17T23:35:11.000Z",
-        "updatedAt": "2026-03-14T03:14:34.000Z",
-        "url": "https://github.com/chadsr/stars",
-        "languages": [],
-        "topics": [
-            "starred",
-            "starred-repositories"
-        ]
-    },
-    {
-        "name": "ross.ch",
-        "description": "My personal website",
-        "stargazerCount": 2,
-        "createdAt": "2018-10-07T13:52:10.000Z",
-        "updatedAt": "2026-03-10T11:21:16.000Z",
-        "url": "https://github.com/chadsr/ross.ch",
-        "languages": [
-            "JavaScript",
-            "TypeScript",
-            "SCSS",
-            "HTML",
-            "Shell"
-        ],
-        "topics": [
-            "css-3d-transitions",
-            "escher",
-            "perspective",
-            "optical-illusion",
-            "cloudflare-pages",
-            "cloudflare-workers",
-            "hugo",
-            "hugo-site",
-            "blog",
-            "css-3d",
-            "css-3d-animation",
-            "css3d",
-            "hugo-blog",
-            "typescript"
-        ]
-    },
-    {
-        "name": "cryptoshot",
-        "description": "Retrieve cryptocurrency balances and prices at a specific point in time",
-        "stargazerCount": 1,
-        "createdAt": "2024-04-18T17:24:17.000Z",
-        "updatedAt": "2026-03-10T09:06:03.000Z",
-        "url": "https://github.com/chadsr/cryptoshot",
-        "languages": [
-            "Python"
-        ],
-        "topics": [
-            "work-in-progress",
-            "cryptocurrency",
-            "cryptocurrency-exchanges",
-            "cryptocurrency-ba",
-            "cryptocurrency-pr",
-            "crypto-currency",
-            "crypto-market",
-            "cryptocurrency-tool"
-        ]
-    },
-    {
-        "name": "ovsc-server",
-        "description": "Custom openvscode-server image",
-        "stargazerCount": 1,
-        "createdAt": "2024-06-14T13:02:08.000Z",
-        "updatedAt": "2026-03-09T18:15:25.000Z",
-        "url": "https://github.com/chadsr/ovsc-server",
-        "languages": [
-            "Dockerfile",
-            "Shell"
-        ],
-        "topics": [
-            "docker",
-            "docker-images",
-            "openvscode-server"
-        ]
-    },
-    {
         "name": "dotfiles",
         "description": "My dotfiles, managed with stow.",
         "stargazerCount": 12,
         "createdAt": "2018-12-03T17:08:23.000Z",
-        "updatedAt": "2026-03-09T15:39:55.000Z",
+        "updatedAt": "2026-03-21T19:34:44.000Z",
         "url": "https://github.com/chadsr/dotfiles",
         "languages": [
             "Shell",
@@ -113,6 +31,120 @@
             "hyprland",
             "sway-dotfiles",
             "dotfiles-linux"
+        ]
+    },
+    {
+        "name": "stars",
+        "description": "Starred  Repositories",
+        "stargazerCount": 2,
+        "createdAt": "2024-04-17T23:35:11.000Z",
+        "updatedAt": "2026-03-21T03:07:35.000Z",
+        "url": "https://github.com/chadsr/stars",
+        "languages": [],
+        "topics": [
+            "starred",
+            "starred-repositories"
+        ]
+    },
+    {
+        "name": "cryptoshot",
+        "description": "Retrieve cryptocurrency balances and prices at a specific point in time",
+        "stargazerCount": 1,
+        "createdAt": "2024-04-18T17:24:17.000Z",
+        "updatedAt": "2026-03-19T16:31:19.000Z",
+        "url": "https://github.com/chadsr/cryptoshot",
+        "languages": [
+            "Python"
+        ],
+        "topics": [
+            "work-in-progress",
+            "cryptocurrency",
+            "cryptocurrency-exchanges",
+            "cryptocurrency-ba",
+            "cryptocurrency-pr",
+            "crypto-currency",
+            "crypto-market",
+            "cryptocurrency-tool"
+        ]
+    },
+    {
+        "name": "notes",
+        "description": "Public Notes & Research",
+        "stargazerCount": 1,
+        "createdAt": "2025-05-06T10:20:08.000Z",
+        "updatedAt": "2026-03-19T09:31:14.000Z",
+        "url": "https://github.com/chadsr/notes",
+        "languages": [
+            "Clojure",
+            "JavaScript"
+        ],
+        "topics": [
+            "json-ld",
+            "jsonld",
+            "linked-data",
+            "logseq",
+            "logseq-notes",
+            "n-quads",
+            "notes",
+            "nquads",
+            "research",
+            "graph-schema",
+            "rdf",
+            "schema-validation",
+            "semantic-web",
+            "triples-extraction",
+            "logseq-publish",
+            "logseq-graph",
+            "digital-garden",
+            "networked-thought"
+        ]
+    },
+    {
+        "name": "ross.ch",
+        "description": "My personal website",
+        "stargazerCount": 2,
+        "createdAt": "2018-10-07T13:52:10.000Z",
+        "updatedAt": "2026-03-17T21:20:35.000Z",
+        "url": "https://github.com/chadsr/ross.ch",
+        "languages": [
+            "JavaScript",
+            "TypeScript",
+            "SCSS",
+            "HTML",
+            "Shell"
+        ],
+        "topics": [
+            "css-3d-transitions",
+            "escher",
+            "perspective",
+            "optical-illusion",
+            "cloudflare-pages",
+            "cloudflare-workers",
+            "hugo",
+            "hugo-site",
+            "blog",
+            "css-3d",
+            "css-3d-animation",
+            "css3d",
+            "hugo-blog",
+            "typescript"
+        ]
+    },
+    {
+        "name": "ovsc-server",
+        "description": "Custom openvscode-server image",
+        "stargazerCount": 1,
+        "createdAt": "2024-06-14T13:02:08.000Z",
+        "updatedAt": "2026-03-09T18:15:25.000Z",
+        "url": "https://github.com/chadsr/ovsc-server",
+        "languages": [
+            "Dockerfile",
+            "Shell"
+        ],
+        "topics": [
+            "docker",
+            "docker-images",
+            "openvscode-server"
         ]
     },
     {
@@ -146,38 +178,6 @@
             "crypto-ticker-widget",
             "waybar-module",
             "sway-config"
-        ]
-    },
-    {
-        "name": "notes",
-        "description": "Public Notes & Research",
-        "stargazerCount": 1,
-        "createdAt": "2025-05-06T10:20:08.000Z",
-        "updatedAt": "2026-03-03T08:57:36.000Z",
-        "url": "https://github.com/chadsr/notes",
-        "languages": [
-            "Clojure",
-            "JavaScript"
-        ],
-        "topics": [
-            "json-ld",
-            "jsonld",
-            "linked-data",
-            "logseq",
-            "logseq-notes",
-            "n-quads",
-            "notes",
-            "nquads",
-            "research",
-            "graph-schema",
-            "rdf",
-            "schema-validation",
-            "semantic-web",
-            "triples-extraction",
-            "logseq-publish",
-            "logseq-graph",
-            "digital-garden",
-            "networked-thought"
         ]
     },
     {
