@@ -1,10 +1,44 @@
 [
     {
+        "name": "stars",
+        "description": "Starred  Repositories",
+        "stargazerCount": 2,
+        "createdAt": "2024-04-17T23:35:11.000Z",
+        "updatedAt": "2026-03-28T03:24:33.000Z",
+        "url": "https://github.com/chadsr/stars",
+        "languages": [],
+        "topics": [
+            "starred",
+            "starred-repositories"
+        ]
+    },
+    {
+        "name": "cryptoshot",
+        "description": "Retrieve cryptocurrency balances and prices at a specific point in time",
+        "stargazerCount": 1,
+        "createdAt": "2024-04-18T17:24:17.000Z",
+        "updatedAt": "2026-03-26T14:27:00.000Z",
+        "url": "https://github.com/chadsr/cryptoshot",
+        "languages": [
+            "Python"
+        ],
+        "topics": [
+            "work-in-progress",
+            "cryptocurrency",
+            "cryptocurrency-exchanges",
+            "cryptocurrency-ba",
+            "cryptocurrency-pr",
+            "crypto-currency",
+            "crypto-market",
+            "cryptocurrency-tool"
+        ]
+    },
+    {
         "name": "dotfiles",
         "description": "My dotfiles, managed with stow.",
         "stargazerCount": 12,
         "createdAt": "2018-12-03T17:08:23.000Z",
-        "updatedAt": "2026-03-21T19:34:44.000Z",
+        "updatedAt": "2026-03-23T08:23:36.000Z",
         "url": "https://github.com/chadsr/dotfiles",
         "languages": [
             "Shell",
@@ -34,37 +68,34 @@
         ]
     },
     {
-        "name": "stars",
-        "description": "Starred  Repositories",
+        "name": "ross.ch",
+        "description": "My personal website",
         "stargazerCount": 2,
-        "createdAt": "2024-04-17T23:35:11.000Z",
-        "updatedAt": "2026-03-21T03:07:35.000Z",
-        "url": "https://github.com/chadsr/stars",
-        "languages": [],
-        "topics": [
-            "starred",
-            "starred-repositories"
-        ]
-    },
-    {
-        "name": "cryptoshot",
-        "description": "Retrieve cryptocurrency balances and prices at a specific point in time",
-        "stargazerCount": 1,
-        "createdAt": "2024-04-18T17:24:17.000Z",
-        "updatedAt": "2026-03-19T16:31:19.000Z",
-        "url": "https://github.com/chadsr/cryptoshot",
+        "createdAt": "2018-10-07T13:52:10.000Z",
+        "updatedAt": "2026-03-22T11:19:36.000Z",
+        "url": "https://github.com/chadsr/ross.ch",
         "languages": [
-            "Python"
+            "JavaScript",
+            "TypeScript",
+            "SCSS",
+            "HTML",
+            "Shell"
         ],
         "topics": [
-            "work-in-progress",
-            "cryptocurrency",
-            "cryptocurrency-exchanges",
-            "cryptocurrency-ba",
-            "cryptocurrency-pr",
-            "crypto-currency",
-            "crypto-market",
-            "cryptocurrency-tool"
+            "css-3d-transitions",
+            "escher",
+            "perspective",
+            "optical-illusion",
+            "cloudflare-pages",
+            "cloudflare-workers",
+            "hugo",
+            "hugo-site",
+            "blog",
+            "css-3d",
+            "css-3d-animation",
+            "css3d",
+            "hugo-blog",
+            "typescript"
         ]
     },
     {
@@ -97,37 +128,6 @@
             "logseq-graph",
             "digital-garden",
             "networked-thought"
-        ]
-    },
-    {
-        "name": "ross.ch",
-        "description": "My personal website",
-        "stargazerCount": 2,
-        "createdAt": "2018-10-07T13:52:10.000Z",
-        "updatedAt": "2026-03-17T21:20:35.000Z",
-        "url": "https://github.com/chadsr/ross.ch",
-        "languages": [
-            "JavaScript",
-            "TypeScript",
-            "SCSS",
-            "HTML",
-            "Shell"
-        ],
-        "topics": [
-            "css-3d-transitions",
-            "escher",
-            "perspective",
-            "optical-illusion",
-            "cloudflare-pages",
-            "cloudflare-workers",
-            "hugo",
-            "hugo-site",
-            "blog",
-            "css-3d",
-            "css-3d-animation",
-            "css3d",
-            "hugo-blog",
-            "typescript"
         ]
     },
     {
