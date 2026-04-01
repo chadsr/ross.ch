@@ -2,7 +2,7 @@ name: Update data
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * 0'
+    - cron: "0 0 * * 0"
 permissions:
   contents: write
   pull-requests: write
@@ -12,20 +12,23 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Get Github Repositories
-        uses: chadsr/action-user-repos-json@v0.2.0
+        uses: chadsr/action-user-repos-json@v0.3.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          username: 'chadsr'
-          minimumStargazers: 1
-          outputPath: ./data/github/repos.json
+          username: "chadsr"
+          include-contributed: true
+          minimum-stargazers: 1
+          sort-by: name
+          sort-asc: true
+          output-path: ./data/github/repos.json
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
         with:
-          title: 'Update Page Data'
-          body: ''
+          title: "Update Page Data"
+          body: ""
           commit-message: "update page data"
-          branch: 'update-page-data-${{ github.run_id }}'
-          assignees: 'chadsr'
+          branch: "update-page-data-${{ github.run_id }}"
+          assignees: "chadsr"
           labels: |
             data

@@ -1,7 +1,7 @@
 <section class="content-section content-work">
     <div class="title-section">
         <h2>Work</h2>
-        <p class="title-wordmark"><em>A non-definitive collection of my work and projects.</em></p>
+        <p class="title-wordmark"><em>A non-definitive collection of my work, and projects i've contributed to.</em></p>
     </div>
     <ul class="feed work-feed">
         {{ $hasContent := false }}
@@ -10,7 +10,14 @@
         {{ .Render "li" }}
         {{ $hasContent = true }}
         {{ end }}
-        {{ range $repo := hugo.Data.github.repos }}
+        {{ $merged := slice }}
+        {{ range $repo := hugo.Data.github.repos.repositories }}
+            {{ $merged = $merged | append (merge $repo (dict "sortDate" $repo.updatedAt)) }}
+        {{ end }}
+        {{ range $contrib := hugo.Data.github.repos.contributions }}
+            {{ $merged = $merged | append (merge $contrib (dict "sortDate" $contrib.lastContributedAt)) }}
+        {{ end }}
+        {{ range $repo := sort $merged "sortDate" "desc" }}
         {{ if not (in $.Site.Params.reposExclude $repo.url) }}
         <li class="feed-item repo field hover perspective">
             <a href="{{ $repo.url }}" rel="noopener" target="_blank">
@@ -21,8 +28,8 @@
                 <div class="feed-item-info ">
                     <span class="repo-updated-date feed-item-date hover">
                         {{- partial "icons/calendar_repeat.html" . -}}
-                        {{ $updatedTime := time.AsTime $repo.updatedAt }}
-                        <p>{{ time.Format $.Site.Params.dateFormat $updatedTime }}</p>
+                        {{ $sortTime := time.AsTime $repo.sortDate }}
+                        <p>{{ time.Format $.Site.Params.dateFormat $sortTime }}</p>
                     </span>
                     <span class="repo-stars">
                         <p>{{ $repo.stargazerCount }}</p>
