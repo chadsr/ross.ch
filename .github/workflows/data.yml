@@ -20,6 +20,7 @@ jobs:
           include-contributed: true
           minimum-stargazers: 1
           sort-by: name
+          sort-asc: true
           output-path: ./data/github/repos.json
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
