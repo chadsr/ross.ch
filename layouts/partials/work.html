@@ -12,14 +12,31 @@
         {{ end }}
         {{ $merged := slice }}
         {{ range $repo := hugo.Data.github.repos.repositories }}
-            {{ $merged = $merged | append (merge $repo (dict "sortDate" $repo.updatedAt)) }}
+        {{ $merged = $merged | append (merge $repo (dict "sortDate" $repo.updatedAt)) }}
         {{ end }}
         {{ range $contrib := hugo.Data.github.repos.contributions }}
-            {{ $merged = $merged | append (merge $contrib (dict "sortDate" $contrib.lastContributedAt)) }}
+        {{ $merged = $merged | append (merge $contrib (dict "sortDate" $contrib.lastContributedAt)) }}
         {{ end }}
         {{ range $repo := sort $merged "sortDate" "desc" }}
         {{ if not (in $.Site.Params.reposExclude $repo.url) }}
         <li class="feed-item repo field hover perspective">
+            {{ $isOwnRepo := eq $repo.owner $.Site.Params.author.ghUsername }}
+            {{ $authorType := cond $isOwnRepo "Person" "Organization" }}
+            {{ $authorName := cond $isOwnRepo $.Site.Params.author.name $repo.owner }}
+            {{ $schema := dict
+            "@context" "https://schema.org"
+            "@type" "SoftwareSourceCode"
+            "name" $repo.name
+            "description" $repo.description
+            "url" $repo.url
+            "codeRepository" $repo.url
+            "programmingLanguage" (cond (gt (len $repo.languages) 0) (index $repo.languages 0) "")
+            "keywords" $repo.topics
+            "dateCreated" $repo.createdAt
+            "dateModified" $repo.updatedAt
+            "author" (dict "@type" $authorType "name" $authorName)
+            }}
+            <script type="application/ld+json">{{ $schema | jsonify (dict "indent" "  ") | safeJS }}</script>
             <a href="{{ $repo.url }}" rel="noopener" target="_blank">
                 <div class="title repo-title feed-item-title hover threed-top perspective">
                     <h3>{{ $repo.name }}</h3>

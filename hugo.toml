@@ -20,6 +20,7 @@ externalDeps = []
 
 [params.author]
 name = 'Ross Chadwick'
+ghUsername = 'chadsr'
 
 [outputs]
 home = ['html', 'rss']
