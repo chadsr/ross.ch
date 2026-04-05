@@ -8,7 +8,10 @@
             "createdAt": "2022-02-02T12:22:32.000Z",
             "updatedAt": "2025-07-17T17:43:43.000Z",
             "url": "https://github.com/reviewdog/action-pytest",
-            "languages": ["Dockerfile", "Shell"],
+            "languages": [
+                "Dockerfile",
+                "Shell"
+            ],
             "topics": [
                 "reviewdog",
                 "reviewdog-action",
@@ -31,8 +34,14 @@
             "createdAt": "2024-08-31T10:15:08.000Z",
             "updatedAt": "2026-04-01T18:47:21.000Z",
             "url": "https://github.com/chadsr/action-user-repos-json",
-            "languages": ["JavaScript", "TypeScript"],
-            "topics": ["actions", "github-actions"]
+            "languages": [
+                "JavaScript",
+                "TypeScript"
+            ],
+            "topics": [
+                "actions",
+                "github-actions"
+            ]
         },
         {
             "owner": "chadsr",
@@ -42,7 +51,10 @@
             "createdAt": "2018-09-28T12:49:40.000Z",
             "updatedAt": "2024-11-20T23:07:40.000Z",
             "url": "https://github.com/chadsr/Aurora-Server",
-            "languages": ["C", "C++"],
+            "languages": [
+                "C",
+                "C++"
+            ],
             "topics": [
                 "esp32",
                 "esp32-arduino",
@@ -65,7 +77,9 @@
             "createdAt": "2024-04-18T17:24:17.000Z",
             "updatedAt": "2026-04-01T06:21:19.000Z",
             "url": "https://github.com/chadsr/cryptoshot",
-            "languages": ["Python"],
+            "languages": [
+                "Python"
+            ],
             "topics": [
                 "work-in-progress",
                 "cryptocurrency",
@@ -85,7 +99,10 @@
             "createdAt": "2016-11-27T12:49:00.000Z",
             "updatedAt": "2020-03-11T13:34:38.000Z",
             "url": "https://github.com/chadsr/donation_box_arduino",
-            "languages": ["C", "C++"],
+            "languages": [
+                "C",
+                "C++"
+            ],
             "topics": [
                 "arduino",
                 "donations",
@@ -109,9 +126,14 @@
             "description": "My dotfiles, managed with stow.",
             "stargazerCount": 12,
             "createdAt": "2018-12-03T17:08:23.000Z",
-            "updatedAt": "2026-03-30T17:07:14.000Z",
+            "updatedAt": "2026-04-02T09:35:58.000Z",
             "url": "https://github.com/chadsr/dotfiles",
-            "languages": ["Shell", "CSS", "GLSL", "Python"],
+            "languages": [
+                "Shell",
+                "CSS",
+                "GLSL",
+                "Python"
+            ],
             "topics": [
                 "waybar",
                 "dotfiles",
@@ -169,7 +191,9 @@
             "createdAt": "2024-09-17T14:27:14.000Z",
             "updatedAt": "2025-06-03T13:53:14.000Z",
             "url": "https://github.com/chadsr/invoice",
-            "languages": ["Go"],
+            "languages": [
+                "Go"
+            ],
             "topics": []
         },
         {
@@ -211,7 +235,9 @@
             "createdAt": "2022-05-05T19:42:49.000Z",
             "updatedAt": "2022-08-18T18:19:47.000Z",
             "url": "https://github.com/chadsr/logrus-sentry",
-            "languages": ["Go"],
+            "languages": [
+                "Go"
+            ],
             "topics": []
         },
         {
@@ -222,7 +248,10 @@
             "createdAt": "2017-02-21T12:45:25.000Z",
             "updatedAt": "2021-11-19T15:41:36.000Z",
             "url": "https://github.com/chadsr/MAD-EUParl",
-            "languages": ["Python", "Shell"],
+            "languages": [
+                "Python",
+                "Shell"
+            ],
             "topics": [
                 "voting",
                 "politics",
@@ -253,7 +282,10 @@
             "createdAt": "2024-05-30T11:39:37.000Z",
             "updatedAt": "2026-04-01T10:56:04.000Z",
             "url": "https://github.com/chadsr/marktplaats-scraper",
-            "languages": ["Dockerfile", "Python"],
+            "languages": [
+                "Dockerfile",
+                "Python"
+            ],
             "topics": [
                 "chromedriver",
                 "dataset-generation",
@@ -277,7 +309,9 @@
             "createdAt": "2018-02-08T08:47:37.000Z",
             "updatedAt": "2025-09-15T08:51:45.000Z",
             "url": "https://github.com/chadsr/MesaFireEvacuation",
-            "languages": ["Python"],
+            "languages": [
+                "Python"
+            ],
             "topics": [
                 "project-mesa",
                 "mesa",
@@ -297,7 +331,9 @@
             "createdAt": "2017-05-18T11:40:33.000Z",
             "updatedAt": "2025-09-11T16:02:24.000Z",
             "url": "https://github.com/chadsr/NordVPN-NetworkManager",
-            "languages": ["Python"],
+            "languages": [
+                "Python"
+            ],
             "topics": [
                 "vpn-connections",
                 "openvpn",
@@ -327,9 +363,12 @@
             "description": "Public Notes & Research",
             "stargazerCount": 1,
             "createdAt": "2025-05-06T10:20:08.000Z",
-            "updatedAt": "2026-03-19T09:31:14.000Z",
+            "updatedAt": "2026-04-02T19:45:20.000Z",
             "url": "https://github.com/chadsr/notes",
-            "languages": ["Clojure", "JavaScript"],
+            "languages": [
+                "Clojure",
+                "JavaScript"
+            ],
             "topics": [
                 "json-ld",
                 "jsonld",
@@ -359,8 +398,15 @@
             "createdAt": "2024-06-14T13:02:08.000Z",
             "updatedAt": "2026-03-09T18:15:25.000Z",
             "url": "https://github.com/chadsr/ovsc-server",
-            "languages": ["Dockerfile", "Shell"],
-            "topics": ["docker", "docker-images", "openvscode-server"]
+            "languages": [
+                "Dockerfile",
+                "Shell"
+            ],
+            "topics": [
+                "docker",
+                "docker-images",
+                "openvscode-server"
+            ]
         },
         {
             "owner": "chadsr",
@@ -368,9 +414,15 @@
             "description": "My personal website",
             "stargazerCount": 2,
             "createdAt": "2018-10-07T13:52:10.000Z",
-            "updatedAt": "2026-03-29T09:13:28.000Z",
+            "updatedAt": "2026-04-02T07:08:36.000Z",
             "url": "https://github.com/chadsr/ross.ch",
-            "languages": ["JavaScript", "TypeScript", "SCSS", "HTML", "Shell"],
+            "languages": [
+                "JavaScript",
+                "TypeScript",
+                "SCSS",
+                "HTML",
+                "Shell"
+            ],
             "topics": [
                 "css-3d-transitions",
                 "escher",
@@ -396,7 +448,9 @@
             "createdAt": "2016-11-22T13:10:19.000Z",
             "updatedAt": "2017-07-23T04:26:58.000Z",
             "url": "https://github.com/chadsr/rpi-network-bridge",
-            "languages": ["Shell"],
+            "languages": [
+                "Shell"
+            ],
             "topics": [
                 "bridge",
                 "rpi-network-bridge",
@@ -410,10 +464,13 @@
             "description": "Starred  Repositories",
             "stargazerCount": 2,
             "createdAt": "2024-04-17T23:35:11.000Z",
-            "updatedAt": "2026-04-01T03:50:29.000Z",
+            "updatedAt": "2026-04-04T03:24:33.000Z",
             "url": "https://github.com/chadsr/stars",
             "languages": [],
-            "topics": ["starred", "starred-repositories"]
+            "topics": [
+                "starred",
+                "starred-repositories"
+            ]
         },
         {
             "owner": "chadsr",
@@ -461,7 +518,10 @@
             "createdAt": "2019-03-30T14:07:03.000Z",
             "updatedAt": "2023-04-18T20:26:37.000Z",
             "url": "https://github.com/chadsr/WaterBot",
-            "languages": ["C++", "C"],
+            "languages": [
+                "C++",
+                "C"
+            ],
             "topics": [
                 "plant-watering",
                 "plant-wateringsystem",
@@ -479,9 +539,11 @@
             "description": "A Waybar module for displaying cryptocurrency market information",
             "stargazerCount": 38,
             "createdAt": "2019-04-30T11:22:23.000Z",
-            "updatedAt": "2026-04-01T17:10:33.000Z",
+            "updatedAt": "2026-04-01T20:37:09.000Z",
             "url": "https://github.com/chadsr/waybar-crypto",
-            "languages": ["Python"],
+            "languages": [
+                "Python"
+            ],
             "topics": [
                 "waybar",
                 "cryptocurrency-prices",
@@ -515,7 +577,9 @@
             "createdAt": "2020-12-10T19:07:43.000Z",
             "updatedAt": "2025-08-13T15:57:22.000Z",
             "url": "https://github.com/reviewdog/action-black",
-            "languages": ["Shell"],
+            "languages": [
+                "Shell"
+            ],
             "topics": [
                 "reviewdog-action",
                 "formatter",
@@ -537,7 +601,10 @@
             "createdAt": "2021-06-04T01:47:49.000Z",
             "updatedAt": "2024-11-18T10:12:49.000Z",
             "url": "https://github.com/jordemort/action-pyright",
-            "languages": ["Python", "Shell"],
+            "languages": [
+                "Python",
+                "Shell"
+            ],
             "topics": [
                 "github-actions",
                 "pyright",
@@ -555,7 +622,10 @@
             "createdAt": "2022-02-02T12:22:32.000Z",
             "updatedAt": "2025-07-17T17:43:43.000Z",
             "url": "https://github.com/reviewdog/action-pytest",
-            "languages": ["Dockerfile", "Shell"],
+            "languages": [
+                "Dockerfile",
+                "Shell"
+            ],
             "topics": [
                 "reviewdog",
                 "reviewdog-action",
@@ -599,7 +669,10 @@
             "createdAt": "2017-06-30T21:56:01.000Z",
             "updatedAt": "2026-03-17T23:08:49.000Z",
             "url": "https://github.com/madnight/bitcoin-chart-cli",
-            "languages": ["JavaScript", "Shell"],
+            "languages": [
+                "JavaScript",
+                "Shell"
+            ],
             "topics": [
                 "bitcoin",
                 "cli",
@@ -627,21 +700,28 @@
             "owner": "lukas-reining",
             "name": "eventsource",
             "description": "EventSource implementation that is fully compliant with the WHATWG Server-Sent Events specification but takes more arguments.",
-            "stargazerCount": 66,
+            "stargazerCount": 65,
             "createdAt": "2023-11-07T14:52:02.000Z",
-            "updatedAt": "2025-11-13T08:36:17.000Z",
+            "updatedAt": "2026-04-04T21:28:20.000Z",
             "url": "https://github.com/lukas-reining/eventsource",
-            "languages": ["JavaScript", "TypeScript"],
-            "topics": ["eventsource", "server-sent-events", "sse"],
+            "languages": [
+                "JavaScript",
+                "TypeScript"
+            ],
+            "topics": [
+                "eventsource",
+                "server-sent-events",
+                "sse"
+            ],
             "lastContributedAt": "2024-09-04T07:00:00.000Z"
         },
         {
             "owner": "ethereum",
             "name": "go-ethereum",
             "description": "Go implementation of the Ethereum protocol",
-            "stargazerCount": 50963,
+            "stargazerCount": 50966,
             "createdAt": "2013-12-26T13:05:46.000Z",
-            "updatedAt": "2026-04-01T18:32:26.000Z",
+            "updatedAt": "2026-04-04T17:47:09.000Z",
             "url": "https://github.com/ethereum/go-ethereum",
             "languages": [
                 "Go",
@@ -655,18 +735,28 @@
                 "HTML",
                 "Python"
             ],
-            "topics": ["go", "blockchain", "ethereum", "p2p", "geth"],
+            "topics": [
+                "go",
+                "blockchain",
+                "ethereum",
+                "p2p",
+                "geth"
+            ],
             "lastContributedAt": "2019-10-17T07:00:00.000Z"
         },
         {
             "owner": "nuxt",
             "name": "image",
             "description": "Plug-and-play image optimization for Nuxt applications.",
-            "stargazerCount": 1520,
+            "stargazerCount": 1521,
             "createdAt": "2020-09-04T11:53:52.000Z",
-            "updatedAt": "2026-04-01T15:48:39.000Z",
+            "updatedAt": "2026-04-04T14:17:39.000Z",
             "url": "https://github.com/nuxt/image",
-            "languages": ["JavaScript", "TypeScript", "Vue"],
+            "languages": [
+                "JavaScript",
+                "TypeScript",
+                "Vue"
+            ],
             "topics": [
                 "image-optimization",
                 "nuxt",
@@ -683,7 +773,11 @@
             "createdAt": "2020-03-24T19:21:31.000Z",
             "updatedAt": "2025-09-23T19:53:41.000Z",
             "url": "https://github.com/shresthagrawal/learnp2p",
-            "languages": ["JavaScript", "CSS", "HTML"],
+            "languages": [
+                "JavaScript",
+                "CSS",
+                "HTML"
+            ],
             "topics": [
                 "libp2p",
                 "js-libp2p",
@@ -698,9 +792,9 @@
             "owner": "maxdorninger",
             "name": "MediaManager",
             "description": "A modern selfhosted media management system for your media library",
-            "stargazerCount": 3170,
+            "stargazerCount": 3172,
             "createdAt": "2025-02-08T17:30:18.000Z",
-            "updatedAt": "2026-04-01T17:21:54.000Z",
+            "updatedAt": "2026-04-03T20:52:06.000Z",
             "url": "https://github.com/maxdorninger/MediaManager",
             "languages": [
                 "Python",
@@ -724,7 +818,9 @@
             "createdAt": "2017-12-28T12:02:50.000Z",
             "updatedAt": "2024-07-03T08:46:09.000Z",
             "url": "https://github.com/CollectiveIntelligence/NetLogoFireEvacuation",
-            "languages": ["NetLogo"],
+            "languages": [
+                "NetLogo"
+            ],
             "topics": [],
             "lastContributedAt": "2018-01-07T08:00:00.000Z"
         },
@@ -736,19 +832,32 @@
             "createdAt": "2023-04-12T19:38:52.000Z",
             "updatedAt": "2026-03-19T00:41:41.000Z",
             "url": "https://github.com/logseq/publish-spa",
-            "languages": ["JavaScript", "Clojure"],
-            "topics": ["github-actions", "logseq", "nbb", "publish"],
+            "languages": [
+                "JavaScript",
+                "Clojure"
+            ],
+            "topics": [
+                "github-actions",
+                "logseq",
+                "nbb",
+                "publish"
+            ],
             "lastContributedAt": "2025-09-09T07:00:00.000Z"
         },
         {
             "owner": "reviewdog",
             "name": "reviewdog",
             "description": "🐶 Automated code review tool integrated with any code analysis tools regardless of programming language",
-            "stargazerCount": 9171,
+            "stargazerCount": 9181,
             "createdAt": "2016-10-17T11:58:34.000Z",
-            "updatedAt": "2026-03-31T21:33:08.000Z",
+            "updatedAt": "2026-04-04T22:00:44.000Z",
             "url": "https://github.com/reviewdog/reviewdog",
-            "languages": ["Go", "Shell", "HTML", "Dockerfile"],
+            "languages": [
+                "Go",
+                "Shell",
+                "HTML",
+                "Dockerfile"
+            ],
             "topics": [
                 "linter",
                 "go",
@@ -770,9 +879,9 @@
             "owner": "skeletonlabs",
             "name": "skeleton",
             "description": "Skeleton is an adaptive design system powered by Tailwind CSS.",
-            "stargazerCount": 5918,
+            "stargazerCount": 5920,
             "createdAt": "2022-02-23T16:04:46.000Z",
-            "updatedAt": "2026-03-31T20:56:55.000Z",
+            "updatedAt": "2026-04-04T23:35:55.000Z",
             "url": "https://github.com/skeletonlabs/skeleton",
             "languages": [
                 "JavaScript",
