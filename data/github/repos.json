@@ -32,7 +32,7 @@
             "description": "A Github action to output repositories owned (or contributed to) by a user, as a JSON file.",
             "stargazerCount": 2,
             "createdAt": "2024-08-31T10:15:08.000Z",
-            "updatedAt": "2026-04-09T11:38:04.000Z",
+            "updatedAt": "2026-05-05T12:26:01.000Z",
             "url": "https://github.com/chadsr/action-user-repos-json",
             "languages": [
                 "JavaScript",
@@ -75,7 +75,7 @@
             "description": "Retrieve cryptocurrency balances and prices at a specific point in time",
             "stargazerCount": 1,
             "createdAt": "2024-04-18T17:24:17.000Z",
-            "updatedAt": "2026-04-28T08:00:25.000Z",
+            "updatedAt": "2026-05-05T12:32:52.000Z",
             "url": "https://github.com/chadsr/cryptoshot",
             "languages": [
                 "Python"
@@ -126,7 +126,7 @@
             "description": "My dotfiles, managed with stow.",
             "stargazerCount": 13,
             "createdAt": "2018-12-03T17:08:23.000Z",
-            "updatedAt": "2026-04-29T20:10:11.000Z",
+            "updatedAt": "2026-05-05T12:09:58.000Z",
             "url": "https://github.com/chadsr/dotfiles",
             "languages": [
                 "Shell",
@@ -202,7 +202,7 @@
             "description": "A (slightly opinionated) starter setup for Ionic/Vue3/Tailwind/Typescript projects",
             "stargazerCount": 8,
             "createdAt": "2022-04-30T18:23:55.000Z",
-            "updatedAt": "2026-04-23T07:35:30.000Z",
+            "updatedAt": "2026-05-05T12:33:18.000Z",
             "url": "https://github.com/chadsr/ionic-vue-ts-starter",
             "languages": [
                 "JavaScript",
@@ -280,7 +280,7 @@
             "description": "Marktplaats.nl (Dutch Classifieds) Listing Scraper",
             "stargazerCount": 6,
             "createdAt": "2024-05-30T11:39:37.000Z",
-            "updatedAt": "2026-04-22T07:27:15.000Z",
+            "updatedAt": "2026-05-05T12:24:06.000Z",
             "url": "https://github.com/chadsr/marktplaats-scraper",
             "languages": [
                 "Dockerfile",
@@ -363,7 +363,7 @@
             "description": "Public Notes & Research",
             "stargazerCount": 1,
             "createdAt": "2025-05-06T10:20:08.000Z",
-            "updatedAt": "2026-04-08T07:28:54.000Z",
+            "updatedAt": "2026-05-05T12:09:02.000Z",
             "url": "https://github.com/chadsr/notes",
             "languages": [
                 "Clojure",
@@ -435,7 +435,7 @@
             "description": "My personal website",
             "stargazerCount": 2,
             "createdAt": "2018-10-07T13:52:10.000Z",
-            "updatedAt": "2026-04-26T12:47:47.000Z",
+            "updatedAt": "2026-05-05T12:18:06.000Z",
             "url": "https://github.com/chadsr/ross.ch",
             "languages": [
                 "JavaScript",
@@ -485,7 +485,7 @@
             "description": "Starred  Repositories",
             "stargazerCount": 2,
             "createdAt": "2024-04-17T23:35:11.000Z",
-            "updatedAt": "2026-05-02T04:02:02.000Z",
+            "updatedAt": "2026-05-09T04:06:32.000Z",
             "url": "https://github.com/chadsr/stars",
             "languages": [],
             "topics": [
@@ -560,7 +560,7 @@
             "description": "A Waybar module for displaying cryptocurrency market information",
             "stargazerCount": 39,
             "createdAt": "2019-04-30T11:22:23.000Z",
-            "updatedAt": "2026-04-23T02:29:39.000Z",
+            "updatedAt": "2026-05-05T12:26:59.000Z",
             "url": "https://github.com/chadsr/waybar-crypto",
             "languages": [
                 "Python"
@@ -666,9 +666,9 @@
             "owner": "gyunaev",
             "name": "birdtray",
             "description": "new mail system tray notification icon for Thunderbird",
-            "stargazerCount": 910,
+            "stargazerCount": 909,
             "createdAt": "2018-09-19T07:35:23.000Z",
-            "updatedAt": "2026-05-02T13:14:35.000Z",
+            "updatedAt": "2026-05-07T13:29:45.000Z",
             "url": "https://github.com/gyunaev/birdtray",
             "languages": [
                 "C++",
@@ -740,9 +740,9 @@
             "owner": "ethereum",
             "name": "go-ethereum",
             "description": "Go implementation of the Ethereum protocol",
-            "stargazerCount": 51018,
+            "stargazerCount": 51024,
             "createdAt": "2013-12-26T13:05:46.000Z",
-            "updatedAt": "2026-05-03T02:59:15.000Z",
+            "updatedAt": "2026-05-09T17:19:00.000Z",
             "url": "https://github.com/ethereum/go-ethereum",
             "languages": [
                 "Go",
@@ -771,7 +771,7 @@
             "description": "Plug-and-play image optimization for Nuxt applications.",
             "stargazerCount": 1525,
             "createdAt": "2020-09-04T11:53:52.000Z",
-            "updatedAt": "2026-04-30T15:04:27.000Z",
+            "updatedAt": "2026-05-05T06:48:36.000Z",
             "url": "https://github.com/nuxt/image",
             "languages": [
                 "JavaScript",
@@ -813,9 +813,9 @@
             "owner": "maxdorninger",
             "name": "MediaManager",
             "description": "A modern selfhosted media management system for your media library",
-            "stargazerCount": 3192,
+            "stargazerCount": 3193,
             "createdAt": "2025-02-08T17:30:18.000Z",
-            "updatedAt": "2026-05-01T15:50:03.000Z",
+            "updatedAt": "2026-05-09T21:33:13.000Z",
             "url": "https://github.com/maxdorninger/MediaManager",
             "languages": [
                 "Python",
@@ -869,9 +869,9 @@
             "owner": "reviewdog",
             "name": "reviewdog",
             "description": "🐶 Automated code review tool integrated with any code analysis tools regardless of programming language",
-            "stargazerCount": 9263,
+            "stargazerCount": 9281,
             "createdAt": "2016-10-17T11:58:34.000Z",
-            "updatedAt": "2026-05-02T20:21:20.000Z",
+            "updatedAt": "2026-05-10T01:47:51.000Z",
             "url": "https://github.com/reviewdog/reviewdog",
             "languages": [
                 "Go",
@@ -900,9 +900,9 @@
             "owner": "skeletonlabs",
             "name": "skeleton",
             "description": "Skeleton is an adaptive design system powered by Tailwind CSS.",
-            "stargazerCount": 5954,
+            "stargazerCount": 5957,
             "createdAt": "2022-02-23T16:04:46.000Z",
-            "updatedAt": "2026-05-01T10:15:49.000Z",
+            "updatedAt": "2026-05-10T03:31:29.000Z",
             "url": "https://github.com/skeletonlabs/skeleton",
             "languages": [
                 "JavaScript",
@@ -911,8 +911,7 @@
                 "CSS",
                 "TypeScript",
                 "Astro",
-                "MDX",
-                "PowerShell"
+                "MDX"
             ],
             "topics": [
                 "components",
