@@ -30,7 +30,7 @@
     "headline": "{{ .Title | safeJS }}",
     "alternativeHeadline": "{{ .Params.lead }}",
     "description": "{{ if .Description }}{{ .Description | safeJS }}{{ else }}{{if .IsPage}}{{ .Summary  }}{{ end }}{{ end }}",
-    "inLanguage": {{ .Site.LanguageCode }},
+    "inLanguage": {{ .Site.Language.Locale }},
     "isFamilyFriendly": "true",
     "mainEntityOfPage": {
         "@type": "WebPage",

@@ -1,5 +1,5 @@
 baseURL = 'https://ross.ch/'
-languageCode = 'en-GB'
+locale = 'en-GB'
 title = 'Ross Chadwick'
 enableRobotsTXT = true
 summaryLength = 10
@@ -34,8 +34,8 @@ tag = 'tags'
 
 [languages]
 [languages.en]
-languageCode = 'en-GB'
-languageName = 'English'
+locale = 'en-GB'
+label = 'English'
 weight = 1
 [languages.en.params]
 reading_speed = 238
