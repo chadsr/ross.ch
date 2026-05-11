@@ -6,7 +6,7 @@ summaryLength = 10
 timeZone = 'Europe/Amsterdam'
 
 [params]
-dateFormat = "02 Jan 2006"
+dateFormat = "02 January 2006"
 description = "Hacker, explorer, maker of strange things that are sometimes useful."
 logo = "favicon.svg"
 copyright = "Copyright (c)"
