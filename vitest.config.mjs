@@ -1,15 +1,7 @@
-import { createRequire } from 'node:module';
 import { cloudflareTest } from '@cloudflare/vitest-pool-workers';
-
-const cjsRequire = createRequire(import.meta.url);
 
 export default {
     plugins: [cloudflareTest({ wrangler: { configPath: './wrangler.jsonc' } })],
-    resolve: {
-        alias: {
-            uuid: cjsRequire.resolve('uuid'),
-        },
-    },
     test: {
         coverage: {
             // you can include other reporters, but 'json-summary' is required, json is recommended
