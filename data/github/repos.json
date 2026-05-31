@@ -75,7 +75,7 @@
             "description": "Retrieve cryptocurrency balances and prices at a specific point in time",
             "stargazerCount": 1,
             "createdAt": "2024-04-18T17:24:17.000Z",
-            "updatedAt": "2026-05-19T23:06:40.000Z",
+            "updatedAt": "2026-05-26T07:56:48.000Z",
             "url": "https://github.com/chadsr/cryptoshot",
             "languages": [
                 "Python"
@@ -126,7 +126,7 @@
             "description": "My dotfiles, managed with stow.",
             "stargazerCount": 13,
             "createdAt": "2018-12-03T17:08:23.000Z",
-            "updatedAt": "2026-05-21T20:14:09.000Z",
+            "updatedAt": "2026-05-29T13:30:38.000Z",
             "url": "https://github.com/chadsr/dotfiles",
             "languages": [
                 "Shell",
@@ -435,7 +435,7 @@
             "description": "My personal website",
             "stargazerCount": 2,
             "createdAt": "2018-10-07T13:52:10.000Z",
-            "updatedAt": "2026-05-19T17:03:52.000Z",
+            "updatedAt": "2026-05-24T08:07:41.000Z",
             "url": "https://github.com/chadsr/ross.ch",
             "languages": [
                 "JavaScript",
@@ -485,7 +485,7 @@
             "description": "Starred  Repositories",
             "stargazerCount": 2,
             "createdAt": "2024-04-17T23:35:11.000Z",
-            "updatedAt": "2026-05-23T04:18:01.000Z",
+            "updatedAt": "2026-05-30T04:35:46.000Z",
             "url": "https://github.com/chadsr/stars",
             "languages": [],
             "topics": [
@@ -499,7 +499,7 @@
             "description": "A (slightly opinionated) starter template for SvelteKit/Capacitor/Tailwind/Typescript projects",
             "stargazerCount": 1,
             "createdAt": "2025-09-05T08:41:15.000Z",
-            "updatedAt": "2026-02-09T09:26:40.000Z",
+            "updatedAt": "2026-05-28T22:45:19.000Z",
             "url": "https://github.com/chadsr/sveltekit-capacitor-starter",
             "languages": [
                 "Java",
@@ -594,9 +594,9 @@
             "owner": "reviewdog",
             "name": "action-black",
             "description": "Run black with Reviewdog :dog:",
-            "stargazerCount": 11,
+            "stargazerCount": 10,
             "createdAt": "2020-12-10T19:07:43.000Z",
-            "updatedAt": "2026-04-19T03:56:18.000Z",
+            "updatedAt": "2026-05-24T21:24:51.000Z",
             "url": "https://github.com/reviewdog/action-black",
             "languages": [
                 "Shell"
@@ -666,9 +666,9 @@
             "owner": "gyunaev",
             "name": "birdtray",
             "description": "new mail system tray notification icon for Thunderbird",
-            "stargazerCount": 909,
+            "stargazerCount": 905,
             "createdAt": "2018-09-19T07:35:23.000Z",
-            "updatedAt": "2026-05-07T13:29:45.000Z",
+            "updatedAt": "2026-05-29T07:23:34.000Z",
             "url": "https://github.com/gyunaev/birdtray",
             "languages": [
                 "C++",
@@ -686,9 +686,9 @@
             "owner": "madnight",
             "name": "bitcoin-chart-cli",
             "description": "Bitcoin chart for the terminal as command line util",
-            "stargazerCount": 317,
+            "stargazerCount": 318,
             "createdAt": "2017-06-30T21:56:01.000Z",
-            "updatedAt": "2026-04-26T05:39:06.000Z",
+            "updatedAt": "2026-05-29T07:40:25.000Z",
             "url": "https://github.com/madnight/bitcoin-chart-cli",
             "languages": [
                 "JavaScript",
@@ -740,9 +740,9 @@
             "owner": "ethereum",
             "name": "go-ethereum",
             "description": "Go implementation of the Ethereum protocol",
-            "stargazerCount": 51050,
+            "stargazerCount": 51068,
             "createdAt": "2013-12-26T13:05:46.000Z",
-            "updatedAt": "2026-05-23T21:57:26.000Z",
+            "updatedAt": "2026-05-31T03:13:50.000Z",
             "url": "https://github.com/ethereum/go-ethereum",
             "languages": [
                 "Go",
@@ -769,9 +769,9 @@
             "owner": "nuxt",
             "name": "image",
             "description": "Plug-and-play image optimization for Nuxt applications.",
-            "stargazerCount": 1529,
+            "stargazerCount": 1528,
             "createdAt": "2020-09-04T11:53:52.000Z",
-            "updatedAt": "2026-05-23T02:05:34.000Z",
+            "updatedAt": "2026-05-30T20:22:23.000Z",
             "url": "https://github.com/nuxt/image",
             "languages": [
                 "JavaScript",
@@ -813,9 +813,9 @@
             "owner": "maxdorninger",
             "name": "MediaManager",
             "description": "A modern selfhosted media management system for your media library",
-            "stargazerCount": 3203,
+            "stargazerCount": 3206,
             "createdAt": "2025-02-08T17:30:18.000Z",
-            "updatedAt": "2026-05-23T15:28:33.000Z",
+            "updatedAt": "2026-05-30T22:19:49.000Z",
             "url": "https://github.com/maxdorninger/MediaManager",
             "languages": [
                 "Python",
@@ -869,9 +869,9 @@
             "owner": "reviewdog",
             "name": "reviewdog",
             "description": "🐶 Automated code review tool integrated with any code analysis tools regardless of programming language",
-            "stargazerCount": 9317,
+            "stargazerCount": 9329,
             "createdAt": "2016-10-17T11:58:34.000Z",
-            "updatedAt": "2026-05-24T00:57:10.000Z",
+            "updatedAt": "2026-05-29T00:52:41.000Z",
             "url": "https://github.com/reviewdog/reviewdog",
             "languages": [
                 "Go",
@@ -900,9 +900,9 @@
             "owner": "skeletonlabs",
             "name": "skeleton",
             "description": "Skeleton is an adaptive design system powered by Tailwind CSS.",
-            "stargazerCount": 5967,
+            "stargazerCount": 5971,
             "createdAt": "2022-02-23T16:04:46.000Z",
-            "updatedAt": "2026-05-24T00:00:24.000Z",
+            "updatedAt": "2026-05-30T18:08:16.000Z",
             "url": "https://github.com/skeletonlabs/skeleton",
             "languages": [
                 "JavaScript",
