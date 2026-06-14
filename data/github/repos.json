@@ -75,7 +75,7 @@
             "description": "Retrieve cryptocurrency balances and prices at a specific point in time",
             "stargazerCount": 1,
             "createdAt": "2024-04-18T17:24:17.000Z",
-            "updatedAt": "2026-06-01T22:25:47.000Z",
+            "updatedAt": "2026-06-09T07:47:32.000Z",
             "url": "https://github.com/chadsr/cryptoshot",
             "languages": [
                 "Python"
@@ -126,7 +126,7 @@
             "description": "My dotfiles, managed with stow.",
             "stargazerCount": 13,
             "createdAt": "2018-12-03T17:08:23.000Z",
-            "updatedAt": "2026-06-04T20:12:04.000Z",
+            "updatedAt": "2026-06-11T09:47:53.000Z",
             "url": "https://github.com/chadsr/dotfiles",
             "languages": [
                 "Shell",
@@ -326,9 +326,9 @@
             "owner": "chadsr",
             "name": "NordVPN-NetworkManager",
             "description": "A CLI tool for automating the importing, securing and usage of NordVPN (and in the future, more) OpenVPN servers through NetworkManager.",
-            "stargazerCount": 120,
+            "stargazerCount": 119,
             "createdAt": "2017-05-18T11:40:33.000Z",
-            "updatedAt": "2025-09-11T16:02:24.000Z",
+            "updatedAt": "2026-06-13T08:43:56.000Z",
             "url": "https://github.com/chadsr/NordVPN-NetworkManager",
             "languages": [
                 "Python"
@@ -434,7 +434,7 @@
             "description": "My personal website",
             "stargazerCount": 2,
             "createdAt": "2018-10-07T13:52:10.000Z",
-            "updatedAt": "2026-06-03T09:13:47.000Z",
+            "updatedAt": "2026-06-07T21:30:26.000Z",
             "url": "https://github.com/chadsr/ross.ch",
             "languages": [
                 "JavaScript",
@@ -484,7 +484,7 @@
             "description": "Starred  Repositories",
             "stargazerCount": 2,
             "createdAt": "2024-04-17T23:35:11.000Z",
-            "updatedAt": "2026-06-06T04:38:30.000Z",
+            "updatedAt": "2026-06-13T05:02:00.000Z",
             "url": "https://github.com/chadsr/stars",
             "languages": [],
             "topics": [
@@ -665,9 +665,9 @@
             "owner": "gyunaev",
             "name": "birdtray",
             "description": "new mail system tray notification icon for Thunderbird",
-            "stargazerCount": 909,
+            "stargazerCount": 912,
             "createdAt": "2018-09-19T07:35:23.000Z",
-            "updatedAt": "2026-06-04T22:09:30.000Z",
+            "updatedAt": "2026-06-12T08:10:52.000Z",
             "url": "https://github.com/gyunaev/birdtray",
             "languages": [
                 "C++",
@@ -739,9 +739,9 @@
             "owner": "ethereum",
             "name": "go-ethereum",
             "description": "Go implementation of the Ethereum protocol",
-            "stargazerCount": 51095,
+            "stargazerCount": 51154,
             "createdAt": "2013-12-26T13:05:46.000Z",
-            "updatedAt": "2026-06-06T18:05:18.000Z",
+            "updatedAt": "2026-06-14T02:27:50.000Z",
             "url": "https://github.com/ethereum/go-ethereum",
             "languages": [
                 "Go",
@@ -770,7 +770,7 @@
             "description": "Plug-and-play image optimization for Nuxt applications.",
             "stargazerCount": 1529,
             "createdAt": "2020-09-04T11:53:52.000Z",
-            "updatedAt": "2026-06-04T11:48:27.000Z",
+            "updatedAt": "2026-06-12T19:25:48.000Z",
             "url": "https://github.com/nuxt/image",
             "languages": [
                 "JavaScript",
@@ -812,9 +812,9 @@
             "owner": "maxdorninger",
             "name": "MediaManager",
             "description": "A modern selfhosted media management system for your media library",
-            "stargazerCount": 3207,
+            "stargazerCount": 3211,
             "createdAt": "2025-02-08T17:30:18.000Z",
-            "updatedAt": "2026-06-04T21:21:57.000Z",
+            "updatedAt": "2026-06-13T01:13:40.000Z",
             "url": "https://github.com/maxdorninger/MediaManager",
             "languages": [
                 "Python",
@@ -848,9 +848,9 @@
             "owner": "logseq",
             "name": "publish-spa",
             "description": "A github action and CLI to publish logseq graphs as a SPA app",
-            "stargazerCount": 308,
+            "stargazerCount": 309,
             "createdAt": "2023-04-12T19:38:52.000Z",
-            "updatedAt": "2026-05-21T23:21:34.000Z",
+            "updatedAt": "2026-06-07T20:52:29.000Z",
             "url": "https://github.com/logseq/publish-spa",
             "languages": [
                 "JavaScript",
@@ -868,9 +868,9 @@
             "owner": "reviewdog",
             "name": "reviewdog",
             "description": "🐶 Automated code review tool integrated with any code analysis tools regardless of programming language",
-            "stargazerCount": 9341,
+            "stargazerCount": 9363,
             "createdAt": "2016-10-17T11:58:34.000Z",
-            "updatedAt": "2026-06-07T03:27:21.000Z",
+            "updatedAt": "2026-06-14T03:34:25.000Z",
             "url": "https://github.com/reviewdog/reviewdog",
             "languages": [
                 "Go",
@@ -899,9 +899,9 @@
             "owner": "skeletonlabs",
             "name": "skeleton",
             "description": "Skeleton is an adaptive design system powered by Tailwind CSS.",
-            "stargazerCount": 5975,
+            "stargazerCount": 5982,
             "createdAt": "2022-02-23T16:04:46.000Z",
-            "updatedAt": "2026-06-06T08:30:59.000Z",
+            "updatedAt": "2026-06-12T17:25:14.000Z",
             "url": "https://github.com/skeletonlabs/skeleton",
             "languages": [
                 "JavaScript",
