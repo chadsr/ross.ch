@@ -211,9 +211,9 @@ $cube-transition-duration: 500ms;
             brightness($brightness-threed-top-light),
             brightness($brightness-threed-top-dark)
         );
-        transform: rotateX(calc($threed-angle))
-            translate3d(0, -50%, calc(-1 * $outline-size / 2));
-        top: calc(-1 * var(--threed-height) * cos($threed-angle));
+        transform-origin: 50% 100%;
+        top: calc(-1 * var(--threed-height));
+        transform: rotateX(calc($threed-angle));
     }
 }
 
@@ -227,9 +227,9 @@ $cube-transition-duration: 500ms;
             brightness($brightness-threed-bottom-light),
             brightness($brightness-threed-bottom-dark)
         );
-        transform: rotateX(calc(-1 * $threed-angle))
-            translate3d(0, 50%, calc(-1 * $outline-size / 2));
-        top: calc(var(--threed-height) * (cos($threed-angle)));
+        transform-origin: 50% 0%;
+        top: var(--threed-height);
+        transform: rotateX(calc(-1 * $threed-angle));
     }
 }
 
@@ -1348,12 +1348,17 @@ ul.social {
 @mixin content-cube($size) {
     $perspective-multiplier: 2;
 
-    main.perspective,
+    main.perspective {
+        perspective: calc($size * $perspective-multiplier);
+        perspective-origin: top;
+        transform-style: preserve-3d;
+    }
+
     header.perspective,
     footer.perspective {
         perspective: calc($size * $perspective-multiplier);
         perspective-origin: top;
-        transform-style: preserve-3d;
+        transform-style: flat;
     }
 
     .perspective {
