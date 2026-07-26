@@ -29,37 +29,36 @@
         "ChromeAndroid >= 119"
     ],
     "devDependencies": {
-        "@cloudflare/vitest-pool-workers": "^0.17.0",
-        "@cloudflare/workers-types": "^4.20260519.1",
+        "@cloudflare/vitest-pool-workers": "^0.18.8",
         "@eslint/js": "^10.0.1",
-        "@fontsource-variable/space-grotesk": "^5.2.10",
+        "@fontsource-variable/space-grotesk": "^5.3.0",
         "@fullhuman/postcss-purgecss": "^8.0.0",
         "@openpgp/web-stream-tools": "^0.3.1",
-        "@vitest/coverage-istanbul": "^4.1.6",
-        "autoprefixer": "^10.5.2",
-        "eslint": "^10.6.0",
+        "@vitest/coverage-istanbul": "^4.1.10",
+        "autoprefixer": "^10.5.4",
+        "eslint": "^10.8.0",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-prettier": "^5.5.6",
         "husky": "^9.1.7",
-        "node-addon-api": "^8.8.0",
-        "postcss": "^8.5.15",
+        "node-addon-api": "^8.9.0",
+        "postcss": "^8.5.23",
         "postcss-calc": "^10.1.1",
         "postcss-cli": "^11.0.1",
         "postcss-preset-env": "^11.3.2",
         "postcss-scss": "^4.0.9",
-        "prettier": "^3.8.3",
-        "stylelint": "^17.14.0",
+        "prettier": "^3.9.6",
+        "stylelint": "^17.14.1",
         "stylelint-config-standard-scss": "^17.0.0",
         "stylelint-prettier": "^5.0.3",
         "stylelint-scss": "^7.2.0",
         "typescript": "^6.0.3",
-        "typescript-eslint": "^8.60.1",
-        "vitest": "^4.1.6",
-        "wrangler": "^4.103.0"
+        "typescript-eslint": "^8.65.0",
+        "vitest": "^4.1.10",
+        "wrangler": "^4.114.0"
     },
     "dependencies": {
-        "axios": "^1.18.0",
-        "openpgp": "^6.3.0",
-        "resend": "^6.12.4"
+        "axios": "^1.18.1",
+        "openpgp": "^6.3.1",
+        "resend": "^6.18.0"
     }
 }
