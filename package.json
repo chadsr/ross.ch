@@ -17,7 +17,8 @@
         "test:coverage": "vitest run --coverage",
         "cf-deploy": "wrangler deploy",
         "cf-dev": "wrangler pages dev",
-        "cf-typegen": "wrangler types functions/worker-configuration.d.ts"
+        "cf-typegen": "wrangler types functions/worker-configuration.d.ts",
+        "pre-commit": "lint-staged"
     },
     "keywords": [],
     "author": "Ross Chadwick",
