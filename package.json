@@ -7,8 +7,8 @@
     "scripts": {
         "build": "hugo --minify && npm run build:functions",
         "build:functions": "wrangler pages functions build --minify --outdir=./dist/worker/",
-        "lint": "eslint . && stylelint **/*.scss",
-        "format": "eslint --fix . && stylelint --fix **/*.scss",
+        "lint": "prettier --check . && eslint . && stylelint \"**/*.scss\"",
+        "format": "eslint --fix . && prettier --write . && stylelint --fix \"**/*.scss\"",
         "prepare": "husky",
         "dev": "hugo --logLevel debug server --ignoreCache --disableFastRender",
         "dev:wrangler": "wrangler dev",
@@ -17,8 +17,7 @@
         "test:coverage": "vitest run --coverage",
         "cf-deploy": "wrangler deploy",
         "cf-dev": "wrangler pages dev",
-        "cf-typegen": "wrangler types functions/worker-configuration.d.ts",
-        "deploy-fleek": "fleek sites deploy"
+        "cf-typegen": "wrangler types functions/worker-configuration.d.ts"
     },
     "keywords": [],
     "author": "Ross Chadwick",
@@ -33,13 +32,14 @@
         "@eslint/js": "^10.0.1",
         "@fontsource-variable/space-grotesk": "^5.3.0",
         "@fullhuman/postcss-purgecss": "^8.0.0",
+        "@htnabe/prettier-plugin-go-template": "^0.0.2",
         "@openpgp/web-stream-tools": "^0.3.1",
         "@vitest/coverage-istanbul": "^4.1.10",
         "autoprefixer": "^10.5.4",
         "eslint": "^10.8.1",
         "eslint-config-prettier": "^10.1.8",
-        "eslint-plugin-prettier": "^5.5.6",
         "husky": "^9.1.7",
+        "lint-staged": "^17.3.0",
         "node-addon-api": "^8.9.1",
         "postcss": "^8.5.26",
         "postcss-calc": "^10.1.1",
@@ -60,5 +60,10 @@
         "axios": "^1.19.0",
         "openpgp": "^6.3.1",
         "resend": "^6.18.1"
+    },
+    "lint-staged": {
+        "*.{ts,mts,cts,js,mjs,cjs,d.ts}": "eslint --fix",
+        "*.{html,json,md,yml,yaml}": "prettier --write",
+        "*.scss": "stylelint --fix"
     }
 }
