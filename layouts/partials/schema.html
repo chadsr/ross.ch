@@ -2,19 +2,32 @@
 {{ $author := .Site.Params.author.name }}
 {{ $copyright_year := now.Format "2006" }}
 {{ $copyright_notice := $author | printf "%s %s" $copyright_year | printf "%s %s" .Site.Params.Copyright }}
+{{ $logoURL := "/favicon.svg" | absURL }}
+{{ with (resources.Get "favicon.png") }}{{ $logoURL = .Permalink }}{{ end }}
 {{ if .IsHome -}}
 <script type="application/ld+json">
 {
-    "@context": "http://schema.org",
+    "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "{{ .Site.Title }}",
     "url": "{{ .Site.BaseURL }}",
     "description": "{{ .Site.Params.description }}",
-    "thumbnailUrl": "{{ .Site.Params.Logo | absURL }}",
+    "thumbnailUrl": "{{ $logoURL }}",
     "license": "{{ .Site.Params.License }}",
     "copyrightHolder" : "{{ $org_name }}",
     "copyrightYear" : "{{ $copyright_year }}",
-    "copyrightNotice": "{{ $copyright_notice }}"
+    "copyrightNotice": "{{ $copyright_notice }}",
+    "publisher": {
+        "@type": "Organization",
+        "name": "{{ $org_name }}",
+        "url": "{{ .Site.BaseURL }}",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "{{ $logoURL }}",
+            "width": 512,
+            "height": 512
+        }
+    }
 }
 </script>
 {{ else if .IsPage }}
