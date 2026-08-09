@@ -84,9 +84,10 @@
     {{- end -}}
 {{- end -}}
 
-{{- /* dateCreated in ISO 8601 (source is DD-MM-YYYY, already parsed upstream) */ -}}
+{{- /* dateCreated + datePublished in ISO 8601 */ -}}
 {{- with $time -}}
-    {{- $result = merge $result (dict "dateCreated" (.Format "2006-01-02")) -}}
+    {{- $iso := (.Format "2006-01-02") -}}
+    {{- $result = merge $result (dict "dateCreated" $iso "datePublished" $iso) -}}
 {{- end -}}
 
 {{- /*
