@@ -121,4 +121,8 @@
     {{- $result = merge $result (dict "publisher" .) -}}
 {{- end -}}
 
+{{- with .image -}}
+    {{- $result = merge $result (dict "image" .) -}}
+{{- end -}}
+
 {{- $result | jsonify (dict "indent" " ") -}}

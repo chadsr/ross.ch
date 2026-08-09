@@ -107,11 +107,17 @@
         {{ end }}
     {{ end }}
 
+    {{ $logo := resources.Get "favicon.png" }}
+    {{ $logoObj := dict "@type" "ImageObject" "url" ("/favicon.svg" | absURL) }}
+    {{ with $logo }}
+        {{ $logoObj = dict "@type" "ImageObject" "url" .Permalink "width" .Width "height" .Height }}
+    {{ end }}
+
     {{ $publisher := dict
         "@type" "Organization"
         "name" $.Site.Title
         "url" $.Site.BaseURL
-        "logo" (dict "@type" "ImageObject" "url" ($.Site.Params.logo | absURL) "width" "32" "height" "32")
+        "logo" $logoObj
     }}
 
     {{ $scratch := newScratch }}
@@ -147,7 +153,7 @@
                     {{ if eq $isPublished "true" }}
                         <li class="feed-item blog-post field hover">
             <script type="application/ld+json">
-                {{ partial "notes-schema.html" (dict "note" $note "time" $time "typeMap" $typeMap "propMap" $propMap "entityIndex" $entityIndex "publisher" $publisher) | safeJS }}
+                {{ partial "notes-schema.html" (dict "note" $note "time" $time "typeMap" $typeMap "propMap" $propMap "entityIndex" $entityIndex "publisher" $publisher "image" $logoObj) | safeJS }}
             </script>
                             <a
                                 href="{{ index $note " @id" }}"
