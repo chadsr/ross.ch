@@ -144,7 +144,7 @@
                     {{ $isPublishedMap := (index $isPublishedSlice 0) }}
                     {{ $isPublished := (index $isPublishedMap "@value") }}
 
-                    {{ if eq $isPublished "false" }}
+                    {{ if eq $isPublished "true" }}
                         <li class="feed-item blog-post field hover">
             <script type="application/ld+json">
                 {{ partial "notes-schema.html" (dict "note" $note "time" $time "typeMap" $typeMap "propMap" $propMap "entityIndex" $entityIndex "publisher" $publisher) | safeJS }}
