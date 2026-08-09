@@ -2,6 +2,7 @@ baseURL = 'https://ross.ch/'
 locale = 'en-GB'
 title = 'Ross Chadwick'
 enableRobotsTXT = true
+disableKinds = ['taxonomy', 'term']
 summaryLength = 10
 timeZone = 'Europe/Amsterdam'
 
@@ -25,8 +26,9 @@ ghUsername = 'chadsr'
 [outputs]
 home = ['html', 'rss']
 section = ['html']
-taxonomy = ['html']
-term = ['html']
+
+[sitemap]
+changefreq = 'weekly'
 
 [taxonomies]
 category = 'categories'
