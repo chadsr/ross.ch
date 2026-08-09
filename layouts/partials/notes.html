@@ -141,6 +141,7 @@
         {{ range $notesWithTime }}
             {{ $note := (index . "note") }}
             {{ $time := (index . "time") }}
+            {{ $noteID := index $note "@id" }}
             {{ $types := index $note "@type" }}
 
             {{ if or (in $types "https://notes.ross.ch/#/page/Note") (in $types "https://notes.ross.ch/#/page/JournalEntry") }}
@@ -156,7 +157,7 @@
                 {{ partial "notes-schema.html" (dict "note" $note "time" $time "typeMap" $typeMap "propMap" $propMap "entityIndex" $entityIndex "publisher" $publisher "image" $logoObj) | safeJS }}
             </script>
                             <a
-                                href="{{ index $note " @id" }}"
+                                href="{{ $noteID }}"
                                 rel="noopener"
                                 target="_blank"
                             >
