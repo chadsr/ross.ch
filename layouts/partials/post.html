@@ -6,8 +6,14 @@
         <div class="post-stats">
             <div class="post-stats-item post-date">
                 <span>
-                    {{ .Params.date.Format .Site.Params.dateFormat }}{{if .Lastmod}}<em>, Updated {{ .Lastmod.Format
-                        .Site.Params.dateFormat }}</em>{{ end }}
+                    {{ .Params.date.Format .Site.Params.dateFormat }}{{ if .Lastmod }}
+                        <em
+                            >, Updated
+                            {{ .Lastmod.Format
+                                .Site.Params.dateFormat
+                            }}</em
+                        >
+                    {{ end }}
                 </span>
             </div>
             {{ $readingTime := div (float .WordCount) .Site.Params.reading_speed }}
@@ -18,8 +24,8 @@
             </div>
             <div class="post-stats-item post-tags">
                 {{ range $tag := (.Params.tags) }}
-                <span class="post-tag"><em>{{ $tag }}</em></span>
-                {{ end}}
+                    <span class="post-tag"><em>{{ $tag }}</em></span>
+                {{ end }}
             </div>
         </div>
     </div>

@@ -17,8 +17,8 @@
         </div>
         <div class="feed-item-info feed-item-tags">
             {{ range $tag := (.Params.tags) }}
-            <span class="feed-item-tag hover">{{ $tag }}</span>
-            {{ end}}
+                <span class="feed-item-tag hover">{{ $tag }}</span>
+            {{ end }}
         </div>
         <div class="feed-item-content">
             <p class="feed-item-summary">{{ .Summary }}</p>

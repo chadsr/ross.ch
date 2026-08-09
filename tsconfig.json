@@ -3,24 +3,18 @@
         "target": "ESNext",
         "module": "ESNext",
         "moduleResolution": "Bundler",
-        "lib": [
-            "ESNext",
-            "dom",
-            "webworker"
-        ],
+        "lib": ["ESNext", "dom", "webworker"],
         "forceConsistentCasingInFileNames": true,
         "removeComments": true,
         "noImplicitAny": true,
         "noUnusedLocals": true,
         "strict": true
     },
-    "include": [
-        "assets/ts/**/*",
-    ],
+    "include": ["assets/ts/**/*"],
     "exclude": [
         "node_modules/**/*",
         "public/**/*",
         "static/**/*",
         "functions/**/*"
-    ],
+    ]
 }

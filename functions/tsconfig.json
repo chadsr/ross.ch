@@ -3,9 +3,7 @@
         "target": "esnext",
         "module": "esnext",
         "moduleResolution": "Bundler",
-        "lib": [
-            "ESNext"
-        ],
+        "lib": ["ESNext"],
         "types": [],
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,
@@ -19,7 +17,5 @@
         "worker-configuration.d.ts",
         "../assets/ts/interfaces.d.ts"
     ],
-    "exclude": [
-        "test/**/*"
-    ]
+    "exclude": ["test/**/*"]
 }

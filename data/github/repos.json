@@ -8,10 +8,7 @@
             "createdAt": "2022-02-02T12:22:32.000Z",
             "updatedAt": "2026-08-07T03:00:48.000Z",
             "url": "https://github.com/reviewdog/action-pytest",
-            "languages": [
-                "Dockerfile",
-                "Shell"
-            ],
+            "languages": ["Dockerfile", "Shell"],
             "topics": [
                 "reviewdog",
                 "reviewdog-action",
@@ -34,14 +31,8 @@
             "createdAt": "2024-08-31T10:15:08.000Z",
             "updatedAt": "2026-08-03T10:38:31.000Z",
             "url": "https://github.com/chadsr/action-user-repos-json",
-            "languages": [
-                "JavaScript",
-                "TypeScript"
-            ],
-            "topics": [
-                "actions",
-                "github-actions"
-            ]
+            "languages": ["JavaScript", "TypeScript"],
+            "topics": ["actions", "github-actions"]
         },
         {
             "owner": "chadsr",
@@ -51,10 +42,7 @@
             "createdAt": "2026-08-04T11:35:37.000Z",
             "updatedAt": "2026-08-05T13:04:22.000Z",
             "url": "https://github.com/chadsr/aur-packages",
-            "languages": [
-                "Shell",
-                "Python"
-            ],
+            "languages": ["Shell", "Python"],
             "topics": [
                 "archlinux",
                 "archlinux-package",
@@ -73,10 +61,7 @@
             "createdAt": "2018-09-28T12:49:40.000Z",
             "updatedAt": "2024-11-20T23:07:40.000Z",
             "url": "https://github.com/chadsr/Aurora-Server",
-            "languages": [
-                "C",
-                "C++"
-            ],
+            "languages": ["C", "C++"],
             "topics": [
                 "esp32",
                 "esp32-arduino",
@@ -99,9 +84,7 @@
             "createdAt": "2024-04-18T17:24:17.000Z",
             "updatedAt": "2026-08-03T21:50:24.000Z",
             "url": "https://github.com/chadsr/cryptoshot",
-            "languages": [
-                "Python"
-            ],
+            "languages": ["Python"],
             "topics": [
                 "work-in-progress",
                 "cryptocurrency",
@@ -121,10 +104,7 @@
             "createdAt": "2016-11-27T12:49:00.000Z",
             "updatedAt": "2020-03-11T13:34:38.000Z",
             "url": "https://github.com/chadsr/donation_box_arduino",
-            "languages": [
-                "C",
-                "C++"
-            ],
+            "languages": ["C", "C++"],
             "topics": [
                 "arduino",
                 "donations",
@@ -150,12 +130,7 @@
             "createdAt": "2018-12-03T17:08:23.000Z",
             "updatedAt": "2026-08-08T16:19:19.000Z",
             "url": "https://github.com/chadsr/dotfiles",
-            "languages": [
-                "Shell",
-                "CSS",
-                "Python",
-                "Lua"
-            ],
+            "languages": ["Shell", "CSS", "Python", "Lua"],
             "topics": [
                 "waybar",
                 "dotfiles",
@@ -213,9 +188,7 @@
             "createdAt": "2024-09-17T14:27:14.000Z",
             "updatedAt": "2025-06-03T13:53:14.000Z",
             "url": "https://github.com/chadsr/invoice",
-            "languages": [
-                "Go"
-            ],
+            "languages": ["Go"],
             "topics": []
         },
         {
@@ -256,9 +229,7 @@
             "createdAt": "2022-05-05T19:42:49.000Z",
             "updatedAt": "2022-08-18T18:19:47.000Z",
             "url": "https://github.com/chadsr/logrus-sentry",
-            "languages": [
-                "Go"
-            ],
+            "languages": ["Go"],
             "topics": []
         },
         {
@@ -269,10 +240,7 @@
             "createdAt": "2017-02-21T12:45:25.000Z",
             "updatedAt": "2026-05-22T21:25:25.000Z",
             "url": "https://github.com/chadsr/MAD-EUParl",
-            "languages": [
-                "Python",
-                "Shell"
-            ],
+            "languages": ["Python", "Shell"],
             "topics": [
                 "voting",
                 "politics",
@@ -303,10 +271,7 @@
             "createdAt": "2024-05-30T11:39:37.000Z",
             "updatedAt": "2026-08-03T10:44:35.000Z",
             "url": "https://github.com/chadsr/marktplaats-scraper",
-            "languages": [
-                "Dockerfile",
-                "Python"
-            ],
+            "languages": ["Dockerfile", "Python"],
             "topics": [
                 "chromedriver",
                 "dataset-generation",
@@ -330,9 +295,7 @@
             "createdAt": "2018-02-08T08:47:37.000Z",
             "updatedAt": "2025-09-15T08:51:45.000Z",
             "url": "https://github.com/chadsr/MesaFireEvacuation",
-            "languages": [
-                "Python"
-            ],
+            "languages": ["Python"],
             "topics": [
                 "project-mesa",
                 "mesa",
@@ -352,9 +315,7 @@
             "createdAt": "2017-05-18T11:40:33.000Z",
             "updatedAt": "2026-07-12T08:50:49.000Z",
             "url": "https://github.com/chadsr/NordVPN-NetworkManager",
-            "languages": [
-                "Python"
-            ],
+            "languages": ["Python"],
             "topics": [
                 "vpn-connections",
                 "openvpn",
@@ -386,10 +347,7 @@
             "createdAt": "2025-05-06T10:20:08.000Z",
             "updatedAt": "2026-08-03T10:33:27.000Z",
             "url": "https://github.com/chadsr/notes",
-            "languages": [
-                "Clojure",
-                "JavaScript"
-            ],
+            "languages": ["Clojure", "JavaScript"],
             "topics": [
                 "json-ld",
                 "jsonld",
@@ -419,12 +377,7 @@
             "createdAt": "2026-04-10T21:47:39.000Z",
             "updatedAt": "2026-07-11T09:19:12.000Z",
             "url": "https://github.com/chadsr/ollamatokenizer",
-            "languages": [
-                "Dockerfile",
-                "Makefile",
-                "Go",
-                "C++"
-            ],
+            "languages": ["Dockerfile", "Makefile", "Go", "C++"],
             "topics": [
                 "llm-tokenizer",
                 "ollama",
@@ -441,15 +394,8 @@
             "createdAt": "2024-06-14T13:02:08.000Z",
             "updatedAt": "2026-08-03T10:35:26.000Z",
             "url": "https://github.com/chadsr/ovsc-server",
-            "languages": [
-                "Dockerfile",
-                "Shell"
-            ],
-            "topics": [
-                "docker",
-                "docker-images",
-                "openvscode-server"
-            ]
+            "languages": ["Dockerfile", "Shell"],
+            "topics": ["docker", "docker-images", "openvscode-server"]
         },
         {
             "owner": "chadsr",
@@ -459,13 +405,7 @@
             "createdAt": "2018-10-07T13:52:10.000Z",
             "updatedAt": "2026-08-02T10:54:13.000Z",
             "url": "https://github.com/chadsr/ross.ch",
-            "languages": [
-                "JavaScript",
-                "TypeScript",
-                "SCSS",
-                "HTML",
-                "Shell"
-            ],
+            "languages": ["JavaScript", "TypeScript", "SCSS", "HTML", "Shell"],
             "topics": [
                 "css-3d-transitions",
                 "escher",
@@ -491,9 +431,7 @@
             "createdAt": "2016-11-22T13:10:19.000Z",
             "updatedAt": "2017-07-23T04:26:58.000Z",
             "url": "https://github.com/chadsr/rpi-network-bridge",
-            "languages": [
-                "Shell"
-            ],
+            "languages": ["Shell"],
             "topics": [
                 "bridge",
                 "rpi-network-bridge",
@@ -510,10 +448,7 @@
             "updatedAt": "2026-08-08T02:35:18.000Z",
             "url": "https://github.com/chadsr/stars",
             "languages": [],
-            "topics": [
-                "starred",
-                "starred-repositories"
-            ]
+            "topics": ["starred", "starred-repositories"]
         },
         {
             "owner": "chadsr",
@@ -561,10 +496,7 @@
             "createdAt": "2019-03-30T14:07:03.000Z",
             "updatedAt": "2023-04-18T20:26:37.000Z",
             "url": "https://github.com/chadsr/WaterBot",
-            "languages": [
-                "C++",
-                "C"
-            ],
+            "languages": ["C++", "C"],
             "topics": [
                 "plant-watering",
                 "plant-wateringsystem",
@@ -584,9 +516,7 @@
             "createdAt": "2019-04-30T11:22:23.000Z",
             "updatedAt": "2026-08-03T10:34:49.000Z",
             "url": "https://github.com/chadsr/waybar-crypto",
-            "languages": [
-                "Python"
-            ],
+            "languages": ["Python"],
             "topics": [
                 "waybar",
                 "cryptocurrency-prices",
@@ -620,9 +550,7 @@
             "createdAt": "2020-12-10T19:07:43.000Z",
             "updatedAt": "2026-08-08T22:00:15.000Z",
             "url": "https://github.com/reviewdog/action-black",
-            "languages": [
-                "Shell"
-            ],
+            "languages": ["Shell"],
             "topics": [
                 "reviewdog-action",
                 "formatter",
@@ -644,10 +572,7 @@
             "createdAt": "2021-06-04T01:47:49.000Z",
             "updatedAt": "2024-11-18T10:12:49.000Z",
             "url": "https://github.com/jordemort/action-pyright",
-            "languages": [
-                "Python",
-                "Shell"
-            ],
+            "languages": ["Python", "Shell"],
             "topics": [
                 "github-actions",
                 "pyright",
@@ -665,10 +590,7 @@
             "createdAt": "2022-02-02T12:22:32.000Z",
             "updatedAt": "2026-08-07T03:00:48.000Z",
             "url": "https://github.com/reviewdog/action-pytest",
-            "languages": [
-                "Dockerfile",
-                "Shell"
-            ],
+            "languages": ["Dockerfile", "Shell"],
             "topics": [
                 "reviewdog",
                 "reviewdog-action",
@@ -712,10 +634,7 @@
             "createdAt": "2017-06-30T21:56:01.000Z",
             "updatedAt": "2026-07-03T06:11:27.000Z",
             "url": "https://github.com/madnight/bitcoin-chart-cli",
-            "languages": [
-                "JavaScript",
-                "Shell"
-            ],
+            "languages": ["JavaScript", "Shell"],
             "topics": [
                 "bitcoin",
                 "cli",
@@ -747,15 +666,8 @@
             "createdAt": "2023-11-07T14:52:02.000Z",
             "updatedAt": "2026-07-15T14:47:39.000Z",
             "url": "https://github.com/lukas-reining/eventsource",
-            "languages": [
-                "JavaScript",
-                "TypeScript"
-            ],
-            "topics": [
-                "eventsource",
-                "server-sent-events",
-                "sse"
-            ],
+            "languages": ["JavaScript", "TypeScript"],
+            "topics": ["eventsource", "server-sent-events", "sse"],
             "lastContributedAt": "2024-09-04T07:00:00.000Z"
         },
         {
@@ -778,13 +690,7 @@
                 "HTML",
                 "Python"
             ],
-            "topics": [
-                "go",
-                "blockchain",
-                "ethereum",
-                "p2p",
-                "geth"
-            ],
+            "topics": ["go", "blockchain", "ethereum", "p2p", "geth"],
             "lastContributedAt": "2019-10-17T07:00:00.000Z"
         },
         {
@@ -795,11 +701,7 @@
             "createdAt": "2020-09-04T11:53:52.000Z",
             "updatedAt": "2026-08-08T12:12:07.000Z",
             "url": "https://github.com/nuxt/image",
-            "languages": [
-                "JavaScript",
-                "TypeScript",
-                "Vue"
-            ],
+            "languages": ["JavaScript", "TypeScript", "Vue"],
             "topics": [
                 "image-optimization",
                 "nuxt",
@@ -816,11 +718,7 @@
             "createdAt": "2020-03-24T19:21:31.000Z",
             "updatedAt": "2026-05-15T13:55:37.000Z",
             "url": "https://github.com/shresthagrawal/learnp2p",
-            "languages": [
-                "JavaScript",
-                "CSS",
-                "HTML"
-            ],
+            "languages": ["JavaScript", "CSS", "HTML"],
             "topics": [
                 "libp2p",
                 "js-libp2p",
@@ -861,9 +759,7 @@
             "createdAt": "2017-12-28T12:02:50.000Z",
             "updatedAt": "2024-07-03T08:46:09.000Z",
             "url": "https://github.com/CollectiveIntelligence/NetLogoFireEvacuation",
-            "languages": [
-                "NetLogo"
-            ],
+            "languages": ["NetLogo"],
             "topics": [],
             "lastContributedAt": "2018-01-07T08:00:00.000Z"
         },
@@ -875,16 +771,8 @@
             "createdAt": "2023-04-12T19:38:52.000Z",
             "updatedAt": "2026-08-04T13:06:49.000Z",
             "url": "https://github.com/logseq/publish-spa",
-            "languages": [
-                "JavaScript",
-                "Clojure"
-            ],
-            "topics": [
-                "github-actions",
-                "logseq",
-                "nbb",
-                "publish"
-            ],
+            "languages": ["JavaScript", "Clojure"],
+            "topics": ["github-actions", "logseq", "nbb", "publish"],
             "lastContributedAt": "2025-09-09T07:00:00.000Z"
         },
         {
@@ -895,12 +783,7 @@
             "createdAt": "2016-10-17T11:58:34.000Z",
             "updatedAt": "2026-08-08T18:51:47.000Z",
             "url": "https://github.com/reviewdog/reviewdog",
-            "languages": [
-                "Go",
-                "Shell",
-                "HTML",
-                "Dockerfile"
-            ],
+            "languages": ["Go", "Shell", "HTML", "Dockerfile"],
             "topics": [
                 "linter",
                 "go",
