@@ -1,14 +1,25 @@
 <section class="content-section content-blog">
     <div class="title-section">
         <h2>Notes</h2>
-        <p class="title-wordmark"><em>An attempt at publicly organising my notes and research.</em></p>
+        <p class="title-wordmark">
+            <em>An attempt at publicly organising my notes and research.</em>
+        </p>
         <p>
             <em>
-                They are also viewable as an <a class="link" href="https://notes.ross.ch/#/graph"
-                    target="_blank">interactive
-                    graph</a> or as <a class="link"
+                They are also viewable as an
+                <a
+                    class="link"
+                    href="https://notes.ross.ch/#/graph"
+                    target="_blank"
+                    >interactive graph</a
+                >
+                or as
+                <a
+                    class="link"
                     href="https://raw.githubusercontent.com/chadsr/notes/refs/heads/main/notes.nq"
-                    target="_blank">linked-data</a>.
+                    target="_blank"
+                    >linked-data</a
+                >.
             </em>
         </p>
     </div>
@@ -16,91 +27,182 @@
     {{ $notes := dict }}
     {{ $url := "https://raw.githubusercontent.com/chadsr/notes/refs/heads/main/notes.jsonld" }}
     {{ $opts := dict
-    "headers" (dict "Content-Type" "application/json")
+        "headers" (dict "Content-Type" "application/json")
     }}
     {{ with try (resources.GetRemote $url $opts) }}
-    {{ with .Err }}
-    {{ errorf "%s" . }}
-    {{ else with .Value }}
-    {{ $notes = .Content | transform.Unmarshal }}
-    {{ else }}
-    {{ errorf "Unable to get remote resource %q" $url }}
+        {{ with .Err }}
+            {{ errorf "%s" . }}
+        {{ else with .Value }}
+            {{ $notes = .Content | transform.Unmarshal }}
+        {{ else }}
+            {{ errorf "Unable to get remote resource %q" $url }}
+        {{ end }}
     {{ end }}
+
+    {{/* Discover schema.org names for every Class and Property declared in the graph. A Class/Property maps to
+        schema.org only if its schema.org/url or sameas points at https://schema.org/ ; anything else (self-links, dbpedia
+        targets) is ignored.
+    */}}
+    {{ $typeMap := dict }}
+    {{ $propMap := dict }}
+    {{ range $entry := $notes }}
+        {{ $etypes := index $entry "@type" }}
+        {{ $eid := index $entry "@id" }}
+        {{ if $etypes }}
+            {{ if or (in $etypes "https://notes.ross.ch/#/page/Class") (in $etypes "https://notes.ross.ch/#/page/Property") }}
+                {{ $short := "" }}
+                {{ with index $entry "https://schema.org/url" }}
+                    {{ range . }}
+                        {{ with index . "@id" }}
+                            {{ if and (not $short) (hasPrefix . "https://schema.org/") }}
+                                {{ $short =
+                                    strings.TrimPrefix "https://schema.org/" .
+                                }}
+                            {{ end }}
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+                {{ with index $entry "https://notes.ross.ch/#/page/sameas" }}
+                    {{ range . }}
+                        {{ with index . "@id" }}
+                            {{ if and (not $short) (hasPrefix . "https://schema.org/") }}
+                                {{ $short =
+                                    strings.TrimPrefix "https://schema.org/" .
+                                }}
+                            {{ end }}
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+                {{ if and $short $eid }}
+                    {{ if in $etypes "https://notes.ross.ch/#/page/Class" }}
+                        {{ $typeMap = merge $typeMap (dict $eid $short) }}
+                    {{ else }}
+                        {{ $propMap = merge $propMap (dict $eid $short) }}
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
     {{ end }}
+
+    {{/* Index every entry by @id so @id references can be inlined. */}}
+    {{ $entityIndex := dict }}
+    {{ range $entry := $notes }}
+        {{ $eid := index $entry "@id" }}
+        {{ if $eid }}
+            {{ $eName := "" }}
+            {{ with index $entry "https://schema.org/name" }}
+                {{ with index . 0 }}{{ $eName = index . "@value" }}{{ end }}
+            {{ end }}
+            {{ $eType := "" }}
+            {{ range $t := (index $entry "@type") }}
+                {{ if not $eType }}
+                    {{ if hasPrefix $t "https://schema.org/" }}
+                        {{ $eType = strings.TrimPrefix "https://schema.org/" $t }}
+                    {{ else }}
+                        {{ with index $typeMap $t }}{{ $eType = . }}{{ end }}
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+            {{ $entityIndex = merge $entityIndex (dict $eid (dict "type" $eType "name" $eName)) }}
+        {{ end }}
+    {{ end }}
+
+    {{ $publisher := dict
+        "@type" "Organization"
+        "name" $.Site.Title
+        "url" $.Site.BaseURL
+        "logo" (dict "@type" "ImageObject" "url" ($.Site.Params.logo | absURL) "width" "32" "height" "32")
+    }}
 
     {{ $scratch := newScratch }}
 
+
     <ul class="notes-feed feed">
         {{ range $k, $note := $notes }}
-        {{ if (index $note "https://schema.org/dateCreated") }}
-        {{ $dateCreatedSlice := (index $note "https://schema.org/dateCreated") }}
-        {{ $dateCreatedMap := (index $dateCreatedSlice 0) }}
-        {{ $dateCreated := (index $dateCreatedMap "@value") }}
-        {{ $dateParts := split $dateCreated "-" }}
-        {{ $time := (time.AsTime (printf "%s-%s-%s" (index $dateParts 2) (index $dateParts 1) (index $dateParts 0))) }}
-        {{ $noteWithTime := dict "note" $note "time" $time }}
-        {{ $scratch.SetInMap "notes" (string $k) $noteWithTime }}
-        {{ end }}
+            {{ if (index $note "https://schema.org/dateCreated") }}
+                {{ $dateCreatedSlice := (index $note "https://schema.org/dateCreated") }}
+                {{ $dateCreatedMap := (index $dateCreatedSlice 0) }}
+                {{ $dateCreated := (index $dateCreatedMap "@value") }}
+                {{ $dateParts := split $dateCreated "-" }}
+                {{ $time := (time.AsTime (printf "%s-%s-%s" (index $dateParts 2) (index $dateParts 1) (index $dateParts 0))) }}
+                {{ $noteWithTime := dict "note" $note "time" $time }}
+                {{ $scratch.SetInMap "notes" (string $k) $noteWithTime }}
+            {{ end }}
         {{ end }}
 
         {{ $notesWithTime := sort ($scratch.Get "notes") "time" "desc" }}
 
         {{ range $notesWithTime }}
-        {{ $note := (index . "note") }}
-        {{ $time := (index . "time") }}
-        {{ $types := index $note "@type" }}
+            {{ $note := (index . "note") }}
+            {{ $time := (index . "time") }}
+            {{ $types := index $note "@type" }}
 
-        {{ if or (in $types "https://notes.ross.ch/#/page/Note") (in $types "https://notes.ross.ch/#/page/Journal") }}
+            {{ if or (in $types "https://notes.ross.ch/#/page/Note") (in $types "https://notes.ross.ch/#/page/JournalEntry") }}
 
-        {{ if (index $note "https://notes.ross.ch/#/page/published") }}
-        {{ $isPublishedSlice := (index $note "https://notes.ross.ch/#/page/published") }}
-        {{ $isPublishedMap := (index $isPublishedSlice 0) }}
-        {{ $isPublished := (index $isPublishedMap "@value") }}
+                {{ if (index $note "https://notes.ross.ch/#/page/published") }}
+                    {{ $isPublishedSlice := (index $note "https://notes.ross.ch/#/page/published") }}
+                    {{ $isPublishedMap := (index $isPublishedSlice 0) }}
+                    {{ $isPublished := (index $isPublishedMap "@value") }}
 
-        {{ if eq $isPublished "true" }}
-        <li class="feed-item blog-post field hover">
+                    {{ if eq $isPublished "false" }}
+                        <li class="feed-item blog-post field hover">
             <script type="application/ld+json">
-                {{ $note | transform.Remarshal "json" | safeJS }}
+                {{ partial "notes-schema.html" (dict "note" $note "time" $time "typeMap" $typeMap "propMap" $propMap "entityIndex" $entityIndex "publisher" $publisher) | safeJS }}
             </script>
-            <a href="{{ index $note "@id" }}" rel="noopener" target="_blank">
-                <div class="title feed-item-title hover threed-top perspective">
-                    {{ if (in $types "https://notes.ross.ch/#/page/Journal") }}
-                    <h3>Journal</h3>
-                    {{ else }}
-                    {{ $nameSlice := (index $note "https://schema.org/name") }}
-                    {{ $titleMap := (index $nameSlice 0) }}
-                    <h3>{{ (index $titleMap "@value") }}</h3>
+                            <a
+                                href="{{ index $note " @id" }}"
+                                rel="noopener"
+                                target="_blank"
+                            >
+                                <div
+                                    class="title feed-item-title hover threed-top perspective"
+                                >
+                                    {{ if (in $types "https://notes.ross.ch/#/page/JournalEntry") }}
+                                        <h3>Journal</h3>
+                                    {{ else }}
+                                        {{ $nameSlice := (index $note "https://schema.org/name") }}
+                                        {{ $titleMap := (index $nameSlice 0) }}
+                                        <h3>
+                                            {{ (index $titleMap "@value") }}
+                                        </h3>
+                                    {{ end }}
+                                </div>
+                                <div class="post-stats">
+                                    <div
+                                        class="post-stats-item post-date feed-item-info"
+                                    >
+                                        {{- partial "icons/calendar.html" . -}}
+                                        {{ time.Format $.Site.Params.dateFormat $time }}
+                                    </div>
+                                </div>
+
+                                {{ if (index $note "https://notes.ross.ch/#/page/topic") }}
+                                    {{ $topicsSlice := (index $note "https://notes.ross.ch/#/page/topic") }}
+                                    <div class="feed-item-info feed-item-tags">
+                                        {{ range $topic := $topicsSlice }}
+                                            {{ $topicString := (replace (index $topic "@id") "https://notes.ross.ch/#/page/" "") }}
+                                            {{ $topicId := (replace $topicString "%20" " ") }}
+                                            <span class="feed-item-tag hover"
+                                                >{{ $topicId }}</span
+                                            >
+                                        {{ end }}
+                                    </div>
+                                {{ end }}
+
+
+                                <div class="feed-item-content">
+                                    {{ $descSlice := (index $note "https://schema.org/description") }}
+                                    {{ $descMap := (index $descSlice 0) }}
+                                    {{ $description := (index $descMap "@value") }}
+                                    <p class="feed-item-summary">
+                                        {{ $description }}
+                                    </p>
+                                </div>
+                            </a>
+                        </li>
                     {{ end }}
-                </div>
-                <div class="post-stats">
-                    <div class="post-stats-item post-date feed-item-info">
-                        {{- partial "icons/calendar.html" . -}}
-                        {{ time.Format $.Site.Params.dateFormat $time }}
-                    </div>
-                </div>
-
-                {{ if (index $note "https://notes.ross.ch/#/page/topic") }}
-                {{ $topicsSlice := (index $note "https://notes.ross.ch/#/page/topic") }}
-                <div class="feed-item-info feed-item-tags">
-                    {{ range $topic := $topicsSlice }}
-                    {{ $topicString := (replace (index $topic "@id") "https://notes.ross.ch/#/page/" "") }}
-                    {{ $topicId := (replace $topicString "%20" " ") }}
-                    <span class="feed-item-tag hover">{{ $topicId }}</span>
-                    {{ end}}
-                </div>
                 {{ end }}
-
-                <div class="feed-item-content">
-                    {{ $descSlice := (index $note "https://schema.org/description") }}
-                    {{ $descMap := (index $descSlice 0) }}
-                    {{ $description := (index $descMap "@value") }}
-                    <p class="feed-item-summary">{{ $description }}</p>
-                </div>
-            </a>
-        </li>
-        {{ end }}
-        {{ end }}
-        {{ end }}
+            {{ end }}
         {{ end }}
     </ul>
 </section>

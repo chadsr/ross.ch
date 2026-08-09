@@ -1,0 +1,95 @@
+{{/* Renders a single note as fully schema.org JSON-LD.
+
+    Everything is derived dynamically from the input graph; predicate and type names are looked up in $propMap / $typeMap (built in notes.html from each Class/Property entry's schema.org/url or sameas).
+    Any predicate or type that does not resolve to https://schema.org/ is dropped, so adding a new mapping is a graph-only change (no template edit).
+
+    Inputs (.):
+    note - the note map (RDF/JSON-LD expanded form)
+    time - parsed dateCreated (Go time), or nil
+    typeMap - { custom @id -> schema.org short name } (for Classes)
+    propMap - { custom predicate URI -> schema.org short name } (for Properties)
+    entityIndex - { @id -> { "type": short|"", "name": string } }
+    publisher - publisher dict (from site config)
+*/}}
+{{- $note := .note -}}
+{{- $time := .time -}}
+{{- $typeMap := .typeMap -}}
+{{- $propMap := .propMap -}}
+{{- $entityIndex := .entityIndex -}}
+{{- $publisher := .publisher -}}
+
+{{- $result := dict "@context" "https://schema.org" -}}
+
+{{- /* @type: map each declared type via typeMap; fall back to CreativeWork */ -}}
+{{- $types := slice -}}
+{{- with $note -}}
+    {{- range $t := (index . "@type") -}}
+        {{- $mapped := "" -}}
+        {{- if hasPrefix $t "https://schema.org/" -}}
+            {{- $mapped = strings.TrimPrefix "https://schema.org/" $t -}}
+        {{- else -}}
+            {{- with index $typeMap $t -}}{{- $mapped = . -}}{{- end -}}
+        {{- end -}}
+        {{- if $mapped -}}{{- $types = append $mapped $types -}}{{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- if not $types -}}{{- $types = slice "CreativeWork" -}}{{- end -}}
+{{- $result = merge $result (dict "@type" (cond (eq (len $types) 1) (index $types 0) $types)) -}}
+
+{{- /* @id + url: the note's own page */ -}}
+{{- with (index $note "@id") -}}
+    {{- $result = merge $result (dict "@id" . "url" .) -}}
+{{- end -}}
+
+{{- /* Walk every predicate. Rename via schema.org prefix or propMap; drop unmapped. */ -}}
+{{- range $key, $values := $note -}}
+    {{- if or (eq $key "@id") (eq $key "@type") -}}{{- continue -}}{{- end -}}
+    {{- $name := "" -}}
+    {{- if hasPrefix $key "https://schema.org/" -}}
+        {{- $name = strings.TrimPrefix "https://schema.org/" $key -}}
+    {{- else if hasPrefix $key "https://notes.ross.ch/#/page/" -}}
+        {{- with index $propMap $key -}}{{- $name = . -}}{{- end -}}
+    {{- end -}}
+    {{- if $name -}}
+        {{- $out := slice -}}
+        {{- range $values -}}
+            {{- $v := . -}}
+            {{- $elem := "" -}}
+            {{- with (index $v "@value") -}}
+                {{- $val := . -}}
+                {{- if eq (index $v "@type") "http://www.w3.org/2001/XMLSchema#boolean" -}}
+                    {{- $elem = eq $val "true" -}}
+                {{- else -}}
+                    {{- $elem = $val -}}
+                {{- end -}}
+            {{- else -}}
+                {{- $refid := (index $v "@id") -}}
+                {{- with index $entityIndex $refid -}}
+                    {{- $eType := index . "type" -}}
+                    {{- if not $eType -}}{{- $eType = "Thing" -}}{{- end -}}
+                    {{- $elem = dict "@type" $eType "name" (index . "name") "url" $refid -}}
+                {{- else -}}
+                    {{- $elem = $refid -}}
+                {{- end -}}
+            {{- end -}}
+            {{- $out = append $elem $out -}}
+        {{- end -}}
+        {{- if eq (len $out) 1 -}}
+            {{- $result = merge $result (dict $name (index $out 0)) -}}
+        {{- else -}}
+            {{- $result = merge $result (dict $name $out) -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+
+{{- /* dateCreated in ISO 8601 (source is DD-MM-YYYY, already parsed upstream) */ -}}
+{{- with $time -}}
+    {{- $result = merge $result (dict "dateCreated" (.Format "2006-01-02")) -}}
+{{- end -}}
+
+{{- /* publisher from site config (not part of the notes graph) */ -}}
+{{- with $publisher -}}
+    {{- $result = merge $result (dict "publisher" .) -}}
+{{- end -}}
+
+{{- $result | jsonify (dict "indent" " ") -}}
