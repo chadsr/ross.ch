@@ -61,7 +61,7 @@
     "dependencies": {
         "axios": "^1.19.0",
         "openpgp": "^6.3.1",
-        "resend": "^6.18.1"
+        "resend": "^6.25.0"
     },
     "lint-staged": {
         "*.{ts,mts,cts,js,mjs,cjs,d.ts}": "eslint --fix",
