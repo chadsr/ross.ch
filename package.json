@@ -45,7 +45,7 @@
         "lint-staged": "^17.3.0",
         "node-addon-api": "^8.9.1",
         "postcss": "^8.5.26",
-        "postcss-calc": "^10.1.1",
+        "postcss-calc": "^11.0.1",
         "postcss-cli": "^11.0.1",
         "postcss-preset-env": "^11.3.2",
         "postcss-scss": "^4.0.9",
