@@ -23,10 +23,6 @@
             "pattern": "ross.ch",
             "custom_domain": true,
         },
-        {
-            "pattern": "www.ross.ch",
-            "custom_domain": true,
-        },
     ],
     "observability": {
         "enabled": true,
