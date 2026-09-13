@@ -29,9 +29,9 @@
             "description": "A Github action to output repositories owned (or contributed to) by a user, as a JSON file.",
             "stargazerCount": 2,
             "createdAt": "2024-08-31T10:15:08.000Z",
-            "updatedAt": "2026-09-06T20:23:19.000Z",
+            "updatedAt": "2026-09-13T10:54:04.000Z",
             "url": "https://github.com/chadsr/action-user-repos-json",
-            "languages": ["JavaScript", "TypeScript"],
+            "languages": ["TypeScript", "JavaScript"],
             "topics": ["actions", "github-actions"]
         },
         {
@@ -61,7 +61,7 @@
             "createdAt": "2018-09-28T12:49:40.000Z",
             "updatedAt": "2024-11-20T23:07:40.000Z",
             "url": "https://github.com/chadsr/Aurora-Server",
-            "languages": ["C", "C++"],
+            "languages": ["C++", "C"],
             "topics": [
                 "esp32",
                 "esp32-arduino",
@@ -104,7 +104,7 @@
             "createdAt": "2026-06-09T17:04:26.000Z",
             "updatedAt": "2026-09-11T15:35:07.000Z",
             "url": "https://github.com/chadsr/docker-secrets-engine-shim",
-            "languages": ["Makefile", "Go"],
+            "languages": ["Go", "Makefile"],
             "topics": [
                 "docker",
                 "docker-credential-helper",
@@ -121,7 +121,7 @@
             "createdAt": "2016-11-27T12:49:00.000Z",
             "updatedAt": "2020-03-11T13:34:38.000Z",
             "url": "https://github.com/chadsr/donation_box_arduino",
-            "languages": ["C", "C++"],
+            "languages": ["C++", "C"],
             "topics": [
                 "arduino",
                 "donations",
@@ -147,7 +147,7 @@
             "createdAt": "2018-12-03T17:08:23.000Z",
             "updatedAt": "2026-09-10T12:45:38.000Z",
             "url": "https://github.com/chadsr/dotfiles",
-            "languages": ["Shell", "CSS", "Python", "Lua"],
+            "languages": ["Shell", "Lua", "CSS", "Python"],
             "topics": [
                 "waybar",
                 "dotfiles",
@@ -217,14 +217,14 @@
             "updatedAt": "2026-06-22T09:57:16.000Z",
             "url": "https://github.com/chadsr/ionic-vue-ts-starter",
             "languages": [
-                "JavaScript",
-                "HTML",
-                "Vue",
                 "TypeScript",
-                "CSS",
-                "Java",
                 "Swift",
-                "Shell"
+                "Vue",
+                "Java",
+                "HTML",
+                "Shell",
+                "JavaScript",
+                "CSS"
             ],
             "topics": [
                 "ionic",
@@ -288,7 +288,7 @@
             "createdAt": "2024-05-30T11:39:37.000Z",
             "updatedAt": "2026-09-02T19:48:07.000Z",
             "url": "https://github.com/chadsr/marktplaats-scraper",
-            "languages": ["Dockerfile", "Python"],
+            "languages": ["Python", "Dockerfile"],
             "topics": [
                 "chromedriver",
                 "dataset-generation",
@@ -394,7 +394,7 @@
             "createdAt": "2026-04-10T21:47:39.000Z",
             "updatedAt": "2026-09-11T08:48:11.000Z",
             "url": "https://github.com/chadsr/ollamatokenizer",
-            "languages": ["Dockerfile", "Makefile", "Go", "C++"],
+            "languages": ["Go", "Makefile", "C++", "Dockerfile"],
             "topics": [
                 "llm-tokenizer",
                 "ollama",
@@ -420,9 +420,9 @@
             "description": "My personal website",
             "stargazerCount": 2,
             "createdAt": "2018-10-07T13:52:10.000Z",
-            "updatedAt": "2026-09-10T08:16:48.000Z",
+            "updatedAt": "2026-09-13T10:58:31.000Z",
             "url": "https://github.com/chadsr/ross.ch",
-            "languages": ["JavaScript", "TypeScript", "SCSS", "HTML", "Shell"],
+            "languages": ["HTML", "TypeScript", "SCSS", "JavaScript", "Shell"],
             "topics": [
                 "css-3d-transitions",
                 "escher",
@@ -462,7 +462,7 @@
             "description": "Starred  Repositories",
             "stargazerCount": 3,
             "createdAt": "2024-04-17T23:35:11.000Z",
-            "updatedAt": "2026-09-12T04:54:07.000Z",
+            "updatedAt": "2026-09-13T05:07:55.000Z",
             "url": "https://github.com/chadsr/stars",
             "languages": [],
             "topics": ["starred", "starred-repositories"]
@@ -476,13 +476,13 @@
             "updatedAt": "2026-08-12T22:38:50.000Z",
             "url": "https://github.com/chadsr/sveltekit-capacitor-starter",
             "languages": [
-                "Java",
                 "TypeScript",
-                "JavaScript",
                 "Swift",
+                "Svelte",
+                "JavaScript",
+                "Java",
                 "CSS",
-                "HTML",
-                "Svelte"
+                "HTML"
             ],
             "topics": [
                 "capacitor",
@@ -633,12 +633,12 @@
             "url": "https://github.com/gyunaev/birdtray",
             "languages": [
                 "C++",
-                "C",
-                "CMake",
                 "NSIS",
+                "CMake",
                 "Batchfile",
                 "Python",
-                "Shell"
+                "Shell",
+                "C"
             ],
             "topics": [],
             "lastContributedAt": "2019-12-11T08:00:00.000Z"
@@ -683,7 +683,7 @@
             "createdAt": "2023-11-07T14:52:02.000Z",
             "updatedAt": "2026-07-15T14:47:39.000Z",
             "url": "https://github.com/lukas-reining/eventsource",
-            "languages": ["JavaScript", "TypeScript"],
+            "languages": ["TypeScript", "JavaScript"],
             "topics": ["eventsource", "server-sent-events", "sse"],
             "lastContributedAt": "2024-09-04T07:00:00.000Z"
         },
@@ -693,19 +693,19 @@
             "description": "Go implementation of the Ethereum protocol",
             "stargazerCount": 51341,
             "createdAt": "2013-12-26T13:05:46.000Z",
-            "updatedAt": "2026-09-13T03:40:36.000Z",
+            "updatedAt": "2026-09-13T09:03:50.000Z",
             "url": "https://github.com/ethereum/go-ethereum",
             "languages": [
                 "Go",
-                "Shell",
                 "C",
-                "Makefile",
-                "M4",
                 "JavaScript",
                 "Assembly",
-                "NSIS",
-                "HTML",
-                "Python"
+                "Sage",
+                "Shell",
+                "Go Template",
+                "CMake",
+                "M4",
+                "NSIS"
             ],
             "topics": ["go", "blockchain", "ethereum", "p2p", "geth"],
             "lastContributedAt": "2019-10-17T07:00:00.000Z"
@@ -718,7 +718,7 @@
             "createdAt": "2020-09-04T11:53:52.000Z",
             "updatedAt": "2026-09-11T13:00:27.000Z",
             "url": "https://github.com/nuxt/image",
-            "languages": ["JavaScript", "TypeScript", "Vue"],
+            "languages": ["TypeScript", "Vue", "JavaScript"],
             "topics": [
                 "image-optimization",
                 "nuxt",
@@ -756,15 +756,15 @@
             "url": "https://github.com/maxdorninger/MediaManager",
             "languages": [
                 "Python",
-                "Dockerfile",
-                "Mako",
-                "JavaScript",
-                "CSS",
-                "HTML",
-                "TypeScript",
                 "Svelte",
+                "TypeScript",
                 "Shell",
-                "Makefile"
+                "CSS",
+                "Dockerfile",
+                "JavaScript",
+                "Makefile",
+                "Mako",
+                "HTML"
             ],
             "topics": [],
             "lastContributedAt": "2025-08-29T07:00:00.000Z"
@@ -788,7 +788,7 @@
             "createdAt": "2023-04-12T19:38:52.000Z",
             "updatedAt": "2026-08-23T08:48:42.000Z",
             "url": "https://github.com/logseq/publish-spa",
-            "languages": ["JavaScript", "Clojure"],
+            "languages": ["Clojure", "JavaScript"],
             "topics": ["github-actions", "logseq", "nbb", "publish"],
             "lastContributedAt": "2025-09-09T07:00:00.000Z"
         },
@@ -796,9 +796,9 @@
             "owner": "reviewdog",
             "name": "reviewdog",
             "description": "🐶 Automated code review tool integrated with any code analysis tools regardless of programming language",
-            "stargazerCount": 9580,
+            "stargazerCount": 9581,
             "createdAt": "2016-10-17T11:58:34.000Z",
-            "updatedAt": "2026-09-12T22:16:41.000Z",
+            "updatedAt": "2026-09-13T05:07:08.000Z",
             "url": "https://github.com/reviewdog/reviewdog",
             "languages": ["Go", "Shell", "HTML", "Dockerfile"],
             "topics": [
@@ -827,13 +827,13 @@
             "updatedAt": "2026-09-12T21:16:34.000Z",
             "url": "https://github.com/skeletonlabs/skeleton",
             "languages": [
-                "JavaScript",
-                "HTML",
+                "TypeScript",
                 "Svelte",
                 "CSS",
-                "TypeScript",
-                "Astro",
                 "MDX",
+                "Astro",
+                "JavaScript",
+                "HTML",
                 "Shell"
             ],
             "topics": [
