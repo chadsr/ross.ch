@@ -16,7 +16,7 @@ jobs:
                   check-latest: true
                   cache: 'npm'
             - name: Get Github Repositories
-              uses: chadsr/action-user-repos-json@v0.3.1
+              uses: chadsr/action-user-repos-json@v0.3.3
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
